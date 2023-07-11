@@ -1,14 +1,19 @@
 # Import Module
-import os, sys, platform
-import locale
-import tkinter as tk
-from tkinter import ttk
-from pystray import MenuItem as TrayMenuItem
-import pystray
-from PIL import Image
 import gettext
+import locale
+import os
+import platform
+import sys
+import tkinter as tk
 import webbrowser
-# from FlooTransceiver import FlooTransceiver
+from tkinter import ttk
+
+import pystray
+from EntryWithPlaceholder import EntryWithPlaceholder
+from FlooStateMachine import FlooStateMachine
+from FlooStateMachineDelegate import FlooStateMachineDelegate
+from PIL import Image
+from pystray import MenuItem as TrayMenuItem
 
 appIcon = "FlooCastApp.ico"
 appGif = "FlooPasteApp.gif"
@@ -39,14 +44,19 @@ elif platform.system().lower().startswith('lin'):
     img_icon = tk.PhotoImage(file=app_path + os.sep + appGif)
     root.tk.call('wm', 'iconphoto', root._w, img_icon)
 # Set geometry (widthxheight)
-root.geometry('600x400')
+root.geometry('720x400')
 
 mainFrame = tk.Frame(root, relief=tk.RAISED)
 mainFrame.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
 
-# statusbar.grid(column = 0, row = 2)
-statusbar = tk.Label(root, text=_("Initializing"), bd=1, relief=tk.SUNKEN, anchor=tk.W)
-statusbar.pack(side=tk.BOTTOM, fill=tk.X)
+# statusBar
+statusBar = tk.Label(root, text=_("Initializing"), bd=1, relief=tk.SUNKEN, anchor=tk.W)
+statusBar.pack(side=tk.BOTTOM, fill=tk.X)
+
+def update_status_bar(info: str):
+    global statusBar
+    statusBar.config(text=info)
+
 
 # Define On/Off Images
 on = tk.PhotoImage(file=app_path+os.sep+'onS.png')
@@ -74,73 +84,81 @@ leBroadcastPanel.columnconfigure(0, weight=1)
 leBroadcastPanel.columnconfigure(1, weight=1)
 leBroadcastPanel.columnconfigure(2, weight=1)
 
-broadcastEnableLabel = tk.Label(leBroadcastPanel, text=_("Broadcast"))
-broadcastEnableLabel.grid(column=0, row=0, sticky='w')
+broadcastEnableLabel = tk.Label(leBroadcastPanel, text=_("The dongle works in either broadcast or unicast mode"))
+broadcastEnableLabel.grid(column=1, row=0, columnspan=2, sticky='w')
 leBroadcastEnable = None
-
 
 # Broadcast enable switch function
 def broadcast_enable_switch():
     global leBroadcastEnable
+    global broadcastEnableButton
+    global flooSm
+    global broadcastNameEntry
+    global broadcastKeyEntry
+    if broadcastEnableButton["state"] == "disabled":
+        return
     # Determine is on or off
-    if shareToMobile:
-        shareToMobileButton.config(image=off)
-        shareToMobile = False
+    if leBroadcastEnable:
+        broadcastEnableButton.config(image=off)
+        leBroadcastEnable = False
+        broadcastNameEntry["state"] = "disabled"
+        broadcastKeyEntry["state"] = "disabled"
+        enable_pairing_widgets(True)
     else:
-        shareToMobileButton.config(image=on)
-        shareToMobile = True
-    floo_transceiver.setShareToMobile(shareToMobile)
-    flooConfig.setShareToMobile(shareToMobile)
+        broadcastEnableButton.config(image=on)
+        broadcastNameEntry["state"] = "normal"
+        broadcastKeyEntry["state"] = "normal"
+        leBroadcastEnable = True
+        enable_pairing_widgets(False)
+
+    # floo_transceiver.setShareToMobile(shareToMobile)
+    # flooConfig.setShareToMobile(shareToMobile)
 
 
 broadcastEnableButton = tk.Button(leBroadcastPanel, image=off, bd=0, command=broadcast_enable_switch)
-broadcastEnableButton["state"] = "disabled"
-broadcastEnableButton.grid(column=2, row=0, sticky='e')
+broadcastEnableButton.grid(column=0, row=0, sticky='w')
 
 broadcastNameLabel = tk.Label(leBroadcastPanel, text=_("Broadcast Name"))
 broadcastNameLabel.grid(column=0, row=1, sticky='w')
 broadcastName = tk.StringVar()
 
 # Broadcase name entry function
-def broadcast_name_entry():
-    global leBroadcastEnable
-    # Determine is on or off
-    if shareToMobile:
-        shareToMobileButton.config(image=off)
-        shareToMobile = False
-    else:
-        shareToMobileButton.config(image=on)
-        shareToMobile = True
-    floo_transceiver.setShareToMobile(shareToMobile)
-    flooConfig.setShareToMobile(shareToMobile)
+def broadcast_name_entry(name: str):
+    print(name)
+    # floo_transceiver.setShareToMobile(shareToMobile)
 
-
-broadcastNameEntry = tk.Entry(leBroadcastPanel, textvariable=broadcastName,
-                              validate="focusout", validatecommand=broadcast_name_entry)
-broadcastNameEntry["state"] = "disabled"
+broadcastNameEntry = EntryWithPlaceholder(leBroadcastPanel, textvariable=broadcastName,
+                                          placeholder="Input a new name then press <ENTER>",
+                                          edit_end_proc=broadcast_name_entry)
 broadcastNameEntry.grid(column=1, row=1, columnspan=2, padx=4, sticky='we')
 broadcastKeyLabel = tk.Label(leBroadcastPanel, text=_("Broadcast Key"))
 broadcastKeyLabel.grid(column=0, row=2, sticky='w')
 broadcastKey = tk.StringVar()
 
 # Broadcase key entry function
-def broadcast_key_entry():
-    global leBroadcastEnable
-    # Determine is on or off
-    if shareToMobile:
-        shareToMobileButton.config(image=off)
-        shareToMobile = False
-    else:
-        shareToMobileButton.config(image=on)
-        shareToMobile = True
-    floo_transceiver.setShareToMobile(shareToMobile)
-    flooConfig.setShareToMobile(shareToMobile)
+def broadcast_key_entry(key: str):
+    print(key)
+    # floo_transceiver.setShareToMobile(shareToMobile)
 
-
-broadcastKeyEntry = tk.Entry(leBroadcastPanel, textvariable=broadcastKey,
-                              validate="focusout", validatecommand=broadcast_key_entry)
-broadcastKeyEntry["state"] = "disabled"
+broadcastKeyEntry = EntryWithPlaceholder(leBroadcastPanel, textvariable=broadcastKey,
+                                         placeholder=_("Leave broadcast key blank to disable encription"),
+                                         edit_end_proc=broadcast_key_entry)
 broadcastKeyEntry.grid(column=1, row=2, columnspan=2, padx=4, sticky='we')
+
+def enable_broadcast_widgets(enable: bool):
+    global broadcastEnableButton
+    global broadcastNameEntry
+    global broadcastKeyEntry
+    if enable:
+        broadcastEnableButton["state"] = "normal"
+        # broadcastNameEntry["state"] = "normal"
+        # broadcastKeyEntry["state"] = "normal"
+    else:
+        broadcastEnableButton["state"] = "disabled"
+        broadcastNameEntry["state"] = "disabled"
+        broadcastKeyEntry["state"] = "disabled"
+
+enable_broadcast_widgets(False)
 
 # New pairing button function
 def button_new_pairing():
@@ -169,6 +187,7 @@ newPairingLabel.pack(side = tk.LEFT)
 
 # Clear all paired device function
 def button_clear_all():
+    global newPairingButton
     global leBroadcastEnable
     # Determine is on or off
     if shareToMobile:
@@ -184,28 +203,34 @@ def button_clear_all():
 clearAllButton = tk.Button(pairedDevicesPanel, text=_("Clear All"), relief="groove", command=button_clear_all)
 clearAllButton.grid(column=2, row=0, padx=4, sticky='we')
 
-
-# Initialize FlooTransceiver
-
+def enable_pairing_widgets(enable: bool):
+    global clearAllButton
+    global newPairingButton
+    if enable:
+        newPairingButton["state"] = "normal"
+        clearAllButton["state"] = "normal"
+    else:
+        newPairingButton["state"] = "disabled"
+        clearAllButton["state"] = "disabled"
 
 # Window panel
 def quit_all():
     root.destroy()
-
 
 # Define a function for quit the window
 def quit_window(icon, TrayMenuItem):
     icon.stop()
     root.destroy()
 
-
 # Define a function to show the window again
 def show_window(icon, TrayMenuItem):
     global windowIcon
-    icon.stop()
-    root.after(0, root.deiconify())
-    windowIcon = None
-
+    try:
+        icon.stop()
+        root.after(0, root.deiconify())
+        windowIcon = None
+    except Exception:
+        pass
 
 # Hide the window and show on the system taskbar
 def hide_window():
@@ -259,6 +284,19 @@ supportLink.bind("<Button-1>", lambda e: url_callback("https://www.flairmesh.com
 versionInfo = tk.Label(aboutFrame, text=_("Version") + "1.0.0")
 versionInfo.pack()
 
+# All GUI object initialized, start FlooStateMachine
+class FlooSmDelegate(FlooStateMachineDelegate):
+    def deviceDetected(self, flag: bool, port: str):
+        enable_broadcast_widgets(flag)
+        if flag:
+            update_status_bar(_("Use FlooGoo dongle on ") + " " + port)
+        else:
+            update_status_bar(_("Please insert your FlooGoo dongle"))
+
+flooSmDelegate = FlooSmDelegate()
+flooSm = FlooStateMachine(flooSmDelegate)
+flooSm.daemon = True
+flooSm.start()
 
 # all widgets will be here
 # Execute Tkinter
