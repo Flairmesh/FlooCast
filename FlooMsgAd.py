@@ -18,6 +18,6 @@ class FlooMsgAd(FlooMessage):
     @classmethod
     def create_valid_msg(cls, payload: bytes):
         msgLen = len(payload)
-        if msgLen != 17:
+        if msgLen != 15:
             return None
         return cls(False, payload[3:15], payload[3:])

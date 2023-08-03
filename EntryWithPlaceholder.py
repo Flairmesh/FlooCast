@@ -22,11 +22,11 @@ class EntryWithPlaceholder(tk.Entry):
 
     def foc_in(self, *args):
         if self['fg'] == self.placeholder_color:
-            self.delete('0', 'end')
+            # self.delete('0', 'end')
             self['fg'] = self.default_fg_color
 
     def foc_out(self, *args):
-        if not self.get():
+        if self.get() == self.placeholder:
             self.put_placeholder()
         else:
             self.edit_end_proc(self.get())

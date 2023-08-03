@@ -23,8 +23,9 @@ class FlooInterface:
     def reset(self):
         print("FlooInterface: reset")
         if self.port_opened:
+            print("FlooInterface: close port")
             self.port.close()
-        self.port_name = None
+        # self.port_name = None
         self.port_opened = False
         self.port = None
         self.delegate.interfaceState(False, None)
@@ -33,14 +34,14 @@ class FlooInterface:
         if self.isSleep:
             return False
 
-        ports = [port.name for port in serial.tools.list_ports.grep('0A12:4007.*FMA100')]
+        # print([port.hwid for port in serial.tools.list_ports.grep('0A12:4007')])
+        # ports = [port.name for port in serial.tools.list_ports.grep('0A12:4007.*20FF00B52000.*')]
+        ports = [port.name for port in serial.tools.list_ports.grep('0A12:4007.*20FF00B52000.*')]
         if ports:
             if not self.port_opened:
-                print("monitor_port: try open " + ports[0])
                 self.port_name = ports[0]
-                # print("current port ", self.port_name, " state: ", self.port_opened)
+                print("monitor_port: try open " + self.port_name)
                 try:
-                    # print("try open")
                     if platform.system().lower().startswith('win'):
                         self.port = serial.Serial(port=self.port_name, baudrate=921600,
                                                   bytesize=8, timeout=2, stopbits=serial.STOPBITS_ONE)
@@ -56,11 +57,11 @@ class FlooInterface:
                     return self.port_opened
                 except Exception as exec0:
                     print(exec0)
+                    self.reset()
                     return False
         else:
             if self.port_opened:
                 print("monitor_port: no port exists")
-                self.port.close()
                 self.reset()
         return False
 
@@ -71,18 +72,21 @@ class FlooInterface:
                     try:
                         if self.port.inWaiting() > 0:
                             print("FlooInterface: got some msgs")
-                            newLine = self.port.read_until("\r\n")
-                            flooMsg = self.parser.run(newLine)
+                            newLine = self.port.read_until(b'\r\n')
+                            print("FlooInterface: full line " + newLine.decode('ascii'))
+                            flooMsg = self.parser.run(newLine[:-2])
                             if flooMsg is None:
                                 break
-                            self.delegate.handleMessage(flooMsg)
-                        else:
+                            else:
+                                self.delegate.handleMessage(flooMsg)
                             time.sleep(0.01)
                     except Exception as exec0:
                         print(exec0)
+                        self.portOpenDelay = None
                         self.reset()
             else:
                 self.reset()
+            print("sleep for 1 second")
             time.sleep(1)  # check port after 1 second
 
     def sendMsg(self, msg:FlooMessage):
@@ -92,4 +96,3 @@ class FlooInterface:
                 self.port.write(msg.bytes)
             except Exception as exec0:
                 print (exec0)
-                pass

@@ -12,5 +12,6 @@ class FlooMsgOk(FlooMessage):
     def create_valid_msg(cls, pkt: bytes):
         msgLen = len(pkt)
         if msgLen != 2:
+            print("OK msg create failed")
             return None
         return cls(False)

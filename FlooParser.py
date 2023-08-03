@@ -1,7 +1,13 @@
 from FlooMessage import FlooMessage
-from FlooMsgOk import FlooMsgOk
 from FlooMsgPl import FlooMsgPl
 from FlooMsgAd import FlooMsgAd
+from FlooMsgAm import FlooMsgAm
+from FlooMsgLa import FlooMsgLa
+from FlooMsgSt import FlooMsgSt
+from FlooMsgBm import FlooMsgBm
+from FlooMsgBn import FlooMsgBn
+from FlooMsgOk import FlooMsgOk
+from FlooMsgEr import FlooMsgEr
 
 class FlooParser:
     """FlooGoo message parser"""
@@ -9,7 +15,14 @@ class FlooParser:
     MSG_HEADERS =  {
         FlooMsgOk.HEADER : FlooMsgOk.create_valid_msg,
         FlooMsgPl.HEADER : FlooMsgPl.create_valid_msg,
-        FlooMsgAd.HEADER : FlooMsgAd.create_valid_msg
+        FlooMsgAd.HEADER : FlooMsgAd.create_valid_msg,
+        FlooMsgAm.HEADER : FlooMsgAm.create_valid_msg,
+        FlooMsgLa.HEADER : FlooMsgLa.create_valid_msg,
+        FlooMsgSt.HEADER : FlooMsgSt.create_valid_msg,
+        FlooMsgBm.HEADER : FlooMsgBm.create_valid_msg,
+        FlooMsgBn.HEADER : FlooMsgBn.create_valid_msg,
+        FlooMsgOk.HEADER : FlooMsgOk.create_valid_msg,
+        FlooMsgEr.HEADER : FlooMsgEr.create_valid_msg
     }
 
     def __init__(self):
@@ -19,7 +32,7 @@ class FlooParser:
         msgLen = len(pkt)
         if msgLen < 2:
             return None
-        msgHeader = pkt[:2].decode('utf-8')
+        msgHeader = pkt[:2].decode('ascii')
         if msgHeader in FlooParser.MSG_HEADERS.keys():
             print("FlooParser: create a " + msgHeader + " message")
             return FlooParser.MSG_HEADERS[msgHeader](pkt)
