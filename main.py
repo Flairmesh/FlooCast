@@ -86,7 +86,7 @@ aboutPanel.grid(column=1, row=1, padx=4, rowspan=2, sticky='nsew')
 # Audio mode panel
 for i in range(0, 2):
     audioModePanel.rowconfigure(i, weight=i)
-for i in range(0, 4):
+for i in range(0, 3):
     audioModePanel.columnconfigure(i, weight=1)
 
 def audioModeSel():
@@ -110,9 +110,13 @@ dongleStatePanel.grid(column=0, row=1, columnspan=1, padx=4, pady=4, sticky='nse
 dongleStateLabel = tk.Label(dongleStatePanel, text=_("Initialization"))
 dongleStateLabel.place(relx=.5, rely=.5,anchor= tk.CENTER)
 leaStatePanel = ttk.LabelFrame(audioModePanel, text=_('LE Audio State'))
-leaStatePanel.grid(column=1, row=1, columnspan=3, padx=4, pady=4, sticky='nsew')
+leaStatePanel.grid(column=1, row=1, columnspan=1, padx=4, pady=4, sticky='nsew')
 leaStateLabel = tk.Label(leaStatePanel, text=_("Disconnected"))
 leaStateLabel.place(relx=.5, rely=.5,anchor= tk.CENTER)
+codecInUsePanel = ttk.LabelFrame(audioModePanel, text=_('Codec in Use'))
+codecInUsePanel.grid(column=2, row=1, columnspan=1, padx=4, pady=4, sticky='nsew')
+codecInUseLabel = tk.Label(codecInUsePanel, text=_("LC3"))
+codecInUseLabel.place(relx=.5, rely=.5,anchor= tk.CENTER)
 
 # LE Broadcast panel
 leBroadcastPanel.columnconfigure(0, weight=1)
@@ -121,30 +125,31 @@ leBroadcastPanel.columnconfigure(2, weight=1)
 
 broadcastEnableLabel = tk.Label(leBroadcastPanel, text=_("Public broadcast"))
 broadcastEnableLabel.grid(column=0, row=0, columnspan=2, sticky='w')
-leBroadcastEnable = None
+publicBroadcastEnable = None
 
 def public_broadcast_enable_switch_set(enable):
-    global leBroadcastEnable
-    leBroadcastEnable = enable
-    publicBroadcastEnableButton.config(image= on if leBroadcastEnable else off)
+    global publicBroadcastEnable
+    publicBroadcastEnable = enable
+    publicBroadcastEnableButton.config(image= on if publicBroadcastEnable else off)
+    flooSm.setPublicBroadcast(enable)
 
 # Broadcast enable switch function
 def public_broadcast_enable_switch():
-    global leBroadcastEnable
-    public_broadcast_enable_switch_set(not leBroadcastEnable)
+    global publicBroadcastEnable
+    public_broadcast_enable_switch_set(not publicBroadcastEnable)
 
 publicBroadcastEnableButton = tk.Button(leBroadcastPanel, image=off, bd=0, command=public_broadcast_enable_switch)
 publicBroadcastEnableButton.grid(column=2, row=0, sticky='e')
 
-broadcastEncryptEnableLabel = tk.Label(leBroadcastPanel, text=_("Encrypt broadcast"))
+broadcastEncryptEnableLabel = tk.Label(leBroadcastPanel, text=_("Encrypt broadcast, please set a key first"))
 broadcastEncryptEnableLabel.grid(column=0, row=1, columnspan=2, sticky='w')
 broadcastEncryptEnable = None
 
 def broadcast_encrypt_switch_set(enable):
     global broadcastEncryptEnable
     broadcastEncryptEnable = enable
-    publicBroadcastEnableButton.config(image= on if leBroadcastEnable else off)
-
+    broadcastEncryptEnableButton.config(image= on if broadcastEncryptEnable else off)
+    flooSm.setBroadcastEncrypt(enable)
 
 # Broadcast encrypt enable switch function
 def broadcast_encrypt_enable_switch():
@@ -160,11 +165,14 @@ broadcastName = tk.StringVar()
 
 # Broadcase name entry function
 def broadcast_name_entry(name: str):
-    flooSm.setBroadcastName(name)
-    # floo_transceiver.setShareToMobile(shareToMobile)
+    bytes = name.encode('utf-8')
+    if len(bytes) > 0 and len(bytes) < 31:
+        flooSm.setBroadcastName(name)
+    else:
+        broadcastNameEntry.put_placeholder()
 
 broadcastNameEntry = EntryWithPlaceholder(leBroadcastPanel, textvariable=broadcastName,
-                                          placeholder="Input a new name then press <ENTER>",
+                                          placeholder="Input a new name of no more than 30 characters then press <ENTER>",
                                           edit_end_proc=broadcast_name_entry)
 broadcastNameEntry.grid(column=1, row=2, columnspan=2, padx=4, sticky='we')
 
@@ -178,7 +186,7 @@ def broadcast_key_entry(key: str):
     # floo_transceiver.setShareToMobile(shareToMobile)
 
 broadcastKeyEntry = EntryWithPlaceholder(leBroadcastPanel, textvariable=broadcastKey,
-                                         placeholder=_("Leave broadcast key blank to disable encription"),
+                                         placeholder=_("Input a new key of no more than 16 characters then press <ENTER>"),
                                          edit_end_proc=broadcast_key_entry)
 broadcastKeyEntry.grid(column=1, row=3, columnspan=2, padx=4, sticky='we')
 
@@ -200,7 +208,7 @@ newPairingLabel.pack(side = tk.LEFT)
 # Clear all paired device function
 def button_clear_all():
     global newPairingButton
-    global leBroadcastEnable
+    global publicBroadcastEnable
     # Determine is on or off
     if shareToMobile:
         shareToMobileButton.config(image=off)
@@ -219,11 +227,11 @@ def enable_pairing_widgets(enable: bool):
     global clearAllButton
     global newPairingButton
     if enable:
-        newPairingButton["state"] = "normal"
-        clearAllButton["state"] = "normal"
+        newPairingButton.config(state=tk.NORMAL)
+        clearAllButton.config(state=tk.NORMAL)
     else:
-        newPairingButton["state"] = "disabled"
-        clearAllButton["state"] = "disabled"
+        newPairingButton.config(state=tk.DISABLED)
+        clearAllButton.config(state=tk.DISABLED)
 
 # Window panel
 def quit_all():
@@ -306,15 +314,15 @@ def update_dfu_info(stateStr: str):
         dfuInfo.config(text = stateStr)
         if not dfuUndergoing:
             dfuInfo.pack()
-            minimizeButton["state"] = "disabled"
-            quitButton["state"] = "disabled"
-            dfuButton["state"] = "disabled"
+            minimizeButton.config(state=tk.DISABLED)
+            quitButton.config(state=tk.DISABLED)
+            dfuButton.config(state=tk.DISABLED)
             dfuUndergoing = True
     else:
         dfuInfo.pack_forget()
-        minimizeButton["state"] = "normal"
-        quitButton["state"] = "normal"
-        dfuButton["state"] = "normal"
+        minimizeButton.config(state=tk.NORMAL)
+        quitButton.config(state=tk.NORMAL)
+        dfuButton.config(state=tk.NORMAL)
         dfuUndergoing = False
 
 def button_dfu():
@@ -394,7 +402,6 @@ class FlooSmDelegate(FlooStateMachineDelegate):
         leaStateLabel.config(text=leaStateStr[state])
 
     def broadcastModeInd(self, state: int):
-        print("Get broadcast mode " + str(state))
         public_broadcast_enable_switch_set(state & 2 == 2)
         broadcast_encrypt_switch_set(state & 1 == 1)
 
@@ -407,6 +414,5 @@ flooSm = FlooStateMachine(flooSmDelegate)
 flooSm.daemon = True
 flooSm.start()
 
-# all widgets will be here
 # Execute Tkinter
 root.mainloop()

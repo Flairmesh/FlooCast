@@ -23,6 +23,6 @@ class FlooMsgBm(FlooMessage):
     @classmethod
     def create_valid_msg(cls, payload: bytes):
         msgLen = len(payload)
-        if msgLen < 5:
+        if msgLen != 5:
             return None
         return cls(False, int(payload[3:5].decode('ascii')))

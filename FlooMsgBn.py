@@ -10,7 +10,7 @@ class FlooMsgBn(FlooMessage):
 
     def __init__(self, isSend, name = None):
         self.name = name
-        if isSend or name is None:
+        if not isSend or name is None:
             super().__init__(isSend, FlooMsgBn.HEADER)
         else:
             super().__init__(isSend, FlooMsgBn.HEADER, bytes(name, 'utf-8'))
@@ -18,6 +18,6 @@ class FlooMsgBn(FlooMessage):
     @classmethod
     def create_valid_msg(cls, payload: bytes):
         msgLen = len(payload)
-        if msgLen < 7:
+        if msgLen < 4:
             return None
         return cls(False, payload[3:].decode('utf-8'))

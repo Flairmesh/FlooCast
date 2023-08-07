@@ -25,6 +25,10 @@ class FlooStateMachine(FlooInterfaceDelegate, Thread):
         self.delegate = delegate
         self.inf = FlooInterface(self)
         self.pendingCmdPara = None
+        self.audioMode = None
+        self.broadcastMode = None
+        self.broadcastName = None
+        self.broadcastKey = None
 
     def reset(self):
         self.state = FlooStateMachine.INIT
@@ -57,6 +61,7 @@ class FlooStateMachine(FlooInterfaceDelegate, Thread):
                     self.lastCmd = cmdGetAudioMode
             elif isinstance(message, FlooMsgAm):
                 if isinstance(self.lastCmd, FlooMsgAm):
+                    self.audioMode = message.mode
                     self.delegate.audioModeInd(message.mode)
                     cmdGetSourceState = FlooMsgSt(True)
                     self.inf.sendMsg(cmdGetSourceState)
@@ -75,30 +80,38 @@ class FlooStateMachine(FlooInterfaceDelegate, Thread):
                     self.lastCmd = cmdGetBroadcastMode
             elif isinstance(message, FlooMsgBm):
                 if isinstance(self.lastCmd, FlooMsgBm):
+                    self.broadcastMode = message.mode
+                    print("broadcast mode got " + str(self.broadcastMode))
                     self.delegate.broadcastModeInd(message.mode)
                     cmdGetBroadcastName = FlooMsgBn(True)
                     self.inf.sendMsg(cmdGetBroadcastName)
                     self.lastCmd = cmdGetBroadcastName
             elif isinstance(message, FlooMsgBn):
                 if isinstance(self.lastCmd, FlooMsgBn):
+                    self.broadcastName = message.name
                     self.delegate.broadcastNameInd(message.name)
                     self.lastCmd = None
                     self.state = FlooStateMachine.CONNECTED
                 # read current audio mode
         elif self.state == FlooStateMachine.CONNECTED:
             if isinstance(message, FlooMsgOk):
-                if isinstance(self.lastCmd, FlooMsgAm) \
-                        or isinstance(self.lastCmd, FlooMsgBm) \
-                        or isinstance(self.lastCmd, FlooMsgBn):
-                    self.lastCmd = None
+                if isinstance(self.lastCmd, FlooMsgAm):
+                    self.audioMode = self.pendingCmdPara
+                elif isinstance(self.lastCmd, FlooMsgBm):
+                    self.broadcastMode = self.pendingCmdPara
+                elif isinstance(self.lastCmd, FlooMsgBn):
+                    self.broadcastName = self.pendingCmdPara
+                self.lastCmd = None
+                self.pendingCmdPara = None
             elif isinstance(message, FlooMsgEr):
                 if isinstance(self.lastCmd, FlooMsgAm):
-                    self.delegate.audioModeInd(self.pendingCmdPara)
+                    self.delegate.audioModeInd(self.audioMode)
                 elif isinstance(self.lastCmd, FlooMsgBm):
-                    self.delegate.broadcastModeInd(self.pendingCmdPara)
+                    self.delegate.broadcastModeInd(self.broadcastMode)
                 elif isinstance(self.lastCmd, FlooMsgBn):
-                    self.delegate.broadcastNameInd(self.pendingCmdPara)
+                    self.delegate.broadcastNameInd(self.broadcastName)
                 self.lastCmd = None
+                self.pendingCmdPara = None
             elif isinstance(message, FlooMsgSt):
                 self.delegate.sourceStateInd(message.state)
             elif isinstance(message, FlooMsgLa):
@@ -112,10 +125,20 @@ class FlooStateMachine(FlooInterfaceDelegate, Thread):
             self.inf.sendMsg(cmdSetAudioMode)
 
     def setPublicBroadcast(self, enable: bool):
-        pass
+        oldValue = self.broadcastMode & 2 == 2
+        if oldValue != enable:
+            self.pendingCmdPara = (self.broadcastMode & 1) + (2 if enable else 0)
+            cmdSetBroadcastMode = FlooMsgBm(True, self.pendingCmdPara)
+            self.lastCmd = cmdSetBroadcastMode
+            self.inf.sendMsg(cmdSetBroadcastMode)
 
     def setBroadcastEncrypt(self, enable: bool):
-        pass
+        oldValue = self.broadcastMode & 1 == 1
+        if oldValue != enable:
+            self.pendingCmdPara = (self.broadcastMode & 2) + (1 if enable else 0)
+            cmdSetBroadcastMode = FlooMsgBm(True, self.pendingCmdPara)
+            self.lastCmd = cmdSetBroadcastMode
+            self.inf.sendMsg(cmdSetBroadcastMode)
 
     def setBroadcastName(self, name:str):
         if self.state == FlooStateMachine.CONNECTED:
