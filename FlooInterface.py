@@ -73,7 +73,7 @@ class FlooInterface:
                         if self.port.inWaiting() > 0:
                             print("FlooInterface: got some msgs")
                             newLine = self.port.read_until(b'\r\n')
-                            print("FlooInterface: full line " + newLine.decode('ascii'))
+                            print("FlooInterface: full line " + newLine.decode('utf-8'))
                             flooMsg = self.parser.run(newLine[:-2])
                             if flooMsg is None:
                                 break

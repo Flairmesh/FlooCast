@@ -6,8 +6,10 @@ from FlooMsgLa import FlooMsgLa
 from FlooMsgSt import FlooMsgSt
 from FlooMsgBm import FlooMsgBm
 from FlooMsgBn import FlooMsgBn
+from FlooMsgFn import FlooMsgFn
 from FlooMsgOk import FlooMsgOk
 from FlooMsgEr import FlooMsgEr
+from FlooMsgUnknown import FlooMsgUnknown
 
 class FlooParser:
     """FlooGoo message parser"""
@@ -21,6 +23,7 @@ class FlooParser:
         FlooMsgSt.HEADER : FlooMsgSt.create_valid_msg,
         FlooMsgBm.HEADER : FlooMsgBm.create_valid_msg,
         FlooMsgBn.HEADER : FlooMsgBn.create_valid_msg,
+        FlooMsgFn.HEADER : FlooMsgFn.create_valid_msg,
         FlooMsgOk.HEADER : FlooMsgOk.create_valid_msg,
         FlooMsgEr.HEADER : FlooMsgEr.create_valid_msg
     }
@@ -36,6 +39,8 @@ class FlooParser:
         if msgHeader in FlooParser.MSG_HEADERS.keys():
             print("FlooParser: create a " + msgHeader + " message")
             return FlooParser.MSG_HEADERS[msgHeader](pkt)
+        else:
+            return FlooMsgUnknown(False)
         return None
 
     def run(self, pkt: bytes) -> FlooMessage:

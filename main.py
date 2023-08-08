@@ -16,7 +16,6 @@ from FlooDfuThread import FlooDfuThread
 from PIL import Image
 from pystray import MenuItem as TrayMenuItem
 
-
 appIcon = "FlooCastApp.ico"
 appGif = "FlooPasteApp.gif"
 appTitle = "FlooCast"
@@ -47,17 +46,20 @@ elif platform.system().lower().startswith('lin'):
 # Set geometry (widthxheight)
 root.geometry('720x400')
 
-mainFrame = tk.Frame(root, relief=tk.RAISED)
-mainFrame.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
+root.rowconfigure(0, weight=1)
+root.rowconfigure(1, weight=0)
+root.columnconfigure(0, weight=1)
+
+mainFrame = tk.Frame(root) # , relief=tk.RAISED
+mainFrame.grid(column=0, row=0, sticky="nsew")
 
 # statusBar
 statusBar = tk.Label(root, text=_("Initializing"), bd=1, relief=tk.SUNKEN, anchor=tk.W)
-statusBar.pack(side=tk.BOTTOM, fill=tk.X)
+statusBar.grid(column=0, row=1, sticky="ew")
 
 def update_status_bar(info: str):
     global statusBar
     statusBar.config(text=info)
-
 
 # Define On/Off Images
 on = tk.PhotoImage(file=app_path+os.sep+'onS.png')
@@ -71,17 +73,17 @@ mainFrame.columnconfigure(0, weight=1)
 mainFrame.columnconfigure(1, weight=0)
 # Setup contains LE Broadcast and Paired Devices
 audioModePanel = ttk.LabelFrame(mainFrame, text=_('Audio Mode'))
-audioModePanel.grid(column=0, row=0, padx=4, sticky='nsew')
+audioModePanel.grid(column=0, row=0, padx=2, sticky='nsew')
 leBroadcastPanel = ttk.LabelFrame(mainFrame, text=_('LE Broadcast'))
-leBroadcastPanel.grid(column=0, row=1, padx=4, sticky='nsew')
-pairedDevicesPanel = ttk.LabelFrame(mainFrame, text=_('Paired Devices'))
-pairedDevicesPanel.grid(column=0, row=2, padx=4, sticky='nsew')
+leBroadcastPanel.grid(column=0, row=1, padx=2, sticky='nsew')
+pairedDevicesPanel = ttk.LabelFrame(mainFrame, text=_('Most Recently Used Devices'))
+pairedDevicesPanel.grid(column=0, row=2, padx=2, sticky='nsew')
 # Window panel
 windowPanel = ttk.LabelFrame(mainFrame, text=_('Window'))
-windowPanel.grid(column=1, row=0, padx=4, sticky='nsew')
+windowPanel.grid(column=1, row=0, padx=2, sticky='nsew')
 # About panel
 aboutPanel = ttk.LabelFrame(mainFrame, text=_('About'))
-aboutPanel.grid(column=1, row=1, padx=4, rowspan=2, sticky='nsew')
+aboutPanel.grid(column=1, row=1, padx=2, rowspan=2, sticky='nsew')
 
 # Audio mode panel
 for i in range(0, 2):
@@ -194,34 +196,36 @@ broadcastKeyEntry.grid(column=1, row=3, columnspan=2, padx=4, sticky='we')
 def button_new_pairing():
     flooSm.setNewPairing()
 
-pairedDevicesPanel.columnconfigure(0, weight=1)
+pairedDevicesPanel.columnconfigure(0, weight=0)
 pairedDevicesPanel.columnconfigure(1, weight=1)
-pairedDevicesPanel.columnconfigure(2, weight=1)
+pairedDevicesPanel.columnconfigure(2, weight=0)
+pairedDevicesPanel.rowconfigure(0, weight=0)
+pairedDevicesPanel.rowconfigure(1, weight=1)
 
-newPairFrame = tk.Frame(pairedDevicesPanel)
-newPairFrame.grid(column=0, row=0, padx=4, sticky='w')
-newPairingButton = tk.Button(newPairFrame, text='+', relief="groove", command=button_new_pairing)
-newPairingButton.pack(side = tk.LEFT)
-newPairingLabel = tk.Label(newPairFrame, text=_("Add device"))
-newPairingLabel.pack(side = tk.LEFT)
+# newPairFrame = tk.Frame(pairedDevicesPanel)
+# newPairFrame.grid(column=0, row=0, padx=4, sticky='w')
+newPairingButton = tk.Button(pairedDevicesPanel, text='+', relief="groove", command=button_new_pairing)
+newPairingButton.grid(column=0, row=0, padx=4, sticky='we')
+# newPairingButton.pack(side = tk.LEFT)
+newPairingLabel = tk.Label(pairedDevicesPanel, text=_("Add device"))
+newPairingLabel.grid(column=1, row=0, padx=4, sticky='w')
+# newPairingLabel.pack(side = tk.LEFT)
 
 # Clear all paired device function
 def button_clear_all():
-    global newPairingButton
-    global publicBroadcastEnable
-    # Determine is on or off
-    if shareToMobile:
-        shareToMobileButton.config(image=off)
-        shareToMobile = False
-    else:
-        shareToMobileButton.config(image=on)
-        shareToMobile = True
-    floo_transceiver.setShareToMobile(shareToMobile)
-    flooConfig.setShareToMobile(shareToMobile)
-
+    flooSm.clearAllPairedDevices()
 
 clearAllButton = tk.Button(pairedDevicesPanel, text=_("Clear All"), relief="groove", command=button_clear_all)
 clearAllButton.grid(column=2, row=0, padx=4, sticky='we')
+pairedDeviceFrame = tk.Frame(pairedDevicesPanel)
+pairedDeviceFrame.grid(column=0, row=1, columnspan=3, padx=4, sticky='nswe')
+pairedDeviceListbox = tk.Listbox(pairedDeviceFrame, )
+pairedDeviceListbox.pack(side=tk.LEFT, expand=True, fill=tk.BOTH)
+scrollbar = tk.Scrollbar(pairedDeviceFrame)
+scrollbar.pack(side = tk.RIGHT, fill=tk.Y)
+pairedDeviceListbox.config(yscrollcommand = scrollbar.set)
+scrollbar.config(command = pairedDeviceListbox.yview)
+pairedDeviceList = []
 
 def enable_pairing_widgets(enable: bool):
     global clearAllButton
@@ -266,7 +270,6 @@ def hide_window():
     icon.run()
     windowIcon = icon
 
-
 root.protocol('WM_DELETE_WINDOW', hide_window)
 windowPanel.columnconfigure(0, weight=1)
 windowPanel.columnconfigure(1, weight=1)
@@ -275,11 +278,9 @@ minimizeButton.grid(column=0, row=0, columnspan=2, padx=(10, 10), pady=(10, 10),
 quitButton = tk.Button(windowPanel, text=_("Quit App"), command=quit_all)
 quitButton.grid(column=0, row=1, columnspan=2, padx=(10, 10), pady=(0, 10), sticky='ew')
 
-
 # aboutPanel
 def url_callback(url):
     webbrowser.open_new(url)
-
 
 aboutFrame = tk.Frame(aboutPanel)
 aboutPanel.rowconfigure(0, weight=1)
@@ -408,6 +409,15 @@ class FlooSmDelegate(FlooStateMachineDelegate):
     def broadcastNameInd(self, name):
         broadcastName.set(name)
         enable_settings_widgets(True)
+
+    def pairedDevicesUpdateInd(self, pairedDevices):
+        global pairedDeviceList
+        print("update paired list len %d" % len(pairedDevices))
+        pairedDeviceListbox.delete(0, tk.END)
+        i = 0
+        while i < len(pairedDevices):
+            pairedDeviceListbox.insert(tk.END, pairedDevices[i])
+            i = i + 1
 
 flooSmDelegate = FlooSmDelegate()
 flooSm = FlooStateMachine(flooSmDelegate)

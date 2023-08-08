@@ -23,5 +23,9 @@ class FlooStateMachineDelegate:
         """Called when FlooGoo device reports current LE audio state."""
         pass
 
+    def pairedDevicesUpdateInd(self, pairedDevices):
+        """Called when FlooGoo device reports current paired devices list"""
+        pass
+
 
 

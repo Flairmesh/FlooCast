@@ -11,6 +11,9 @@ from FlooMsgBm import FlooMsgBm
 from FlooMsgBn import FlooMsgBn
 from FlooMsgOk import FlooMsgOk
 from FlooMsgEr import FlooMsgEr
+from FlooMsgFn import FlooMsgFn
+from FlooMsgCp import FlooMsgCp
+from FlooMsgIq import FlooMsgIq
 
 class FlooStateMachine(FlooInterfaceDelegate, Thread):
     """The state machine of the host app working with FlooGoo USB Bluetooth Dongle"""
@@ -29,6 +32,7 @@ class FlooStateMachine(FlooInterfaceDelegate, Thread):
         self.broadcastMode = None
         self.broadcastName = None
         self.broadcastKey = None
+        self.pairedDevices = []
 
     def reset(self):
         self.state = FlooStateMachine.INIT
@@ -81,7 +85,6 @@ class FlooStateMachine(FlooInterfaceDelegate, Thread):
             elif isinstance(message, FlooMsgBm):
                 if isinstance(self.lastCmd, FlooMsgBm):
                     self.broadcastMode = message.mode
-                    print("broadcast mode got " + str(self.broadcastMode))
                     self.delegate.broadcastModeInd(message.mode)
                     cmdGetBroadcastName = FlooMsgBn(True)
                     self.inf.sendMsg(cmdGetBroadcastName)
@@ -90,18 +93,34 @@ class FlooStateMachine(FlooInterfaceDelegate, Thread):
                 if isinstance(self.lastCmd, FlooMsgBn):
                     self.broadcastName = message.name
                     self.delegate.broadcastNameInd(message.name)
-                    self.lastCmd = None
-                    self.state = FlooStateMachine.CONNECTED
-                # read current audio mode
+                    cmdGetDeviceName = FlooMsgFn(True)
+                    self.inf.sendMsg(cmdGetDeviceName)
+                    self.lastCmd = cmdGetDeviceName
+                    # self.lastCmd = None
+                    # self.state = FlooStateMachine.CONNECTED
+            elif isinstance(message, FlooMsgFn):
+                if isinstance(self.lastCmd, FlooMsgFn):
+                    if message.btAddress is None:
+                        # end of the device list
+                        self.delegate.pairedDevicesUpdateInd(self.pairedDevices)
+                        self.lastCmd = None
+                        self.state = FlooStateMachine.CONNECTED
+                    else:
+                        self.pairedDevices.append(message.name)
         elif self.state == FlooStateMachine.CONNECTED:
             if isinstance(message, FlooMsgOk):
                 if isinstance(self.lastCmd, FlooMsgAm):
                     self.audioMode = self.pendingCmdPara
+                    self.lastCmd = None
                 elif isinstance(self.lastCmd, FlooMsgBm):
                     self.broadcastMode = self.pendingCmdPara
+                    self.lastCmd = None
                 elif isinstance(self.lastCmd, FlooMsgBn):
                     self.broadcastName = self.pendingCmdPara
-                self.lastCmd = None
+                    self.lastCmd = None
+                elif isinstance(self.lastCmd, FlooMsgCp):
+                    self.pairedDevices.clear()
+                    self.delegate.pairedDevicesUpdateInd([])
                 self.pendingCmdPara = None
             elif isinstance(message, FlooMsgEr):
                 if isinstance(self.lastCmd, FlooMsgAm):
@@ -114,8 +133,17 @@ class FlooStateMachine(FlooInterfaceDelegate, Thread):
                 self.pendingCmdPara = None
             elif isinstance(message, FlooMsgSt):
                 self.delegate.sourceStateInd(message.state)
+                if message.state == 4 or message.state == 6:
+                    self.getRecentlyUsedDevices()
             elif isinstance(message, FlooMsgLa):
                 self.delegate.leAudioStateInd(message.state)
+            elif isinstance(message, FlooMsgFn):
+                if message.btAddress is None:
+                    # end of the device list
+                    self.delegate.pairedDevicesUpdateInd(self.pairedDevices)
+                    self.lastCmd = None
+                else:
+                    self.pairedDevices.append(message.name)
 
     def setAudioMode(self, mode: int):
         if self.state == FlooStateMachine.CONNECTED:
@@ -142,7 +170,6 @@ class FlooStateMachine(FlooInterfaceDelegate, Thread):
 
     def setBroadcastName(self, name:str):
         if self.state == FlooStateMachine.CONNECTED:
-            print("setBroadcastName " + name)
             cmdSetBroadcastName = FlooMsgBn(True, name)
             self.pendingCmdPara = name
             self.lastCmd = cmdSetBroadcastName
@@ -150,11 +177,26 @@ class FlooStateMachine(FlooInterfaceDelegate, Thread):
 
     def setBroadcastKey(self, key:str):
         if self.state == FlooStateMachine.CONNECTED:
-            print("setBroadcastKey " + key)
             cmdSetBroadcastName = FlooMsgBn(True, name)
             self.pendingCmdPara = key
             self.lastCmd = cmdSetBroadcastName
             self.inf.sendMsg(cmdSetBroadcastName)
 
     def setNewPairing(self):
-        pass
+        if self.state == FlooStateMachine.CONNECTED:
+            cmdStartNewPairing = FlooMsgIq()
+            self.lastCmd = cmdStartNewPairing
+            self.inf.sendMsg(cmdStartNewPairing)
+
+    def clearAllPairedDevices(self):
+        if self.state == FlooStateMachine.CONNECTED:
+            cmdClearAllPairedDevices = FlooMsgCp()
+            self.lastCmd = cmdClearAllPairedDevices
+            self.inf.sendMsg(cmdClearAllPairedDevices)
+
+    def getRecentlyUsedDevices(self):
+        if self.state == FlooStateMachine.CONNECTED:
+            self.pairedDevices.clear()
+            cmdGetDeviceName = FlooMsgFn(True)
+            self.lastCmd = cmdGetDeviceName
+            self.inf.sendMsg(cmdGetDeviceName)
