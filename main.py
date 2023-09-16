@@ -478,8 +478,8 @@ def button_dfu():
     filename = fd.askopenfilename()
     if filename:
         os.chdir(app_path)
-        print("Run DFU in directory: " + os.getcwd())
-        dfuThread = FlooDfuThread(['myDfuDo.bat', filename], update_dfu_info)
+        # print("Run DFU in directory: " + os.getcwd())
+        dfuThread = FlooDfuThread([app_path + os.sep + 'myDfuDo.bat', filename], update_dfu_info)
         dfuThread.start()
 
 
