@@ -35,8 +35,7 @@ class FlooInterface:
             return False
 
         print([port.hwid for port in serial.tools.list_ports.grep('0A12:4007.*FMA120.*')])
-        # ports = [port.name for port in serial.tools.list_ports.grep('0A12:4007.*20FF00B52000.*')]
-        ports = [port.name for port in serial.tools.list_ports.grep('0A12:4007.*')] # FMA120
+        ports = [port.name for port in serial.tools.list_ports.grep('0A12:4007.*FMA120.*')] # FMA120
         if ports:
             if not self.port_opened:
                 self.port_name = ports[0]
