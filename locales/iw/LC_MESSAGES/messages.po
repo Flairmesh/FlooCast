@@ -1,0 +1,221 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2023-09-14 21:16+1000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+
+
+#: main.py:47 main.py:89
+msgid "Initializing"
+msgstr "אתחול"
+
+#: main.py:48
+msgid "Idle"
+msgstr "לְהִתְבַּטֵל"
+
+#: main.py:49
+msgid "Pairing"
+msgstr "צִמוּד"
+
+#: main.py:50
+msgid "Connecting"
+msgstr "מְקַשֵׁר"
+
+#: main.py:51 main.py:61
+msgid "Connected"
+msgstr "מְחוּבָּר"
+
+#: main.py:52
+msgid "Audio starting"
+msgstr "אודיו מתחיל"
+
+#: main.py:53
+msgid "Audio streaming"
+msgstr "הזרמת אודיו"
+
+#: main.py:54
+msgid "Audio stopping"
+msgstr "השמע מפסיק"
+
+#: main.py:55
+msgid "Disconnecting"
+msgstr "מתנתק"
+
+#: main.py:56
+msgid "Voice starting"
+msgstr "קול מתחיל"
+
+#: main.py:57
+msgid "Voice streaming"
+msgstr "הזרמת קול"
+
+#: main.py:58
+msgid "Voice stopping"
+msgstr "קול עוצר"
+
+#: main.py:60 main.py:155
+msgid "Disconnected"
+msgstr "מְנוּתָק"
+
+#: main.py:62
+msgid "Unicast starting"
+msgstr "Unicast מתחיל"
+
+#: main.py:63
+msgid "Unicast streaming"
+msgstr "סטרימינג של Unicast"
+
+#: main.py:64
+msgid "Broadcast starting"
+msgstr "שידור מתחיל"
+
+#: main.py:65
+msgid "Broadcast streaming"
+msgstr "שידור סטרימינג"
+
+#: main.py:66
+msgid "Streaming stopping"
+msgstr "הסטרימינג מפסיק"
+
+#: main.py:109
+msgid "Audio Mode"
+msgstr "מצב שמע"
+
+#: main.py:111
+msgid "LE Broadcast"
+msgstr "שידור LE"
+
+#: main.py:113
+msgid "Most Recently Used Devices"
+msgstr "התקנים שנעשה בהם שימוש לאחרונה"
+
+#: main.py:116
+msgid "Window"
+msgstr "חַלוֹן"
+
+#: main.py:119
+msgid "Help"
+msgstr "עֶזרָה"
+
+#: main.py:139
+msgid "High Quality (one-to-one)"
+msgstr "איכות גבוהה (אחד על אחד)"
+
+#: main.py:142
+msgid "Gaming (one-to-one)"
+msgstr "משחקים (אחד על אחד)"
+
+#: main.py:145
+msgid "Broadcast"
+msgstr "מִשׁדָר"
+
+#: main.py:149
+msgid "Dongle State"
+msgstr "מצב מתאם"
+
+#: main.py:153
+msgid "LE Audio State"
+msgstr "מצב אודיו של LE"
+
+#: main.py:157
+msgid "Codec in Use"
+msgstr "Codec בשימוש"
+
+#: main.py:162
+msgid "Prefer using LE audio for dual-mode devices"
+msgstr "העדיפו להשתמש באודיו LE עבור התקני מצב כפול"
+
+#: main.py:188
+msgid "Public broadcast"
+msgstr "שידור ציבורי"
+
+#: main.py:209
+msgid "Broadcast high-quality music, otherwise, voice"
+msgstr "שדר מוזיקה באיכות גבוהה, אחרת, קול"
+
+#: main.py:231
+msgid "Encrypt broadcast; please set a key first"
+msgstr "הצפין שידור; נא להגדיר מפתח קודם"
+
+#: main.py:252
+msgid "Broadcast Name, maximum 30 characters"
+msgstr "שם השידור, מקסימום 30 תווים"
+
+#: main.py:271
+msgid "Broadcast Key, maximum 16 characters"
+msgstr "מפתח שידור, מקסימום 16 תווים"
+
+#: main.py:286
+msgid "Input a new key then press <ENTER>"
+msgstr "הזן מפתח חדש ולאחר מכן הקש <ENTER>"
+
+#: main.py:308
+msgid "Add device"
+msgstr "הוסף מכשיר"
+
+#: main.py:325
+msgid "Delete"
+msgstr "לִמְחוֹק"
+
+#: main.py:343
+msgid "Clear All"
+msgstr "נקה הכל"
+
+#: main.py:405
+msgid "Quit"
+msgstr "לְהַפְסִיק"
+
+#: main.py:405
+msgid "Show Window"
+msgstr "הצג חלון"
+
+#: main.py:406
+msgid "FlooGoo Bluetooth Audio Source"
+msgstr "מקור שמע FlooGoo Bluetooth"
+
+#: main.py:414
+msgid "Minimize to System Tray"
+msgstr "למזער למגש המערכת"
+
+#: main.py:416
+msgid "Quit App"
+msgstr "צא מהאפליקציה"
+
+#: main.py:430
+msgid "Disconnect and reconnect the dongle to activate configuration changes, after which it will function independently without the app."
+msgstr "נתק וחבר מחדש את הדונגל כדי להפעיל שינויי תצורה, ולאחר מכן הוא יתפקד באופן עצמאי ללא האפליקציה."
+
+#: main.py:445
+msgid "Third-Party Software Licenses"
+msgstr "רישיונות תוכנה של צד שלישי"
+
+#: main.py:448
+msgid "Support Link"
+msgstr "קישור תמיכה"
+
+#: main.py:451
+msgid "Version"
+msgstr "גִרְסָה"
+
+#: main.py:486
+msgid "Device Firmware Upgrade"
+msgstr "שדרוג קושחה של מכשיר"
+
+#: main.py:524
+msgid "Use FlooGoo dongle on "
+msgstr "השתמש במתאם FlooGoo"
+
+#: main.py:526
+msgid "Please insert your FlooGoo dongle"
+msgstr "אנא הכנס את מתאם FlooGoo שלך"
+

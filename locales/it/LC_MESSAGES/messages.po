@@ -1,0 +1,221 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2023-09-14 21:16+1000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+
+
+#: main.py:47 main.py:89
+msgid "Initializing"
+msgstr "Inizializzazione"
+
+#: main.py:48
+msgid "Idle"
+msgstr "Oziare"
+
+#: main.py:49
+msgid "Pairing"
+msgstr "accoppiamento"
+
+#: main.py:50
+msgid "Connecting"
+msgstr "Connessione"
+
+#: main.py:51 main.py:61
+msgid "Connected"
+msgstr "Collegato"
+
+#: main.py:52
+msgid "Audio starting"
+msgstr "Inizio dell'audio"
+
+#: main.py:53
+msgid "Audio streaming"
+msgstr "Trasmissione audio"
+
+#: main.py:54
+msgid "Audio stopping"
+msgstr "Interruzione dell'audio"
+
+#: main.py:55
+msgid "Disconnecting"
+msgstr "Disconnessione"
+
+#: main.py:56
+msgid "Voice starting"
+msgstr "Inizio della voce"
+
+#: main.py:57
+msgid "Voice streaming"
+msgstr "Streaming vocale"
+
+#: main.py:58
+msgid "Voice stopping"
+msgstr "Voce interrotta"
+
+#: main.py:60 main.py:155
+msgid "Disconnected"
+msgstr "Disconnesso"
+
+#: main.py:62
+msgid "Unicast starting"
+msgstr "Avvio unicast"
+
+#: main.py:63
+msgid "Unicast streaming"
+msgstr "Streaming unicast"
+
+#: main.py:64
+msgid "Broadcast starting"
+msgstr "Inizio della trasmissione"
+
+#: main.py:65
+msgid "Broadcast streaming"
+msgstr "Trasmissione in streaming"
+
+#: main.py:66
+msgid "Streaming stopping"
+msgstr "Interruzione dello streaming"
+
+#: main.py:109
+msgid "Audio Mode"
+msgstr "Modalità audio"
+
+#: main.py:111
+msgid "LE Broadcast"
+msgstr "Trasmissione LE"
+
+#: main.py:113
+msgid "Most Recently Used Devices"
+msgstr "Dispositivi utilizzati più di recente"
+
+#: main.py:116
+msgid "Window"
+msgstr "Finestra"
+
+#: main.py:119
+msgid "Help"
+msgstr "Aiuto"
+
+#: main.py:139
+msgid "High Quality (one-to-one)"
+msgstr "Alta qualità (uno a uno)"
+
+#: main.py:142
+msgid "Gaming (one-to-one)"
+msgstr "Gioco (uno a uno)"
+
+#: main.py:145
+msgid "Broadcast"
+msgstr "Trasmissione"
+
+#: main.py:149
+msgid "Dongle State"
+msgstr "Stato dell'adattatore"
+
+#: main.py:153
+msgid "LE Audio State"
+msgstr "Stato audio LE"
+
+#: main.py:157
+msgid "Codec in Use"
+msgstr "Codec in uso"
+
+#: main.py:162
+msgid "Prefer using LE audio for dual-mode devices"
+msgstr "Preferisci utilizzare l'audio LE per i dispositivi a doppia modalità"
+
+#: main.py:188
+msgid "Public broadcast"
+msgstr "Trasmissione pubblica"
+
+#: main.py:209
+msgid "Broadcast high-quality music, otherwise, voice"
+msgstr "Trasmetti musica di alta qualità, altrimenti voce"
+
+#: main.py:231
+msgid "Encrypt broadcast; please set a key first"
+msgstr "Crittografare la trasmissione; si prega di impostare prima una chiave"
+
+#: main.py:252
+msgid "Broadcast Name, maximum 30 characters"
+msgstr "Nome trasmissione, massimo 30 caratteri"
+
+#: main.py:271
+msgid "Broadcast Key, maximum 16 characters"
+msgstr "Chiave di trasmissione, massimo 16 caratteri"
+
+#: main.py:286
+msgid "Input a new key then press <ENTER>"
+msgstr "Immettere una nuova chiave, quindi premere <INVIO>"
+
+#: main.py:308
+msgid "Add device"
+msgstr "Aggiungi dispositivo"
+
+#: main.py:325
+msgid "Delete"
+msgstr "Eliminare"
+
+#: main.py:343
+msgid "Clear All"
+msgstr "Cancella tutto"
+
+#: main.py:405
+msgid "Quit"
+msgstr "Esentato"
+
+#: main.py:405
+msgid "Show Window"
+msgstr "Mostra finestra"
+
+#: main.py:406
+msgid "FlooGoo Bluetooth Audio Source"
+msgstr "Sorgente audio Bluetooth FlooGoo"
+
+#: main.py:414
+msgid "Minimize to System Tray"
+msgstr "Ridurre a icona nel vassoio di sistema"
+
+#: main.py:416
+msgid "Quit App"
+msgstr "Esci dall'app"
+
+#: main.py:430
+msgid "Disconnect and reconnect the dongle to activate configuration changes, after which it will function independently without the app."
+msgstr "Scollega e ricollega il dongle per attivare le modifiche alla configurazione, dopodiché funzionerà in modo indipendente senza l'app."
+
+#: main.py:445
+msgid "Third-Party Software Licenses"
+msgstr "Licenze software di terze parti"
+
+#: main.py:448
+msgid "Support Link"
+msgstr "Collegamento di supporto"
+
+#: main.py:451
+msgid "Version"
+msgstr "Versione"
+
+#: main.py:486
+msgid "Device Firmware Upgrade"
+msgstr "Aggiornamento firmware del dispositivo"
+
+#: main.py:524
+msgid "Use FlooGoo dongle on "
+msgstr "Utilizza l'adattatore FlooGoo"
+
+#: main.py:526
+msgid "Please insert your FlooGoo dongle"
+msgstr "Inserisci l'adattatore FlooGoo"
+

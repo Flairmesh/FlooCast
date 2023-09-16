@@ -21,17 +21,49 @@ appGif = "FlooPasteApp.gif"
 appTitle = "FlooCast"
 appLogoPng = "FlooCastHeader.png"
 
+codecStr = ['None',
+            'CVSD',
+            'mSBC/WBS',
+            'SBC',
+            'aptX',
+            'aptX HD',
+            'aptX Adaptive',
+            'LC3',
+            'aptX Adaptive',
+            'aptX Lite']
+
 userLocale = locale.getdefaultlocale()
 lan = userLocale[0].split('_')[0]
 # print(lan)
 
 # Set the local directory
 app_path = os.path.abspath(os.path.dirname(sys.argv[0]))
-localedir = app_path + os.sep +'locale'
+localedir = app_path + os.sep + 'locales'
 # Set up your magic function
 translate = gettext.translation("messages", localedir, languages=[lan], fallback=True)
 translate.install()
 _ = translate.gettext
+
+sourceStateStr = [_("Initializing"),
+                  _("Idle"),
+                  _("Pairing"),
+                  _("Connecting"),
+                  _("Connected"),
+                  _("Audio starting"),
+                  _("Audio streaming"),
+                  _("Audio stopping"),
+                  _("Disconnecting"),
+                  _("Voice starting"),
+                  _("Voice streaming"),
+                  _("Voice stopping")]
+
+leaStateStr = [_("Disconnected"),
+               _("Connected"),
+               _("Unicast starting"),
+               _("Unicast streaming"),
+               _("Broadcast starting"),
+               _("Broadcast streaming"),
+               _("Streaming stopping")]
 
 # create root window
 root = tk.Tk()
@@ -44,26 +76,28 @@ elif platform.system().lower().startswith('lin'):
     img_icon = tk.PhotoImage(file=app_path + os.sep + appGif)
     root.tk.call('wm', 'iconphoto', root._w, img_icon)
 # Set geometry (widthxheight)
-root.geometry('720x400')
+root.geometry('720x480')
 
 root.rowconfigure(0, weight=1)
 root.rowconfigure(1, weight=0)
 root.columnconfigure(0, weight=1)
 
-mainFrame = tk.Frame(root) # , relief=tk.RAISED
+mainFrame = tk.Frame(root)  # , relief=tk.RAISED
 mainFrame.grid(column=0, row=0, sticky="nsew")
 
 # statusBar
 statusBar = tk.Label(root, text=_("Initializing"), bd=1, relief=tk.SUNKEN, anchor=tk.W)
 statusBar.grid(column=0, row=1, sticky="ew")
 
+
 def update_status_bar(info: str):
     global statusBar
     statusBar.config(text=info)
 
+
 # Define On/Off Images
-on = tk.PhotoImage(file=app_path+os.sep+'onS.png')
-off = tk.PhotoImage(file=app_path+os.sep+'offS.png')
+on = tk.PhotoImage(file=app_path + os.sep + 'onS.png')
+off = tk.PhotoImage(file=app_path + os.sep + 'offS.png')
 
 mainFrame.rowconfigure(0, weight=0)
 mainFrame.rowconfigure(1, weight=0)
@@ -82,18 +116,23 @@ pairedDevicesPanel.grid(column=0, row=2, padx=2, sticky='nsew')
 windowPanel = ttk.LabelFrame(mainFrame, text=_('Window'))
 windowPanel.grid(column=1, row=0, padx=2, sticky='nsew')
 # About panel
-aboutPanel = ttk.LabelFrame(mainFrame, text=_('About'))
+aboutPanel = ttk.LabelFrame(mainFrame, text=_('Help'))
 aboutPanel.grid(column=1, row=1, padx=2, rowspan=2, sticky='nsew')
 
 # Audio mode panel
-for i in range(0, 2):
-    audioModePanel.rowconfigure(i, weight=i)
+for i in range(0, 3):
+    if i == 1:
+        audioModePanel.rowconfigure(i, weight=1)
+    else:
+        audioModePanel.rowconfigure(i, weight=0)
 for i in range(0, 3):
     audioModePanel.columnconfigure(i, weight=1)
+
 
 def audioModeSel():
     enable_pairing_widgets(audioMode.get() != 2)
     flooSm.setAudioMode(audioMode.get())
+
 
 audioMode = tk.IntVar()
 audioMode.set(0)
@@ -109,16 +148,37 @@ broadcastRadioButton.grid(column=2, row=0, padx=4, sticky='w')
 
 dongleStatePanel = ttk.LabelFrame(audioModePanel, text=_('Dongle State'))
 dongleStatePanel.grid(column=0, row=1, columnspan=1, padx=4, pady=4, sticky='nsew')
-dongleStateLabel = tk.Label(dongleStatePanel, text=_("Initialization"))
-dongleStateLabel.place(relx=.5, rely=.5,anchor= tk.CENTER)
+dongleStateLabel = tk.Label(dongleStatePanel, text=_("Initializing"))
+dongleStateLabel.place(relx=.5, rely=.5, anchor=tk.CENTER)
 leaStatePanel = ttk.LabelFrame(audioModePanel, text=_('LE Audio State'))
 leaStatePanel.grid(column=1, row=1, columnspan=1, padx=4, pady=4, sticky='nsew')
 leaStateLabel = tk.Label(leaStatePanel, text=_("Disconnected"))
-leaStateLabel.place(relx=.5, rely=.5,anchor= tk.CENTER)
+leaStateLabel.place(relx=.5, rely=.5, anchor=tk.CENTER)
 codecInUsePanel = ttk.LabelFrame(audioModePanel, text=_('Codec in Use'))
 codecInUsePanel.grid(column=2, row=1, columnspan=1, padx=4, pady=4, sticky='nsew')
-codecInUseLabel = tk.Label(codecInUsePanel, text=_("LC3"))
-codecInUseLabel.place(relx=.5, rely=.5,anchor= tk.CENTER)
+codecInUseLabel = tk.Label(codecInUsePanel, text=codecStr[0])
+codecInUseLabel.place(relx=.5, rely=.5, anchor=tk.CENTER)
+
+preferLeaEnableLabel = tk.Label(audioModePanel, text=_("Prefer using LE audio for dual-mode devices"))
+preferLeaEnableLabel.grid(column=0, row=2, columnspan=2, sticky='w')
+preferLeaEnable = None
+
+
+def prefer_lea_enable_switch_set(enable):
+    global preferLeaEnable
+    preferLeaEnable = enable
+    preferLeaEnableButton.config(image=on if preferLeaEnable else off)
+    flooSm.setPreferLea(enable)
+
+
+# Broadcast enable switch function
+def prefer_lea_enable_switch():
+    global preferLeaEnable
+    prefer_lea_enable_switch_set(not preferLeaEnable)
+
+
+preferLeaEnableButton = tk.Button(audioModePanel, image=off, bd=0, command=prefer_lea_enable_switch)
+preferLeaEnableButton.grid(column=2, row=2, sticky='e')
 
 # LE Broadcast panel
 leBroadcastPanel.columnconfigure(0, weight=1)
@@ -129,41 +189,70 @@ broadcastEnableLabel = tk.Label(leBroadcastPanel, text=_("Public broadcast"))
 broadcastEnableLabel.grid(column=0, row=0, columnspan=2, sticky='w')
 publicBroadcastEnable = None
 
+
 def public_broadcast_enable_switch_set(enable):
     global publicBroadcastEnable
     publicBroadcastEnable = enable
-    publicBroadcastEnableButton.config(image= on if publicBroadcastEnable else off)
+    publicBroadcastEnableButton.config(image=on if publicBroadcastEnable else off)
     flooSm.setPublicBroadcast(enable)
+
 
 # Broadcast enable switch function
 def public_broadcast_enable_switch():
     global publicBroadcastEnable
     public_broadcast_enable_switch_set(not publicBroadcastEnable)
 
+
 publicBroadcastEnableButton = tk.Button(leBroadcastPanel, image=off, bd=0, command=public_broadcast_enable_switch)
 publicBroadcastEnableButton.grid(column=2, row=0, sticky='e')
 
-broadcastEncryptEnableLabel = tk.Label(leBroadcastPanel, text=_("Encrypt broadcast, please set a key first"))
-broadcastEncryptEnableLabel.grid(column=0, row=1, columnspan=2, sticky='w')
+broadcastQualityLabel = tk.Label(leBroadcastPanel, text=_("Broadcast high-quality music, otherwise, voice"))
+broadcastQualityLabel.grid(column=0, row=1, columnspan=2, sticky='w')
+broadcastHighQualityEnable = None
+
+
+def broadcast_high_quality_switch_set(enable):
+    global broadcastHighQualityEnable
+    broadcastHighQualityEnable = enable
+    broadcastHighQualityEnableButton.config(image=on if broadcastHighQualityEnable else off)
+    flooSm.setBroadcastHighQuality(enable)
+
+
+# Broadcast high quality enable switch function
+def broadcast_high_quality_enable_switch():
+    global broadcastHighQualityEnable
+    broadcast_high_quality_switch_set(not broadcastHighQualityEnable)
+
+
+broadcastHighQualityEnableButton = tk.Button(leBroadcastPanel, image=off, bd=0,
+                                             command=broadcast_high_quality_enable_switch)
+broadcastHighQualityEnableButton.grid(column=2, row=1, sticky='e')
+
+broadcastEncryptEnableLabel = tk.Label(leBroadcastPanel, text=_("Encrypt broadcast; please set a key first"))
+broadcastEncryptEnableLabel.grid(column=0, row=2, columnspan=2, sticky='w')
 broadcastEncryptEnable = None
+
 
 def broadcast_encrypt_switch_set(enable):
     global broadcastEncryptEnable
     broadcastEncryptEnable = enable
-    broadcastEncryptEnableButton.config(image= on if broadcastEncryptEnable else off)
+    broadcastEncryptEnableButton.config(image=on if broadcastEncryptEnable else off)
     flooSm.setBroadcastEncrypt(enable)
+
 
 # Broadcast encrypt enable switch function
 def broadcast_encrypt_enable_switch():
     global broadcastEncryptEnable
     broadcast_encrypt_switch_set(not broadcastEncryptEnable)
 
-broadcastEncryptEnableButton = tk.Button(leBroadcastPanel, image=off, bd=0, command=broadcast_encrypt_enable_switch)
-broadcastEncryptEnableButton.grid(column=2, row=1, sticky='e')
 
-broadcastNameLabel = tk.Label(leBroadcastPanel, text=_("Broadcast Name"))
-broadcastNameLabel.grid(column=0, row=2, sticky='w')
+broadcastEncryptEnableButton = tk.Button(leBroadcastPanel, image=off, bd=0, command=broadcast_encrypt_enable_switch)
+broadcastEncryptEnableButton.grid(column=2, row=2, sticky='e')
+
+broadcastNameLabel = tk.Label(leBroadcastPanel, text=_("Broadcast Name, maximum 30 characters"))
+broadcastNameLabel.grid(column=0, row=3, sticky='w')
 broadcastName = tk.StringVar()
+
 
 # Broadcase name entry function
 def broadcast_name_entry(name: str):
@@ -173,28 +262,37 @@ def broadcast_name_entry(name: str):
     else:
         broadcastNameEntry.put_placeholder()
 
+
 broadcastNameEntry = EntryWithPlaceholder(leBroadcastPanel, textvariable=broadcastName,
                                           placeholder="Input a new name of no more than 30 characters then press <ENTER>",
                                           edit_end_proc=broadcast_name_entry)
-broadcastNameEntry.grid(column=1, row=2, columnspan=2, padx=4, sticky='we')
+broadcastNameEntry.grid(column=1, row=3, columnspan=2, padx=4, sticky='we')
 
-broadcastKeyLabel = tk.Label(leBroadcastPanel, text=_("Broadcast Key"))
-broadcastKeyLabel.grid(column=0, row=3, sticky='w')
+broadcastKeyLabel = tk.Label(leBroadcastPanel, text=_("Broadcast Key, maximum 16 characters"))
+broadcastKeyLabel.grid(column=0, row=4, sticky='w')
 broadcastKey = tk.StringVar()
+
 
 # Broadcase key entry function
 def broadcast_key_entry(key: str):
-    print(key)
-    # floo_transceiver.setShareToMobile(shareToMobile)
+    bytes = key.encode('utf-8')
+    if len(bytes) > 0 and len(bytes) < 17:
+        flooSm.setBroadcastKey(key)
+    else:
+        broadcastNameEntry.put_placeholder()
+
 
 broadcastKeyEntry = EntryWithPlaceholder(leBroadcastPanel, textvariable=broadcastKey,
-                                         placeholder=_("Input a new key of no more than 16 characters then press <ENTER>"),
+                                         placeholder=_(
+                                             "Input a new key then press <ENTER>"),
                                          edit_end_proc=broadcast_key_entry)
-broadcastKeyEntry.grid(column=1, row=3, columnspan=2, padx=4, sticky='we')
+broadcastKeyEntry.grid(column=1, row=4, columnspan=2, padx=4, sticky='we')
+
 
 # New pairing button function
 def button_new_pairing():
     flooSm.setNewPairing()
+
 
 pairedDevicesPanel.columnconfigure(0, weight=0)
 pairedDevicesPanel.columnconfigure(1, weight=1)
@@ -209,23 +307,58 @@ newPairingButton.grid(column=0, row=0, padx=4, sticky='we')
 # newPairingButton.pack(side = tk.LEFT)
 newPairingLabel = tk.Label(pairedDevicesPanel, text=_("Add device"))
 newPairingLabel.grid(column=1, row=0, padx=4, sticky='w')
+
+
 # newPairingLabel.pack(side = tk.LEFT)
 
 # Clear all paired device function
 def button_clear_all():
     flooSm.clearAllPairedDevices()
 
+
+class PopMenuListbox(tk.Listbox):
+
+    def __init__(self, parent, *args, **kwargs):
+        tk.Listbox.__init__(self, parent, *args, **kwargs)
+        self.popup_menu = tk.Menu(self, tearoff=0)
+        # self.popup_menu.add_command(label=_("Trigger Connection"), command=self.trigger_connection)
+        self.popup_menu.add_command(label=_("Delete"), command=self.delete_selected)
+        self.bind("<Button-3>", self.popup)  # Button-2 on Aqua
+
+    def popup(self, event):
+        try:
+            self.popup_menu.tk_popup(event.x_root, event.y_root, 0)
+        finally:
+            self.popup_menu.grab_release()
+
+    def delete_selected(self):
+        for i in self.curselection()[::-1]:
+            flooSm.clearIndexedDevice(i)
+
+    def trigger_connection(self):
+        flooSm.triggerConnection()
+        # self.selection_set(0, 'end')
+
+
 clearAllButton = tk.Button(pairedDevicesPanel, text=_("Clear All"), relief="groove", command=button_clear_all)
 clearAllButton.grid(column=2, row=0, padx=4, sticky='we')
 pairedDeviceFrame = tk.Frame(pairedDevicesPanel)
 pairedDeviceFrame.grid(column=0, row=1, columnspan=3, padx=4, sticky='nswe')
-pairedDeviceListbox = tk.Listbox(pairedDeviceFrame, )
+pairedDeviceListbox = PopMenuListbox(pairedDeviceFrame)  # selectmode=tk.MULTIPLE
 pairedDeviceListbox.pack(side=tk.LEFT, expand=True, fill=tk.BOTH)
 scrollbar = tk.Scrollbar(pairedDeviceFrame)
-scrollbar.pack(side = tk.RIGHT, fill=tk.Y)
-pairedDeviceListbox.config(yscrollcommand = scrollbar.set)
-scrollbar.config(command = pairedDeviceListbox.yview)
-pairedDeviceList = []
+scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+pairedDeviceListbox.config(yscrollcommand=scrollbar.set)
+scrollbar.config(command=pairedDeviceListbox.yview)
+currentPairedDeviceList = []
+
+
+# pairedDeviceListbox = tk.Listbox(pairedDeviceFrame, )
+# pairedDeviceListbox.pack(side=tk.LEFT, expand=True, fill=tk.BOTH)
+# scrollbar = tk.Scrollbar(pairedDeviceFrame)
+# scrollbar.pack(side = tk.RIGHT, fill=tk.Y)
+# pairedDeviceListbox.config(yscrollcommand = scrollbar.set)
+# scrollbar.config(command = pairedDeviceListbox.yview)
 
 def enable_pairing_widgets(enable: bool):
     global clearAllButton
@@ -237,14 +370,17 @@ def enable_pairing_widgets(enable: bool):
         newPairingButton.config(state=tk.DISABLED)
         clearAllButton.config(state=tk.DISABLED)
 
+
 # Window panel
 def quit_all():
     root.destroy()
+
 
 # Define a function for quit the window
 def quit_window(icon, TrayMenuItem):
     icon.stop()
     root.destroy()
+
 
 # Define a function to show the window again
 def show_window(icon, TrayMenuItem):
@@ -256,6 +392,7 @@ def show_window(icon, TrayMenuItem):
     except Exception:
         pass
 
+
 # Hide the window and show on the system taskbar
 def hide_window():
     global windowIcon
@@ -266,28 +403,37 @@ def hide_window():
     elif platform.system().lower().startswith('lin'):
         image = tk.PhotoImage(file=app_path + os.sep + appGif)
     menu = (TrayMenuItem(_('Quit'), quit_window), TrayMenuItem(_('Show Window'), show_window))
-    icon = pystray.Icon(appTitle, image, _("FlooGoo Bluetooth Audio Source"), menu) # "FlooGoo Bluetooth Audio Source"
+    icon = pystray.Icon(appTitle, image, _("FlooGoo Bluetooth Audio Source"), menu)  # "FlooGoo Bluetooth Audio Source"
     icon.run()
     windowIcon = icon
+
 
 root.protocol('WM_DELETE_WINDOW', hide_window)
 windowPanel.columnconfigure(0, weight=1)
 windowPanel.columnconfigure(1, weight=1)
 minimizeButton = tk.Button(windowPanel, text=_("Minimize to System Tray"), command=hide_window)
-minimizeButton.grid(column=0, row=0, columnspan=2, padx=(10, 10), pady=(10, 10), sticky='ew')
+minimizeButton.grid(column=0, row=0, columnspan=2, padx=(10, 10), pady=(15, 15), sticky='ew')
 quitButton = tk.Button(windowPanel, text=_("Quit App"), command=quit_all)
-quitButton.grid(column=0, row=1, columnspan=2, padx=(10, 10), pady=(0, 10), sticky='ew')
+quitButton.grid(column=0, row=1, columnspan=2, padx=(10, 10), pady=(0, 15), sticky='ew')
+
 
 # aboutPanel
 def url_callback(url):
     webbrowser.open_new(url)
 
-aboutFrame = tk.Frame(aboutPanel)
+
 aboutPanel.rowconfigure(0, weight=1)
 aboutPanel.rowconfigure(1, weight=1)
 aboutPanel.rowconfigure(2, weight=1)
-aboutFrame.grid(row=1, column=0)
 
+resetExplanationLabel = tk.Message(aboutPanel,
+                                   text=_("Disconnect and reconnect the dongle to activate configuration changes, " \
+                                          "after which it will function independently without the app."),
+                                   aspect=400)
+resetExplanationLabel.grid(column=0, row=0, padx=(0, 0), sticky='ewns')
+
+aboutFrame = tk.Frame(aboutPanel)
+aboutFrame.grid(row=1, column=0)
 logoFrame = tk.Frame(aboutFrame, relief=tk.RAISED)
 logoFrame.pack(pady=4)
 logo = tk.Canvas(logoFrame, width=230, height=64)
@@ -302,17 +448,18 @@ thirdPartyLink.bind("<Button-1>", lambda e: url_callback("https://www.flairmesh.
 supportLink = tk.Label(aboutFrame, text=_("Support Link"), fg="blue", cursor="hand2")
 supportLink.pack()
 supportLink.bind("<Button-1>", lambda e: url_callback("https://www.flairmesh.com/Dongle/FMA120.html"))
-versionInfo = tk.Label(aboutFrame, text=_("Version") + "1.0.0")
+versionInfo = tk.Label(aboutFrame, text=_("Version") + "1.0.1")
 versionInfo.pack()
 
 dfuUndergoing = False
 dfuInfo = tk.Label(aboutFrame, text="")
 
+
 def update_dfu_info(stateStr: str):
     global dfuUndergoing
     if stateStr:
         print(stateStr)
-        dfuInfo.config(text = stateStr)
+        dfuInfo.config(text=stateStr)
         if not dfuUndergoing:
             dfuInfo.pack()
             minimizeButton.config(state=tk.DISABLED)
@@ -326,16 +473,20 @@ def update_dfu_info(stateStr: str):
         dfuButton.config(state=tk.NORMAL)
         dfuUndergoing = False
 
+
 def button_dfu():
     filename = fd.askopenfilename()
     if filename:
+        os.chdir(app_path)
         print("Run DFU in directory: " + os.getcwd())
         dfuThread = FlooDfuThread(['myDfuDo.bat', filename], update_dfu_info)
         dfuThread.start()
 
+
 if platform.system().lower().startswith('win'):
     dfuButton = tk.Button(aboutFrame, text=_('Device Firmware Upgrade'), relief="groove", command=button_dfu)
     dfuButton.pack()
+
 
 def enable_settings_widgets(enable: bool):
     if enable:
@@ -343,6 +494,7 @@ def enable_settings_widgets(enable: bool):
         gamingModeRadioButton.config(state=tk.NORMAL)
         broadcastRadioButton.config(state=tk.NORMAL)
         publicBroadcastEnableButton.config(state=tk.NORMAL)
+        broadcastHighQualityEnableButton.config(state=tk.NORMAL)
         broadcastEncryptEnableButton.config(state=tk.NORMAL)
         broadcastNameEntry.config(state=tk.NORMAL)
         broadcastKeyEntry.config(state=tk.NORMAL)
@@ -353,56 +505,46 @@ def enable_settings_widgets(enable: bool):
         gamingModeRadioButton.config(state=tk.DISABLED)
         broadcastRadioButton.config(state=tk.DISABLED)
         publicBroadcastEnableButton.config(state=tk.DISABLED)
+        broadcastHighQualityEnableButton.config(state=tk.DISABLED)
         broadcastEncryptEnableButton.config(state=tk.DISABLED)
         broadcastNameEntry.config(state=tk.DISABLED)
         broadcastKeyEntry.config(state=tk.DISABLED)
         if platform.system().lower().startswith('win'):
             dfuButton.config(state=tk.DISABLED)
 
+
 enable_settings_widgets(False)
 
-sourceStateStr = [_("Initializing"),
-                  _("Idle"),
-                  _("Pairing"),
-                  _("Connecting"),
-                  _("Connected"),
-                  _("Audio staring"),
-                  _("Audio streaming"),
-                  _("Audio stopping"),
-                  _("Disconnecting"),
-                  _("Voice starting"),
-                  _("Voice streaming"),
-                  _("Voice stopping")]
-
-leaStateStr = [_("Disconnected"),
-               _("Connected"),
-               _("Unicast starting"),
-               _("Unicast streaming"),
-               _("Broadcast starting"),
-               _("Broadcast streaming"),
-               _("Streaming stopping")]
 
 # All GUI object initialized, start FlooStateMachine
 class FlooSmDelegate(FlooStateMachineDelegate):
     def deviceDetected(self, flag: bool, port: str):
+        global currentPairedDeviceList
         enable_settings_widgets(flag)
         if flag:
             update_status_bar(_("Use FlooGoo dongle on ") + " " + port)
         else:
             update_status_bar(_("Please insert your FlooGoo dongle"))
             enable_pairing_widgets(False)
+            pairedDeviceListbox.delete(0, tk.END)
 
     def audioModeInd(self, mode: int):
         audioMode.set(mode)
         enable_pairing_widgets(mode != 2)
 
     def sourceStateInd(self, state: int):
-        dongleStateLabel.config(text = sourceStateStr[state])
+        dongleStateLabel.config(text=sourceStateStr[state])
+        # if state < 4:
+        #    codecInUseLabel.config(text=codecStr[0])
 
     def leAudioStateInd(self, state: int):
         leaStateLabel.config(text=leaStateStr[state])
 
+    def preferLeaInd(self, state: int):
+        prefer_lea_enable_switch_set(state == 1)
+
     def broadcastModeInd(self, state: int):
+        broadcast_high_quality_switch_set(state & 4 == 4)
         public_broadcast_enable_switch_set(state & 2 == 2)
         broadcast_encrypt_switch_set(state & 1 == 1)
 
@@ -411,13 +553,17 @@ class FlooSmDelegate(FlooStateMachineDelegate):
         enable_settings_widgets(True)
 
     def pairedDevicesUpdateInd(self, pairedDevices):
-        global pairedDeviceList
+        global currentPairedDeviceList
         print("update paired list len %d" % len(pairedDevices))
         pairedDeviceListbox.delete(0, tk.END)
         i = 0
         while i < len(pairedDevices):
             pairedDeviceListbox.insert(tk.END, pairedDevices[i])
             i = i + 1
+
+    def audioCodecInUseInd(self, codec):
+        codecInUseLabel.config(text=codecStr[codec])
+
 
 flooSmDelegate = FlooSmDelegate()
 flooSm = FlooStateMachine(flooSmDelegate)

@@ -1,0 +1,225 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2023-09-14 21:16+1000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+
+
+#: main.py:47 main.py:89
+msgid "Initializing"
+msgstr "جار تهيئة"
+
+#: main.py:48
+msgid "Idle"
+msgstr "عاطل"
+
+#: main.py:49
+msgid "Pairing"
+msgstr "الاقتران"
+
+#: main.py:50
+msgid "Connecting"
+msgstr "توصيل"
+
+#: main.py:51 main.py:61
+msgid "Connected"
+msgstr "متصل"
+
+#: main.py:52
+msgid "Audio starting"
+msgstr "بدء الصوت"
+
+#: main.py:53
+msgid "Audio streaming"
+msgstr "تدفق الصوت"
+
+#: main.py:54
+msgid "Audio stopping"
+msgstr "توقف الصوت"
+
+#: main.py:55
+msgid "Disconnecting"
+msgstr "قطع الاتصال"
+
+#: main.py:56
+msgid "Voice starting"
+msgstr "بدء الصوت"
+
+#: main.py:57
+msgid "Voice streaming"
+msgstr "البث الصوتي"
+
+#: main.py:58
+msgid "Voice stopping"
+msgstr "توقف الصوت"
+
+#: main.py:60 main.py:155
+msgid "Disconnected"
+msgstr "انقطع الاتصال"
+
+#: main.py:62
+msgid "Unicast starting"
+msgstr "بدء البث الأحادي"
+
+#: main.py:63
+msgid "Unicast streaming"
+msgstr "البث الأحادي"
+
+#: main.py:64
+msgid "Broadcast starting"
+msgstr "بدء البث"
+
+#: main.py:65
+msgid "Broadcast streaming"
+msgstr "بث مباشر"
+
+#: main.py:66
+msgid "Streaming stopping"
+msgstr "توقف البث"
+
+#: main.py:109
+msgid "Audio Mode"
+msgstr "وضع الصوت"
+
+#: main.py:111
+msgid "LE Broadcast"
+msgstr "بث جنيه"
+
+#: main.py:113
+msgid "Most Recently Used Devices"
+msgstr "أحدث الأجهزة المستخدمة"
+
+#: main.py:116
+msgid "Window"
+msgstr "نافذة او شباك"
+
+#: main.py:119
+msgid "Help"
+msgstr "يساعد"
+
+#: main.py:139
+msgid "High Quality (one-to-one)"
+msgstr "جودة عالية (واحد لواحد)"
+
+#: main.py:142
+msgid "Gaming (one-to-one)"
+msgstr "الألعاب (واحد لواحد)"
+
+#: main.py:145
+msgid "Broadcast"
+msgstr "إذاعة"
+
+#: main.py:149
+msgid "Dongle State"
+msgstr "حالة المحول"
+
+#: main.py:151
+msgid "Initialization"
+msgstr "التهيئة"
+
+#: main.py:153
+msgid "LE Audio State"
+msgstr "حالة الصوت LE"
+
+#: main.py:157
+msgid "Codec in Use"
+msgstr "برنامج الترميز قيد الاستخدام"
+
+#: main.py:162
+msgid "Prefer using LE audio for dual-mode devices"
+msgstr "تفضل استخدام صوت LE للأجهزة ذات الوضع المزدوج"
+
+#: main.py:188
+msgid "Public broadcast"
+msgstr "البث العام"
+
+#: main.py:209
+msgid "Broadcast high-quality music, otherwise, voice"
+msgstr "بث موسيقى عالية الجودة، وإلا صوت"
+
+#: main.py:231
+msgid "Encrypt broadcast; please set a key first"
+msgstr "تشفير البث؛ يرجى تعيين المفتاح أولا"
+
+#: main.py:252
+msgid "Broadcast Name, maximum 30 characters"
+msgstr "اسم البث، الحد الأقصى 30 حرفًا"
+
+#: main.py:271
+msgid "Broadcast Key, maximum 16 characters"
+msgstr "مفتاح البث، الحد الأقصى 16 حرفًا"
+
+#: main.py:286
+msgid "Input a new key then press <ENTER>"
+msgstr "أدخل مفتاحًا جديدًا ثم اضغط على <ENTER>"
+
+#: main.py:308
+msgid "Add device"
+msgstr "اضف جهاز"
+
+#: main.py:325
+msgid "Delete"
+msgstr "يمسح"
+
+#: main.py:343
+msgid "Clear All"
+msgstr "امسح الكل"
+
+#: main.py:405
+msgid "Quit"
+msgstr "يترك"
+
+#: main.py:405
+msgid "Show Window"
+msgstr "فرجي شباك"
+
+#: main.py:406
+msgid "FlooGoo Bluetooth Audio Source"
+msgstr "مصدر صوت بلوتوث FlooGoo"
+
+#: main.py:414
+msgid "Minimize to System Tray"
+msgstr "يخفض الى قاع النظام"
+
+#: main.py:416
+msgid "Quit App"
+msgstr "قم بإنهاء التطبيق"
+
+#: main.py:430
+msgid "Disconnect and reconnect the dongle to activate configuration changes, after which it will function independently without the app."
+msgstr "افصل جهاز الدونجل وأعد توصيله لتنشيط تغييرات التكوين، وبعد ذلك سيعمل بشكل مستقل بدون التطبيق."
+
+#: main.py:445
+msgid "Third-Party Software Licenses"
+msgstr "تراخيص برامج الطرف الثالث"
+
+#: main.py:448
+msgid "Support Link"
+msgstr "رابط الدعم"
+
+#: main.py:451
+msgid "Version"
+msgstr "إصدار"
+
+#: main.py:486
+msgid "Device Firmware Upgrade"
+msgstr "ترقية البرامج الثابتة للجهاز"
+
+#: main.py:524
+msgid "Use FlooGoo dongle on "
+msgstr "استخدم محول FlooGoo قيد التشغيل"
+
+#: main.py:526
+msgid "Please insert your FlooGoo dongle"
+msgstr "الرجاء إدخال محول FlooGoo الخاص بك"
+

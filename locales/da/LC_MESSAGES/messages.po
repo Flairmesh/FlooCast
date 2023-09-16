@@ -1,0 +1,225 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2023-09-14 21:16+1000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+
+
+#: main.py:47 main.py:89
+msgid "Initializing"
+msgstr "Initialiserer"
+
+#: main.py:48
+msgid "Idle"
+msgstr "Ledig"
+
+#: main.py:49
+msgid "Pairing"
+msgstr "Parring"
+
+#: main.py:50
+msgid "Connecting"
+msgstr "Tilslutning"
+
+#: main.py:51 main.py:61
+msgid "Connected"
+msgstr "Forbundet"
+
+#: main.py:52
+msgid "Audio starting"
+msgstr "Lyden starter"
+
+#: main.py:53
+msgid "Audio streaming"
+msgstr "Audio streaming"
+
+#: main.py:54
+msgid "Audio stopping"
+msgstr "Lyden stopper"
+
+#: main.py:55
+msgid "Disconnecting"
+msgstr "Afbryder forbindelsen"
+
+#: main.py:56
+msgid "Voice starting"
+msgstr "Stemmen starter"
+
+#: main.py:57
+msgid "Voice streaming"
+msgstr "Stemmestreaming"
+
+#: main.py:58
+msgid "Voice stopping"
+msgstr "Stemmen stopper"
+
+#: main.py:60 main.py:155
+msgid "Disconnected"
+msgstr "Afbrudt"
+
+#: main.py:62
+msgid "Unicast starting"
+msgstr "Unicast starter"
+
+#: main.py:63
+msgid "Unicast streaming"
+msgstr "Unicast streaming"
+
+#: main.py:64
+msgid "Broadcast starting"
+msgstr "Udsendelse starter"
+
+#: main.py:65
+msgid "Broadcast streaming"
+msgstr "Broadcast streaming"
+
+#: main.py:66
+msgid "Streaming stopping"
+msgstr "Streaming stopper"
+
+#: main.py:109
+msgid "Audio Mode"
+msgstr "Lydtilstand"
+
+#: main.py:111
+msgid "LE Broadcast"
+msgstr "LE Broadcast"
+
+#: main.py:113
+msgid "Most Recently Used Devices"
+msgstr "Senest brugte enheder"
+
+#: main.py:116
+msgid "Window"
+msgstr "Vindue"
+
+#: main.py:119
+msgid "Help"
+msgstr "Hjælp"
+
+#: main.py:139
+msgid "High Quality (one-to-one)"
+msgstr "Høj kvalitet (en-til-en)"
+
+#: main.py:142
+msgid "Gaming (one-to-one)"
+msgstr "Spil (en-til-en)"
+
+#: main.py:145
+msgid "Broadcast"
+msgstr "Udsende"
+
+#: main.py:149
+msgid "Dongle State"
+msgstr "Adaptertilstand"
+
+#: main.py:151
+msgid "Initialization"
+msgstr "Initialisering"
+
+#: main.py:153
+msgid "LE Audio State"
+msgstr "LE lydtilstand"
+
+#: main.py:157
+msgid "Codec in Use"
+msgstr "Codec i brug"
+
+#: main.py:162
+msgid "Prefer using LE audio for dual-mode devices"
+msgstr "Foretrækker at bruge LE-lyd til dual-mode enheder"
+
+#: main.py:188
+msgid "Public broadcast"
+msgstr "Offentlig udsendelse"
+
+#: main.py:209
+msgid "Broadcast high-quality music, otherwise, voice"
+msgstr "Udsend musik i høj kvalitet, ellers stemme"
+
+#: main.py:231
+msgid "Encrypt broadcast; please set a key first"
+msgstr "Krypter udsendelse; Indstil venligst en nøgle først"
+
+#: main.py:252
+msgid "Broadcast Name, maximum 30 characters"
+msgstr "Udsendelsesnavn, maksimalt 30 tegn"
+
+#: main.py:271
+msgid "Broadcast Key, maximum 16 characters"
+msgstr "Broadcast-nøgle, maksimalt 16 tegn"
+
+#: main.py:286
+msgid "Input a new key then press <ENTER>"
+msgstr "Indtast en ny tast og tryk derefter på <ENTER>"
+
+#: main.py:308
+msgid "Add device"
+msgstr "Tilføj enhed"
+
+#: main.py:325
+msgid "Delete"
+msgstr "Slet"
+
+#: main.py:343
+msgid "Clear All"
+msgstr "Slet alt"
+
+#: main.py:405
+msgid "Quit"
+msgstr "Afslut"
+
+#: main.py:405
+msgid "Show Window"
+msgstr "Vis vindue"
+
+#: main.py:406
+msgid "FlooGoo Bluetooth Audio Source"
+msgstr "FlooGoo Bluetooth-lydkilde"
+
+#: main.py:414
+msgid "Minimize to System Tray"
+msgstr "Minimer til systembakken"
+
+#: main.py:416
+msgid "Quit App"
+msgstr "Afslut app"
+
+#: main.py:430
+msgid "Disconnect and reconnect the dongle to activate configuration changes, after which it will function independently without the app."
+msgstr "Afbryd og tilslut donglen igen for at aktivere konfigurationsændringer, hvorefter den vil fungere uafhængigt uden appen."
+
+#: main.py:445
+msgid "Third-Party Software Licenses"
+msgstr "Tredjeparts softwarelicenser"
+
+#: main.py:448
+msgid "Support Link"
+msgstr "Support Link"
+
+#: main.py:451
+msgid "Version"
+msgstr "Version"
+
+#: main.py:486
+msgid "Device Firmware Upgrade"
+msgstr "Opgradering af enhedsfirmware"
+
+#: main.py:524
+msgid "Use FlooGoo dongle on "
+msgstr "Brug FlooGoo adapter på"
+
+#: main.py:526
+msgid "Please insert your FlooGoo dongle"
+msgstr "Indsæt venligst din FlooGoo-adapter"
+

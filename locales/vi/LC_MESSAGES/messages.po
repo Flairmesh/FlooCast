@@ -1,0 +1,221 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2023-09-14 21:16+1000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+
+
+#: main.py:47 main.py:89
+msgid "Initializing"
+msgstr "Đang khởi tạo"
+
+#: main.py:48
+msgid "Idle"
+msgstr "Nhàn rỗi"
+
+#: main.py:49
+msgid "Pairing"
+msgstr "Ghép nối"
+
+#: main.py:50
+msgid "Connecting"
+msgstr "Đang kết nối"
+
+#: main.py:51 main.py:61
+msgid "Connected"
+msgstr "Đã kết nối"
+
+#: main.py:52
+msgid "Audio starting"
+msgstr "Bắt đầu âm thanh"
+
+#: main.py:53
+msgid "Audio streaming"
+msgstr "Phát thanh"
+
+#: main.py:54
+msgid "Audio stopping"
+msgstr "Dừng âm thanh"
+
+#: main.py:55
+msgid "Disconnecting"
+msgstr "Ngắt kết nối"
+
+#: main.py:56
+msgid "Voice starting"
+msgstr "Bắt đầu bằng giọng nói"
+
+#: main.py:57
+msgid "Voice streaming"
+msgstr "Truyền phát giọng nói"
+
+#: main.py:58
+msgid "Voice stopping"
+msgstr "Dừng giọng nói"
+
+#: main.py:60 main.py:155
+msgid "Disconnected"
+msgstr "Đã ngắt kết nối"
+
+#: main.py:62
+msgid "Unicast starting"
+msgstr "Khởi động đơn hướng"
+
+#: main.py:63
+msgid "Unicast streaming"
+msgstr "Truyền phát đơn hướng"
+
+#: main.py:64
+msgid "Broadcast starting"
+msgstr "Bắt đầu phát sóng"
+
+#: main.py:65
+msgid "Broadcast streaming"
+msgstr "Truyền phát trực tuyến"
+
+#: main.py:66
+msgid "Streaming stopping"
+msgstr "Đang dừng phát trực tuyến"
+
+#: main.py:109
+msgid "Audio Mode"
+msgstr "Chế độ âm thanh"
+
+#: main.py:111
+msgid "LE Broadcast"
+msgstr "LE phát sóng"
+
+#: main.py:113
+msgid "Most Recently Used Devices"
+msgstr "Thiết bị được sử dụng gần đây nhất"
+
+#: main.py:116
+msgid "Window"
+msgstr "Cửa sổ"
+
+#: main.py:119
+msgid "Help"
+msgstr "Giúp đỡ"
+
+#: main.py:139
+msgid "High Quality (one-to-one)"
+msgstr "Chất lượng cao (một-một)"
+
+#: main.py:142
+msgid "Gaming (one-to-one)"
+msgstr "Chơi game (một đối một)"
+
+#: main.py:145
+msgid "Broadcast"
+msgstr "Phát tin"
+
+#: main.py:149
+msgid "Dongle State"
+msgstr "Trạng thái bộ điều hợp"
+
+#: main.py:153
+msgid "LE Audio State"
+msgstr "Trạng thái âm thanh LE"
+
+#: main.py:157
+msgid "Codec in Use"
+msgstr "Codec đang được sử dụng"
+
+#: main.py:162
+msgid "Prefer using LE audio for dual-mode devices"
+msgstr "Thích sử dụng âm thanh LE cho các thiết bị chế độ kép"
+
+#: main.py:188
+msgid "Public broadcast"
+msgstr "Phát sóng công cộng"
+
+#: main.py:209
+msgid "Broadcast high-quality music, otherwise, voice"
+msgstr "Phát sóng âm nhạc chất lượng cao, nếu không thì giọng nói"
+
+#: main.py:231
+msgid "Encrypt broadcast; please set a key first"
+msgstr "Mã hóa phát sóng; vui lòng đặt chìa khóa trước"
+
+#: main.py:252
+msgid "Broadcast Name, maximum 30 characters"
+msgstr "Tên phát sóng, tối đa 30 ký tự"
+
+#: main.py:271
+msgid "Broadcast Key, maximum 16 characters"
+msgstr "Khóa phát sóng, tối đa 16 ký tự"
+
+#: main.py:286
+msgid "Input a new key then press <ENTER>"
+msgstr "Nhập phím mới rồi nhấn <ENTER>"
+
+#: main.py:308
+msgid "Add device"
+msgstr "Thêm thiết bị"
+
+#: main.py:325
+msgid "Delete"
+msgstr "Xóa bỏ"
+
+#: main.py:343
+msgid "Clear All"
+msgstr "Làm sạch tất cả"
+
+#: main.py:405
+msgid "Quit"
+msgstr "Từ bỏ"
+
+#: main.py:405
+msgid "Show Window"
+msgstr "Hiển thị cửa sổ"
+
+#: main.py:406
+msgid "FlooGoo Bluetooth Audio Source"
+msgstr "Nguồn âm thanh Bluetooth FlooGoo"
+
+#: main.py:414
+msgid "Minimize to System Tray"
+msgstr "Thu nhỏ xuống khay hệ thống"
+
+#: main.py:416
+msgid "Quit App"
+msgstr "Thoát ứng dụng"
+
+#: main.py:430
+msgid "Disconnect and reconnect the dongle to activate configuration changes, after which it will function independently without the app."
+msgstr "Ngắt kết nối và kết nối lại dongle để kích hoạt các thay đổi cấu hình, sau đó nó sẽ hoạt động độc lập mà không cần ứng dụng."
+
+#: main.py:445
+msgid "Third-Party Software Licenses"
+msgstr "Giấy phép phần mềm của bên thứ ba"
+
+#: main.py:448
+msgid "Support Link"
+msgstr "Liên kết hỗ trợ"
+
+#: main.py:451
+msgid "Version"
+msgstr "Phiên bản"
+
+#: main.py:486
+msgid "Device Firmware Upgrade"
+msgstr "Nâng cấp chương trình cơ sở thiết bị"
+
+#: main.py:524
+msgid "Use FlooGoo dongle on "
+msgstr "Sử dụng bộ chuyển đổi FlooGoo trên"
+
+#: main.py:526
+msgid "Please insert your FlooGoo dongle"
+msgstr "Vui lòng lắp bộ chuyển đổi FlooGoo của bạn"
+

@@ -14,4 +14,4 @@ class FlooMsgCp(FlooMessage):
             super().__init__(True, FlooMsgCp.HEADER)
         else:
             paramStr = "%02X" % index
-            super().__init__(True, FlooMsgCP.HEADER, bytes(paramStr, 'ascii'))
+            super().__init__(True, FlooMsgCp.HEADER, bytes(paramStr, 'ascii'))

@@ -1,0 +1,221 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2023-09-14 21:16+1000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+
+
+#: main.py:47 main.py:89
+msgid "Initializing"
+msgstr "初期化中"
+
+#: main.py:48
+msgid "Idle"
+msgstr "アイドル状態"
+
+#: main.py:49
+msgid "Pairing"
+msgstr "ペアリング"
+
+#: main.py:50
+msgid "Connecting"
+msgstr "接続中"
+
+#: main.py:51 main.py:61
+msgid "Connected"
+msgstr "接続済み"
+
+#: main.py:52
+msgid "Audio starting"
+msgstr "オーディオの開始"
+
+#: main.py:53
+msgid "Audio streaming"
+msgstr "オーディオストリーミング"
+
+#: main.py:54
+msgid "Audio stopping"
+msgstr "音声停止"
+
+#: main.py:55
+msgid "Disconnecting"
+msgstr "切断中"
+
+#: main.py:56
+msgid "Voice starting"
+msgstr "音声起動"
+
+#: main.py:57
+msgid "Voice streaming"
+msgstr "音声ストリーミング"
+
+#: main.py:58
+msgid "Voice stopping"
+msgstr "声が止まる"
+
+#: main.py:60 main.py:155
+msgid "Disconnected"
+msgstr "切断されました"
+
+#: main.py:62
+msgid "Unicast starting"
+msgstr "ユニキャスト開始"
+
+#: main.py:63
+msgid "Unicast streaming"
+msgstr "ユニキャストストリーミング"
+
+#: main.py:64
+msgid "Broadcast starting"
+msgstr "放送開始"
+
+#: main.py:65
+msgid "Broadcast streaming"
+msgstr "ブロードキャストストリーミング"
+
+#: main.py:66
+msgid "Streaming stopping"
+msgstr "ストリーミング停止中"
+
+#: main.py:109
+msgid "Audio Mode"
+msgstr "オーディオモード"
+
+#: main.py:111
+msgid "LE Broadcast"
+msgstr "LEブロードキャスト"
+
+#: main.py:113
+msgid "Most Recently Used Devices"
+msgstr "最近使用したデバイス"
+
+#: main.py:116
+msgid "Window"
+msgstr "窓"
+
+#: main.py:119
+msgid "Help"
+msgstr "ヘルプ"
+
+#: main.py:139
+msgid "High Quality (one-to-one)"
+msgstr "高品質（1対1）"
+
+#: main.py:142
+msgid "Gaming (one-to-one)"
+msgstr "ゲーム（1対1）"
+
+#: main.py:145
+msgid "Broadcast"
+msgstr "放送"
+
+#: main.py:149
+msgid "Dongle State"
+msgstr "アダプターの状態"
+
+#: main.py:153
+msgid "LE Audio State"
+msgstr "LE オーディオ状態"
+
+#: main.py:157
+msgid "Codec in Use"
+msgstr "使用中のコーデック"
+
+#: main.py:162
+msgid "Prefer using LE audio for dual-mode devices"
+msgstr "デュアルモードデバイスには LE オーディオの使用を優先する"
+
+#: main.py:188
+msgid "Public broadcast"
+msgstr "公共放送"
+
+#: main.py:209
+msgid "Broadcast high-quality music, otherwise, voice"
+msgstr "高品質の音楽をブロードキャストするか、それ以外の場合は音声をブロードキャストする"
+
+#: main.py:231
+msgid "Encrypt broadcast; please set a key first"
+msgstr "ブロードキャストを暗号化します。 最初にキーを設定してください"
+
+#: main.py:252
+msgid "Broadcast Name, maximum 30 characters"
+msgstr "ブロードキャスト名、最大 30 文字"
+
+#: main.py:271
+msgid "Broadcast Key, maximum 16 characters"
+msgstr "ブロードキャスト キー、最大 16 文字"
+
+#: main.py:286
+msgid "Input a new key then press <ENTER>"
+msgstr "新しいキーを入力し、<ENTER> を押します。"
+
+#: main.py:308
+msgid "Add device"
+msgstr "デバイスを追加"
+
+#: main.py:325
+msgid "Delete"
+msgstr "消去"
+
+#: main.py:343
+msgid "Clear All"
+msgstr "すべてクリア"
+
+#: main.py:405
+msgid "Quit"
+msgstr "やめる"
+
+#: main.py:405
+msgid "Show Window"
+msgstr "ショーウィンドウ"
+
+#: main.py:406
+msgid "FlooGoo Bluetooth Audio Source"
+msgstr "FlooGoo Bluetooth オーディオ ソース"
+
+#: main.py:414
+msgid "Minimize to System Tray"
+msgstr "システムトレイに最小化"
+
+#: main.py:416
+msgid "Quit App"
+msgstr "アプリを終了する"
+
+#: main.py:430
+msgid "Disconnect and reconnect the dongle to activate configuration changes, after which it will function independently without the app."
+msgstr "ドングルを切断して再接続して構成変更を有効にすると、アプリなしで独立して機能します。"
+
+#: main.py:445
+msgid "Third-Party Software Licenses"
+msgstr "サードパーティ ソフトウェア ライセンス"
+
+#: main.py:448
+msgid "Support Link"
+msgstr "サポートリンク"
+
+#: main.py:451
+msgid "Version"
+msgstr "バージョン"
+
+#: main.py:486
+msgid "Device Firmware Upgrade"
+msgstr "デバイスのファームウェアのアップグレード"
+
+#: main.py:524
+msgid "Use FlooGoo dongle on "
+msgstr "FlooGooアダプターを使用してください"
+
+#: main.py:526
+msgid "Please insert your FlooGoo dongle"
+msgstr "FlooGoo アダプターを挿入してください"
+

@@ -1,0 +1,221 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2023-09-14 21:16+1000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+
+
+#: main.py:47 main.py:89
+msgid "Initializing"
+msgstr "Başlatılıyor"
+
+#: main.py:48
+msgid "Idle"
+msgstr "Boşta"
+
+#: main.py:49
+msgid "Pairing"
+msgstr "Eşleştirme"
+
+#: main.py:50
+msgid "Connecting"
+msgstr "Bağlanıyor"
+
+#: main.py:51 main.py:61
+msgid "Connected"
+msgstr "Bağlı"
+
+#: main.py:52
+msgid "Audio starting"
+msgstr "Ses başlatılıyor"
+
+#: main.py:53
+msgid "Audio streaming"
+msgstr "Ses akışı"
+
+#: main.py:54
+msgid "Audio stopping"
+msgstr "Ses durdurma"
+
+#: main.py:55
+msgid "Disconnecting"
+msgstr "Bağlantı kesiliyor"
+
+#: main.py:56
+msgid "Voice starting"
+msgstr "Sesli başlatma"
+
+#: main.py:57
+msgid "Voice streaming"
+msgstr "Ses akışı"
+
+#: main.py:58
+msgid "Voice stopping"
+msgstr "Ses durdurma"
+
+#: main.py:60 main.py:155
+msgid "Disconnected"
+msgstr "Bağlantı kesildi"
+
+#: main.py:62
+msgid "Unicast starting"
+msgstr "Tek noktaya yayın başlangıcı"
+
+#: main.py:63
+msgid "Unicast streaming"
+msgstr "Tek noktaya yayın akışı"
+
+#: main.py:64
+msgid "Broadcast starting"
+msgstr "Yayın başlıyor"
+
+#: main.py:65
+msgid "Broadcast streaming"
+msgstr "Yayın akışı"
+
+#: main.py:66
+msgid "Streaming stopping"
+msgstr "Akış durduruluyor"
+
+#: main.py:109
+msgid "Audio Mode"
+msgstr "Ses Modu"
+
+#: main.py:111
+msgid "LE Broadcast"
+msgstr "LE Yayını"
+
+#: main.py:113
+msgid "Most Recently Used Devices"
+msgstr "En Son Kullanılan Cihazlar"
+
+#: main.py:116
+msgid "Window"
+msgstr "Pencere"
+
+#: main.py:119
+msgid "Help"
+msgstr "Yardım"
+
+#: main.py:139
+msgid "High Quality (one-to-one)"
+msgstr "Yüksek Kalite (bire bir)"
+
+#: main.py:142
+msgid "Gaming (one-to-one)"
+msgstr "Oyun (bire bir)"
+
+#: main.py:145
+msgid "Broadcast"
+msgstr "Yayın"
+
+#: main.py:149
+msgid "Dongle State"
+msgstr "Adaptör Durumu"
+
+#: main.py:153
+msgid "LE Audio State"
+msgstr "LE Ses Durumu"
+
+#: main.py:157
+msgid "Codec in Use"
+msgstr "Kullanımdaki Codec"
+
+#: main.py:162
+msgid "Prefer using LE audio for dual-mode devices"
+msgstr "Çift modlu cihazlar için LE sesini kullanmayı tercih edin"
+
+#: main.py:188
+msgid "Public broadcast"
+msgstr "Kamu yayını"
+
+#: main.py:209
+msgid "Broadcast high-quality music, otherwise, voice"
+msgstr "Yüksek kaliteli müzik yayınlayın, aksi takdirde ses yayınlayın"
+
+#: main.py:231
+msgid "Encrypt broadcast; please set a key first"
+msgstr "Yayını şifreleyin; lütfen önce bir anahtar ayarlayın"
+
+#: main.py:252
+msgid "Broadcast Name, maximum 30 characters"
+msgstr "Yayın Adı, maksimum 30 karakter"
+
+#: main.py:271
+msgid "Broadcast Key, maximum 16 characters"
+msgstr "Yayın Anahtarı, maksimum 16 karakter"
+
+#: main.py:286
+msgid "Input a new key then press <ENTER>"
+msgstr "Yeni bir anahtar girin ve <ENTER> tuşuna basın"
+
+#: main.py:308
+msgid "Add device"
+msgstr "Cihaz ekle"
+
+#: main.py:325
+msgid "Delete"
+msgstr "Silmek"
+
+#: main.py:343
+msgid "Clear All"
+msgstr "Hepsini temizle"
+
+#: main.py:405
+msgid "Quit"
+msgstr "Çıkış yapmak"
+
+#: main.py:405
+msgid "Show Window"
+msgstr "Pencere göster"
+
+#: main.py:406
+msgid "FlooGoo Bluetooth Audio Source"
+msgstr "FlooGoo Bluetooth Ses Kaynağı"
+
+#: main.py:414
+msgid "Minimize to System Tray"
+msgstr "Sistem Tepsisine Küçült"
+
+#: main.py:416
+msgid "Quit App"
+msgstr "Uygulamadan Çık"
+
+#: main.py:430
+msgid "Disconnect and reconnect the dongle to activate configuration changes, after which it will function independently without the app."
+msgstr "Yapılandırma değişikliklerini etkinleştirmek için donanım kilidinin bağlantısını kesin ve yeniden bağlayın; bundan sonra uygulama olmadan bağımsız olarak çalışacaktır."
+
+#: main.py:445
+msgid "Third-Party Software Licenses"
+msgstr "Üçüncü Taraf Yazılım Lisansları"
+
+#: main.py:448
+msgid "Support Link"
+msgstr "Destek Bağlantısı"
+
+#: main.py:451
+msgid "Version"
+msgstr "Sürüm"
+
+#: main.py:486
+msgid "Device Firmware Upgrade"
+msgstr "Cihaz Firmware Güncellemesi"
+
+#: main.py:524
+msgid "Use FlooGoo dongle on "
+msgstr "FlooGoo adaptörünü kullanın"
+
+#: main.py:526
+msgid "Please insert your FlooGoo dongle"
+msgstr "Lütfen FlooGoo adaptörünüzü takın"
+

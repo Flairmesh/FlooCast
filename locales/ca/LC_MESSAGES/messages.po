@@ -1,0 +1,225 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2023-09-14 21:16+1000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+
+
+#: main.py:47 main.py:89
+msgid "Initializing"
+msgstr "Inicialització"
+
+#: main.py:48
+msgid "Idle"
+msgstr "Ociós"
+
+#: main.py:49
+msgid "Pairing"
+msgstr "Maridatge"
+
+#: main.py:50
+msgid "Connecting"
+msgstr "Connectant"
+
+#: main.py:51 main.py:61
+msgid "Connected"
+msgstr "Connectat"
+
+#: main.py:52
+msgid "Audio starting"
+msgstr "Inici de l'àudio"
+
+#: main.py:53
+msgid "Audio streaming"
+msgstr "Transmissió d'àudio"
+
+#: main.py:54
+msgid "Audio stopping"
+msgstr "S'atura l'àudio"
+
+#: main.py:55
+msgid "Disconnecting"
+msgstr "Desconnectant"
+
+#: main.py:56
+msgid "Voice starting"
+msgstr "La veu comença"
+
+#: main.py:57
+msgid "Voice streaming"
+msgstr "Transmissió de veu"
+
+#: main.py:58
+msgid "Voice stopping"
+msgstr "La veu s'atura"
+
+#: main.py:60 main.py:155
+msgid "Disconnected"
+msgstr "Desconnectat"
+
+#: main.py:62
+msgid "Unicast starting"
+msgstr "Començament unicast"
+
+#: main.py:63
+msgid "Unicast streaming"
+msgstr "Transmissió unicast"
+
+#: main.py:64
+msgid "Broadcast starting"
+msgstr "Comença l'emissió"
+
+#: main.py:65
+msgid "Broadcast streaming"
+msgstr "Transmissió en streaming"
+
+#: main.py:66
+msgid "Streaming stopping"
+msgstr "S'atura el streaming"
+
+#: main.py:109
+msgid "Audio Mode"
+msgstr "Mode d'àudio"
+
+#: main.py:111
+msgid "LE Broadcast"
+msgstr "LE Broadcast"
+
+#: main.py:113
+msgid "Most Recently Used Devices"
+msgstr "Dispositius utilitzats més recentment"
+
+#: main.py:116
+msgid "Window"
+msgstr "Finestra"
+
+#: main.py:119
+msgid "Help"
+msgstr "Ajuda"
+
+#: main.py:139
+msgid "High Quality (one-to-one)"
+msgstr "Alta qualitat (un a un)"
+
+#: main.py:142
+msgid "Gaming (one-to-one)"
+msgstr "Jocs (un a un)"
+
+#: main.py:145
+msgid "Broadcast"
+msgstr "Transmissió"
+
+#: main.py:149
+msgid "Dongle State"
+msgstr "Estat de l'adaptador"
+
+#: main.py:151
+msgid "Initialization"
+msgstr "Inicialització"
+
+#: main.py:153
+msgid "LE Audio State"
+msgstr "Estat d'àudio LE"
+
+#: main.py:157
+msgid "Codec in Use"
+msgstr "Còdec en ús"
+
+#: main.py:162
+msgid "Prefer using LE audio for dual-mode devices"
+msgstr "Preferiu utilitzar l'àudio LE per a dispositius de mode dual"
+
+#: main.py:188
+msgid "Public broadcast"
+msgstr "Emissió pública"
+
+#: main.py:209
+msgid "Broadcast high-quality music, otherwise, voice"
+msgstr "Transmet música d'alta qualitat, en cas contrari, veu"
+
+#: main.py:231
+msgid "Encrypt broadcast; please set a key first"
+msgstr "Transmissió xifrada; primer, posa una clau"
+
+#: main.py:252
+msgid "Broadcast Name, maximum 30 characters"
+msgstr "Nom de l'emissió, màxim 30 caràcters"
+
+#: main.py:271
+msgid "Broadcast Key, maximum 16 characters"
+msgstr "Clau de difusió, màxim 16 caràcters"
+
+#: main.py:286
+msgid "Input a new key then press <ENTER>"
+msgstr "Introduïu una tecla nova i premeu <ENTER>"
+
+#: main.py:308
+msgid "Add device"
+msgstr "Afegeix un dispositiu"
+
+#: main.py:325
+msgid "Delete"
+msgstr "Suprimeix"
+
+#: main.py:343
+msgid "Clear All"
+msgstr "Esborra-ho tot"
+
+#: main.py:405
+msgid "Quit"
+msgstr "Surt"
+
+#: main.py:405
+msgid "Show Window"
+msgstr "Mostra la finestra"
+
+#: main.py:406
+msgid "FlooGoo Bluetooth Audio Source"
+msgstr "Font d'àudio Bluetooth FlooGoo"
+
+#: main.py:414
+msgid "Minimize to System Tray"
+msgstr "Minimitzar a la safata del sistema"
+
+#: main.py:416
+msgid "Quit App"
+msgstr "Surt de l'aplicació"
+
+#: main.py:430
+msgid "Disconnect and reconnect the dongle to activate configuration changes, after which it will function independently without the app."
+msgstr "Desconnecteu i torneu a connectar el dongle per activar els canvis de configuració, després dels quals funcionarà de manera independent sense l'aplicació."
+
+#: main.py:445
+msgid "Third-Party Software Licenses"
+msgstr "Llicències de programari de tercers"
+
+#: main.py:448
+msgid "Support Link"
+msgstr "Enllaç de suport"
+
+#: main.py:451
+msgid "Version"
+msgstr "Versió"
+
+#: main.py:486
+msgid "Device Firmware Upgrade"
+msgstr "Actualització del firmware del dispositiu"
+
+#: main.py:524
+msgid "Use FlooGoo dongle on "
+msgstr "Utilitzeu l'adaptador FlooGoo activat"
+
+#: main.py:526
+msgid "Please insert your FlooGoo dongle"
+msgstr "Si us plau, inseriu el vostre adaptador FlooGoo"
+

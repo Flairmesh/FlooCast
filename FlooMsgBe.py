@@ -10,7 +10,7 @@ class FlooMsgBe(FlooMessage):
 
     def __init__(self, isSend, key = None):
         self.key = key
-        if not isSend or name is None:
+        if not isSend or key is None:
             super().__init__(isSend, FlooMsgBe.HEADER)
         else:
             super().__init__(isSend, FlooMsgBe.HEADER, bytes(key, 'utf-8'))
