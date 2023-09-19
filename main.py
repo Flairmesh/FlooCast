@@ -448,7 +448,7 @@ thirdPartyLink.bind("<Button-1>", lambda e: url_callback("https://www.flairmesh.
 supportLink = tk.Label(aboutFrame, text=_("Support Link"), fg="blue", cursor="hand2")
 supportLink.pack()
 supportLink.bind("<Button-1>", lambda e: url_callback("https://www.flairmesh.com/Dongle/FMA120.html"))
-versionInfo = tk.Label(aboutFrame, text=_("Version") + "1.0.1")
+versionInfo = tk.Label(aboutFrame, text=_("Version") + "1.0.2")
 versionInfo.pack()
 
 dfuUndergoing = False
