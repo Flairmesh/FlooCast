@@ -6,4 +6,6 @@
 *.mo
 *.exe
 *.dll
+*.msix
+*.spec
 
