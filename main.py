@@ -448,30 +448,34 @@ thirdPartyLink.bind("<Button-1>", lambda e: url_callback("https://www.flairmesh.
 supportLink = tk.Label(aboutFrame, text=_("Support Link"), fg="blue", cursor="hand2")
 supportLink.pack()
 supportLink.bind("<Button-1>", lambda e: url_callback("https://www.flairmesh.com/Dongle/FMA120.html"))
-versionInfo = tk.Label(aboutFrame, text=_("Version") + "1.0.2")
+versionInfo = tk.Label(aboutFrame, text=_("Version") + "1.0.3")
 versionInfo.pack()
 
 dfuUndergoing = False
 dfuInfo = tk.Label(aboutFrame, text="")
 
 
-def update_dfu_info(stateStr: str):
+def update_dfu_info(state: int):
     global dfuUndergoing
-    if stateStr:
-        print(stateStr)
-        dfuInfo.config(text=stateStr)
+
+    print(state)
+    if state == FlooDfuThread.DFU_STATE_DONE:
+        dfuInfo.pack_forget()
+        minimizeButton.config(state=tk.NORMAL)
+        quitButton.config(state=tk.NORMAL)
+        dfuButton.config(state=tk.NORMAL)
+        dfuUndergoing = False
+    elif state > FlooDfuThread.DFU_STATE_DONE:
+        dfuInfo.config(text=_("Upgrade error"))
+    else:
+        # print(stateStr)
+        dfuInfo.config(text=_("Upgrade progress") + (" %d" % state) + "%")
         if not dfuUndergoing:
             dfuInfo.pack()
             minimizeButton.config(state=tk.DISABLED)
             quitButton.config(state=tk.DISABLED)
             dfuButton.config(state=tk.DISABLED)
             dfuUndergoing = True
-    else:
-        dfuInfo.pack_forget()
-        minimizeButton.config(state=tk.NORMAL)
-        quitButton.config(state=tk.NORMAL)
-        dfuButton.config(state=tk.NORMAL)
-        dfuUndergoing = False
 
 
 def button_dfu():
@@ -479,7 +483,11 @@ def button_dfu():
     if filename:
         os.chdir(app_path)
         # print("Run DFU in directory: " + os.getcwd())
-        dfuThread = FlooDfuThread([app_path + os.sep + 'myDfuDo.bat', filename], update_dfu_info)
+        # dfuThread = FlooDfuThread([app_path + os.sep + 'dfuDo.bat', app_path, filename], update_dfu_info)
+        # echo' , 'yes', '|',
+        #dfuThread = FlooDfuThread([app_path + os.sep + 'HidDfuCmd.exe', 'upgradebin', '0A12',
+        #                           '4007', '1', 'FF00', filename], update_dfu_info)
+        dfuThread = FlooDfuThread([app_path, filename], update_dfu_info)
         dfuThread.start()
 
 
@@ -499,7 +507,7 @@ def enable_settings_widgets(enable: bool):
         broadcastNameEntry.config(state=tk.NORMAL)
         broadcastKeyEntry.config(state=tk.NORMAL)
         if platform.system().lower().startswith('win'):
-            dfuButton.config(state=tk.NORMAL)
+            dfuButton.config(state=tk.DISABLED if dfuUndergoing else tk.NORMAL)
     else:
         highQualityRadioButton.config(state=tk.DISABLED)
         gamingModeRadioButton.config(state=tk.DISABLED)
