@@ -207,6 +207,14 @@ msgstr "Collegamento di supporto"
 msgid "Version"
 msgstr "Versione"
 
+#: main.py:469
+msgid "Upgrade error"
+msgstr "Errore di aggiornamento"
+
+#: main.py:472
+msgid "Upgrade progress"
+msgstr "Avanzamento dell'aggiornamento"
+
 #: main.py:486
 msgid "Device Firmware Upgrade"
 msgstr "Aggiornamento firmware del dispositivo"

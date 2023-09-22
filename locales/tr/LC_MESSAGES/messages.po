@@ -207,6 +207,14 @@ msgstr "Destek Bağlantısı"
 msgid "Version"
 msgstr "Sürüm"
 
+#: main.py:469
+msgid "Upgrade error"
+msgstr "Yükseltme hatası"
+
+#: main.py:472
+msgid "Upgrade progress"
+msgstr "Yükseltme ilerlemesi"
+
 #: main.py:486
 msgid "Device Firmware Upgrade"
 msgstr "Cihaz Firmware Güncellemesi"

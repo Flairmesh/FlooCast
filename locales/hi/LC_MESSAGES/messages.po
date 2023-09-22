@@ -211,6 +211,14 @@ msgstr "समर्थन लिंक"
 msgid "Version"
 msgstr "संस्करण"
 
+#: main.py:469
+msgid "Upgrade error"
+msgstr "अपग्रेड त्रुटि"
+
+#: main.py:472
+msgid "Upgrade progress"
+msgstr "प्रगति को उन्नत करें"
+
 #: main.py:486
 msgid "Device Firmware Upgrade"
 msgstr "डिवाइस फ़र्मवेयर अपग्रेड"

@@ -207,6 +207,14 @@ msgstr "קישור תמיכה"
 msgid "Version"
 msgstr "גִרְסָה"
 
+#: main.py:469
+msgid "Upgrade error"
+msgstr "שגיאת שדרוג"
+
+#: main.py:472
+msgid "Upgrade progress"
+msgstr "התקדמות השדרוג"
+
 #: main.py:486
 msgid "Device Firmware Upgrade"
 msgstr "שדרוג קושחה של מכשיר"

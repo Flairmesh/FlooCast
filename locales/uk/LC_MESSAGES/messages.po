@@ -207,6 +207,14 @@ msgstr "Посилання на підтримку"
 msgid "Version"
 msgstr "Версія"
 
+#: main.py:469
+msgid "Upgrade error"
+msgstr "Помилка оновлення"
+
+#: main.py:472
+msgid "Upgrade progress"
+msgstr "Прогрес оновлення"
+
 #: main.py:486
 msgid "Device Firmware Upgrade"
 msgstr "Оновлення мікропрограми пристрою"

@@ -17,213 +17,213 @@ msgstr ""
 
 #: main.py:47 main.py:89
 msgid "Initializing"
-msgstr "Initialisierung"
+msgstr "Initialiserer"
 
 #: main.py:48
 msgid "Idle"
-msgstr "Leerlauf"
+msgstr "Idle"
 
 #: main.py:49
 msgid "Pairing"
-msgstr "Paarung"
+msgstr "Parring"
 
 #: main.py:50
 msgid "Connecting"
-msgstr "Verbinden"
+msgstr "Kobler til"
 
 #: main.py:51 main.py:61
 msgid "Connected"
-msgstr "In Verbindung gebracht"
+msgstr "Tilkoblet"
 
 #: main.py:52
 msgid "Audio starting"
-msgstr "Audio beginnt"
+msgstr "Lyd starter"
 
 #: main.py:53
 msgid "Audio streaming"
-msgstr "Audio-Streaming"
+msgstr "Lydstrømming"
 
 #: main.py:54
 msgid "Audio stopping"
-msgstr "Audio stoppt"
+msgstr "Lyd stopper"
 
 #: main.py:55
 msgid "Disconnecting"
-msgstr "Trennen"
+msgstr "Kobler fra"
 
 #: main.py:56
 msgid "Voice starting"
-msgstr "Stimme beginnt"
+msgstr "Stemme starter"
 
 #: main.py:57
 msgid "Voice streaming"
-msgstr "Sprachstreaming"
+msgstr "Stemmestrømming"
 
 #: main.py:58
 msgid "Voice stopping"
-msgstr "Stimme stoppt"
+msgstr "Stemme stopper"
 
 #: main.py:60 main.py:155
 msgid "Disconnected"
-msgstr "Getrennt"
+msgstr "Koblet fra"
 
 #: main.py:62
 msgid "Unicast starting"
-msgstr "Unicast startet"
+msgstr "Unicast starter"
 
 #: main.py:63
 msgid "Unicast streaming"
-msgstr "Unicast-Streaming"
+msgstr "Unicast-strømming"
 
 #: main.py:64
 msgid "Broadcast starting"
-msgstr "Die Übertragung beginnt"
+msgstr "Kringkastingen starter"
 
 #: main.py:65
 msgid "Broadcast streaming"
-msgstr "Broadcast-Streaming"
+msgstr "Kringkast strømming"
 
 #: main.py:66
 msgid "Streaming stopping"
-msgstr "Streaming stoppt"
+msgstr "Strøming stopper"
 
 #: main.py:109
 msgid "Audio Mode"
-msgstr "Audiomodus"
+msgstr "Lydmodus"
 
 #: main.py:111
 msgid "LE Broadcast"
-msgstr "LE-Sendung"
+msgstr "LE Broadcast"
 
 #: main.py:113
 msgid "Most Recently Used Devices"
-msgstr "Zuletzt verwendete Geräte"
+msgstr "Sist brukte enheter"
 
 #: main.py:116
 msgid "Window"
-msgstr "Fenster"
+msgstr "Vindu"
 
 #: main.py:119
 msgid "Help"
-msgstr "Helfen"
+msgstr "Hjelp"
 
 #: main.py:139
 msgid "High Quality (one-to-one)"
-msgstr "Hohe Qualität (eins zu eins)"
+msgstr "Høy kvalitet (en-til-en)"
 
 #: main.py:142
 msgid "Gaming (one-to-one)"
-msgstr "Gaming (eins zu eins)"
+msgstr "Gaming (en-til-en)"
 
 #: main.py:145
 msgid "Broadcast"
-msgstr "Übertragen"
+msgstr "Kringkasting"
 
 #: main.py:149
 msgid "Dongle State"
-msgstr "Adapterstatus"
+msgstr "Dongle State"
 
 #: main.py:153
 msgid "LE Audio State"
-msgstr "LE-Audiostatus"
+msgstr "LE Audio State"
 
 #: main.py:157
 msgid "Codec in Use"
-msgstr "Codec im Einsatz"
+msgstr "Kodek i bruk"
 
 #: main.py:162
 msgid "Prefer using LE audio for dual-mode devices"
-msgstr "Bevorzugen Sie LE-Audio für Dual-Mode-Geräte"
+msgstr "Foretrekker å bruke LE-lyd for enheter med to moduser"
 
 #: main.py:188
 msgid "Public broadcast"
-msgstr "Öffentliche Ausstrahlung"
+msgstr "Offentlig kringkasting"
 
 #: main.py:209
 msgid "Broadcast high-quality music, otherwise, voice"
-msgstr "Übertragen Sie hochwertige Musik, ansonsten Sprache"
+msgstr "Kringkast musikk av høy kvalitet, ellers stemme"
 
 #: main.py:231
 msgid "Encrypt broadcast; please set a key first"
-msgstr "Broadcast verschlüsseln; Bitte legen Sie zuerst einen Schlüssel fest"
+msgstr "Krypter kringkasting; sett inn en nøkkel først"
 
 #: main.py:252
 msgid "Broadcast Name, maximum 30 characters"
-msgstr "Broadcast-Name, maximal 30 Zeichen"
+msgstr "Kringkastingsnavn, maksimalt 30 tegn"
 
 #: main.py:271
 msgid "Broadcast Key, maximum 16 characters"
-msgstr "Broadcast-Schlüssel, maximal 16 Zeichen"
+msgstr "Kringkastingsnøkkel, maksimalt 16 tegn"
 
 #: main.py:286
 msgid "Input a new key then press <ENTER>"
-msgstr "Geben Sie einen neuen Schlüssel ein und drücken Sie dann <ENTER>"
+msgstr "Skriv inn en ny nøkkel og trykk deretter <ENTER>"
 
 #: main.py:308
 msgid "Add device"
-msgstr "Gerät hinzufügen"
+msgstr "Legg til enhet"
 
 #: main.py:325
 msgid "Delete"
-msgstr "Löschen"
+msgstr "Slett"
 
 #: main.py:343
 msgid "Clear All"
-msgstr "Alles lÃ¶schen"
+msgstr "Slett alt"
 
 #: main.py:405
 msgid "Quit"
-msgstr "Aufhören"
+msgstr "Avslutt"
 
 #: main.py:405
 msgid "Show Window"
-msgstr "Schaufenster"
+msgstr "Vis vindu"
 
 #: main.py:406
 msgid "FlooGoo Bluetooth Audio Source"
-msgstr "FlooGoo Bluetooth-Audioquelle"
+msgstr "FlooGoo Bluetooth-lydkilde"
 
 #: main.py:414
 msgid "Minimize to System Tray"
-msgstr "In die Taskleiste minimieren"
+msgstr "Minimer til systemstatusfeltet"
 
 #: main.py:416
 msgid "Quit App"
-msgstr "Beenden Sie die App"
+msgstr "Avslutt appen"
 
 #: main.py:430
 msgid "Disconnect and reconnect the dongle to activate configuration changes, after which it will function independently without the app."
-msgstr "Trennen Sie den Dongle und schließen Sie ihn erneut an, um Konfigurationsänderungen zu aktivieren. Anschließend funktioniert er unabhängig ohne die App."
+msgstr "Koble fra og koble til dongelen på nytt for å aktivere konfigurasjonsendringer, hvoretter den vil fungere uavhengig uten appen."
 
 #: main.py:445
 msgid "Third-Party Software Licenses"
-msgstr "Softwarelizenzen von Drittanbietern"
+msgstr "Tredjeparts programvarelisenser"
 
 #: main.py:448
 msgid "Support Link"
-msgstr "Support-Link"
+msgstr "Support Link"
 
 #: main.py:451
 msgid "Version"
-msgstr "Ausführung"
+msgstr "Versjon"
 
 #: main.py:469
 msgid "Upgrade error"
-msgstr "Upgrade-Fehler"
+msgstr "Oppgraderingsfeil"
 
 #: main.py:472
 msgid "Upgrade progress"
-msgstr "Upgrade-Fortschritt"
+msgstr "Oppgraderingsfremdrift"
 
 #: main.py:486
 msgid "Device Firmware Upgrade"
-msgstr "Geräte-Firmware-Upgrade"
+msgstr "Enhetsfastvareoppgradering"
 
 #: main.py:524
 msgid "Use FlooGoo dongle on "
-msgstr "Verwenden Sie den FlooGoo-Adapter "
+msgstr "Bruk FlooGoo dongle på"
 
 #: main.py:526
 msgid "Please insert your FlooGoo dongle"
-msgstr "Bitte stecken Sie Ihren FlooGoo-Adapter ein"
+msgstr "Vennligst sett inn FlooGoo-dongelen"
 

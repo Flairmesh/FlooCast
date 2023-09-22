@@ -211,6 +211,14 @@ msgstr "Tukilinkki"
 msgid "Version"
 msgstr "Versio"
 
+#: main.py:469
+msgid "Upgrade error"
+msgstr "Päivitysvirhe"
+
+#: main.py:472
+msgid "Upgrade progress"
+msgstr "Päivityksen edistyminen"
+
 #: main.py:486
 msgid "Device Firmware Upgrade"
 msgstr "Laitteen laiteohjelmiston päivitys"

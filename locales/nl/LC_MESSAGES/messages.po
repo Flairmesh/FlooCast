@@ -207,6 +207,14 @@ msgstr "Ondersteuningslink"
 msgid "Version"
 msgstr "Versie"
 
+#: main.py:469
+msgid "Upgrade error"
+msgstr "Upgradefout"
+
+#: main.py:472
+msgid "Upgrade progress"
+msgstr "Upgrade-voortgang"
+
 #: main.py:486
 msgid "Device Firmware Upgrade"
 msgstr "Firmware-upgrade van apparaat"

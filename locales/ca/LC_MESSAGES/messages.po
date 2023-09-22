@@ -211,6 +211,14 @@ msgstr "Enllaç de suport"
 msgid "Version"
 msgstr "Versió"
 
+#: main.py:469
+msgid "Upgrade error"
+msgstr "Error d'actualització"
+
+#: main.py:472
+msgid "Upgrade progress"
+msgstr "Progrés de l'actualització"
+
 #: main.py:486
 msgid "Device Firmware Upgrade"
 msgstr "Actualització del firmware del dispositiu"

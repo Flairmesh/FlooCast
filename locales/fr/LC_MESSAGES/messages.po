@@ -211,6 +211,14 @@ msgstr "Lien d'assistance"
 msgid "Version"
 msgstr "Version"
 
+#: main.py:469
+msgid "Upgrade error"
+msgstr "Erreur de mise à niveau"
+
+#: main.py:472
+msgid "Upgrade progress"
+msgstr "Progression de la mise à niveau"
+
 #: main.py:486
 msgid "Device Firmware Upgrade"
 msgstr "Mise à niveau du micrologiciel de l'appareil"

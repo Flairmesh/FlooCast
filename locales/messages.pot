@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-09-15 00:09+1000\n"
+"POT-Creation-Date: 2023-09-22 14:47+1000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Generated-By: pygettext.py 1.5\n"
 
 
-#: main.py:47 main.py:89
+#: main.py:47 main.py:89 main.py:151
 msgid "Initializing"
 msgstr ""
 
@@ -123,10 +123,6 @@ msgstr ""
 msgid "Dongle State"
 msgstr ""
 
-#: main.py:151
-msgid "Initialization"
-msgstr ""
-
 #: main.py:153
 msgid "LE Audio State"
 msgstr ""
@@ -211,15 +207,23 @@ msgstr ""
 msgid "Version"
 msgstr ""
 
-#: main.py:486
+#: main.py:469
+msgid "Upgrade error"
+msgstr ""
+
+#: main.py:472
+msgid "Upgrade progress "
+msgstr ""
+
+#: main.py:495
 msgid "Device Firmware Upgrade"
 msgstr ""
 
-#: main.py:524
+#: main.py:533
 msgid "Use FlooGoo dongle on "
 msgstr ""
 
-#: main.py:526
+#: main.py:535
 msgid "Please insert your FlooGoo dongle"
 msgstr ""
 

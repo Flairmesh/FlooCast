@@ -211,6 +211,14 @@ msgstr "Support Link"
 msgid "Version"
 msgstr "Version"
 
+#: main.py:469
+msgid "Upgrade error"
+msgstr "Opgraderingsfejl"
+
+#: main.py:472
+msgid "Upgrade progress"
+msgstr "Opgraderingsfremskridt"
+
 #: main.py:486
 msgid "Device Firmware Upgrade"
 msgstr "Opgradering af enhedsfirmware"

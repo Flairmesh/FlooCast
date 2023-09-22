@@ -211,6 +211,14 @@ msgstr "رابط الدعم"
 msgid "Version"
 msgstr "إصدار"
 
+#: main.py:469
+msgid "Upgrade error"
+msgstr "خطأ في الترقية"
+
+#: main.py:472
+msgid "Upgrade progress"
+msgstr "تقدم الترقية"
+
 #: main.py:486
 msgid "Device Firmware Upgrade"
 msgstr "ترقية البرامج الثابتة للجهاز"
