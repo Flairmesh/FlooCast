@@ -72,7 +72,7 @@ root = tk.Tk()
 root.title(appTitle)
 if platform.system().lower().startswith('win'):
     root.iconbitmap(app_path + os.sep + appIcon)
-elif platform.system().lower().startswith('lin'):
+else:
     img_icon = tk.PhotoImage(file=app_path + os.sep + appGif)
     root.tk.call('wm', 'iconphoto', root._w, img_icon)
 # Set geometry (widthxheight)
@@ -398,10 +398,7 @@ def hide_window():
     global windowIcon
     root.withdraw()
     # file_path = os.path.abspath(os.path.dirname(sys.argv[0]))
-    if platform.system().lower().startswith('win'):
-        image = Image.open(app_path + os.sep + appIcon)
-    elif platform.system().lower().startswith('lin'):
-        image = tk.PhotoImage(file=app_path + os.sep + appGif)
+    image = Image.open(app_path + os.sep + appIcon)
     menu = (TrayMenuItem(_('Quit'), quit_window), TrayMenuItem(_('Show Window'), show_window))
     icon = pystray.Icon(appTitle, image, _("FlooGoo Bluetooth Audio Source"), menu)  # "FlooGoo Bluetooth Audio Source"
     icon.run()
