@@ -445,19 +445,21 @@ thirdPartyLink.bind("<Button-1>", lambda e: url_callback("https://www.flairmesh.
 supportLink = tk.Label(aboutFrame, text=_("Support Link"), fg="blue", cursor="hand2")
 supportLink.pack()
 supportLink.bind("<Button-1>", lambda e: url_callback("https://www.flairmesh.com/Dongle/FMA120.html"))
-versionInfo = tk.Label(aboutFrame, text=_("Version") + "1.0.3")
+versionInfo = tk.Label(aboutFrame, text=_("Version") + "1.0.4")
 versionInfo.pack()
 
 dfuUndergoing = False
 dfuInfo = tk.Label(aboutFrame, text="")
+firmwareVersion = ""
 
 
 def update_dfu_info(state: int):
     global dfuUndergoing
+    global firmwareVersion
 
     print(state)
     if state == FlooDfuThread.DFU_STATE_DONE:
-        dfuInfo.pack_forget()
+        dfuInfo.config(text=_("Firmware") + " " + firmwareVersion)
         minimizeButton.config(state=tk.NORMAL)
         quitButton.config(state=tk.NORMAL)
         dfuButton.config(state=tk.NORMAL)
@@ -523,15 +525,23 @@ enable_settings_widgets(False)
 
 # All GUI object initialized, start FlooStateMachine
 class FlooSmDelegate(FlooStateMachineDelegate):
-    def deviceDetected(self, flag: bool, port: str):
+    def deviceDetected(self, flag: bool, port: str, version : str = None):
         global currentPairedDeviceList
+        global firmwareVersion
+
         enable_settings_widgets(flag)
         if flag:
             update_status_bar(_("Use FlooGoo dongle on ") + " " + port)
+            if not dfuUndergoing:
+                dfuInfo.config(text=_("Firmware") + " " + version)
+            else:
+                firmwareVersion = version
+            dfuInfo.pack()
         else:
             update_status_bar(_("Please insert your FlooGoo dongle"))
             enable_pairing_widgets(False)
             pairedDeviceListbox.delete(0, tk.END)
+            dfuInfo.pack_forget()
 
     def audioModeInd(self, mode: int):
         audioMode.set(mode)

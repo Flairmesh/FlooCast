@@ -19,6 +19,7 @@ from FlooMsgCt import FlooMsgCt
 from FlooMsgDc import FlooMsgDc
 from FlooMsgAc import FlooMsgAc
 from FlooMsgLf import FlooMsgLf
+from FlooMsgVr import FlooMsgVr
 
 class FlooStateMachine(FlooInterfaceDelegate, Thread):
     """The state machine of the host app working with FlooGoo USB Bluetooth Dongle"""
@@ -51,9 +52,9 @@ class FlooStateMachine(FlooInterfaceDelegate, Thread):
 
     def interfaceState(self, enabled: bool, port: str):
         if enabled and self.state == FlooStateMachine.INIT:
-            cmdReadAddr = FlooMsgAd(True)
-            self.inf.sendMsg(cmdReadAddr)
-            self.lastCmd = cmdReadAddr
+            cmdReadVersion = FlooMsgVr(True)
+            self.inf.sendMsg(cmdReadVersion)
+            self.lastCmd = cmdReadVersion
         elif not enabled:
             print("FlooStateMachine reset bypass")
             self.lastCmd = None
@@ -64,9 +65,9 @@ class FlooStateMachine(FlooInterfaceDelegate, Thread):
     def handleMessage(self, message: FlooMessage):
         print("FlooStateMachine: handleMessage " + message.header)
         if self.state == FlooStateMachine.INIT:
-            if isinstance(message, FlooMsgAd):
-                if isinstance(self.lastCmd, FlooMsgAd):
-                    self.delegate.deviceDetected(True, self.inf.port_name)
+            if isinstance(message, FlooMsgVr):
+                if isinstance(self.lastCmd, FlooMsgVr):
+                    self.delegate.deviceDetected(True, self.inf.port_name, message.verStr)
                     cmdGetAudioMode = FlooMsgAm(True)
                     self.inf.sendMsg(cmdGetAudioMode)
                     self.lastCmd = cmdGetAudioMode
