@@ -211,6 +211,10 @@ msgstr "رابط الدعم"
 msgid "Version"
 msgstr "إصدار"
 
+#: main.py:462 main.py:536
+msgid "Firmware"
+msgstr "البرامج الثابتة"
+
 #: main.py:469
 msgid "Upgrade error"
 msgstr "خطأ في الترقية"

@@ -207,6 +207,10 @@ msgstr "ลิงค์สนับสนุน"
 msgid "Version"
 msgstr "เวอร์ชัน"
 
+#: main.py:462 main.py:536
+msgid "Firmware"
+msgstr "เฟิร์มแวร์"
+
 #: main.py:469
 msgid "Upgrade error"
 msgstr "ข้อผิดพลาดในการอัพเกรด"

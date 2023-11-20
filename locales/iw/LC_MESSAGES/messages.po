@@ -207,6 +207,10 @@ msgstr "קישור תמיכה"
 msgid "Version"
 msgstr "גִרְסָה"
 
+#: main.py:462 main.py:536
+msgid "Firmware"
+msgstr "קושחה"
+
 #: main.py:469
 msgid "Upgrade error"
 msgstr "שגיאת שדרוג"

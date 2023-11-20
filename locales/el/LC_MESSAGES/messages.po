@@ -211,6 +211,10 @@ msgstr "Σύνδεσμος υποστήριξης"
 msgid "Version"
 msgstr "Εκδοχή"
 
+#: main.py:462 main.py:536
+msgid "Firmware"
+msgstr "Υλικολογισμικό"
+
 #: main.py:469
 msgid "Upgrade error"
 msgstr "Σφάλμα αναβάθμισης"

@@ -207,6 +207,10 @@ msgstr "サポートリンク"
 msgid "Version"
 msgstr "バージョン"
 
+#: main.py:462 main.py:536
+msgid "Firmware"
+msgstr "ファームウェア"
+
 #: main.py:469
 msgid "Upgrade error"
 msgstr "アップグレードエラー"

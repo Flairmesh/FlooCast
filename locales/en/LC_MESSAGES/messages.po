@@ -207,6 +207,10 @@ msgstr ""
 msgid "Version"
 msgstr ""
 
+#: main.py:462 main.py:536
+msgid "Firmware"
+msgstr ""
+
 #: main.py:469
 msgid "Upgrade error"
 msgstr ""

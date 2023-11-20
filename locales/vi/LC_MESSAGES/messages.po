@@ -207,6 +207,10 @@ msgstr "Liên kết hỗ trợ"
 msgid "Version"
 msgstr "Phiên bản"
 
+#: main.py:462 main.py:536
+msgid "Firmware"
+msgstr "Phần sụn"
+
 #: main.py:469
 msgid "Upgrade error"
 msgstr "Lỗi nâng cấp"

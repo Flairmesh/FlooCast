@@ -211,6 +211,10 @@ msgstr "Lien d'assistance"
 msgid "Version"
 msgstr "Version"
 
+#: main.py:462 main.py:536
+msgid "Firmware"
+msgstr "Micrologiciel"
+
 #: main.py:469
 msgid "Upgrade error"
 msgstr "Erreur de mise à niveau"

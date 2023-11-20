@@ -207,6 +207,10 @@ msgstr "Ondersteuningslink"
 msgid "Version"
 msgstr "Versie"
 
+#: main.py:462 main.py:536
+msgid "Firmware"
+msgstr "Firmware"
+
 #: main.py:469
 msgid "Upgrade error"
 msgstr "Upgradefout"

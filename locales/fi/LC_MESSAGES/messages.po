@@ -211,6 +211,10 @@ msgstr "Tukilinkki"
 msgid "Version"
 msgstr "Versio"
 
+#: main.py:462 main.py:536
+msgid "Firmware"
+msgstr "Laiteohjelmisto"
+
 #: main.py:469
 msgid "Upgrade error"
 msgstr "Päivitysvirhe"

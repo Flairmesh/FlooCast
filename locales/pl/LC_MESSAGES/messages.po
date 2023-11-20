@@ -207,6 +207,10 @@ msgstr "Link do wsparcia"
 msgid "Version"
 msgstr "Wersja"
 
+#: main.py:462 main.py:536
+msgid "Firmware"
+msgstr "Oprogramowanie sprzętowe"
+
 #: main.py:469
 msgid "Upgrade error"
 msgstr "Błąd aktualizacji"

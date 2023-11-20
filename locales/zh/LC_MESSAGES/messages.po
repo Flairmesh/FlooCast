@@ -207,6 +207,10 @@ msgstr "支持网站链接"
 msgid "Version"
 msgstr "版本"
 
+#: main.py:462 main.py:536
+msgid "Firmware"
+msgstr "固件"
+
 #: main.py:469
 msgid "Upgrade error"
 msgstr "更新错误"

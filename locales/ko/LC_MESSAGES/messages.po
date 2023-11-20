@@ -207,6 +207,10 @@ msgstr "지원 링크"
 msgid "Version"
 msgstr "버전"
 
+#: main.py:462 main.py:536
+msgid "Firmware"
+msgstr "펌웨어"
+
 #: main.py:469
 msgid "Upgrade error"
 msgstr "업그레이드 오류"

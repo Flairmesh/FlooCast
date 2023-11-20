@@ -207,6 +207,10 @@ msgstr "Support Link"
 msgid "Version"
 msgstr "Versjon"
 
+#: main.py:462 main.py:536
+msgid "Firmware"
+msgstr "Fastvare"
+
 #: main.py:469
 msgid "Upgrade error"
 msgstr "Oppgraderingsfeil"

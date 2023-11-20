@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-09-22 14:47+1000\n"
+"POT-Creation-Date: 2023-11-20 22:23+1100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -171,59 +171,63 @@ msgstr ""
 msgid "Clear All"
 msgstr ""
 
-#: main.py:405
+#: main.py:402
 msgid "Quit"
 msgstr ""
 
-#: main.py:405
+#: main.py:402
 msgid "Show Window"
 msgstr ""
 
-#: main.py:406
+#: main.py:403
 msgid "FlooGoo Bluetooth Audio Source"
 msgstr ""
 
-#: main.py:414
+#: main.py:411
 msgid "Minimize to System Tray"
 msgstr ""
 
-#: main.py:416
+#: main.py:413
 msgid "Quit App"
 msgstr ""
 
-#: main.py:430
+#: main.py:427
 msgid "Disconnect and reconnect the dongle to activate configuration changes, after which it will function independently without the app."
 msgstr ""
 
-#: main.py:445
+#: main.py:442
 msgid "Third-Party Software Licenses"
 msgstr ""
 
-#: main.py:448
+#: main.py:445
 msgid "Support Link"
 msgstr ""
 
-#: main.py:451
+#: main.py:448
 msgid "Version"
 msgstr ""
 
-#: main.py:469
+#: main.py:462 main.py:536
+msgid "Firmware"
+msgstr "Micrologiciel"
+
+#: main.py:468
 msgid "Upgrade error"
 msgstr ""
 
-#: main.py:472
-msgid "Upgrade progress "
+#: main.py:471
+msgid "Upgrade progress"
 msgstr ""
 
-#: main.py:495
+#: main.py:494
 msgid "Device Firmware Upgrade"
 msgstr ""
 
-#: main.py:533
+#: main.py:534
 msgid "Use FlooGoo dongle on "
 msgstr ""
 
-#: main.py:535
+#: main.py:541
 msgid "Please insert your FlooGoo dongle"
 msgstr ""
 
