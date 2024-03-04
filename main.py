@@ -30,7 +30,8 @@ codecStr = ['None',
             'aptX Adaptive',
             'LC3',
             'aptX Adaptive',
-            'aptX Lite']
+            'aptX Lite',
+            'aptX Lossless']
 
 userLocale = locale.getdefaultlocale()
 lan = userLocale[0].split('_')[0]
@@ -445,7 +446,7 @@ thirdPartyLink.bind("<Button-1>", lambda e: url_callback("https://www.flairmesh.
 supportLink = tk.Label(aboutFrame, text=_("Support Link"), fg="blue", cursor="hand2")
 supportLink.pack()
 supportLink.bind("<Button-1>", lambda e: url_callback("https://www.flairmesh.com/Dongle/FMA120.html"))
-versionInfo = tk.Label(aboutFrame, text=_("Version") + "1.0.4")
+versionInfo = tk.Label(aboutFrame, text=_("Version") + "1.0.5")
 versionInfo.pack()
 
 dfuUndergoing = False
@@ -577,7 +578,7 @@ class FlooSmDelegate(FlooStateMachineDelegate):
             i = i + 1
 
     def audioCodecInUseInd(self, codec):
-        codecInUseLabel.config(text=codecStr[codec])
+        codecInUseLabel.config(text=codecStr[codec] if codec < len(codecStr) else _("Unknown"))
 
 
 flooSmDelegate = FlooSmDelegate()
