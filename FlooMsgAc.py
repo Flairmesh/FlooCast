@@ -6,11 +6,13 @@ class FlooMsgAc(FlooMessage):
     xx: 01 Voice CVSD
         02 Voice mSBC
         03 A2DP SBC
-        04 A2DP AAC
-        05 A2DP APTX
-        06 A2DP APTX HD
-        07 A2DP APTX Adaptive
-        08 LEA LC3
+        04 A2DP APTX
+        05 A2DP APTX HD
+        06 A2DP APTX Adaptive
+        07 LEA LC3
+        08 LEA APTX Adaptive
+        09 LEA APTX Lite
+        0A A2DP APTX Adaptive Lossless
     """
 
     HEADER = "AC"
