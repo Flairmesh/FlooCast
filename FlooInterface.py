@@ -44,7 +44,7 @@ class FlooInterface:
                     if platform.system().lower().startswith('win'):
                         self.port = serial.Serial(port=self.port_name, baudrate=921600,
                                                   bytesize=8, timeout=2, stopbits=serial.STOPBITS_ONE)
-                    elif platform.system().lower().startswith('lin'):
+                    else:
                         self.port = serial.Serial(port='/dev/' + self.port_name, baudrate=921600,
                                                   bytesize=8, timeout=2, stopbits=serial.STOPBITS_ONE)
 
