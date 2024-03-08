@@ -406,6 +406,7 @@ def hide_window():
     windowIcon = icon
 
 
+windowIcon = None
 root.protocol('WM_DELETE_WINDOW', hide_window)
 windowPanel.columnconfigure(0, weight=1)
 windowPanel.columnconfigure(1, weight=1)
