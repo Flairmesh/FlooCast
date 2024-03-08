@@ -17,7 +17,7 @@ from PIL import Image
 from pystray import MenuItem as TrayMenuItem
 
 appIcon = "FlooCastApp.ico"
-appGif = "FlooPasteApp.gif"
+appGif = "FlooCastApp.gif"
 appTitle = "FlooCast"
 appLogoPng = "FlooCastHeader.png"
 
