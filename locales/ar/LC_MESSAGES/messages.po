@@ -159,6 +159,10 @@ msgstr "اسم البث، الحد الأقصى 30 حرفًا"
 msgid "Broadcast Key, maximum 16 characters"
 msgstr "مفتاح البث، الحد الأقصى 16 حرفًا"
 
+#: main.py:275
+msgid "Input a new name of no more than 30 characters then press <ENTER>"
+msgstr "أدخل اسمًا جديدًا لا يزيد عن 30 حرفًا ثم اضغط على <ENTER>"
+
 #: main.py:286
 msgid "Input a new key then press <ENTER>"
 msgstr "أدخل مفتاحًا جديدًا ثم اضغط على <ENTER>"

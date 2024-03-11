@@ -155,6 +155,10 @@ msgstr "Uitzendnaam, maximaal 30 tekens"
 msgid "Broadcast Key, maximum 16 characters"
 msgstr "Broadcast-sleutel, maximaal 16 tekens"
 
+#: main.py:275
+msgid "Input a new name of no more than 30 characters then press <ENTER>"
+msgstr "Voer een nieuwe naam in van maximaal 30 tekens en druk vervolgens op <ENTER>"
+
 #: main.py:286
 msgid "Input a new key then press <ENTER>"
 msgstr "Voer een nieuwe sleutel in en druk op <ENTER>"

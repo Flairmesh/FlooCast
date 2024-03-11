@@ -155,6 +155,10 @@ msgstr "广播名称，最大30英文字符"
 msgid "Broadcast Key, maximum 16 characters"
 msgstr "广播密码，最大16个英文字符"
 
+#: main.py:275
+msgid "Input a new name of no more than 30 characters then press <ENTER>"
+msgstr "输入不超过 30 个字符的新名称，然后按 <ENTER>"
+
 #: main.py:286
 msgid "Input a new key then press <ENTER>"
 msgstr "输入一个新密码后按回车"

@@ -155,6 +155,10 @@ msgstr "Tên phát sóng, tối đa 30 ký tự"
 msgid "Broadcast Key, maximum 16 characters"
 msgstr "Khóa phát sóng, tối đa 16 ký tự"
 
+#: main.py:275
+msgid "Input a new name of no more than 30 characters then press <ENTER>"
+msgstr "Nhập tên mới không quá 30 ký tự rồi nhấn <ENTER>"
+
 #: main.py:286
 msgid "Input a new key then press <ENTER>"
 msgstr "Nhập phím mới rồi nhấn <ENTER>"

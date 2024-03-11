@@ -155,6 +155,10 @@ msgstr "ชื่อการออกอากาศ สูงสุด 30 ต�
 msgid "Broadcast Key, maximum 16 characters"
 msgstr "รหัสออกอากาศ สูงสุด 16 ตัวอักษร"
 
+#: main.py:275
+msgid "Input a new name of no more than 30 characters then press <ENTER>"
+msgstr "ใส่ชื่อใหม่ไม่เกิน 30 ตัวอักษร แล้วกด <ENTER>"
+
 #: main.py:286
 msgid "Input a new key then press <ENTER>"
 msgstr "ป้อนคีย์ใหม่ จากนั้นกด <ENTER>"

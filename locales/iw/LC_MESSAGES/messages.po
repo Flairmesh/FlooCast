@@ -155,6 +155,10 @@ msgstr "שם השידור, מקסימום 30 תווים"
 msgid "Broadcast Key, maximum 16 characters"
 msgstr "מפתח שידור, מקסימום 16 תווים"
 
+#: main.py:275
+msgid "Input a new name of no more than 30 characters then press <ENTER>"
+msgstr "הזן שם חדש של לא יותר מ-30 תווים ולאחר מכן הקש <ENTER>"
+
 #: main.py:286
 msgid "Input a new key then press <ENTER>"
 msgstr "הזן מפתח חדש ולאחר מכן הקש <ENTER>"

@@ -159,6 +159,10 @@ msgstr "Nom de l'emissió, màxim 30 caràcters"
 msgid "Broadcast Key, maximum 16 characters"
 msgstr "Clau de difusió, màxim 16 caràcters"
 
+#: main.py:275
+msgid "Input a new name of no more than 30 characters then press <ENTER>"
+msgstr "Introduïu un nom nou de no més de 30 caràcters i premeu <ENTER>"
+
 #: main.py:286
 msgid "Input a new key then press <ENTER>"
 msgstr "Introduïu una tecla nova i premeu <ENTER>"

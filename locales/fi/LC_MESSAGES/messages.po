@@ -159,6 +159,10 @@ msgstr "Lähetyksen nimi, enintään 30 merkkiä"
 msgid "Broadcast Key, maximum 16 characters"
 msgstr "Lähetysavain, enintään 16 merkkiä"
 
+#: main.py:275
+msgid "Input a new name of no more than 30 characters then press <ENTER>"
+msgstr "Syötä uusi nimi, jossa on enintään 30 merkkiä ja paina sitten <ENTER>"
+
 #: main.py:286
 msgid "Input a new key then press <ENTER>"
 msgstr "Syötä uusi avain ja paina sitten <ENTER>"

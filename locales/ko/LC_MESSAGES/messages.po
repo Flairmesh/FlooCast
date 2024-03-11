@@ -155,6 +155,10 @@ msgstr "방송 이름, 최대 30자"
 msgid "Broadcast Key, maximum 16 characters"
 msgstr "브로드캐스트 키, 최대 16자"
 
+#: main.py:275
+msgid "Input a new name of no more than 30 characters then press <ENTER>"
+msgstr "30자 이하의 새 이름을 입력한 후 <ENTER>를 누르세요."
+
 #: main.py:286
 msgid "Input a new key then press <ENTER>"
 msgstr "새 키를 입력한 후 <ENTER>를 누르세요."

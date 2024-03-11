@@ -155,6 +155,10 @@ msgstr "Nome da transmissão, máximo de 30 caracteres"
 msgid "Broadcast Key, maximum 16 characters"
 msgstr "Chave de transmissão, máximo de 16 caracteres"
 
+#: main.py:275
+msgid "Input a new name of no more than 30 characters then press <ENTER>"
+msgstr "Insira um novo nome com no máximo 30 caracteres e pressione <ENTER>"
+
 #: main.py:286
 msgid "Input a new key then press <ENTER>"
 msgstr "Insira uma nova chave e pressione <ENTER>"

@@ -155,6 +155,10 @@ msgstr "廣播名稱，最多 30 個字符"
 msgid "Broadcast Key, maximum 16 characters"
 msgstr "廣播密鑰，最多 16 個字符"
 
+#: main.py:275
+msgid "Input a new name of no more than 30 characters then press <ENTER>"
+msgstr "輸入不超過 30 個字元的新名稱，然後按 <ENTER>"
+
 #: main.py:286
 msgid "Input a new key then press <ENTER>"
 msgstr "輸入新密鑰然後按<ENTER>"

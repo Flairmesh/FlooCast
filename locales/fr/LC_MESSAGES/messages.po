@@ -159,6 +159,10 @@ msgstr "Nom de la diffusion, 30 caractères maximum"
 msgid "Broadcast Key, maximum 16 characters"
 msgstr "Clé de diffusion, maximum 16 caractères"
 
+#: main.py:275
+msgid "Input a new name of no more than 30 characters then press <ENTER>"
+msgstr "Saisissez un nouveau nom de 30 caractères maximum puis appuyez sur <ENTER>"
+
 #: main.py:286
 msgid "Input a new key then press <ENTER>"
 msgstr "Saisissez une nouvelle clé puis appuyez sur <ENTER>"

@@ -155,6 +155,10 @@ msgstr ""
 msgid "Broadcast Key, maximum 16 characters"
 msgstr ""
 
+#: main.py:275
+msgid "Input a new name of no more than 30 characters then press <ENTER>"
+msgstr ""
+
 #: main.py:286
 msgid "Input a new key then press <ENTER>"
 msgstr ""

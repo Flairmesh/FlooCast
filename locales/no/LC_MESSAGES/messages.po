@@ -155,6 +155,10 @@ msgstr "Kringkastingsnavn, maksimalt 30 tegn"
 msgid "Broadcast Key, maximum 16 characters"
 msgstr "Kringkastingsnøkkel, maksimalt 16 tegn"
 
+#: main.py:275
+msgid "Input a new name of no more than 30 characters then press <ENTER>"
+msgstr "Skriv inn et nytt navn på ikke mer enn 30 tegn og trykk deretter <ENTER>"
+
 #: main.py:286
 msgid "Input a new key then press <ENTER>"
 msgstr "Skriv inn en ny nøkkel og trykk deretter <ENTER>"

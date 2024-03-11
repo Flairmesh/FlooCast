@@ -159,6 +159,10 @@ msgstr "Όνομα εκπομπής, έως 30 χαρακτήρες"
 msgid "Broadcast Key, maximum 16 characters"
 msgstr "Κλειδί εκπομπής, μέγιστο 16 χαρακτήρες"
 
+#: main.py:275
+msgid "Input a new name of no more than 30 characters then press <ENTER>"
+msgstr "Εισαγάγετε ένα νέο όνομα που δεν θα υπερβαίνει τους 30 χαρακτήρες και πατήστε <ENTER>"
+
 #: main.py:286
 msgid "Input a new key then press <ENTER>"
 msgstr "Εισαγάγετε ένα νέο πλήκτρο και πατήστε <ENTER>"

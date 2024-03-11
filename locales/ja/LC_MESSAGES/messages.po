@@ -155,6 +155,10 @@ msgstr "ブロードキャスト名、最大 30 文字"
 msgid "Broadcast Key, maximum 16 characters"
 msgstr "ブロードキャスト キー、最大 16 文字"
 
+#: main.py:275
+msgid "Input a new name of no more than 30 characters then press <ENTER>"
+msgstr "30 文字以内の新しい名前を入力して、<ENTER> を押してください。"
+
 #: main.py:286
 msgid "Input a new key then press <ENTER>"
 msgstr "新しいキーを入力し、<ENTER> を押します。"

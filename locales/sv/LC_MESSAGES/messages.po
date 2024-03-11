@@ -155,6 +155,10 @@ msgstr "Sändningsnamn, max 30 tecken"
 msgid "Broadcast Key, maximum 16 characters"
 msgstr "Broadcast Key, max 16 tecken"
 
+#: main.py:275
+msgid "Input a new name of no more than 30 characters then press <ENTER>"
+msgstr "Ange ett nytt namn på högst 30 tecken och tryck sedan på <ENTER>"
+
 #: main.py:286
 msgid "Input a new key then press <ENTER>"
 msgstr "Mata in en ny nyckel och tryck sedan på <ENTER>"

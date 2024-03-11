@@ -155,6 +155,10 @@ msgstr "Yayın Adı, maksimum 30 karakter"
 msgid "Broadcast Key, maximum 16 characters"
 msgstr "Yayın Anahtarı, maksimum 16 karakter"
 
+#: main.py:275
+msgid "Input a new name of no more than 30 characters then press <ENTER>"
+msgstr "En fazla 30 karakterden oluşan yeni bir ad girin ve ardından <ENTER> tuşuna basın"
+
 #: main.py:286
 msgid "Input a new key then press <ENTER>"
 msgstr "Yeni bir anahtar girin ve <ENTER> tuşuna basın"

@@ -155,6 +155,10 @@ msgstr "Широкомовна назва, максимум 30 символів"
 msgid "Broadcast Key, maximum 16 characters"
 msgstr "Широкомовний ключ, максимум 16 символів"
 
+#: main.py:275
+msgid "Input a new name of no more than 30 characters then press <ENTER>"
+msgstr "Введіть нове ім'я довжиною не більше 30 символів і натисніть <ENTER>"
+
 #: main.py:286
 msgid "Input a new key then press <ENTER>"
 msgstr "Введіть новий ключ і натисніть <ENTER>"

@@ -155,6 +155,10 @@ msgstr "Nazwa transmisji, maksymalnie 30 znaków"
 msgid "Broadcast Key, maximum 16 characters"
 msgstr "Klucz rozgłoszeniowy, maksymalnie 16 znaków"
 
+#: main.py:275
+msgid "Input a new name of no more than 30 characters then press <ENTER>"
+msgstr "Wprowadź nową nazwę zawierającą nie więcej niż 30 znaków, a następnie naciśnij <ENTER>"
+
 #: main.py:286
 msgid "Input a new key then press <ENTER>"
 msgstr "Wprowadź nowy klucz i naciśnij <ENTER>"

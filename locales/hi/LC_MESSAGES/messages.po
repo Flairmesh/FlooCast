@@ -159,6 +159,10 @@ msgstr "प्रसारण नाम, अधिकतम 30 अक्षर"
 msgid "Broadcast Key, maximum 16 characters"
 msgstr "प्रसारण कुंजी, अधिकतम 16 अक्षर"
 
+#: main.py:275
+msgid "Input a new name of no more than 30 characters then press <ENTER>"
+msgstr "30 से अधिक अक्षरों का नया नाम दर्ज करें, फिर <ENTER> दबाएँ"
+
 #: main.py:286
 msgid "Input a new key then press <ENTER>"
 msgstr "एक नई कुंजी इनपुट करें और फिर <ENTER> दबाएँ"
