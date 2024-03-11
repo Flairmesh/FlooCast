@@ -1,6 +1,8 @@
 # Import Module
 import gettext
 import locale
+import subprocess
+import re
 import os
 import platform
 import sys
@@ -33,9 +35,14 @@ codecStr = ['None',
             'aptX Lite',
             'aptX Lossless']
 
-userLocale = locale.getdefaultlocale()
-lan = userLocale[0].split('_')[0]
-# print(lan)
+if platform.system().lower().startswith('darwin'):
+    preferLanguages = subprocess.run(['defaults', 'read', '-g', 'AppleLanguages'], stdout=subprocess.PIPE)
+    preferLanguage = preferLanguages.stdout.decode('utf-8').split('\n')[1]
+    lanSearch = re.search(r'(?<=\")\w+', preferLanguage.lstrip())
+    lan = lanSearch.group(0)
+else:
+    userLocale = locale.getdefaultlocale()
+    lan = userLocale[0].split('_')[0]
 
 # Set the local directory
 app_path = os.path.abspath(os.path.dirname(sys.argv[0]))
@@ -265,7 +272,7 @@ def broadcast_name_entry(name: str):
 
 
 broadcastNameEntry = EntryWithPlaceholder(leBroadcastPanel, textvariable=broadcastName,
-                                          placeholder="Input a new name of no more than 30 characters then press <ENTER>",
+                                          placeholder=_("Input a new name of no more than 30 characters then press <ENTER>"),
                                           edit_end_proc=broadcast_name_entry)
 broadcastNameEntry.grid(column=1, row=3, columnspan=2, padx=4, sticky='we')
 
