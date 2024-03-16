@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-09-14 21:16+1000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2024-03-16 18:42+1000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -17,15 +17,15 @@ msgstr ""
 
 #: main.py:47 main.py:89
 msgid "Initializing"
-msgstr "초기화 중"
+msgstr "시작 중"
 
 #: main.py:48
 msgid "Idle"
-msgstr "게으른"
+msgstr "대기 중"
 
 #: main.py:49
 msgid "Pairing"
-msgstr "편성"
+msgstr "페어링 중"
 
 #: main.py:50
 msgid "Connecting"
@@ -37,55 +37,55 @@ msgstr "연결됨"
 
 #: main.py:52
 msgid "Audio starting"
-msgstr "오디오 시작"
+msgstr "오디오 시작 중"
 
 #: main.py:53
 msgid "Audio streaming"
-msgstr "오디오 스트리밍"
+msgstr "오디오 재생 중"
 
 #: main.py:54
 msgid "Audio stopping"
-msgstr "오디오 중지"
+msgstr "오디오 정지 중"
 
 #: main.py:55
 msgid "Disconnecting"
-msgstr "연결 끊기"
+msgstr "연결 해제 중"
 
 #: main.py:56
 msgid "Voice starting"
-msgstr "음성 시작"
+msgstr "음성 시작 중"
 
 #: main.py:57
 msgid "Voice streaming"
-msgstr "음성 스트리밍"
+msgstr "음성 재생 중"
 
 #: main.py:58
 msgid "Voice stopping"
-msgstr "음성 중지"
+msgstr "음성 정지 중"
 
 #: main.py:60 main.py:155
 msgid "Disconnected"
-msgstr "연결이 끊김"
+msgstr "연결 해제됨"
 
 #: main.py:62
 msgid "Unicast starting"
-msgstr "유니캐스트 시작"
+msgstr "유니캐스트 시작 중"
 
 #: main.py:63
 msgid "Unicast streaming"
-msgstr "유니캐스트 스트리밍"
+msgstr "유니캐스트 재생 중"
 
 #: main.py:64
 msgid "Broadcast starting"
-msgstr "방송 시작"
+msgstr "브로드캐스트 시작 중"
 
 #: main.py:65
 msgid "Broadcast streaming"
-msgstr "방송 스트리밍"
+msgstr "브로드캐스트 재생 중"
 
 #: main.py:66
 msgid "Streaming stopping"
-msgstr "스트리밍 중지"
+msgstr "재생 정지 중"
 
 #: main.py:109
 msgid "Audio Mode"
@@ -93,35 +93,35 @@ msgstr "오디오 모드"
 
 #: main.py:111
 msgid "LE Broadcast"
-msgstr "르방송"
+msgstr "LE 브로드캐스트"
 
 #: main.py:113
 msgid "Most Recently Used Devices"
-msgstr "가장 최근에 사용한 장치"
+msgstr "최근 연결 기기"
 
 #: main.py:116
 msgid "Window"
-msgstr "창문"
+msgstr "프로그램 창"
 
 #: main.py:119
 msgid "Help"
-msgstr "돕다"
+msgstr "도움말"
 
 #: main.py:139
 msgid "High Quality (one-to-one)"
-msgstr "고품질(일대일)"
+msgstr "고품질 (일대일 통신)"
 
 #: main.py:142
 msgid "Gaming (one-to-one)"
-msgstr "게임(일대일)"
+msgstr "게이밍 (일대일 통신)"
 
 #: main.py:145
 msgid "Broadcast"
-msgstr "방송"
+msgstr "브로드캐스트 (일대다 통신)"
 
 #: main.py:149
 msgid "Dongle State"
-msgstr "어댑터 상태"
+msgstr "동글 어댑터 상태"
 
 #: main.py:153
 msgid "LE Audio State"
@@ -129,39 +129,39 @@ msgstr "LE 오디오 상태"
 
 #: main.py:157
 msgid "Codec in Use"
-msgstr "사용 중인 코덱"
+msgstr "연결 코덱"
 
 #: main.py:162
 msgid "Prefer using LE audio for dual-mode devices"
-msgstr "듀얼 모드 장치에는 LE 오디오 사용을 선호합니다."
+msgstr "듀얼 모드 기기 연결 시 LE 오디오 우선 사용"
 
 #: main.py:188
 msgid "Public broadcast"
-msgstr "공개방송"
+msgstr "공개 브로드캐스트"
 
 #: main.py:209
 msgid "Broadcast high-quality music, otherwise, voice"
-msgstr "고품질 음악 방송, 그렇지 않으면 음성 방송"
+msgstr "브로드캐스트 연결 시 고품질 오디오 모드 우선 사용"
 
 #: main.py:231
 msgid "Encrypt broadcast; please set a key first"
-msgstr "방송을 암호화합니다. 먼저 키를 설정해 주세요"
+msgstr "브로드캐스트 암호화 - 비밀번호 우선 설정 필요"
 
 #: main.py:252
 msgid "Broadcast Name, maximum 30 characters"
-msgstr "방송 이름, 최대 30자"
+msgstr "브로드캐스트 이름 (최대 30자)"
 
 #: main.py:271
 msgid "Broadcast Key, maximum 16 characters"
-msgstr "브로드캐스트 키, 최대 16자"
+msgstr "브로드캐스트 비밀번호 (최대 16자)"
 
 #: main.py:275
 msgid "Input a new name of no more than 30 characters then press <ENTER>"
-msgstr "30자 이하의 새 이름을 입력한 후 <ENTER>를 누르세요."
+msgstr "30자 이하의 새로운 이름을 입력한 후 <ENTER>를 누르세요"
 
 #: main.py:286
 msgid "Input a new key then press <ENTER>"
-msgstr "새 키를 입력한 후 <ENTER>를 누르세요."
+msgstr "새 비밀번호를 입력한 후 <ENTER>를 누르세요"
 
 #: main.py:308
 msgid "Add device"
@@ -173,19 +173,19 @@ msgstr "삭제"
 
 #: main.py:343
 msgid "Clear All"
-msgstr "모두 지우기"
+msgstr "모두 삭제"
 
 #: main.py:405
 msgid "Quit"
-msgstr "그만두다"
+msgstr "나가기"
 
 #: main.py:405
 msgid "Show Window"
-msgstr "쇼윈도우"
+msgstr "프로그램 창 표시"
 
 #: main.py:406
 msgid "FlooGoo Bluetooth Audio Source"
-msgstr "FlooGoo Bluetooth 오디오 소스"
+msgstr "FlooGoo Bluetooth Audio Source"
 
 #: main.py:414
 msgid "Minimize to System Tray"
@@ -193,11 +193,11 @@ msgstr "시스템 트레이로 최소화"
 
 #: main.py:416
 msgid "Quit App"
-msgstr "앱 종료"
+msgstr "프로그램 종료"
 
 #: main.py:430
 msgid "Disconnect and reconnect the dongle to activate configuration changes, after which it will function independently without the app."
-msgstr "구성 변경 사항을 활성화하려면 동글을 분리했다가 다시 연결하세요. 그러면 동글은 앱 없이도 독립적으로 작동합니다."
+msgstr "변경된 설정을 적용하려면 동글을 분리했다가 다시 연결하세요. 이후 프로그램 없이도 독자적으로 사용이 가능합니다."
 
 #: main.py:445
 msgid "Third-Party Software Licenses"
@@ -225,13 +225,13 @@ msgstr "업그레이드 진행"
 
 #: main.py:486
 msgid "Device Firmware Upgrade"
-msgstr "장치 펌웨어 업그레이드"
+msgstr "기기 펌웨어 업그레이드"
 
 #: main.py:524
 msgid "Use FlooGoo dongle on "
-msgstr "다음에서 FlooGoo 어댑터를 사용하세요."
+msgstr "FlooGoo 동글 포트 주소 -"
 
 #: main.py:526
 msgid "Please insert your FlooGoo dongle"
-msgstr "FlooGoo 어댑터를 삽입하세요."
+msgstr "FlooGoo 동글을 연결해주세요"
 
