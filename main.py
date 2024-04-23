@@ -454,12 +454,13 @@ thirdPartyLink.bind("<Button-1>", lambda e: url_callback("https://www.flairmesh.
 supportLink = tk.Label(aboutFrame, text=_("Support Link"), fg="blue", cursor="hand2")
 supportLink.pack()
 supportLink.bind("<Button-1>", lambda e: url_callback("https://www.flairmesh.com/Dongle/FMA120.html"))
-versionInfo = tk.Label(aboutFrame, text=_("Version") + "1.0.5")
+versionInfo = tk.Label(aboutFrame, text=_("Version") + "1.0.6")
 versionInfo.pack()
 
 dfuUndergoing = False
 dfuInfo = tk.Label(aboutFrame, text="")
 firmwareVersion = ""
+variant = ""
 
 
 def update_dfu_info(state: int):
@@ -475,8 +476,11 @@ def update_dfu_info(state: int):
         dfuUndergoing = False
     elif state > FlooDfuThread.DFU_STATE_DONE:
         dfuInfo.config(text=_("Upgrade error"))
+        minimizeButton.config(state=tk.NORMAL)
+        quitButton.config(state=tk.NORMAL)
+        # dfuButton.config(state=tk.NORMAL)
+        dfuUndergoing = True
     else:
-        # print(stateStr)
         dfuInfo.config(text=_("Upgrade progress") + (" %d" % state) + "%")
         if not dfuUndergoing:
             dfuInfo.pack()
@@ -487,16 +491,18 @@ def update_dfu_info(state: int):
 
 
 def button_dfu():
-    filename = fd.askopenfilename()
+    filename = fd.askopenfilename(filetypes=[("Binary files", ".bin")])
     if filename:
         os.chdir(app_path)
-        # print("Run DFU in directory: " + os.getcwd())
-        # dfuThread = FlooDfuThread([app_path + os.sep + 'dfuDo.bat', app_path, filename], update_dfu_info)
-        # echo' , 'yes', '|',
-        #dfuThread = FlooDfuThread([app_path + os.sep + 'HidDfuCmd.exe', 'upgradebin', '0A12',
-        #                           '4007', '1', 'FF00', filename], update_dfu_info)
-        dfuThread = FlooDfuThread([app_path, filename], update_dfu_info)
-        dfuThread.start()
+        fileBasename = os.path.splitext(filename)[0]
+        if not re.search(r'\d+$', fileBasename):
+            fileBasename = fileBasename[:-1]
+        fileBasename += variant
+        filename = fileBasename + ".bin"
+        print(filename)
+        if os.path.isfile(filename):
+            dfuThread = FlooDfuThread([app_path, filename], update_dfu_info)
+            dfuThread.start()
 
 
 if platform.system().lower().startswith('win'):
@@ -537,14 +543,15 @@ class FlooSmDelegate(FlooStateMachineDelegate):
     def deviceDetected(self, flag: bool, port: str, version : str = None):
         global currentPairedDeviceList
         global firmwareVersion
+        global variant
 
         enable_settings_widgets(flag)
         if flag:
             update_status_bar(_("Use FlooGoo dongle on ") + " " + port)
+            variant = "" if re.search(r'\d+$', version) else version[-1]
+            firmwareVersion = version if variant == "" else version[:-1]
             if not dfuUndergoing:
-                dfuInfo.config(text=_("Firmware") + " " + version)
-            else:
-                firmwareVersion = version
+                dfuInfo.config(text=_("Firmware") + " " + firmwareVersion)
             dfuInfo.pack()
         else:
             update_status_bar(_("Please insert your FlooGoo dongle"))
