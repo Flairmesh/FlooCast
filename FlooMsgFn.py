@@ -33,6 +33,6 @@ class FlooMsgFn(FlooMessage):
         elif msgLen == 18:
             return cls(False, int(payload[3:5].decode('ascii')), payload[6:].decode('utf-8'))
         elif msgLen > 19:
-            return cls(False, int(payload[3:5].decode('ascii')), payload[6:18].decode('utf-8'), payload[19:].decode('utf-8'))
+            return cls(False, int(payload[3:5].decode('ascii')), payload[6:18].decode('utf-8'), payload[19:].decode('utf-8', errors="ignore"))
         else:
             return None
