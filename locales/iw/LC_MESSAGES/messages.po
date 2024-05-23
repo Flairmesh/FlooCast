@@ -235,3 +235,10 @@ msgstr "השתמש במתאם FlooGoo"
 msgid "Please insert your FlooGoo dongle"
 msgstr "אנא הכנס את מתאם FlooGoo שלך"
 
+#: main.py:335
+msgid "Connect/Disconnect"
+msgstr "התחבר/נתק"
+
+#: main.py:584
+msgid "New Firmware is available"
+msgstr "קושחה חדשה זמינה"

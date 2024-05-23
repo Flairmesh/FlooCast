@@ -235,3 +235,10 @@ msgstr "ใช้อะแดปเตอร์ FlooGoo บน"
 msgid "Please insert your FlooGoo dongle"
 msgstr "กรุณาใส่อะแดปเตอร์ FlooGoo ของคุณ"
 
+#: main.py:335
+msgid "Connect/Disconnect"
+msgstr "เชื่อมต่อ/ตัดการเชื่อมต่อ"
+
+#: main.py:584
+msgid "New Firmware is available"
+msgstr "มีเฟิร์มแวร์ใหม่แล้ว"

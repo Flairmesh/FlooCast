@@ -235,3 +235,10 @@ msgstr "Використовуйте адаптер FlooGoo"
 msgid "Please insert your FlooGoo dongle"
 msgstr "Вставте адаптер FlooGoo"
 
+#: main.py:335
+msgid "Connect/Disconnect"
+msgstr "Підключення/Відключення"
+
+#: main.py:584
+msgid "New Firmware is available"
+msgstr "Доступна нова мікропрограма"

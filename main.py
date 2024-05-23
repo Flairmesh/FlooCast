@@ -17,6 +17,9 @@ from FlooStateMachineDelegate import FlooStateMachineDelegate
 from FlooDfuThread import FlooDfuThread
 from PIL import Image
 from pystray import MenuItem as TrayMenuItem
+import urllib.request
+import certifi
+import ssl
 
 appIcon = "FlooCastApp.ico"
 appGif = "FlooCastApp.gif"
@@ -329,7 +332,7 @@ class PopMenuListbox(tk.Listbox):
     def __init__(self, parent, *args, **kwargs):
         tk.Listbox.__init__(self, parent, *args, **kwargs)
         self.popup_menu = tk.Menu(self, tearoff=0)
-        # self.popup_menu.add_command(label=_("Trigger Connection"), command=self.trigger_connection)
+        self.popup_menu.add_command(label=_("Connect/Disconnect"), command=self.connect_disconnect_selected)
         self.popup_menu.add_command(label=_("Delete"), command=self.delete_selected)
         self.bind("<Button-3>", self.popup)  # Button-2 on Aqua
 
@@ -343,8 +346,9 @@ class PopMenuListbox(tk.Listbox):
         for i in self.curselection()[::-1]:
             flooSm.clearIndexedDevice(i)
 
-    def trigger_connection(self):
-        flooSm.triggerConnection()
+    def connect_disconnect_selected(self):
+        for i in self.curselection()[::-1]:
+            flooSm.toggleConnection(i)
         # self.selection_set(0, 'end')
 
 
@@ -446,7 +450,7 @@ logo = tk.Canvas(logoFrame, width=230, height=64)
 img = tk.PhotoImage(file=app_path + os.sep + appLogoPng)
 logo.create_image(0, 0, anchor=tk.NW, image=img)
 logo.pack()
-copyRightInfo = tk.Label(aboutFrame, text="Copyright© 2023 Flairmesh Technologies.")
+copyRightInfo = tk.Label(aboutFrame, text="Copyright© 2023~2024 Flairmesh Technologies.")
 copyRightInfo.pack()
 thirdPartyLink = tk.Label(aboutFrame, text=_("Third-Party Software Licenses"), fg="blue", cursor="hand2")
 thirdPartyLink.pack()
@@ -454,20 +458,28 @@ thirdPartyLink.bind("<Button-1>", lambda e: url_callback("https://www.flairmesh.
 supportLink = tk.Label(aboutFrame, text=_("Support Link"), fg="blue", cursor="hand2")
 supportLink.pack()
 supportLink.bind("<Button-1>", lambda e: url_callback("https://www.flairmesh.com/Dongle/FMA120.html"))
-versionInfo = tk.Label(aboutFrame, text=_("Version") + "1.0.6")
+versionInfo = tk.Label(aboutFrame, text=_("Version") + "1.0.7")
 versionInfo.pack()
 
 dfuUndergoing = False
 dfuInfo = tk.Label(aboutFrame, text="")
+dfuInfoDefaultColor = dfuInfo.cget('foreground')
+dfuInfoBind = False
 firmwareVersion = ""
 variant = ""
+a2dpSink = False
 
 
 def update_dfu_info(state: int):
     global dfuUndergoing
     global firmwareVersion
+    global dfuInfoBind
 
-    print(state)
+    if dfuInfoBind:
+        dfuInfo.unbind("<Button-1>", dfuInfoBind)
+        dfuInfoBind = False
+        dfuInfo.config(fg=dfuInfoDefaultColor, cursor='')
+    #print(state)
     if state == FlooDfuThread.DFU_STATE_DONE:
         dfuInfo.config(text=_("Firmware") + " " + firmwareVersion)
         minimizeButton.config(state=tk.NORMAL)
@@ -512,8 +524,14 @@ if platform.system().lower().startswith('win'):
 
 def enable_settings_widgets(enable: bool):
     if enable:
-        highQualityRadioButton.config(state=tk.NORMAL)
-        gamingModeRadioButton.config(state=tk.NORMAL)
+        if a2dpSink:
+            highQualityRadioButton.config(state=tk.DISABLED)
+            gamingModeRadioButton.config(state=tk.DISABLED)
+            preferLeaEnableButton.config(state=tk.DISABLED)
+        else:
+            highQualityRadioButton.config(state=tk.NORMAL)
+            gamingModeRadioButton.config(state=tk.NORMAL)
+            preferLeaEnableButton.config(state=tk.NORMAL)
         broadcastRadioButton.config(state=tk.NORMAL)
         publicBroadcastEnableButton.config(state=tk.NORMAL)
         broadcastHighQualityEnableButton.config(state=tk.NORMAL)
@@ -526,6 +544,7 @@ def enable_settings_widgets(enable: bool):
         highQualityRadioButton.config(state=tk.DISABLED)
         gamingModeRadioButton.config(state=tk.DISABLED)
         broadcastRadioButton.config(state=tk.DISABLED)
+        preferLeaEnableButton.config(state=tk.DISABLED)
         publicBroadcastEnableButton.config(state=tk.DISABLED)
         broadcastHighQualityEnableButton.config(state=tk.DISABLED)
         broadcastEncryptEnableButton.config(state=tk.DISABLED)
@@ -544,24 +563,48 @@ class FlooSmDelegate(FlooStateMachineDelegate):
         global currentPairedDeviceList
         global firmwareVersion
         global variant
+        global a2dpSink
+        global dfuInfoBind
 
-        enable_settings_widgets(flag)
         if flag:
             update_status_bar(_("Use FlooGoo dongle on ") + " " + port)
             variant = "" if re.search(r'\d+$', version) else version[-1]
+            a2dpSink = True if version.startswith("AS") else False
             firmwareVersion = version if variant == "" else version[:-1]
+            # firmwareVersion = firmwareVersion[2:] if a2dpSink else firmwareVersion
+            if a2dpSink:
+                latest = urllib.request.urlopen("https://www.flairmesh.com/Dongle/FMA120/latest_as",
+                                                context=ssl.create_default_context(cafile=certifi.where())).read()
+            else:
+                latest = urllib.request.urlopen("https://www.flairmesh.com/Dongle/FMA120/latest",
+                                                context=ssl.create_default_context(cafile=certifi.where())).read()
+            latest = latest.decode("utf-8").rstrip()
             if not dfuUndergoing:
-                dfuInfo.config(text=_("Firmware") + " " + firmwareVersion)
+                if latest > firmwareVersion:
+                    dfuInfo.config(text=(_("New Firmware is available") + " " + firmwareVersion + " -> " + latest),
+                                   fg="blue",cursor="hand2")
+                    newFirmwareUrl = "https://www.flairmesh.com/support/FMA120_" + latest +".zip"
+                    dfuInfoBind = dfuInfo.bind("<Button-1>",lambda e: url_callback(newFirmwareUrl))
+                else:
+                    if dfuInfoBind:
+                        dfuInfo.unbind("<Button-1>",dfuInfoBind)
+                        dfuInfoBind = False
+                        dfuInfo.config(fg=dfuInfoDefaultColor,cursor='')
+                    dfuInfo.config(text=_("Firmware") + " " + firmwareVersion)
             dfuInfo.pack()
         else:
             update_status_bar(_("Please insert your FlooGoo dongle"))
+            enable_settings_widgets(flag)
             enable_pairing_widgets(False)
             pairedDeviceListbox.delete(0, tk.END)
             dfuInfo.pack_forget()
 
     def audioModeInd(self, mode: int):
         audioMode.set(mode)
-        enable_pairing_widgets(mode != 2)
+        if a2dpSink:
+            enable_pairing_widgets(True)
+        else:
+            enable_pairing_widgets(mode != 2)
 
     def sourceStateInd(self, state: int):
         dongleStateLabel.config(text=sourceStateStr[state])

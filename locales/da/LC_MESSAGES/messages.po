@@ -239,3 +239,10 @@ msgstr "Brug FlooGoo adapter på"
 msgid "Please insert your FlooGoo dongle"
 msgstr "Indsæt venligst din FlooGoo-adapter"
 
+#: main.py:335
+msgid "Connect/Disconnect"
+msgstr "Tilslut/Afbryd"
+
+#: main.py:584
+msgid "New Firmware is available"
+msgstr "Ny firmware er tilgængelig"

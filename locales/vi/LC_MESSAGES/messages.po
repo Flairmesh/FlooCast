@@ -235,3 +235,10 @@ msgstr "Sử dụng bộ chuyển đổi FlooGoo trên"
 msgid "Please insert your FlooGoo dongle"
 msgstr "Vui lòng lắp bộ chuyển đổi FlooGoo của bạn"
 
+#: main.py:335
+msgid "Connect/Disconnect"
+msgstr "Kết nối/Ngắt kết nối"
+
+#: main.py:584
+msgid "New Firmware is available"
+msgstr "Đã có phần mềm mới"

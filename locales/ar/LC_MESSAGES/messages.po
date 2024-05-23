@@ -239,3 +239,11 @@ msgstr "استخدم محول FlooGoo قيد التشغيل"
 msgid "Please insert your FlooGoo dongle"
 msgstr "الرجاء إدخال محول FlooGoo الخاص بك"
 
+#: main.py:335
+msgid "Connect/Disconnect"
+msgstr "الاتصال/قطع الاتصال"
+
+#: main.py:584
+msgid "New Firmware is available"
+msgstr "البرامج الثابتة الجديدة متاحة"
+

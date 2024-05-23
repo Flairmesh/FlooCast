@@ -20,6 +20,9 @@ from FlooMsgDc import FlooMsgDc
 from FlooMsgAc import FlooMsgAc
 from FlooMsgLf import FlooMsgLf
 from FlooMsgVr import FlooMsgVr
+from FlooMsgMd import FlooMsgMd
+from FlooMsgTc import FlooMsgTc
+from FlooMsgFd import FlooMsgFd
 
 class FlooStateMachine(FlooInterfaceDelegate, Thread):
     """The state machine of the host app working with FlooGoo USB Bluetooth Dongle"""
@@ -41,11 +44,13 @@ class FlooStateMachine(FlooInterfaceDelegate, Thread):
         self.broadcastKey = None
         self.pairedDevices = []
         self.sourceState = None
+        self.a2dpSink = False
 
     def reset(self):
         self.state = FlooStateMachine.INIT
         self.lastCmd = None
         self.pendingCmdPara = None
+        self.a2dpSink = False
 
     def run(self):
         self.inf.run()
@@ -67,6 +72,10 @@ class FlooStateMachine(FlooInterfaceDelegate, Thread):
         if self.state == FlooStateMachine.INIT:
             if isinstance(message, FlooMsgVr):
                 if isinstance(self.lastCmd, FlooMsgVr):
+                    if message.verStr.startswith("AS"):
+                        self.a2dpSink = True
+                    else:
+                        self.a2dpSink = False
                     self.delegate.deviceDetected(True, self.inf.port_name, message.verStr)
                     cmdGetAudioMode = FlooMsgAm(True)
                     self.inf.sendMsg(cmdGetAudioMode)
@@ -238,9 +247,15 @@ class FlooStateMachine(FlooInterfaceDelegate, Thread):
     def setNewPairing(self):
         print("new pairing button clicked")
         if self.state == FlooStateMachine.CONNECTED:
-            cmdStartNewPairing = FlooMsgIq()
-            self.lastCmd = cmdStartNewPairing
-            self.inf.sendMsg(cmdStartNewPairing)
+            if self.a2dpSink:
+                cmdSetDiscoverable = FlooMsgMd(True, 1)
+                self.pendingCmdPara = 1
+                self.lastCmd = cmdSetDiscoverable
+                self.inf.sendMsg(cmdSetDiscoverable)
+            else:
+                cmdStartNewPairing = FlooMsgIq()
+                self.lastCmd = cmdStartNewPairing
+                self.inf.sendMsg(cmdStartNewPairing)
 
     def clearAllPairedDevices(self):
         if self.state == FlooStateMachine.CONNECTED:
@@ -261,16 +276,9 @@ class FlooStateMachine(FlooInterfaceDelegate, Thread):
             self.lastCmd = cmdGetDeviceName
             self.inf.sendMsg(cmdGetDeviceName)
 
-    def triggerConnection(self):
+    def toggleConnection(self, index: int):
         if self.state == FlooStateMachine.CONNECTED:
-            if self.sourceState > 3:
-                cmdDisconnect = FlooMsgDc()
-                self.lastCmd = cmdDisconnect
-                self.inf.sendMsg(cmdDisconnect)
-            elif self.sourceState == 1:
-                cmdConnect = FlooMsgCt()
-                self.lastCmd = cmdConnect
-                self.inf.sendMsg(cmdConnect)
-
-
-
+            cmdToggleConnection = FlooMsgTc(index)
+            self.lastCmd = cmdToggleConnection
+            self.inf.sendMsg(cmdToggleConnection)
+            

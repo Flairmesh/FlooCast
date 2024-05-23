@@ -239,3 +239,10 @@ msgstr "Käytä FlooGoo-sovitinta"
 msgid "Please insert your FlooGoo dongle"
 msgstr "Aseta FlooGoo-sovitin"
 
+#: main.py:335
+msgid "Connect/Disconnect"
+msgstr "Yhdistä/katkaise yhteys"
+
+#: main.py:584
+msgid "New Firmware is available"
+msgstr "Uusi laiteohjelmisto on saatavilla"

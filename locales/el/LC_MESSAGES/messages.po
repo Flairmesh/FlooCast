@@ -239,3 +239,10 @@ msgstr "Χρησιμοποιήστε τον προσαρμογέα FlooGoo εν�
 msgid "Please insert your FlooGoo dongle"
 msgstr "Εισαγάγετε τον προσαρμογέα FlooGoo"
 
+#: main.py:335
+msgid "Connect/Disconnect"
+msgstr "Σύνδεση/Αποσύνδεση"
+
+#: main.py:584
+msgid "New Firmware is available"
+msgstr "Νέο υλικολογισμικό είναι διαθέσιμο"

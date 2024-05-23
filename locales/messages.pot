@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-11-20 22:23+1100\n"
+"POT-Creation-Date: 2024-05-23 23:06+1000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,219 +15,235 @@ msgstr ""
 "Generated-By: pygettext.py 1.5\n"
 
 
-#: main.py:47 main.py:89 main.py:151
+#: main.py:58 main.py:100 main.py:162
 msgid "Initializing"
 msgstr ""
 
-#: main.py:48
+#: main.py:59
 msgid "Idle"
 msgstr ""
 
-#: main.py:49
+#: main.py:60
 msgid "Pairing"
 msgstr ""
 
-#: main.py:50
+#: main.py:61
 msgid "Connecting"
 msgstr ""
 
-#: main.py:51 main.py:61
+#: main.py:62 main.py:72
 msgid "Connected"
 msgstr ""
 
-#: main.py:52
+#: main.py:63
 msgid "Audio starting"
 msgstr ""
 
-#: main.py:53
+#: main.py:64
 msgid "Audio streaming"
 msgstr ""
 
-#: main.py:54
+#: main.py:65
 msgid "Audio stopping"
 msgstr ""
 
-#: main.py:55
+#: main.py:66
 msgid "Disconnecting"
 msgstr ""
 
-#: main.py:56
+#: main.py:67
 msgid "Voice starting"
 msgstr ""
 
-#: main.py:57
+#: main.py:68
 msgid "Voice streaming"
 msgstr ""
 
-#: main.py:58
+#: main.py:69
 msgid "Voice stopping"
 msgstr ""
 
-#: main.py:60 main.py:155
+#: main.py:71 main.py:166
 msgid "Disconnected"
 msgstr ""
 
-#: main.py:62
+#: main.py:73
 msgid "Unicast starting"
 msgstr ""
 
-#: main.py:63
+#: main.py:74
 msgid "Unicast streaming"
 msgstr ""
 
-#: main.py:64
+#: main.py:75
 msgid "Broadcast starting"
 msgstr ""
 
-#: main.py:65
+#: main.py:76
 msgid "Broadcast streaming"
 msgstr ""
 
-#: main.py:66
+#: main.py:77
 msgid "Streaming stopping"
 msgstr ""
 
-#: main.py:109
+#: main.py:120
 msgid "Audio Mode"
 msgstr ""
 
-#: main.py:111
+#: main.py:122
 msgid "LE Broadcast"
 msgstr ""
 
-#: main.py:113
+#: main.py:124
 msgid "Most Recently Used Devices"
 msgstr ""
 
-#: main.py:116
+#: main.py:127
 msgid "Window"
 msgstr ""
 
-#: main.py:119
+#: main.py:130
 msgid "Help"
 msgstr ""
 
-#: main.py:139
+#: main.py:150
 msgid "High Quality (one-to-one)"
 msgstr ""
 
-#: main.py:142
+#: main.py:153
 msgid "Gaming (one-to-one)"
 msgstr ""
 
-#: main.py:145
+#: main.py:156
 msgid "Broadcast"
 msgstr ""
 
-#: main.py:149
+#: main.py:160
 msgid "Dongle State"
 msgstr ""
 
-#: main.py:153
+#: main.py:164
 msgid "LE Audio State"
 msgstr ""
 
-#: main.py:157
+#: main.py:168
 msgid "Codec in Use"
 msgstr ""
 
-#: main.py:162
+#: main.py:173
 msgid "Prefer using LE audio for dual-mode devices"
 msgstr ""
 
-#: main.py:188
+#: main.py:199
 msgid "Public broadcast"
 msgstr ""
 
-#: main.py:209
+#: main.py:220
 msgid "Broadcast high-quality music, otherwise, voice"
 msgstr ""
 
-#: main.py:231
+#: main.py:242
 msgid "Encrypt broadcast; please set a key first"
 msgstr ""
 
-#: main.py:252
+#: main.py:263
 msgid "Broadcast Name, maximum 30 characters"
 msgstr ""
 
-#: main.py:271
+#: main.py:278
+msgid "Input a new name of no more than 30 characters then press <ENTER>"
+msgstr ""
+
+#: main.py:282
 msgid "Broadcast Key, maximum 16 characters"
 msgstr ""
 
-#: main.py:286
+#: main.py:297
 msgid "Input a new key then press <ENTER>"
 msgstr ""
 
-#: main.py:308
+#: main.py:319
 msgid "Add device"
 msgstr ""
 
-#: main.py:325
+#: main.py:335
+msgid "Connect/Disconnect"
+msgstr ""
+
+#: main.py:336
 msgid "Delete"
 msgstr ""
 
-#: main.py:343
+#: main.py:355
 msgid "Clear All"
 msgstr ""
 
-#: main.py:402
+#: main.py:414
 msgid "Quit"
 msgstr ""
 
-#: main.py:402
+#: main.py:414
 msgid "Show Window"
 msgstr ""
 
-#: main.py:403
+#: main.py:415
 msgid "FlooGoo Bluetooth Audio Source"
 msgstr ""
 
-#: main.py:411
+#: main.py:424
 msgid "Minimize to System Tray"
 msgstr ""
 
-#: main.py:413
+#: main.py:426
 msgid "Quit App"
 msgstr ""
 
-#: main.py:427
+#: main.py:440
 msgid "Disconnect and reconnect the dongle to activate configuration changes, after which it will function independently without the app."
 msgstr ""
 
-#: main.py:442
+#: main.py:455
 msgid "Third-Party Software Licenses"
 msgstr ""
 
-#: main.py:445
+#: main.py:458
 msgid "Support Link"
 msgstr ""
 
-#: main.py:448
+#: main.py:461
 msgid "Version"
 msgstr ""
 
-#: main.py:462 main.py:536
+#: main.py:484 main.py:592
 msgid "Firmware"
-msgstr "Micrologiciel"
+msgstr ""
 
-#: main.py:468
+#: main.py:490
 msgid "Upgrade error"
 msgstr ""
 
-#: main.py:471
+#: main.py:496
 msgid "Upgrade progress"
 msgstr ""
 
-#: main.py:494
+#: main.py:521
 msgid "Device Firmware Upgrade"
 msgstr ""
 
-#: main.py:534
+#: main.py:570
 msgid "Use FlooGoo dongle on "
 msgstr ""
 
-#: main.py:541
+#: main.py:584
+msgid "New Firmware is available"
+msgstr ""
+
+#: main.py:595
 msgid "Please insert your FlooGoo dongle"
+msgstr ""
+
+#: main.py:638
+msgid "Unknown"
 msgstr ""
 
