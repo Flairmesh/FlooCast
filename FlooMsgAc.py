@@ -17,9 +17,14 @@ class FlooMsgAc(FlooMessage):
 
     HEADER = "AC"
 
-    def __init__(self, isSend, codec = None):
+    def __init__(self, isSend, codec = None, rssi = 0, rate = 0):
         self.codec = codec
-        if codec != None:
+        self.rssi = rssi
+        self.rate = rate
+        if codec == 0x0A or codec == 0x06:
+            adaptiveStr = "%02X" % codec + "," + "%02X" % rssi + "," + "%04X" % rate
+            super().__init__(isSend, FlooMsgAc.HEADER, bytes(adaptiveStr, 'ascii'))
+        elif codec != None:
             codecStr = "%02X" % codec
             super().__init__(isSend, FlooMsgAc.HEADER, bytes(codecStr, 'ascii'))
         else:
@@ -28,6 +33,11 @@ class FlooMsgAc(FlooMessage):
     @classmethod
     def create_valid_msg(cls, payload: bytes):
         msgLen = len(payload)
-        if msgLen != 5:
-            return None
-        return cls(False, int(payload[3:5].decode('ascii'), 16))
+        if msgLen == 5:
+            return cls(False, int(payload[3:5].decode('ascii'), 16))
+        elif msgLen == 13:
+            return cls(False, int(payload[3:5].decode('ascii'), 16),
+                       int(payload[6:8].decode('ascii'), 16),
+                       int(payload[9:13].decode('ascii'), 16))
+        else:
+            return cls(False, int(payload[3:5].decode('ascii'), 16))

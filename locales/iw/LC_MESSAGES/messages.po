@@ -242,3 +242,11 @@ msgstr "התחבר/נתק"
 #: main.py:584
 msgid "New Firmware is available"
 msgstr "קושחה חדשה זמינה"
+
+#: main.py:666
+msgid "RSSI"
+msgstr "RSSI"
+
+#: main.py:442
+msgid "LED"
+msgstr "אור נתפס חשמלית"

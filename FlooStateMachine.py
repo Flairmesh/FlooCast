@@ -23,6 +23,7 @@ from FlooMsgVr import FlooMsgVr
 from FlooMsgMd import FlooMsgMd
 from FlooMsgTc import FlooMsgTc
 from FlooMsgFd import FlooMsgFd
+from FlooMsgFt import FlooMsgFt
 
 class FlooStateMachine(FlooInterfaceDelegate, Thread):
     """The state machine of the host app working with FlooGoo USB Bluetooth Dongle"""
@@ -45,12 +46,14 @@ class FlooStateMachine(FlooInterfaceDelegate, Thread):
         self.pairedDevices = []
         self.sourceState = None
         self.a2dpSink = False
+        self.feature = None
 
     def reset(self):
         self.state = FlooStateMachine.INIT
         self.lastCmd = None
         self.pendingCmdPara = None
         self.a2dpSink = False
+        self.feature = None
 
     def run(self):
         self.inf.run()
@@ -128,16 +131,24 @@ class FlooStateMachine(FlooInterfaceDelegate, Thread):
                     if message.btAddress is None:
                         # end of the device list
                         self.delegate.pairedDevicesUpdateInd(self.pairedDevices)
-                        cmdGetCodecInUse = FlooMsgAc(True)
-                        self.inf.sendMsg(cmdGetCodecInUse)
-                        self.lastCmd = cmdGetCodecInUse
+                        cmdGetFeature = FlooMsgFt(True)
+                        self.inf.sendMsg(cmdGetFeature)
+                        self.lastCmd = cmdGetFeature
                     else:
                         self.pairedDevices.append(message.name)
+            elif isinstance(message, FlooMsgFt):
+                if isinstance(self.lastCmd, FlooMsgFt):
+                    self.feature = message.feature
+                    self.delegate.ledEnabledInd(message.feature & 0x01)
+                    self.delegate.aptxLosslessEnabledInd(0x01 if (message.feature & 0x02) == 0x02 else 0x00)
+                    cmdGetCodecInUse = FlooMsgAc(True)
+                    self.inf.sendMsg(cmdGetCodecInUse)
+                    self.lastCmd = cmdGetCodecInUse
             elif isinstance(message, FlooMsgAc) or isinstance(message, FlooMsgEr):
                 if isinstance(self.lastCmd, FlooMsgAc) and isinstance(message, FlooMsgAc):
-                    self.delegate.audioCodecInUseInd(message.codec)
-                self.lastCmd = None
-                self.state = FlooStateMachine.CONNECTED
+                    self.delegate.audioCodecInUseInd(message.codec, message.rssi, message.rate)
+                    self.lastCmd = None
+                    self.state = FlooStateMachine.CONNECTED
 
         elif self.state == FlooStateMachine.CONNECTED:
             if isinstance(message, FlooMsgOk):
@@ -158,6 +169,9 @@ class FlooStateMachine(FlooInterfaceDelegate, Thread):
                 elif isinstance(self.lastCmd, FlooMsgCp):
                     self.pairedDevices.clear()
                     self.delegate.pairedDevicesUpdateInd([])
+                elif isinstance(self.lastCmd, FlooMsgFt):
+                    self.feature = self.lastCmd.feature
+                    self.lastCmd = None
                 else:
                     self.lastCmd = None
                 self.pendingCmdPara = None
@@ -170,6 +184,9 @@ class FlooStateMachine(FlooInterfaceDelegate, Thread):
                     self.delegate.broadcastModeInd(self.broadcastMode)
                 elif isinstance(self.lastCmd, FlooMsgBn):
                     self.delegate.broadcastNameInd(self.broadcastName)
+                elif isinstance(self.lastCmd, FlooMsgFt):
+                    self.delegate.ledEnabledInd(self.feature & 0x01)
+                    self.delegate.aptxLosslessEnabledInd(1 if (self.feature & 0x02) == 0x02 else 0)
                 self.lastCmd = None
                 self.pendingCmdPara = None
             elif isinstance(message, FlooMsgSt):
@@ -187,7 +204,11 @@ class FlooStateMachine(FlooInterfaceDelegate, Thread):
                 else:
                     self.pairedDevices.append(message.name)
             elif isinstance(message, FlooMsgAc):
-                self.delegate.audioCodecInUseInd(message.codec)
+                self.delegate.audioCodecInUseInd(message.codec, message.rssi, message.rate)
+            elif isinstance(message, FlooMsgFt):
+                self.feature = message.feature
+                self.delegate.ledEnabledInd(self.feature & 0x01)
+                self.delegate.aptxLosslessEnabledInd(1 if (self.feature & 0x02) == 0x02 else 0)
 
     def setAudioMode(self, mode: int):
         if self.state == FlooStateMachine.CONNECTED:
@@ -281,4 +302,19 @@ class FlooStateMachine(FlooInterfaceDelegate, Thread):
             cmdToggleConnection = FlooMsgTc(index)
             self.lastCmd = cmdToggleConnection
             self.inf.sendMsg(cmdToggleConnection)
+
+    def enableLed(self, onOff: int):
+        if self.state == FlooStateMachine.CONNECTED:
+            feature = (self.feature & 0x02) + onOff
+            cmdLedOnOff = FlooMsgFt(True, feature)
+            self.pendingCmdPara = feature
+            self.lastCmd = cmdLedOnOff
+            self.inf.sendMsg(cmdLedOnOff)
+
+    def enableAptxLossless(self, onOff: int):
+        if self.state == FlooStateMachine.CONNECTED:
+            feature = (self.feature & 0x01) + (0x02 if onOff else 0x00)
+            cmdLosslessOnOff = FlooMsgFt(True, feature)
+            self.lastCmd = cmdLosslessOnOff
+            self.inf.sendMsg(cmdLosslessOnOff)
             

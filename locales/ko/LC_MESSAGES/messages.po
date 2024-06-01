@@ -242,3 +242,11 @@ msgstr "연결/연결 해제"
 #: main.py:584
 msgid "New Firmware is available"
 msgstr "새로운 펌웨어를 사용할 수 있습니다"
+
+#: main.py:666
+msgid "RSSI"
+msgstr "RSSI"
+
+#: main.py:442
+msgid "LED"
+msgstr "LED"

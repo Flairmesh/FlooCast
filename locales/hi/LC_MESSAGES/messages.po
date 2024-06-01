@@ -246,3 +246,11 @@ msgstr "कनेक्ट/डिस्कनेक्ट करें"
 #: main.py:584
 msgid "New Firmware is available"
 msgstr "नया फ़र्मवेयर उपलब्ध है"
+
+#: main.py:666
+msgid "RSSI"
+msgstr "RSSI"
+
+#: main.py:442
+msgid "LED"
+msgstr "एलईडी"

@@ -36,7 +36,8 @@ codecStr = ['None',
             'LC3',
             'aptX Adaptive',
             'aptX Lite',
-            'aptX Lossless']
+            'aptX Lossless',
+            'aptX Voice']
 
 if platform.system().lower().startswith('darwin'):
     preferLanguages = subprocess.run(['defaults', 'read', '-g', 'AppleLanguages'], stdout=subprocess.PIPE)
@@ -87,7 +88,7 @@ else:
     img_icon = tk.PhotoImage(file=app_path + os.sep + appGif)
     root.tk.call('wm', 'iconphoto', root._w, img_icon)
 # Set geometry (widthxheight)
-root.geometry('720x480')
+root.geometry('900x480')
 
 root.rowconfigure(0, weight=1)
 root.rowconfigure(1, weight=0)
@@ -127,7 +128,7 @@ pairedDevicesPanel.grid(column=0, row=2, padx=2, sticky='nsew')
 windowPanel = ttk.LabelFrame(mainFrame, text=_('Window'))
 windowPanel.grid(column=1, row=0, padx=2, sticky='nsew')
 # About panel
-aboutPanel = ttk.LabelFrame(mainFrame, text=_('Help'))
+aboutPanel = ttk.LabelFrame(mainFrame, text=_('Settings'))
 aboutPanel.grid(column=1, row=1, padx=2, rowspan=2, sticky='nsew')
 
 # Audio mode panel
@@ -136,8 +137,11 @@ for i in range(0, 3):
         audioModePanel.rowconfigure(i, weight=1)
     else:
         audioModePanel.rowconfigure(i, weight=0)
-for i in range(0, 3):
-    audioModePanel.columnconfigure(i, weight=1)
+for i in range(0, 4):
+    if i > 2:
+        audioModePanel.columnconfigure(i, weight=2)
+    else:
+        audioModePanel.columnconfigure(i, weight=1)
 
 
 def audioModeSel():
@@ -166,7 +170,7 @@ leaStatePanel.grid(column=1, row=1, columnspan=1, padx=4, pady=4, sticky='nsew')
 leaStateLabel = tk.Label(leaStatePanel, text=_("Disconnected"))
 leaStateLabel.place(relx=.5, rely=.5, anchor=tk.CENTER)
 codecInUsePanel = ttk.LabelFrame(audioModePanel, text=_('Codec in Use'))
-codecInUsePanel.grid(column=2, row=1, columnspan=1, padx=4, pady=4, sticky='nsew')
+codecInUsePanel.grid(column=2, row=1, columnspan=2, padx=4, pady=4, sticky='nsew')
 codecInUseLabel = tk.Label(codecInUsePanel, text=codecStr[0])
 codecInUseLabel.place(relx=.5, rely=.5, anchor=tk.CENTER)
 
@@ -189,7 +193,7 @@ def prefer_lea_enable_switch():
 
 
 preferLeaEnableButton = tk.Button(audioModePanel, image=off, bd=0, command=prefer_lea_enable_switch)
-preferLeaEnableButton.grid(column=2, row=2, sticky='e')
+preferLeaEnableButton.grid(column=3, row=2, sticky='e')
 
 # LE Broadcast panel
 leBroadcastPanel.columnconfigure(0, weight=1)
@@ -432,18 +436,61 @@ def url_callback(url):
     webbrowser.open_new(url)
 
 
-aboutPanel.rowconfigure(0, weight=1)
-aboutPanel.rowconfigure(1, weight=1)
+aboutPanel.rowconfigure(0, weight=0)
+aboutPanel.rowconfigure(1, weight=0)
 aboutPanel.rowconfigure(2, weight=1)
+aboutPanel.rowconfigure(3, weight=1)
+
+ledEnableLabel = tk.Label(aboutPanel, text=_("LED"))
+ledEnableLabel.grid(column=0, row=0, sticky='w')
+ledEnable = None
+
+
+def led_enable_switch_set(enable):
+    global ledEnable
+    ledEnable = enable
+    ledEnableButton.config(image=on if ledEnable else off)
+    flooSm.enableLed(enable)
+
+
+# Broadcast enable switch function
+def led_enable_switch():
+    global ledEnable
+    led_enable_switch_set(not ledEnable)
+
+
+ledEnableButton = tk.Button(aboutPanel, image=off, bd=0, command=led_enable_switch)
+ledEnableButton.grid(column=1, row=0, sticky='e')
+
+aptxLosslessEnableLabel = tk.Label(aboutPanel, text="aptX\u2122 Lossless")
+aptxLosslessEnableLabel.grid(column=0, row=1, sticky='w')
+aptxLosslessEnable = None
+
+
+def aptxLossless_enable_switch_set(enable):
+    global aptxLosslessEnable
+    aptxLosslessEnable = enable
+    aptxLosslessEnableButton.config(image=on if aptxLosslessEnable else off)
+    flooSm.enableAptxLossless(enable)
+
+
+# Broadcast enable switch function
+def aptxLossless_enable_switch():
+    global aptxLosslessEnable
+    aptxLossless_enable_switch_set(not aptxLosslessEnable)
+
+
+aptxLosslessEnableButton = tk.Button(aboutPanel, image=off, bd=0, command=aptxLossless_enable_switch)
+aptxLosslessEnableButton.grid(column=1, row=1, sticky='e')
 
 resetExplanationLabel = tk.Message(aboutPanel,
                                    text=_("Disconnect and reconnect the dongle to activate configuration changes, " \
                                           "after which it will function independently without the app."),
                                    aspect=400)
-resetExplanationLabel.grid(column=0, row=0, padx=(0, 0), sticky='ewns')
+resetExplanationLabel.grid(column=0, row=3, columnspan=2, padx=(0, 0), sticky='ewns')
 
 aboutFrame = tk.Frame(aboutPanel)
-aboutFrame.grid(row=1, column=0)
+aboutFrame.grid(row=2, column=0, columnspan=2)
 logoFrame = tk.Frame(aboutFrame, relief=tk.RAISED)
 logoFrame.pack(pady=4)
 logo = tk.Canvas(logoFrame, width=230, height=64)
@@ -458,7 +505,7 @@ thirdPartyLink.bind("<Button-1>", lambda e: url_callback("https://www.flairmesh.
 supportLink = tk.Label(aboutFrame, text=_("Support Link"), fg="blue", cursor="hand2")
 supportLink.pack()
 supportLink.bind("<Button-1>", lambda e: url_callback("https://www.flairmesh.com/Dongle/FMA120.html"))
-versionInfo = tk.Label(aboutFrame, text=_("Version") + "1.0.7")
+versionInfo = tk.Label(aboutFrame, text=_("Version") + "1.0.8")
 versionInfo.pack()
 
 dfuUndergoing = False
@@ -538,6 +585,8 @@ def enable_settings_widgets(enable: bool):
         broadcastEncryptEnableButton.config(state=tk.NORMAL)
         broadcastNameEntry.config(state=tk.NORMAL)
         broadcastKeyEntry.config(state=tk.NORMAL)
+        ledEnableButton.config(state=tk.NORMAL)
+        aptxLosslessEnableButton.config(state=tk.NORMAL)
         if platform.system().lower().startswith('win'):
             dfuButton.config(state=tk.DISABLED if dfuUndergoing else tk.NORMAL)
     else:
@@ -550,6 +599,8 @@ def enable_settings_widgets(enable: bool):
         broadcastEncryptEnableButton.config(state=tk.DISABLED)
         broadcastNameEntry.config(state=tk.DISABLED)
         broadcastKeyEntry.config(state=tk.DISABLED)
+        ledEnableButton.config(state=tk.DISABLED)
+        aptxLosslessEnableButton.config(state=tk.DISABLED)
         if platform.system().lower().startswith('win'):
             dfuButton.config(state=tk.DISABLED)
 
@@ -635,8 +686,19 @@ class FlooSmDelegate(FlooStateMachineDelegate):
             pairedDeviceListbox.insert(tk.END, pairedDevices[i])
             i = i + 1
 
-    def audioCodecInUseInd(self, codec):
+    def audioCodecInUseInd(self, codec, rssi, rate):
         codecInUseLabel.config(text=codecStr[codec] if codec < len(codecStr) else _("Unknown"))
+        if (codec == 6 or codec == 10) and rssi != 0:
+            codecInUseLabel.config(text=codecStr[codec]  + " @ " + str(rate) + "Kbps "
+                                        + _("RSSI") +" -" + str(0x100 - rssi) + "dBm")
+        else:
+            codecInUseLabel.config(text=codecStr[codec] if codec < len(codecStr) else _("Unknown"))
+
+    def ledEnabledInd(self, enabled):
+        led_enable_switch_set(enabled)
+
+    def aptxLosslessEnabledInd(self, enabled):
+        aptxLossless_enable_switch_set(enabled)
 
 
 flooSmDelegate = FlooSmDelegate()

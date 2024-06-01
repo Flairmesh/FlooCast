@@ -245,3 +245,11 @@ msgstr "Connecter/Déconnecter"
 #: main.py:584
 msgid "New Firmware is available"
 msgstr "Un nouveau firmware est disponible"
+
+#: main.py:666
+msgid "RSSI"
+msgstr "RSSI"
+
+#: main.py:442
+msgid "LED"
+msgstr "DEL"

@@ -242,3 +242,11 @@ msgstr "接続/切断"
 #: main.py:584
 msgid "New Firmware is available"
 msgstr "新しいファームウェアが利用可能になりました"
+
+#: main.py:666
+msgid "RSSI"
+msgstr "電波強度指示"
+
+#: main.py:442
+msgid "LED"
+msgstr "LED"

@@ -12,6 +12,7 @@ from FlooMsgEr import FlooMsgEr
 from FlooMsgAc import FlooMsgAc
 from FlooMsgLf import FlooMsgLf
 from FlooMsgVr import FlooMsgVr
+from FlooMsgFt import FlooMsgFt
 from FlooMsgUnknown import FlooMsgUnknown
 
 class FlooParser:
@@ -31,7 +32,8 @@ class FlooParser:
         FlooMsgEr.HEADER : FlooMsgEr.create_valid_msg,
         FlooMsgAc.HEADER : FlooMsgAc.create_valid_msg,
         FlooMsgLf.HEADER : FlooMsgLf.create_valid_msg,
-        FlooMsgVr.HEADER : FlooMsgVr.create_valid_msg
+        FlooMsgVr.HEADER : FlooMsgVr.create_valid_msg,
+        FlooMsgFt.HEADER : FlooMsgFt.create_valid_msg
     }
 
     def __init__(self):

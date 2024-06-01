@@ -247,3 +247,10 @@ msgstr "الاتصال/قطع الاتصال"
 msgid "New Firmware is available"
 msgstr "البرامج الثابتة الجديدة متاحة"
 
+#: main.py:666
+msgid "RSSI"
+msgstr "RSSI"
+
+#: main.py:442
+msgid "LED"
+msgstr "ليد"

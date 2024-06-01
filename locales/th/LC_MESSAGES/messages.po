@@ -31,6 +31,14 @@ msgstr "กำลังจับคู่"
 msgid "Connecting"
 msgstr "กำลังเชื่อมต่อ"
 
+#: main.py:666
+msgid "RSSI"
+msgstr "RSSI"
+
+#: main.py:442
+msgid "LED"
+msgstr "แอลอีดี"
+
 #: main.py:51 main.py:61
 msgid "Connected"
 msgstr "เชื่อมต่อแล้ว"

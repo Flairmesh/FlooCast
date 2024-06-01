@@ -242,3 +242,11 @@ msgstr "Kết nối/Ngắt kết nối"
 #: main.py:584
 msgid "New Firmware is available"
 msgstr "Đã có phần mềm mới"
+
+#: main.py:666
+msgid "RSSI"
+msgstr "RSSI"
+
+#: main.py:442
+msgid "LED"
+msgstr "đèn LED"

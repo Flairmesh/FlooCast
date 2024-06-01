@@ -242,3 +242,11 @@ msgstr "Підключення/Відключення"
 #: main.py:584
 msgid "New Firmware is available"
 msgstr "Доступна нова мікропрограма"
+
+#: main.py:666
+msgid "RSSI"
+msgstr "RSSI"
+
+#: main.py:442
+msgid "LED"
+msgstr "світлодіод"
