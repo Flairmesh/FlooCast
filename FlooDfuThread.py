@@ -6,7 +6,6 @@ from subprocess import PIPE, Popen
 from threading  import Thread
 from tkinter import messagebox
 import tkinter as tk
-from HidDfuAPI import HidDfu
 
 class FlooDfuThread(threading.Thread):
     #
