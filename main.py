@@ -30,14 +30,14 @@ codecStr = ['None',
             'CVSD',
             'mSBC/WBS',
             'SBC',
-            'aptX',
-            'aptX HD',
-            'aptX Adaptive',
+            'aptX\u2122',
+            'aptX\u2122 HD',
+            'aptX\u2122 Adaptive',
             'LC3',
-            'aptX Adaptive',
-            'aptX Lite',
-            'aptX Lossless',
-            'aptX Voice']
+            'aptX\u2122 Adaptive',
+            'aptX\u2122 Lite',
+            'aptX\u2122 Lossless',
+            'aptX\u2122 Voice']
 
 if platform.system().lower().startswith('darwin'):
     preferLanguages = subprocess.run(['defaults', 'read', '-g', 'AppleLanguages'], stdout=subprocess.PIPE)
