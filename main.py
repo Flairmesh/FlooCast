@@ -336,13 +336,22 @@ class PopMenuListbox(tk.Listbox):
     def __init__(self, parent, *args, **kwargs):
         tk.Listbox.__init__(self, parent, *args, **kwargs)
         self.popup_menu = tk.Menu(self, tearoff=0)
-        self.popup_menu.add_command(label=_("Connect/Disconnect"), command=self.connect_disconnect_selected)
+        self.popup_menu.add_command(command=self.connect_disconnect_selected)
         self.popup_menu.add_command(label=_("Delete"), command=self.delete_selected)
         self.bind("<Button-3>", self.popup)  # Button-2 on Aqua
 
     def popup(self, event):
         try:
-            self.popup_menu.tk_popup(event.x_root, event.y_root, 0)
+            # resolve selected device index
+            sel = self.nearest(event.y)
+            # set proper menu label based on device status
+            self.popup_menu.entryconfig(
+                0, label=_("Connect") if sel > 0 or flooSm.sourceState < 4 else _("Disconnect"))
+            # forcefully select the device for better UX
+            self.selection_clear(0, tk.END)
+            self.selection_set(sel, sel)
+            # show popup menu
+            self.popup_menu.tk_popup(event.x_root, event.y_root, sel)
         finally:
             self.popup_menu.grab_release()
 
