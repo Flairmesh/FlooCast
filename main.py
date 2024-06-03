@@ -339,6 +339,7 @@ class PopMenuListbox(tk.Listbox):
         self.popup_menu.add_command(command=self.connect_disconnect_selected)
         self.popup_menu.add_command(label=_("Delete"), command=self.delete_selected)
         self.bind("<Button-3>", self.popup)  # Button-2 on Aqua
+        self.popup_menu.bind("<FocusOut>", self.hide)
 
     def popup(self, event):
         # resolve selected device index
@@ -354,7 +355,10 @@ class PopMenuListbox(tk.Listbox):
                 # show popup menu
                 self.popup_menu.tk_popup(event.x_root, event.y_root, sel)
             finally:
-                self.popup_menu.grab_release()
+                self.popup_menu.grab_set()
+
+    def hide(self, event=None):
+        self.popup_menu.unpost()
 
     def delete_selected(self):
         for i in self.curselection()[::-1]:
