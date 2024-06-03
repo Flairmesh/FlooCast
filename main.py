@@ -341,19 +341,20 @@ class PopMenuListbox(tk.Listbox):
         self.bind("<Button-3>", self.popup)  # Button-2 on Aqua
 
     def popup(self, event):
-        try:
-            # resolve selected device index
-            sel = self.nearest(event.y)
-            # set proper menu label based on device status
-            self.popup_menu.entryconfig(
-                0, label=_("Connect") if sel > 0 or flooSm.sourceState < 4 else _("Disconnect"))
-            # forcefully select the device for better UX
-            self.selection_clear(0, tk.END)
-            self.selection_set(sel, sel)
-            # show popup menu
-            self.popup_menu.tk_popup(event.x_root, event.y_root, sel)
-        finally:
-            self.popup_menu.grab_release()
+        # resolve selected device index
+        sel = self.nearest(event.y)
+        if sel >= 0:
+            try:
+                # set proper menu label based on device status
+                self.popup_menu.entryconfig(
+                    0, label=_("Connect") if sel > 0 or flooSm.sourceState < 4 else _("Disconnect"))
+                # forcefully select the device for better UX
+                self.selection_clear(0, tk.END)
+                self.selection_set(sel, sel)
+                # show popup menu
+                self.popup_menu.tk_popup(event.x_root, event.y_root, sel)
+            finally:
+                self.popup_menu.grab_release()
 
     def delete_selected(self):
         for i in self.curselection()[::-1]:
