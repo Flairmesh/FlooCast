@@ -17,6 +17,7 @@ tkinter
 pyserial
 pystray
 serial-tool
+certifi
  
 ## Usage
 
