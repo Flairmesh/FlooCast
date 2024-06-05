@@ -253,3 +253,18 @@ msgstr "RSSI"
 #: main.py:442
 msgid "LED"
 msgstr "DEL"
+
+msgid "Connect"
+msgstr "Connecter"
+
+msgid "Disconnect"
+msgstr "Déconnecter"
+
+msgid "Settings"
+msgstr "Paramètres"
+
+msgid ", check the latest."
+msgstr ", vérifiez la dernière."
+
+msgid "Current firmware: "
+msgstr "Micrologiciel actuel :"

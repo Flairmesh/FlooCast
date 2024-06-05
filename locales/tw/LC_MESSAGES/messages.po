@@ -242,3 +242,18 @@ msgstr "連接/斷開"
 #: main.py:584
 msgid "New Firmware is available"
 msgstr "新韌體可用"
+
+msgid "Connect"
+msgstr "連接"
+
+msgid "Disconnect"
+msgstr "斷開"
+
+msgid "Settings"
+msgstr "設定"
+
+msgid ", check the latest."
+msgstr "，查看最新的。"
+
+msgid "Current firmware: "
+msgstr "目前韌體："

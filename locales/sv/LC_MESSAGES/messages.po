@@ -242,3 +242,18 @@ msgstr "Anslut/koppla från"
 #: main.py:584
 msgid "New Firmware is available"
 msgstr "Ny firmware är tillgänglig"
+
+msgid "Connect"
+msgstr "Ansluta"
+
+msgid "Disconnect"
+msgstr "Koppla ifrån"
+
+msgid "Settings"
+msgstr "inställningar"
+
+msgid ", check the latest."
+msgstr ", kolla det senaste."
+
+msgid "Current firmware: "
+msgstr "Aktuell firmware:"

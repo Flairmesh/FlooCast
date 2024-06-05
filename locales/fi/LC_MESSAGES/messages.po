@@ -246,3 +246,18 @@ msgstr "Yhdistä/katkaise yhteys"
 #: main.py:584
 msgid "New Firmware is available"
 msgstr "Uusi laiteohjelmisto on saatavilla"
+
+msgid "Connect"
+msgstr "Kytkeä"
+
+msgid "Disconnect"
+msgstr "Katkaista"
+
+msgid "Settings"
+msgstr "asetukset"
+
+msgid ", check the latest."
+msgstr ", tarkista viimeisimmät."
+
+msgid "Current firmware: "
+msgstr "Nykyinen laiteohjelmisto:"

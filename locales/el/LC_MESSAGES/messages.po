@@ -246,3 +246,18 @@ msgstr "Σύνδεση/Αποσύνδεση"
 #: main.py:584
 msgid "New Firmware is available"
 msgstr "Νέο υλικολογισμικό είναι διαθέσιμο"
+
+msgid "Connect"
+msgstr "Συνδέω-συωδεομαι"
+
+msgid "Disconnect"
+msgstr "Αποσυνδέω"
+
+msgid "Settings"
+msgstr "Ρυθμίσεις"
+
+msgid ", check the latest."
+msgstr ", ελέγξτε τα πιο πρόσφατα."
+
+msgid "Current firmware: "
+msgstr "Τρέχον υλικολογισμικό:"

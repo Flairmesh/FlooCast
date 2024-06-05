@@ -242,3 +242,18 @@ msgstr "Koble til/Koble fra"
 #: main.py:584
 msgid "New Firmware is available"
 msgstr "Ny fastvare er tilgjengelig"
+
+msgid "Connect"
+msgstr "Koble"
+
+msgid "Disconnect"
+msgstr "Koble fra"
+
+msgid "Settings"
+msgstr "Innstillinger"
+
+msgid ", check the latest."
+msgstr ", sjekk det siste"
+
+msgid "Current firmware: "
+msgstr "Gjeldende fastvare:"

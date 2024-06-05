@@ -242,3 +242,18 @@ msgstr "Połącz/Rozłącz"
 #: main.py:584
 msgid "New Firmware is available"
 msgstr "Dostępne jest nowe oprogramowanie sprzętowe"
+
+msgid "Connect"
+msgstr "Łączyć"
+
+msgid "Disconnect"
+msgstr "Rozłączyć się"
+
+msgid "Settings"
+msgstr "Ustawienia"
+
+msgid ", check the latest."
+msgstr ", sprawdź najnowsze"
+
+msgid "Current firmware: "
+msgstr "Aktualne oprogramowanie:"

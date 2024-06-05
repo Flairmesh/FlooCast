@@ -250,3 +250,18 @@ msgstr "RSSI"
 #: main.py:442
 msgid "LED"
 msgstr "אור נתפס חשמלית"
+
+msgid "Connect"
+msgstr "לְחַבֵּר"
+
+msgid "Disconnect"
+msgstr "לְנַתֵק"
+
+msgid "Settings"
+msgstr "הגדרות"
+
+msgid ", check the latest."
+msgstr ", בדוק את העדכון האחרון."
+
+msgid "Current firmware: "
+msgstr "קושחה נוכחית:"

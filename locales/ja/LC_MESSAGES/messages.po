@@ -250,3 +250,18 @@ msgstr "電波強度指示"
 #: main.py:442
 msgid "LED"
 msgstr "LED"
+
+msgid "Connect"
+msgstr "接続"
+
+msgid "Disconnect"
+msgstr "切断"
+
+msgid "Settings"
+msgstr "設定"
+
+msgid ", check the latest."
+msgstr "最新のものを確認してください。"
+
+msgid "Current firmware: "
+msgstr "現在のファームウェア:"

@@ -254,3 +254,18 @@ msgstr "RSSI"
 #: main.py:442
 msgid "LED"
 msgstr "ليد"
+
+msgid "Connect"
+msgstr "يتصل"
+
+msgid "Disconnect"
+msgstr "قطع الاتصال"
+
+msgid "Settings"
+msgstr "إعدادات"
+
+msgid ", check the latest."
+msgstr "، تحقق من الأحدث."
+
+msgid "Current firmware: "
+msgstr "البرامج الثابتة الحالية:"

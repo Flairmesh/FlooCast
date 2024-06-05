@@ -250,3 +250,18 @@ msgstr "RSSI"
 #: main.py:442
 msgid "LED"
 msgstr "đèn LED"
+
+msgid "Connect"
+msgstr "Kết nối"
+
+msgid "Disconnect"
+msgstr "Ngắt kết nối"
+
+msgid "Settings"
+msgstr "Cài đặt"
+
+msgid ", check the latest."
+msgstr ", hãy kiểm tra cái mới nhất."
+
+msgid "Current firmware: "
+msgstr "Chương trình cơ sở hiện tại:"

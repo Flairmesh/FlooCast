@@ -246,3 +246,18 @@ msgstr "Tilslut/Afbryd"
 #: main.py:584
 msgid "New Firmware is available"
 msgstr "Ny firmware er tilgængelig"
+
+msgid "Connect"
+msgstr "Forbinde"
+
+msgid "Disconnect"
+msgstr "Koble fra"
+
+msgid "Settings"
+msgstr "Indstillinger"
+
+msgid ", check the latest."
+msgstr ", tjek det seneste."
+
+msgid "Current firmware: "
+msgstr "Nuværende firmware:"

@@ -242,3 +242,18 @@ msgstr ""
 #: main.py:584
 msgid "New Firmware is available"
 msgstr ""
+
+msgid "Connect"
+msgstr ""
+
+msgid "Disconnect"
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+
+msgid ", check the latest."
+msgstr ""
+
+msgid "Current firmware: "
+msgstr ""

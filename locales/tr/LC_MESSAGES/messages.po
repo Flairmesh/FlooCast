@@ -242,3 +242,18 @@ msgstr "Bağlan/Bağlantıyı Kes"
 #: main.py:584
 msgid "New Firmware is available"
 msgstr "Yeni ürün yazılımı mevcut"
+
+msgid "Connect"
+msgstr "Bağlamak"
+
+msgid "Disconnect"
+msgstr "Bağlantıyı kes"
+
+msgid "Settings"
+msgstr "Ayarlar"
+
+msgid ", check the latest."
+msgstr ", son durumu kontrol et."
+
+msgid "Current firmware: "
+msgstr "Geçerli donanım yazılımı: "

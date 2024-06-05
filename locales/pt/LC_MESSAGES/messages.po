@@ -242,3 +242,18 @@ msgstr "Conectar/Desconectar"
 #: main.py:584
 msgid "New Firmware is available"
 msgstr "Novo firmware está disponível"
+
+msgid "Connect"
+msgstr "Conectar"
+
+msgid "Disconnect"
+msgstr "desconectar"
+
+msgid "Settings"
+msgstr "Configurações"
+
+msgid ", check the latest."
+msgstr ", verifique as últimas."
+
+msgid "Current firmware: "
+msgstr "Firmware atual:"

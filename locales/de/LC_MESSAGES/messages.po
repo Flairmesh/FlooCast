@@ -242,3 +242,18 @@ msgstr "Verbinden/Trennen"
 #: main.py:584
 msgid "New Firmware is available"
 msgstr "Neue Firmware ist verfügbar"
+
+msgid "Connect"
+msgstr "Verbinden"
+
+msgid "Disconnect"
+msgstr "Trennen"
+
+msgid "Settings"
+msgstr "Einstellungen"
+
+msgid ", check the latest."
+msgstr ", überprüfen Sie die neueste."
+
+msgid "Current firmware: "
+msgstr "Aktuelle Firmware: "

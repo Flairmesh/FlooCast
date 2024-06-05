@@ -254,3 +254,18 @@ msgstr "RSSI"
 #: main.py:442
 msgid "LED"
 msgstr "एलईडी"
+
+msgid "Connect"
+msgstr "कनेक्ट"
+
+msgid "Disconnect"
+msgstr "डिस्कनेक्ट"
+
+msgid "Settings"
+msgstr "सेटिंग्स"
+
+msgid ", check the latest."
+msgstr ", नवीनतम जाँचें."
+
+msgid "Current firmware: "
+msgstr "वर्तमान फ़र्मवेयर: "

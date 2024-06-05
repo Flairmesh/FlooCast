@@ -250,3 +250,18 @@ msgstr "RSSI"
 #: main.py:442
 msgid "LED"
 msgstr "світлодіод"
+
+msgid "Connect"
+msgstr "Підключитися"
+
+msgid "Disconnect"
+msgstr "Відключити"
+
+msgid "Settings"
+msgstr "Налаштування"
+
+msgid ", check the latest."
+msgstr ", перевірити останні."
+
+msgid "Current firmware: "
+msgstr "Поточна прошивка: "

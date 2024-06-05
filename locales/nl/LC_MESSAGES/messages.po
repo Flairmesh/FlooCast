@@ -242,3 +242,18 @@ msgstr "Verbinden/verbreken"
 #: main.py:584
 msgid "New Firmware is available"
 msgstr "Er is nieuwe firmware beschikbaar"
+
+msgid "Connect"
+msgstr "Aansluiten"
+
+msgid "Disconnect"
+msgstr "Loskoppelen"
+
+msgid "Settings"
+msgstr "Instellingen"
+
+msgid ", check the latest."
+msgstr ", bekijk de laatste."
+
+msgid "Current firmware: "
+msgstr "Huidige firmware:"
