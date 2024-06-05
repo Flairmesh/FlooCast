@@ -355,7 +355,11 @@ class PopMenuListbox(tk.Listbox):
                 # show popup menu
                 self.popup_menu.tk_popup(event.x_root, event.y_root, sel)
             finally:
-                self.popup_menu.grab_set()
+                # TODO there might be a better way to achieve same behavior on different OSes
+                if platform.system().lower().startswith('win'):
+                    self.popup_menu.grab_release()
+                else:
+                    self.popup_menu.grab_set()
 
     def hide(self, event=None):
         self.popup_menu.unpost()
