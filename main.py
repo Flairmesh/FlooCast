@@ -632,15 +632,25 @@ class FlooSmDelegate(FlooStateMachineDelegate):
             a2dpSink = True if version.startswith("AS") else False
             firmwareVersion = version if variant == "" else version[:-1]
             # firmwareVersion = firmwareVersion[2:] if a2dpSink else firmwareVersion
-            if a2dpSink:
-                latest = urllib.request.urlopen("https://www.flairmesh.com/Dongle/FMA120/latest_as",
-                                                context=ssl.create_default_context(cafile=certifi.where())).read()
-            else:
-                latest = urllib.request.urlopen("https://www.flairmesh.com/Dongle/FMA120/latest",
-                                                context=ssl.create_default_context(cafile=certifi.where())).read()
-            latest = latest.decode("utf-8").rstrip()
+            try:
+                if a2dpSink:
+                    latest = urllib.request.urlopen("https://www.flairmesh.com/Dongle/FMA120/latest_as",
+                                                    context=ssl.create_default_context(cafile=certifi.where())).read()
+                else:
+                    latest = urllib.request.urlopen("https://www.flairmesh.com/Dongle/FMA120/latest",
+                                                    context=ssl.create_default_context(cafile=certifi.where())).read()
+                    latest = latest.decode("utf-8").rstrip()
+            except Exception as exec0:
+                print("Cann't get the latest version")
+                latest = "Unable"
+
             if not dfuUndergoing:
-                if latest > firmwareVersion:
+                if latest == "Unable":
+                    dfuInfo.config(text=( _("Current firmware: ") + firmwareVersion + _(", check the latest.")),
+                                   fg="blue", cursor="hand2")
+                    newFirmwareUrl = "https://www.flairmesh.com/Dongle/FMA120.html"
+                    dfuInfoBind = dfuInfo.bind("<Button-1>", lambda e: url_callback(newFirmwareUrl))
+                elif latest > firmwareVersion:
                     dfuInfo.config(text=(_("New Firmware is available") + " " + firmwareVersion + " -> " + latest),
                                    fg="blue",cursor="hand2")
                     newFirmwareUrl = "https://www.flairmesh.com/support/FMA120_" + latest +".zip"
