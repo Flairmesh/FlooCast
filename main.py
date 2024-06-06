@@ -639,7 +639,7 @@ class FlooSmDelegate(FlooStateMachineDelegate):
                 else:
                     latest = urllib.request.urlopen("https://www.flairmesh.com/Dongle/FMA120/latest",
                                                     context=ssl.create_default_context(cafile=certifi.where())).read()
-                    latest = latest.decode("utf-8").rstrip()
+                latest = latest.decode("utf-8").rstrip()
             except Exception as exec0:
                 print("Cann't get the latest version")
                 latest = "Unable"
