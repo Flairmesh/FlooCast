@@ -339,21 +339,30 @@ class PopMenuListbox(tk.Listbox):
         self.popup_menu.add_command(command=self.connect_disconnect_selected)
         self.popup_menu.add_command(label=_("Delete"), command=self.delete_selected)
         self.bind("<Button-3>", self.popup)  # Button-2 on Aqua
+        self.popup_menu.bind("<FocusOut>", self.hide)
 
     def popup(self, event):
-        try:
-            # resolve selected device index
-            sel = self.nearest(event.y)
-            # set proper menu label based on device status
-            self.popup_menu.entryconfig(
-                0, label=_("Connect") if sel > 0 or flooSm.sourceState < 4 else _("Disconnect"))
-            # forcefully select the device for better UX
-            self.selection_clear(0, tk.END)
-            self.selection_set(sel, sel)
-            # show popup menu
-            self.popup_menu.tk_popup(event.x_root, event.y_root, sel)
-        finally:
-            self.popup_menu.grab_release()
+        # resolve selected device index
+        sel = self.nearest(event.y)
+        if sel >= 0:
+            try:
+                # set proper menu label based on device status
+                self.popup_menu.entryconfig(
+                    0, label=_("Connect") if sel > 0 or flooSm.sourceState < 4 else _("Disconnect"))
+                # forcefully select the device for better UX
+                self.selection_clear(0, tk.END)
+                self.selection_set(sel, sel)
+                # show popup menu
+                self.popup_menu.tk_popup(event.x_root, event.y_root, sel)
+            finally:
+                # TODO there might be a better way to achieve same behavior on different OSes
+                if platform.system().lower().startswith('win'):
+                    self.popup_menu.grab_release()
+                else:
+                    self.popup_menu.grab_set()
+
+    def hide(self, event=None):
+        self.popup_menu.unpost()
 
     def delete_selected(self):
         for i in self.curselection()[::-1]:
