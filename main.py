@@ -421,7 +421,8 @@ def show_window(icon, TrayMenuItem):
     global windowIcon
     try:
         icon.stop()
-        root.after(0, root.deiconify())
+        root.update()
+        root.deiconify()
         windowIcon = None
     except Exception:
         pass
@@ -433,7 +434,7 @@ def hide_window():
     root.withdraw()
     # file_path = os.path.abspath(os.path.dirname(sys.argv[0]))
     image = Image.open(app_path + os.sep + appIcon)
-    menu = (TrayMenuItem(_('Quit'), quit_window), TrayMenuItem(_('Show Window'), show_window))
+    menu = (TrayMenuItem(_('Show Window'), show_window), TrayMenuItem(_('Quit'), quit_window))
     icon = pystray.Icon(appTitle, image, _("FlooGoo Bluetooth Audio Source"), menu)  # "FlooGoo Bluetooth Audio Source"
     icon.run()
     windowIcon = icon
@@ -502,7 +503,7 @@ aptxLosslessEnableButton = tk.Button(aboutPanel, image=off, bd=0, command=aptxLo
 aptxLosslessEnableButton.grid(column=1, row=1, sticky='e')
 
 resetExplanationLabel = tk.Message(aboutPanel,
-                                   text=_("Disconnect and reconnect the dongle to activate configuration changes, " \
+                                   text=_("Disconnect and reconnect the dongle to activate configuration changes, "
                                           "after which it will function independently without the app."),
                                    aspect=400)
 resetExplanationLabel.grid(column=0, row=3, columnspan=2, padx=(0, 0), sticky='ewns')
@@ -523,7 +524,7 @@ thirdPartyLink.bind("<Button-1>", lambda e: url_callback("https://www.flairmesh.
 supportLink = tk.Label(aboutFrame, text=_("Support Link"), fg="blue", cursor="hand2")
 supportLink.pack()
 supportLink.bind("<Button-1>", lambda e: url_callback("https://www.flairmesh.com/Dongle/FMA120.html"))
-versionInfo = tk.Label(aboutFrame, text=_("Version") + "1.0.9")
+versionInfo = tk.Label(aboutFrame, text=_("Version") + " " + "1.0.9")
 versionInfo.pack()
 
 dfuUndergoing = False
@@ -541,7 +542,7 @@ def update_dfu_info(state: int):
     global dfuInfoBind
 
     if dfuInfoBind:
-        dfuInfo.unbind("<Button-1>", dfuInfoBind)
+        dfuInfo.unbind("<Button-1>")
         dfuInfoBind = False
         dfuInfo.config(fg=dfuInfoDefaultColor, cursor='')
     #print(state)
@@ -628,7 +629,7 @@ enable_settings_widgets(False)
 
 # All GUI object initialized, start FlooStateMachine
 class FlooSmDelegate(FlooStateMachineDelegate):
-    def deviceDetected(self, flag: bool, port: str, version : str = None):
+    def deviceDetected(self, flag: bool, port: str, version: str = None):
         global currentPairedDeviceList
         global firmwareVersion
         global variant
@@ -655,20 +656,20 @@ class FlooSmDelegate(FlooStateMachineDelegate):
 
             if not dfuUndergoing:
                 if latest == "Unable":
-                    dfuInfo.config(text=( _("Current firmware: ") + firmwareVersion + _(", check the latest.")),
+                    dfuInfo.config(text=(_("Current firmware: ") + firmwareVersion + _(", check the latest.")),
                                    fg="blue", cursor="hand2")
                     newFirmwareUrl = "https://www.flairmesh.com/Dongle/FMA120.html"
                     dfuInfoBind = dfuInfo.bind("<Button-1>", lambda e: url_callback(newFirmwareUrl))
                 elif latest > firmwareVersion:
                     dfuInfo.config(text=(_("New Firmware is available") + " " + firmwareVersion + " -> " + latest),
-                                   fg="blue",cursor="hand2")
-                    newFirmwareUrl = "https://www.flairmesh.com/support/FMA120_" + latest +".zip"
-                    dfuInfoBind = dfuInfo.bind("<Button-1>",lambda e: url_callback(newFirmwareUrl))
+                                   fg="blue", cursor="hand2")
+                    newFirmwareUrl = "https://www.flairmesh.com/support/FMA120_" + latest + ".zip"
+                    dfuInfoBind = dfuInfo.bind("<Button-1>", lambda e: url_callback(newFirmwareUrl))
                 else:
                     if dfuInfoBind:
-                        dfuInfo.unbind("<Button-1>",dfuInfoBind)
+                        dfuInfo.unbind("<Button-1>")
                         dfuInfoBind = False
-                        dfuInfo.config(fg=dfuInfoDefaultColor,cursor='')
+                        dfuInfo.config(fg=dfuInfoDefaultColor, cursor='')
                     dfuInfo.config(text=_("Firmware") + " " + firmwareVersion)
             dfuInfo.pack()
         else:
@@ -717,8 +718,8 @@ class FlooSmDelegate(FlooStateMachineDelegate):
     def audioCodecInUseInd(self, codec, rssi, rate):
         codecInUseLabel.config(text=codecStr[codec] if codec < len(codecStr) else _("Unknown"))
         if (codec == 6 or codec == 10) and rssi != 0:
-            codecInUseLabel.config(text=codecStr[codec]  + " @ " + str(rate) + "Kbps "
-                                        + _("RSSI") +" -" + str(0x100 - rssi) + "dBm")
+            codecInUseLabel.config(text=codecStr[codec] + " @ " + str(rate) + "Kbps "
+                                        + _("RSSI") + " -" + str(0x100 - rssi) + "dBm")
         else:
             codecInUseLabel.config(text=codecStr[codec] if codec < len(codecStr) else _("Unknown"))
 
