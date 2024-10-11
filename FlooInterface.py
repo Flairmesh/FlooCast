@@ -78,7 +78,7 @@ class FlooInterface:
                                 break
                             else:
                                 self.delegate.handleMessage(flooMsg)
-                            time.sleep(0.01)
+                        time.sleep(0.01)
                     except Exception as exec0:
                         print(exec0)
                         self.portOpenDelay = None
