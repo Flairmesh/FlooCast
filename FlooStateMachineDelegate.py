@@ -36,11 +36,15 @@ class FlooStateMachineDelegate:
         pass
 
     def ledEnabledInd(self, enabled):
-        """Called when FlooGoo device reports current paired devices list"""
+        """Called when FlooGoo device reports current setting of LED"""
         pass
 
     def aptxLosslessEnabledInd(self, enabled):
-        """Called when FlooGoo device reports current paired devices list"""
+        """Called when FlooGoo device reports current setting of aptx lossless"""
+        pass
+
+    def gattClientEnabledInd(self, enabled):
+        """Called when FlooGoo device reports current setting of Gatt Client Function"""
         pass
 
 
