@@ -1,4 +1,4 @@
-# Import Module
+# !/usr/bin/env python
 import gettext
 import locale
 import subprocess
@@ -6,17 +6,20 @@ import re
 import os
 import platform
 import sys
-import tkinter as tk
+from gc import enable
+
+import wx
 import webbrowser
-import pystray
-from tkinter import ttk
-from tkinter import filedialog as fd
+from ctypes.wintypes import tagMSG
+from wx.lib.sized_controls import border
+import wx.lib.agw.hyperlink as hl
+from wx.adv import TaskBarIcon as TaskBarIcon
+
 from EntryWithPlaceholder import EntryWithPlaceholder
 from FlooStateMachine import FlooStateMachine
 from FlooStateMachineDelegate import FlooStateMachineDelegate
 from FlooDfuThread import FlooDfuThread
 from PIL import Image
-from pystray import MenuItem as TrayMenuItem
 import urllib.request
 import certifi
 import ssl
@@ -78,458 +81,562 @@ leaStateStr = [_("Disconnected"),
                _("Streaming stopping")]
 
 # create root window
-root = tk.Tk()
+app = wx.App(False)
 
-# root window title and dimension
-root.title(appTitle)
-if platform.system().lower().startswith('win'):
-    root.iconbitmap(app_path + os.sep + appIcon)
-else:
-    img_icon = tk.PhotoImage(file=app_path + os.sep + appGif)
-    root.tk.call('wm', 'iconphoto', root._w, img_icon)
-# Set geometry (widthxheight)
-root.geometry('900x480')
+appFrame = wx.Frame(None, wx.ID_ANY, "FlooCast", size=wx.Size(930, 560))
+appFrame.SetIcon(wx.Icon(app_path + os.sep + appIcon))
 
-root.rowconfigure(0, weight=1)
-root.rowconfigure(1, weight=0)
-root.columnconfigure(0, weight=1)
-
-mainFrame = tk.Frame(root)  # , relief=tk.RAISED
-mainFrame.grid(column=0, row=0, sticky="nsew")
-
-# statusBar
-statusBar = tk.Label(root, text=_("Initializing"), bd=1, relief=tk.SUNKEN, anchor=tk.W)
-statusBar.grid(column=0, row=1, sticky="ew")
+statusBar = appFrame.CreateStatusBar(name=_("Status Bar"))
+statusBar.SetStatusText(_("Initializing"))
 
 
+# Update the status bar
 def update_status_bar(info: str):
     global statusBar
-    statusBar.config(text=info)
+    statusBar.SetStatusText(info)
 
 
 # Define On/Off Images
-on = tk.PhotoImage(file=app_path + os.sep + 'onS.png')
-off = tk.PhotoImage(file=app_path + os.sep + 'offS.png')
+on = wx.Bitmap(app_path + os.sep + 'onS.png', )
+off = wx.Bitmap(app_path + os.sep + 'offS.png')
 
-mainFrame.rowconfigure(0, weight=0)
-mainFrame.rowconfigure(1, weight=0)
-mainFrame.rowconfigure(2, weight=1)
-# mainFrame.grid_columnconfigure(0, weight=1)
-mainFrame.columnconfigure(0, weight=1)
-mainFrame.columnconfigure(1, weight=0)
-# Setup contains LE Broadcast and Paired Devices
-audioModePanel = ttk.LabelFrame(mainFrame, text=_('Audio Mode'))
-audioModePanel.grid(column=0, row=0, padx=2, sticky='nsew')
-leBroadcastPanel = ttk.LabelFrame(mainFrame, text=_('LE Broadcast'))
-leBroadcastPanel.grid(column=0, row=1, padx=2, sticky='nsew')
-pairedDevicesPanel = ttk.LabelFrame(mainFrame, text=_('Most Recently Used Devices'))
-pairedDevicesPanel.grid(column=0, row=2, padx=2, sticky='nsew')
-# Window panel
-windowPanel = ttk.LabelFrame(mainFrame, text=_('Window'))
-windowPanel.grid(column=1, row=0, padx=2, sticky='nsew')
-# About panel
-aboutPanel = ttk.LabelFrame(mainFrame, text=_('Settings'))
-aboutPanel.grid(column=1, row=1, padx=2, rowspan=2, sticky='nsew')
+appPanel = wx.Panel(appFrame)
+appSizer = wx.FlexGridSizer(2, 2, vgap=2, hgap=4)
 
 # Audio mode panel
-for i in range(0, 3):
-    if i == 1:
-        audioModePanel.rowconfigure(i, weight=1)
+audioMode = None
+audioModeSb = wx.StaticBox(appPanel, wx.ID_ANY, _('Audio Mode'))
+audioModeSbSizer = wx.StaticBoxSizer(audioModeSb, wx.VERTICAL)
+
+audioModeUpperPanel = wx.Panel(audioModeSb)
+audioModeUpperPanelSizer = wx.FlexGridSizer(2, 3, (0, 0))
+audioModeHighQualityRadioButton = wx.RadioButton(audioModeUpperPanel, label=_('High Quality (one-to-one)'),
+                                                 style=wx.RB_GROUP)
+audioModeGamingRadioButton = wx.RadioButton(audioModeUpperPanel, label=_('Gaming (one-to-one)'))
+audioModeBroadcastRadioButton = wx.RadioButton(audioModeUpperPanel, label=_('Broadcast'))
+
+
+def audio_mode_sel_set(mode):
+    if mode == 0:
+        settingsPanelSizer.Show(aptxLosslessCheckBox)
+        settingsPanelSizer.Show(aptxLosslessEnableButton)
+        settingsPanelSizer.Hide(gattClientWithBroadcastCheckBox)
+        settingsPanelSizer.Hide(gattClientWithBroadcastEnableButton)
+    elif mode == 1:
+        settingsPanelSizer.Hide(aptxLosslessCheckBox)
+        settingsPanelSizer.Hide(aptxLosslessEnableButton)
+        settingsPanelSizer.Hide(gattClientWithBroadcastCheckBox)
+        settingsPanelSizer.Hide(gattClientWithBroadcastEnableButton)
+    elif mode == 2:
+        settingsPanelSizer.Hide(aptxLosslessCheckBox)
+        settingsPanelSizer.Hide(aptxLosslessEnableButton)
+        settingsPanelSizer.Show(gattClientWithBroadcastCheckBox)
+        settingsPanelSizer.Show(gattClientWithBroadcastEnableButton)
+    settingsPanelSizer.Layout()
+    pairedDevicesSb.Enable(mode != 2)
+
+def audio_mode_sel(event):
+    selectedLabel = (event.GetEventObject().GetLabel())
+    if selectedLabel == audioModeHighQualityRadioButton.GetLabel():
+        mode = 0
+    elif selectedLabel == audioModeGamingRadioButton.GetLabel():
+        mode = 1
     else:
-        audioModePanel.rowconfigure(i, weight=0)
-for i in range(0, 4):
-    if i > 2:
-        audioModePanel.columnconfigure(i, weight=2)
-    else:
-        audioModePanel.columnconfigure(i, weight=1)
+        mode = 2
+    audio_mode_sel_set(mode)
+    settingsPanelSizer.Layout()
+    pairedDevicesSb.Enable(mode != 2)
+    flooSm.setAudioMode(mode)
 
 
-def audioModeSel():
-    enable_pairing_widgets(audioMode.get() != 2)
-    flooSm.setAudioMode(audioMode.get())
+audioModeUpperPanel.Bind(wx.EVT_RADIOBUTTON, audio_mode_sel)
 
+dongleStateSb = wx.StaticBox(audioModeUpperPanel, wx.ID_ANY, _('Dongle State'))
+dongleStateSbSizer = wx.StaticBoxSizer(dongleStateSb, wx.VERTICAL)
+dongleStateText = wx.StaticText(dongleStateSb, wx.ID_ANY, _("Initializing"))
+dongleStateSbSizer.Add(dongleStateText, flag=wx.ALIGN_CENTER_HORIZONTAL | wx.TOP | wx.BOTTOM, border=4)
 
-audioMode = tk.IntVar()
-audioMode.set(0)
-highQualityRadioButton = ttk.Radiobutton(audioModePanel, text=_('High Quality (one-to-one)'), variable=audioMode,
-                                         value=0, command=audioModeSel)
-highQualityRadioButton.grid(column=0, row=0, padx=4, sticky='w')
-gamingModeRadioButton = ttk.Radiobutton(audioModePanel, text=_('Gaming (one-to-one)'), variable=audioMode,
-                                        value=1, command=audioModeSel)
-gamingModeRadioButton.grid(column=1, row=0, padx=4, sticky='w')
-broadcastRadioButton = ttk.Radiobutton(audioModePanel, text=_('Broadcast'), variable=audioMode,
-                                       value=2, command=audioModeSel)
-broadcastRadioButton.grid(column=2, row=0, padx=4, sticky='w')
+leaStateSb = wx.StaticBox(audioModeUpperPanel, wx.ID_ANY, _('LE Audio State'))
+leaStateSbSizer = wx.StaticBoxSizer(leaStateSb, wx.VERTICAL)
+leaStateText = wx.StaticText(leaStateSb, wx.ID_ANY, _("Disconnected"))
+leaStateSbSizer.Add(leaStateText, flag=wx.ALIGN_CENTER_HORIZONTAL | wx.TOP | wx.BOTTOM, border=4)
 
-dongleStatePanel = ttk.LabelFrame(audioModePanel, text=_('Dongle State'))
-dongleStatePanel.grid(column=0, row=1, columnspan=1, padx=4, pady=4, sticky='nsew')
-dongleStateLabel = tk.Label(dongleStatePanel, text=_("Initializing"))
-dongleStateLabel.place(relx=.5, rely=.5, anchor=tk.CENTER)
-leaStatePanel = ttk.LabelFrame(audioModePanel, text=_('LE Audio State'))
-leaStatePanel.grid(column=1, row=1, columnspan=1, padx=4, pady=4, sticky='nsew')
-leaStateLabel = tk.Label(leaStatePanel, text=_("Disconnected"))
-leaStateLabel.place(relx=.5, rely=.5, anchor=tk.CENTER)
-codecInUsePanel = ttk.LabelFrame(audioModePanel, text=_('Codec in Use'))
-codecInUsePanel.grid(column=2, row=1, columnspan=2, padx=4, pady=4, sticky='nsew')
-codecInUseLabel = tk.Label(codecInUsePanel, text=codecStr[0])
-codecInUseLabel.place(relx=.5, rely=.5, anchor=tk.CENTER)
+codecInUseSb = wx.StaticBox(audioModeUpperPanel, wx.ID_ANY, _('Codec in Use'))
+codecInUseSbSizer = wx.StaticBoxSizer(codecInUseSb, wx.VERTICAL)
+codecInUseText = wx.StaticText(codecInUseSb, wx.ID_ANY, codecStr[0])
+codecInUseSbSizer.Add(codecInUseText, flag=wx.ALIGN_CENTER_HORIZONTAL | wx.TOP | wx.BOTTOM, border=4)
 
-preferLeaEnableLabel = tk.Label(audioModePanel, text=_("Prefer using LE audio for dual-mode devices"))
-preferLeaEnableLabel.grid(column=0, row=2, columnspan=2, sticky='w')
+audioModeUpperPanelSizer.Add(audioModeHighQualityRadioButton, flag=wx.EXPAND | wx.ALL, border=4)
+audioModeUpperPanelSizer.Add(audioModeGamingRadioButton, flag=wx.EXPAND | wx.ALL, border=4)
+audioModeUpperPanelSizer.Add(audioModeBroadcastRadioButton, flag=wx.EXPAND | wx.ALL, border=4)
+audioModeUpperPanelSizer.Add(dongleStateSbSizer, flag=wx.EXPAND | wx.ALL, border=4)
+audioModeUpperPanelSizer.Add(leaStateSbSizer, flag=wx.EXPAND | wx.ALL, border=4)
+audioModeUpperPanelSizer.Add(codecInUseSbSizer, flag=wx.EXPAND | wx.ALL, border=4)
+audioModeUpperPanelSizer.AddGrowableRow(0, 1)
+audioModeUpperPanelSizer.AddGrowableRow(1, 1)
+audioModeUpperPanelSizer.AddGrowableCol(0, 1)
+audioModeUpperPanelSizer.AddGrowableCol(1, 1)
+audioModeUpperPanelSizer.AddGrowableCol(2, 2)
+audioModeUpperPanel.SetSizer(audioModeUpperPanelSizer)
+
+audioModeLowerPanel = wx.Panel(audioModeSb)
+audioModeLowerPanelSizer = wx.BoxSizer(wx.HORIZONTAL)
+
 preferLeaEnable = None
 
 
 def prefer_lea_enable_switch_set(enable):
     global preferLeaEnable
     preferLeaEnable = enable
-    preferLeaEnableButton.config(image=on if preferLeaEnable else off)
+    preferLeaCheckBox.SetValue(enable)
+    preferLeButton.SetBitmap(on if preferLeaEnable else off)
+    preferLeButton.SetToolTip(
+        _('Toggle switch for') + ' ' + _('Prefer using LE audio for dual-mode devices') + ' ' + (_(
+            'On') if preferLeaEnable else _(
+            'Off')))
     flooSm.setPreferLea(enable)
 
 
-# Broadcast enable switch function
-def prefer_lea_enable_switch():
-    global preferLeaEnable
+def prefer_lea_enable_switch(event):
     prefer_lea_enable_switch_set(not preferLeaEnable)
 
 
-preferLeaEnableButton = tk.Button(audioModePanel, image=off, bd=0, command=prefer_lea_enable_switch)
-preferLeaEnableButton.grid(column=3, row=2, sticky='e')
+preferLeaCheckBox = wx.CheckBox(audioModeLowerPanel, wx.ID_ANY,
+                                label=_('Prefer using LE audio for dual-mode devices') + ' (' + _(
+                                    'Must be disabled for') + ' ' + 'aptX\u2122 Lossless' + ')')
+preferLeButton = wx.Button(audioModeLowerPanel, wx.ID_ANY, style=wx.NO_BORDER | wx.MINIMIZE)
+preferLeButton.SetToolTip(
+    _('Toggle switch for') + ' ' + _('Prefer using LE audio for dual-mode devices') + ' ' + _('Off'))
+preferLeButton.SetBitmap(off)
+audioModeLowerPanel.Bind(wx.EVT_CHECKBOX, prefer_lea_enable_switch, preferLeaCheckBox)
+preferLeButton.Bind(wx.EVT_BUTTON, prefer_lea_enable_switch)
+audioModeLowerPanelSizer.Add(preferLeaCheckBox, flag=wx.EXPAND, proportion=1)
+audioModeLowerPanelSizer.Add(preferLeButton, proportion=0)
+audioModeLowerPanel.SetSizer(audioModeLowerPanelSizer)
 
-# LE Broadcast panel
-leBroadcastPanel.columnconfigure(0, weight=1)
-leBroadcastPanel.columnconfigure(1, weight=1)
-leBroadcastPanel.columnconfigure(2, weight=1)
+audioModeSbSizer.Add(audioModeUpperPanel, flag=wx.EXPAND)  # , proportion=5
+audioModeSbSizer.Add(audioModeLowerPanel, flag=wx.EXPAND)  # , proportion=1
 
-broadcastEnableLabel = tk.Label(leBroadcastPanel, text=_("Public broadcast"))
-broadcastEnableLabel.grid(column=0, row=0, columnspan=2, sticky='w')
+
+# Window panel
+class FlooCastTaskBarIcon(TaskBarIcon):
+    def __init__(self, frame):
+        TaskBarIcon.__init__(self)
+
+        self.frame = frame
+        # file_path = os.path.abspath(os.path.dirname(sys.argv[0]))
+        image = Image.open(app_path + os.sep + appIcon)
+
+        self.SetIcon(wx.Icon(app_path + os.sep + appIcon, wx.BITMAP_TYPE_ICO), 'FlooCast')
+
+        # ------------
+
+        self.Bind(wx.EVT_MENU, self.OnTaskBarActivate, id=1)
+        self.Bind(wx.EVT_MENU, self.OnTaskBarDeactivate, id=2)
+        self.Bind(wx.EVT_MENU, self.OnTaskBarClose, id=3)
+
+    # -----------------------------------------------------------------------
+
+    def CreatePopupMenu(self):
+        menu = wx.Menu()
+        menu.Append(1, _('Show Window'))
+        menu.Append(2, _('Minimize to System Tray'))
+        menu.Append(3, _('Quit'))
+
+        return menu
+
+    def OnTaskBarClose(self, event):
+        self.frame.Close()
+
+    def OnTaskBarActivate(self, event):
+        if not self.frame.IsShown():
+            self.frame.Show()
+
+    def OnTaskBarDeactivate(self, event):
+        if self.frame.IsShown():
+            self.frame.Hide()
+
+
+def quit_all():
+    appFrame.Close()
+
+
+# Define a function for quit the window
+def quit_window(event):
+    windowIcon.Destroy()
+    appFrame.Destroy()
+
+
+# Hide the window and show on the system taskbar
+def hide_window(event):
+    if appFrame.IsShown():
+        appFrame.Hide()
+
+
+windowIcon = FlooCastTaskBarIcon(appFrame)
+appFrame.Bind(wx.EVT_ICONIZE, hide_window)
+appFrame.Bind(wx.EVT_CLOSE, quit_window)
+
+windowSb = wx.StaticBox(appPanel, wx.ID_ANY, _('Window'))
+windowSbSizer = wx.StaticBoxSizer(windowSb, wx.VERTICAL)
+minimizeButton = wx.Button(windowSb, label=_('Minimize to System Tray'))
+minimizeButton.Bind(wx.EVT_BUTTON, hide_window)
+quitButton = wx.Button(windowSb, label=_('Quit App'))
+quitButton.Bind(wx.EVT_BUTTON, quit_window)
+
+windowSbSizer.AddStretchSpacer()
+windowSbSizer.Add(minimizeButton, proportion=2, flag=wx.EXPAND | wx.LEFT | wx.RIGHT, border=10)
+windowSbSizer.AddStretchSpacer()
+windowSbSizer.Add(quitButton, proportion=2, flag=wx.EXPAND | wx.LEFT | wx.RIGHT, border=10)
+windowSbSizer.AddStretchSpacer()
+
+# A combined panel for broadcast settings and paired devices
+broadcastAndPairedDevicePanel = wx.Panel(appPanel)
+broadcastAndPairedDeviceSizer = wx.BoxSizer(wx.VERTICAL)
+
+leBroadcastSb = wx.StaticBox(broadcastAndPairedDevicePanel, wx.ID_ANY, _('LE Broadcast'))
+leBroadcastSbSizer = wx.StaticBoxSizer(leBroadcastSb, wx.VERTICAL)
+leBroadcastSwitchPanel = wx.Panel(leBroadcastSb)
+leBroadcastSwitchPanelSizer = wx.FlexGridSizer(3, 2, (0, 0))
+
 publicBroadcastEnable = None
 
 
 def public_broadcast_enable_switch_set(enable):
     global publicBroadcastEnable
     publicBroadcastEnable = enable
-    publicBroadcastEnableButton.config(image=on if publicBroadcastEnable else off)
+    publicBroadcastCheckBox.SetValue(enable)
+    publicBroadcastButton.SetBitmap(on if publicBroadcastEnable else off)
+    publicBroadcastButton.SetToolTip(
+        _('Toggle switch for') + ' ' + _('Public broadcast') + ' ' + (_('On') if publicBroadcastEnable else _(
+            'Off')))
     flooSm.setPublicBroadcast(enable)
 
 
 # Broadcast enable switch function
-def public_broadcast_enable_switch():
-    global publicBroadcastEnable
+def public_broadcast_enable_switch(event):
     public_broadcast_enable_switch_set(not publicBroadcastEnable)
 
 
-publicBroadcastEnableButton = tk.Button(leBroadcastPanel, image=off, bd=0, command=public_broadcast_enable_switch)
-publicBroadcastEnableButton.grid(column=2, row=0, sticky='e')
+publicBroadcastCheckBox = wx.CheckBox(leBroadcastSwitchPanel, wx.ID_ANY, label=_('Public broadcast') + ' (' + _(
+    'Must be enabled for compatibility with') + ' Auracast\u2122)')
+publicBroadcastButton = wx.Button(leBroadcastSwitchPanel, wx.ID_ANY, style=wx.NO_BORDER | wx.MINIMIZE)
+publicBroadcastButton.SetToolTip(_('Toggle switch for') + ' ' + _('Public broadcast') + ' ' + _('Off'))
+publicBroadcastButton.SetBitmap(off)
+leBroadcastSwitchPanel.Bind(wx.EVT_CHECKBOX, public_broadcast_enable_switch, publicBroadcastCheckBox)
+publicBroadcastButton.Bind(wx.EVT_BUTTON, public_broadcast_enable_switch)
 
-broadcastQualityLabel = tk.Label(leBroadcastPanel, text=_("Broadcast high-quality music, otherwise, voice"))
-broadcastQualityLabel.grid(column=0, row=1, columnspan=2, sticky='w')
 broadcastHighQualityEnable = None
 
 
 def broadcast_high_quality_switch_set(enable):
     global broadcastHighQualityEnable
     broadcastHighQualityEnable = enable
-    broadcastHighQualityEnableButton.config(image=on if broadcastHighQualityEnable else off)
+    broadcastHighQualityCheckBox.SetValue(enable)
+    broadcastHighQualityButton.SetBitmap(on if broadcastHighQualityEnable else off)
+    publicBroadcastButton.SetToolTip(
+        _('Toggle switch for') + ' ' + _('Broadcast high-quality music, otherwise, voice') + ' ' + (_(
+            'On') if broadcastHighQualityEnable else _(
+            'Off')))
     flooSm.setBroadcastHighQuality(enable)
 
 
 # Broadcast high quality enable switch function
-def broadcast_high_quality_enable_switch():
-    global broadcastHighQualityEnable
+def broadcast_high_quality_enable_switch(event):
     broadcast_high_quality_switch_set(not broadcastHighQualityEnable)
 
 
-broadcastHighQualityEnableButton = tk.Button(leBroadcastPanel, image=off, bd=0,
-                                             command=broadcast_high_quality_enable_switch)
-broadcastHighQualityEnableButton.grid(column=2, row=1, sticky='e')
+broadcastHighQualityCheckBox = wx.CheckBox(leBroadcastSwitchPanel, wx.ID_ANY,
+                                           label=_('Broadcast high-quality music, otherwise, voice') + ' (' + _(
+                                               'Must be disabled for compatibility with') + ' Auracast\u2122)')
+broadcastHighQualityButton = wx.Button(leBroadcastSwitchPanel, wx.ID_ANY, style=wx.NO_BORDER | wx.MINIMIZE)
+broadcastHighQualityButton.SetToolTip(
+    _('Toggle switch for') + ' ' + _('Broadcast high-quality music, otherwise, voice') + ' ' + _('Off'))
+broadcastHighQualityButton.SetBitmap(off)
+leBroadcastSwitchPanel.Bind(wx.EVT_CHECKBOX, broadcast_high_quality_enable_switch, broadcastHighQualityCheckBox)
+broadcastHighQualityButton.Bind(wx.EVT_BUTTON, broadcast_high_quality_enable_switch)
 
-broadcastEncryptEnableLabel = tk.Label(leBroadcastPanel, text=_("Encrypt broadcast; please set a key first"))
-broadcastEncryptEnableLabel.grid(column=0, row=2, columnspan=2, sticky='w')
 broadcastEncryptEnable = None
 
 
 def broadcast_encrypt_switch_set(enable):
     global broadcastEncryptEnable
     broadcastEncryptEnable = enable
-    broadcastEncryptEnableButton.config(image=on if broadcastEncryptEnable else off)
+    broadcastEncryptCheckBox.SetValue(enable)
+    broadcastEncryptButton.SetBitmap(on if broadcastEncryptEnable else off)
+    broadcastEncryptButton.SetToolTip(
+        _('Toggle switch for') + ' ' + _('Encrypt broadcast; please set a key first') + ' ' + (_(
+            'On') if broadcastEncryptEnable else _('Off')))
     flooSm.setBroadcastEncrypt(enable)
 
 
 # Broadcast encrypt enable switch function
-def broadcast_encrypt_enable_switch():
-    global broadcastEncryptEnable
+def broadcast_encrypt_enable_switch(event):
     broadcast_encrypt_switch_set(not broadcastEncryptEnable)
 
 
-broadcastEncryptEnableButton = tk.Button(leBroadcastPanel, image=off, bd=0, command=broadcast_encrypt_enable_switch)
-broadcastEncryptEnableButton.grid(column=2, row=2, sticky='e')
+broadcastEncryptCheckBox = wx.CheckBox(leBroadcastSwitchPanel, wx.ID_ANY,
+                                       label=_('Encrypt broadcast; please set a key first'))
+broadcastEncryptButton = wx.Button(leBroadcastSwitchPanel, wx.ID_ANY, style=wx.NO_BORDER | wx.MINIMIZE)
+broadcastEncryptButton.SetToolTip(
+    _('Toggle switch for') + ' ' + _('Encrypt broadcast; please set a key first') + ' ' + _('Off'))
+broadcastEncryptButton.SetBitmap(off)
+leBroadcastSwitchPanel.Bind(wx.EVT_CHECKBOX, broadcast_encrypt_enable_switch, broadcastEncryptCheckBox)
+broadcastEncryptButton.Bind(wx.EVT_BUTTON, broadcast_encrypt_enable_switch)
 
-broadcastNameLabel = tk.Label(leBroadcastPanel, text=_("Broadcast Name, maximum 30 characters"))
-broadcastNameLabel.grid(column=0, row=3, sticky='w')
-broadcastName = tk.StringVar()
+leBroadcastSwitchPanelSizer.Add(publicBroadcastCheckBox, flag=wx.ALIGN_LEFT)
+leBroadcastSwitchPanelSizer.Add(publicBroadcastButton, flag=wx.ALIGN_RIGHT)
+leBroadcastSwitchPanelSizer.Add(broadcastHighQualityCheckBox, flag=wx.ALIGN_LEFT)
+leBroadcastSwitchPanelSizer.Add(broadcastHighQualityButton, flag=wx.ALIGN_RIGHT)
+leBroadcastSwitchPanelSizer.Add(broadcastEncryptCheckBox, flag=wx.ALIGN_LEFT)
+leBroadcastSwitchPanelSizer.Add(broadcastEncryptButton, flag=wx.ALIGN_RIGHT)
+
+leBroadcastSwitchPanelSizer.AddGrowableCol(0, 0)
+leBroadcastSwitchPanelSizer.AddGrowableCol(1, 1)
+
+leBroadcastEntryPanel = wx.Panel(leBroadcastSb)
+leBroadcastEntryPanelSizer = wx.FlexGridSizer(2, 2, (0, 0))
 
 
-# Broadcase name entry function
-def broadcast_name_entry(name: str):
-    bytes = name.encode('utf-8')
-    if len(bytes) > 0 and len(bytes) < 31:
+# Broadcast name entry function
+def broadcast_name_entry(event):
+    name = broadcastNameEntry.GetValue()
+    print("new broadcast name", name)
+    nameBytes = name.encode('utf-8')
+    if 0 < len(nameBytes) < 31:
         flooSm.setBroadcastName(name)
-    else:
-        broadcastNameEntry.put_placeholder()
+    event.Skip()
 
 
-broadcastNameEntry = EntryWithPlaceholder(leBroadcastPanel, textvariable=broadcastName,
-                                          placeholder=_("Input a new name of no more than 30 characters then press <ENTER>"),
-                                          edit_end_proc=broadcast_name_entry)
-broadcastNameEntry.grid(column=1, row=3, columnspan=2, padx=4, sticky='we')
+broadcastNameLabel = wx.StaticText(leBroadcastEntryPanel, wx.ID_ANY, label=_('Broadcast Name, maximum 30 characters'))
+broadcastNameEntry = wx.SearchCtrl(leBroadcastEntryPanel, wx.ID_ANY)
+broadcastNameEntry.ShowSearchButton(False)
+broadcastNameEntry.SetHint(_("Input a new name of no more than 30 characters then press <ENTER>"))
+broadcastNameEntry.SetDescriptiveText(_("Input a new name of no more than 30 characters then press <ENTER>"))
+broadcastNameEntry.Bind(wx.EVT_SEARCHCTRL_SEARCH_BTN, broadcast_name_entry)
+broadcastNameEntry.Bind(wx.EVT_KILL_FOCUS, broadcast_name_entry)
 
-broadcastKeyLabel = tk.Label(leBroadcastPanel, text=_("Broadcast Key, maximum 16 characters"))
-broadcastKeyLabel.grid(column=0, row=4, sticky='w')
-broadcastKey = tk.StringVar()
 
-
-# Broadcase key entry function
-def broadcast_key_entry(key: str):
-    bytes = key.encode('utf-8')
-    if len(bytes) > 0 and len(bytes) < 17:
+# Broadcast key entry function
+def broadcast_key_entry(event):
+    key = broadcastKeyEntry.GetValue()
+    keyBytes = key.encode('utf-8')
+    if 0 < len(keyBytes) < 17:
         flooSm.setBroadcastKey(key)
-    else:
-        broadcastNameEntry.put_placeholder()
+    event.Skip()
 
 
-broadcastKeyEntry = EntryWithPlaceholder(leBroadcastPanel, textvariable=broadcastKey,
-                                         placeholder=_(
-                                             "Input a new key then press <ENTER>"),
-                                         edit_end_proc=broadcast_key_entry)
-broadcastKeyEntry.grid(column=1, row=4, columnspan=2, padx=4, sticky='we')
+broadcastKey = wx.StaticText(leBroadcastEntryPanel, wx.ID_ANY, label=_('Broadcast Key, maximum 16 characters'))
+broadcastKeyEntry = wx.SearchCtrl(leBroadcastEntryPanel, wx.ID_ANY, style=wx.TE_PASSWORD)
+broadcastKeyEntry.ShowSearchButton(False)
+# broadcastKeyEntry.SetHint(_("Input a new key then press <ENTER>"))
+broadcastKeyEntry.SetDescriptiveText(_("Input a new key then press <ENTER>"))
+broadcastKeyEntry.Bind(wx.EVT_SEARCHCTRL_SEARCH_BTN, broadcast_key_entry)
+broadcastKeyEntry.Bind(wx.EVT_KILL_FOCUS, broadcast_key_entry)
+
+leBroadcastEntryPanelSizer.Add(broadcastNameLabel, flag=wx.ALIGN_LEFT | wx.ALIGN_CENTER_VERTICAL)
+leBroadcastEntryPanelSizer.Add(broadcastNameEntry, flag=wx.EXPAND | wx.LEFT, border=8)
+leBroadcastEntryPanelSizer.Add(broadcastKey, flag=wx.ALIGN_LEFT | wx.ALIGN_CENTER_VERTICAL)
+leBroadcastEntryPanelSizer.Add(broadcastKeyEntry, flag=wx.EXPAND | wx.LEFT, border=8)
+
+leBroadcastEntryPanelSizer.AddGrowableCol(0, 1)
+leBroadcastEntryPanelSizer.AddGrowableCol(1, 1)
+leBroadcastEntryPanel.SetSizer(leBroadcastEntryPanelSizer)
+
+leBroadcastSbSizer.Add(leBroadcastSwitchPanel, flag=wx.EXPAND | wx.TOP, border=4)
+leBroadcastSbSizer.Add(leBroadcastEntryPanel, flag=wx.EXPAND, border=4)
+leBroadcastSwitchPanel.SetSizer(leBroadcastSwitchPanelSizer)
+
+pairedDevicesSb = wx.StaticBox(broadcastAndPairedDevicePanel, wx.ID_ANY, _('Most Recently Used Devices'))
+pairedDevicesSbPanelSizer = wx.StaticBoxSizer(pairedDevicesSb, wx.VERTICAL)
+
+pairedDevicesSbButtonPanel = wx.Panel(pairedDevicesSb)
+pairedDevicesSbButtonPanelSizer = wx.BoxSizer(wx.HORIZONTAL)
 
 
 # New pairing button function
-def button_new_pairing():
+def button_new_pairing(event):
     flooSm.setNewPairing()
 
 
-pairedDevicesPanel.columnconfigure(0, weight=0)
-pairedDevicesPanel.columnconfigure(1, weight=1)
-pairedDevicesPanel.columnconfigure(2, weight=0)
-pairedDevicesPanel.rowconfigure(0, weight=0)
-pairedDevicesPanel.rowconfigure(1, weight=1)
-
-# newPairFrame = tk.Frame(pairedDevicesPanel)
-# newPairFrame.grid(column=0, row=0, padx=4, sticky='w')
-newPairingButton = tk.Button(pairedDevicesPanel, text='+', relief="groove", command=button_new_pairing)
-newPairingButton.grid(column=0, row=0, padx=4, sticky='we')
-# newPairingButton.pack(side = tk.LEFT)
-newPairingLabel = tk.Label(pairedDevicesPanel, text=_("Add device"))
-newPairingLabel.grid(column=1, row=0, padx=4, sticky='w')
-
-
-# newPairingLabel.pack(side = tk.LEFT)
-
 # Clear all paired device function
-def button_clear_all():
+def button_clear_all(event):
     flooSm.clearAllPairedDevices()
 
 
-class PopMenuListbox(tk.Listbox):
-
-    def __init__(self, parent, *args, **kwargs):
-        tk.Listbox.__init__(self, parent, *args, **kwargs)
-        self.popup_menu = tk.Menu(self, tearoff=0)
-        self.popup_menu.add_command(command=self.connect_disconnect_selected)
-        self.popup_menu.add_command(label=_("Delete"), command=self.delete_selected)
-        self.bind("<Button-3>", self.popup)  # Button-2 on Aqua
-        self.popup_menu.bind("<FocusOut>", self.hide)
-
-    def popup(self, event):
-        # resolve selected device index
-        sel = self.nearest(event.y)
-        if sel >= 0:
-            try:
-                # set proper menu label based on device status
-                self.popup_menu.entryconfig(
-                    0, label=_("Connect") if sel > 0 or flooSm.sourceState < 4 else _("Disconnect"))
-                # forcefully select the device for better UX
-                self.selection_clear(0, tk.END)
-                self.selection_set(sel, sel)
-                # show popup menu
-                self.popup_menu.tk_popup(event.x_root, event.y_root, sel)
-            finally:
-                # TODO there might be a better way to achieve same behavior on different OSes
-                if platform.system().lower().startswith('win'):
-                    self.popup_menu.grab_release()
-                else:
-                    self.popup_menu.grab_set()
-
-    def hide(self, event=None):
-        self.popup_menu.unpost()
-
-    def delete_selected(self):
-        for i in self.curselection()[::-1]:
-            flooSm.clearIndexedDevice(i)
-
-    def connect_disconnect_selected(self):
-        for i in self.curselection()[::-1]:
-            flooSm.toggleConnection(i)
-        # self.selection_set(0, 'end')
+newPairingButton = wx.Button(pairedDevicesSbButtonPanel, wx.ID_ANY, label=_('Add device'))
+clearAllButton = wx.Button(pairedDevicesSbButtonPanel, wx.ID_ANY, label=_('Clear All'))
+pairedDevicesSbButtonPanelSizer.Add(newPairingButton, flag=wx.LEFT)
+pairedDevicesSbButtonPanelSizer.AddStretchSpacer()
+pairedDevicesSbButtonPanelSizer.Add(clearAllButton, flag=wx.RIGHT)
+newPairingButton.Bind(wx.EVT_BUTTON, button_new_pairing)
+clearAllButton.Bind(wx.EVT_BUTTON, button_clear_all)
+pairedDevicesSbButtonPanel.SetSizer(pairedDevicesSbButtonPanelSizer)
 
 
-clearAllButton = tk.Button(pairedDevicesPanel, text=_("Clear All"), relief="groove", command=button_clear_all)
-clearAllButton.grid(column=2, row=0, padx=4, sticky='we')
-pairedDeviceFrame = tk.Frame(pairedDevicesPanel)
-pairedDeviceFrame.grid(column=0, row=1, columnspan=3, padx=4, sticky='nswe')
-pairedDeviceListbox = PopMenuListbox(pairedDeviceFrame)  # selectmode=tk.MULTIPLE
-pairedDeviceListbox.pack(side=tk.LEFT, expand=True, fill=tk.BOTH)
-scrollbar = tk.Scrollbar(pairedDeviceFrame)
-scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
-pairedDeviceListbox.config(yscrollcommand=scrollbar.set)
-scrollbar.config(command=pairedDeviceListbox.yview)
+class PopMenu(wx.Menu):
+    def __init__(self, parent):
+        super(PopMenu, self).__init__()
+        self.parent = parent
+        listBox = parent
+        self.index = listBox.GetSelection()
+        # menu item Connect/Disconnect
+        menuItemConnection = wx.MenuItem(self, wx.ID_ANY, _("Connect") if self.index > 0 or
+                                                                          flooSm.sourceState < 4 else _("Disconnect"))
+        self.Bind(wx.EVT_MENU, self.connect_disconnect_selected, menuItemConnection)
+        self.Append(menuItemConnection)
+        # menu item clear
+        menuItemDelete = wx.MenuItem(self, wx.ID_ANY, _("Delete"))
+        self.Bind(wx.EVT_MENU, self.delete_selected, menuItemDelete)
+        self.Append(menuItemDelete)
+
+    def delete_selected(self, e):
+        flooSm.clearIndexedDevice(self.index)
+
+    def connect_disconnect_selected(self, e):
+        flooSm.toggleConnection(self.index)
+
+
+def OnContextMenu(Event):
+    listBox = Event.GetEventObject()
+    listBox.PopupMenu(PopMenu(listBox), listBox.ScreenToClient(Event.GetPosition()))  # wx.GetMousePosition()
+
+
+pairedDeviceListbox = wx.ListBox(pairedDevicesSb, style=wx.LB_SINGLE | wx.LB_ALWAYS_SB)
+pairedDeviceListbox.Bind(wx.EVT_CONTEXT_MENU, OnContextMenu)
 currentPairedDeviceList = []
 
+pairedDevicesSbPanelSizer.Add(pairedDevicesSbButtonPanel, proportion=0, flag=wx.EXPAND)
+pairedDevicesSbPanelSizer.Add(pairedDeviceListbox, proportion=1, flag=wx.EXPAND)
 
-# pairedDeviceListbox = tk.Listbox(pairedDeviceFrame, )
-# pairedDeviceListbox.pack(side=tk.LEFT, expand=True, fill=tk.BOTH)
-# scrollbar = tk.Scrollbar(pairedDeviceFrame)
-# scrollbar.pack(side = tk.RIGHT, fill=tk.Y)
-# pairedDeviceListbox.config(yscrollcommand = scrollbar.set)
-# scrollbar.config(command = pairedDeviceListbox.yview)
+broadcastAndPairedDeviceSizer.Add(leBroadcastSbSizer, proportion=0, flag=wx.EXPAND)
+broadcastAndPairedDeviceSizer.Add(pairedDevicesSbPanelSizer, proportion=1, flag=wx.EXPAND)
+broadcastAndPairedDevicePanel.SetSizer(broadcastAndPairedDeviceSizer)
 
-def enable_pairing_widgets(enable: bool):
-    global clearAllButton
-    global newPairingButton
-    if enable:
-        newPairingButton.config(state=tk.NORMAL)
-        clearAllButton.config(state=tk.NORMAL)
-    else:
-        newPairingButton.config(state=tk.DISABLED)
-        clearAllButton.config(state=tk.DISABLED)
+# Settings panel
+aboutSb = wx.StaticBox(appPanel, wx.ID_ANY, _('Settings'))
+aboutSbSizer = wx.StaticBoxSizer(aboutSb, wx.VERTICAL)
+settingsPanel = wx.Panel(aboutSb)
+settingsPanelSizer = wx.FlexGridSizer(3, 2, (5, 0))
 
-
-# Window panel
-def quit_all():
-    root.destroy()
-
-
-# Define a function for quit the window
-def quit_window(icon, TrayMenuItem):
-    icon.stop()
-    root.destroy()
-
-
-# Define a function to show the window again
-def show_window(icon, TrayMenuItem):
-    global windowIcon
-    try:
-        icon.stop()
-        root.update()
-        root.deiconify()
-        windowIcon = None
-    except Exception:
-        pass
-
-
-# Hide the window and show on the system taskbar
-def hide_window():
-    global windowIcon
-    root.withdraw()
-    # file_path = os.path.abspath(os.path.dirname(sys.argv[0]))
-    image = Image.open(app_path + os.sep + appIcon)
-    menu = (TrayMenuItem(_('Show Window'), show_window), TrayMenuItem(_('Quit'), quit_window))
-    icon = pystray.Icon(appTitle, image, _("FlooGoo Bluetooth Audio Source"), menu)  # "FlooGoo Bluetooth Audio Source"
-    icon.run()
-    windowIcon = icon
-
-
-windowIcon = None
-root.protocol('WM_DELETE_WINDOW', hide_window)
-windowPanel.columnconfigure(0, weight=1)
-windowPanel.columnconfigure(1, weight=1)
-minimizeButton = tk.Button(windowPanel, text=_("Minimize to System Tray"), command=hide_window)
-minimizeButton.grid(column=0, row=0, columnspan=2, padx=(10, 10), pady=(15, 15), sticky='ew')
-quitButton = tk.Button(windowPanel, text=_("Quit App"), command=quit_all)
-quitButton.grid(column=0, row=1, columnspan=2, padx=(10, 10), pady=(0, 15), sticky='ew')
-
-
-# aboutPanel
-def url_callback(url):
-    webbrowser.open_new(url)
-
-
-aboutPanel.rowconfigure(0, weight=0)
-aboutPanel.rowconfigure(1, weight=0)
-aboutPanel.rowconfigure(2, weight=1)
-aboutPanel.rowconfigure(3, weight=1)
-
-ledEnableLabel = tk.Label(aboutPanel, text=_("LED"))
-ledEnableLabel.grid(column=0, row=0, sticky='w')
 ledEnable = None
 
 
 def led_enable_switch_set(enable):
     global ledEnable
     ledEnable = enable
-    ledEnableButton.config(image=on if ledEnable else off)
+    ledCheckBox.SetValue(enable)
+    ledEnableButton.SetBitmap(on if ledEnable else off)
+    ledEnableButton.SetToolTip(_('Toggle switch for') + ' ' + _('LED') + ' ' + (_('On') if ledEnable else _('Off')))
     flooSm.enableLed(enable)
 
 
-# Broadcast enable switch function
-def led_enable_switch():
-    global ledEnable
+# led enable switch function
+def led_enable_switch(event):
     led_enable_switch_set(not ledEnable)
 
 
-ledEnableButton = tk.Button(aboutPanel, image=off, bd=0, command=led_enable_switch)
-ledEnableButton.grid(column=1, row=0, sticky='e')
+ledCheckBox = wx.CheckBox(settingsPanel, wx.ID_ANY, label=_('LED'))
+ledEnableButton = wx.Button(settingsPanel, wx.ID_ANY, style=wx.NO_BORDER | wx.MINIMIZE)
+ledEnableButton.SetToolTip(_('Toggle switch for') + ' ' + _('LED') + ' ' + _(' Off'))
+ledEnableButton.SetBitmap(off)
+settingsPanel.Bind(wx.EVT_CHECKBOX, led_enable_switch, ledCheckBox)
+ledEnableButton.Bind(wx.EVT_BUTTON, led_enable_switch)
 
-aptxLosslessEnableLabel = tk.Label(aboutPanel, text="aptX\u2122 Lossless")
-aptxLosslessEnableLabel.grid(column=0, row=1, sticky='w')
 aptxLosslessEnable = None
 
 
 def aptxLossless_enable_switch_set(enable):
     global aptxLosslessEnable
     aptxLosslessEnable = enable
-    aptxLosslessEnableButton.config(image=on if aptxLosslessEnable else off)
+    aptxLosslessCheckBox.SetValue(enable)
+    aptxLosslessEnableButton.SetBitmap(on if aptxLosslessEnable else off)
+    aptxLosslessEnableButton.SetToolTip(
+        _('Toggle switch for') + ' ' + _('aptX Lossless') + ' ' + (_('On') if aptxLosslessEnable else _('Off')))
     flooSm.enableAptxLossless(enable)
 
 
-# Broadcast enable switch function
-def aptxLossless_enable_switch():
-    global aptxLosslessEnable
+# aptxLossless enable switch function
+def aptxLossless_enable_switch(event):
     aptxLossless_enable_switch_set(not aptxLosslessEnable)
 
 
-aptxLosslessEnableButton = tk.Button(aboutPanel, image=off, bd=0, command=aptxLossless_enable_switch)
-aptxLosslessEnableButton.grid(column=1, row=1, sticky='e')
+aptxLosslessCheckBox = wx.CheckBox(settingsPanel, wx.ID_ANY, label='aptX\u2122 Lossless')
+aptxLosslessEnableButton = wx.Button(settingsPanel, wx.ID_ANY, style=wx.NO_BORDER | wx.MINIMIZE)
+aptxLosslessEnableButton.SetToolTip(_('Toggle switch for') + ' ' + _('aptX Lossless') + ' ' + _('Off'))
+aptxLosslessEnableButton.SetBitmap(off)  # , wx.RIGHT
+settingsPanel.Bind(wx.EVT_CHECKBOX, aptxLossless_enable_switch, aptxLosslessCheckBox)
+aptxLosslessEnableButton.Bind(wx.EVT_BUTTON, aptxLossless_enable_switch)
 
-resetExplanationLabel = tk.Message(aboutPanel,
-                                   text=_("Disconnect and reconnect the dongle to activate configuration changes, "
-                                          "after which it will function independently without the app."),
-                                   aspect=400)
-resetExplanationLabel.grid(column=0, row=3, columnspan=2, padx=(0, 0), sticky='ewns')
+gattClientWithBroadcastEnable = None
 
-aboutFrame = tk.Frame(aboutPanel)
-aboutFrame.grid(row=2, column=0, columnspan=2)
-logoFrame = tk.Frame(aboutFrame, relief=tk.RAISED)
-logoFrame.pack(pady=4)
-logo = tk.Canvas(logoFrame, width=230, height=64)
-img = tk.PhotoImage(file=app_path + os.sep + appLogoPng)
-logo.create_image(0, 0, anchor=tk.NW, image=img)
-logo.pack()
-copyRightInfo = tk.Label(aboutFrame, text="Copyright© 2023~2024 Flairmesh Technologies.")
-copyRightInfo.pack()
-thirdPartyLink = tk.Label(aboutFrame, text=_("Third-Party Software Licenses"), fg="blue", cursor="hand2")
-thirdPartyLink.pack()
-thirdPartyLink.bind("<Button-1>", lambda e: url_callback("https://www.flairmesh.com/support/third_lic.html"))
-supportLink = tk.Label(aboutFrame, text=_("Support Link"), fg="blue", cursor="hand2")
-supportLink.pack()
-supportLink.bind("<Button-1>", lambda e: url_callback("https://www.flairmesh.com/Dongle/FMA120.html"))
-versionInfo = tk.Label(aboutFrame, text=_("Version") + " " + "1.0.9")
-versionInfo.pack()
+
+def gatt_client_enable_switch_set(enable):
+    global gattClientWithBroadcastEnable
+    gattClientWithBroadcastEnable = enable
+    gattClientWithBroadcastCheckBox.SetValue(enable)
+    gattClientWithBroadcastEnableButton.SetBitmap(on if gattClientWithBroadcastEnable else off)
+    gattClientWithBroadcastEnableButton.SetToolTip(
+        _('Toggle switch for') + ' ' + 'GATT ' + _('Client') + ' ' + (
+            _('On') if gattClientWithBroadcastEnable else _('Off')))
+    flooSm.enableGattClient(enable)
+
+
+# gatt client enable switch function
+def gatt_client_enable_switch(event):
+    gatt_client_enable_switch_set(not gattClientWithBroadcastEnable)
+
+
+gattClientWithBroadcastCheckBox = wx.CheckBox(settingsPanel, wx.ID_ANY, label='GATT ' + _('Client'))
+gattClientWithBroadcastEnableButton = wx.Button(settingsPanel, wx.ID_ANY, style=wx.NO_BORDER | wx.MINIMIZE)
+gattClientWithBroadcastEnableButton.SetToolTip(_('Toggle switch for') + ' ' + ('GATT ') + _('Client') + ' ' + _('Off'))
+gattClientWithBroadcastEnableButton.SetBitmap(off)  # , wx.RIGHT
+settingsPanel.Bind(wx.EVT_CHECKBOX, gatt_client_enable_switch, gattClientWithBroadcastCheckBox)
+gattClientWithBroadcastEnableButton.Bind(wx.EVT_BUTTON, gatt_client_enable_switch)
+
+settingsPanelSizer.Add(ledCheckBox, 1, flag=wx.ALIGN_LEFT | wx.ALIGN_CENTER_VERTICAL)
+settingsPanelSizer.Add(ledEnableButton, flag=wx.ALIGN_RIGHT)
+settingsPanelSizer.Add(aptxLosslessCheckBox, 1, flag=wx.ALIGN_LEFT | wx.ALIGN_CENTER_VERTICAL)
+settingsPanelSizer.Add(aptxLosslessEnableButton, flag=wx.ALIGN_RIGHT)
+settingsPanelSizer.Add(gattClientWithBroadcastCheckBox, 1, flag=wx.ALIGN_LEFT | wx.ALIGN_CENTER_VERTICAL)
+settingsPanelSizer.Add(gattClientWithBroadcastEnableButton, flag=wx.ALIGN_RIGHT)
+settingsPanelSizer.Hide(aptxLosslessCheckBox)
+settingsPanelSizer.Hide(aptxLosslessEnableButton)
+settingsPanelSizer.Hide(gattClientWithBroadcastCheckBox)
+settingsPanelSizer.Hide(gattClientWithBroadcastEnableButton)
+
+settingsPanelSizer.AddGrowableCol(0, 1)
+settingsPanelSizer.AddGrowableCol(1, 0)
+settingsPanel.SetSizer(settingsPanelSizer)
+
+versionPanel = wx.Panel(aboutSb)
+versionPanelSizer = wx.BoxSizer(wx.VERTICAL)
+logoImg = wx.Image(app_path + os.sep + appLogoPng, wx.BITMAP_TYPE_PNG).ConvertToBitmap()
+logoStaticBmp = wx.StaticBitmap(versionPanel, wx.ID_ANY, logoImg)
+logoStaticBmp.SetToolTip(_('FlooGoo'))
+versionPanelSizer.Add(logoStaticBmp, flag=wx.ALIGN_CENTER)
+copyRightText = "Copyright© 2023~2024 Flairmesh Technologies."
+copyRightInfo = wx.StaticText(versionPanel, wx.ID_ANY, label=copyRightText)
+versionPanelSizer.Add(copyRightInfo, flag=wx.ALIGN_CENTER | wx.BOTTOM, border=4)
+font = wx.Font(pointSize=10, family=wx.DEFAULT,
+               style=wx.NORMAL, weight=wx.NORMAL,
+               faceName='Consolas')
+dc = wx.ScreenDC()
+dc.SetFont(font)
+settingsMaxWidth, notUsed = dc.GetTextExtent(copyRightText)
+thirdPartyLink = hl.HyperLinkCtrl(versionPanel, wx.ID_ANY, _("Third-Party Software Licenses"),
+                                  URL="https://www.flairmesh.com/support/third_lic.html")
+versionPanelSizer.Add(thirdPartyLink, flag=wx.ALIGN_CENTER | wx.BOTTOM, border=4)
+supportLink = hl.HyperLinkCtrl(versionPanel, wx.ID_ANY, _("Support Link"),
+                               URL="https://www.flairmesh.com/Dongle/FMA120.html")
+versionPanelSizer.Add(supportLink, flag=wx.ALIGN_CENTER | wx.BOTTOM, border=4)
+versionPanel.SetSizer(versionPanelSizer)
+versionInfo = wx.StaticText(versionPanel, wx.ID_ANY, label=_("Version") + "1.1.0")
+versionPanelSizer.Add(versionInfo, flag=wx.ALIGN_CENTER | wx.BOTTOM, border=4)
 
 dfuUndergoing = False
-dfuInfo = tk.Label(aboutFrame, text="")
-dfuInfoDefaultColor = dfuInfo.cget('foreground')
+
+# dfuInfoDefaultColor = dfuInfo.cget('foreground')
 dfuInfoBind = False
 firmwareVersion = ""
 variant = ""
@@ -541,90 +648,120 @@ def update_dfu_info(state: int):
     global firmwareVersion
     global dfuInfoBind
 
-    if dfuInfoBind:
-        dfuInfo.unbind("<Button-1>")
-        dfuInfoBind = False
-        dfuInfo.config(fg=dfuInfoDefaultColor, cursor='')
-    #print(state)
     if state == FlooDfuThread.DFU_STATE_DONE:
-        dfuInfo.config(text=_("Firmware") + " " + firmwareVersion)
-        minimizeButton.config(state=tk.NORMAL)
-        quitButton.config(state=tk.NORMAL)
-        dfuButton.config(state=tk.NORMAL)
+        audioModeSb.Enable()
+        windowSb.Enable()
+        broadcastAndPairedDevicePanel.Enable()
+        settingsPanel.Enable()
+        dfuButton.Enable()
+        dfuInfo.SetLabelText(_("Firmware") + " " + firmwareVersion)
         dfuUndergoing = False
     elif state > FlooDfuThread.DFU_STATE_DONE:
-        dfuInfo.config(text=_("Upgrade error"))
-        minimizeButton.config(state=tk.NORMAL)
-        quitButton.config(state=tk.NORMAL)
-        # dfuButton.config(state=tk.NORMAL)
+        dfuInfo.SetLabelText(_("Upgrade error"))
+        windowSb.Enable()
         dfuUndergoing = True
     else:
-        dfuInfo.config(text=_("Upgrade progress") + (" %d" % state) + "%")
+        versionPanelSizer.Hide(newFirmwareUrl)
+        versionPanelSizer.Show(dfuInfo)
+        dfuInfo.SetLabelText(_("Upgrade progress") + (" %d" % state) + "%")
         if not dfuUndergoing:
-            dfuInfo.pack()
-            minimizeButton.config(state=tk.DISABLED)
-            quitButton.config(state=tk.DISABLED)
-            dfuButton.config(state=tk.DISABLED)
+            dfuButton.Disable()
+            audioModeSb.Disable()
+            windowSb.Disable()
+            broadcastAndPairedDevicePanel.Disable()
+            settingsPanel.Disable()
             dfuUndergoing = True
+    versionPanelSizer.Layout()
 
 
-def button_dfu():
-    filename = fd.askopenfilename(filetypes=[("Binary files", ".bin")])
-    if filename:
-        os.chdir(app_path)
-        fileBasename = os.path.splitext(filename)[0]
-        if not re.search(r'\d+$', fileBasename):
-            fileBasename = fileBasename[:-1]
-        fileBasename += variant
-        filename = fileBasename + ".bin"
-        print(filename)
-        if os.path.isfile(filename):
-            dfuThread = FlooDfuThread([app_path, filename], update_dfu_info)
-            dfuThread.start()
+def button_dfu(event):
+    with wx.FileDialog(appFrame, _("Open Firmware file"), wildcard="Bin files (*.bin)|*.bin",
+                       style=wx.FD_OPEN | wx.FD_FILE_MUST_EXIST) as fileDialog:
+
+        if fileDialog.ShowModal() == wx.ID_CANCEL:
+            return  # the user changed their mind
+
+        # Proceed loading the file chosen by the user
+        filename = fileDialog.GetPath()
+        if filename:
+            print("app directory ", app_path)
+            os.chdir(app_path)
+            # os.add_dll_directory(app_path)
+            fileBasename = os.path.splitext(filename)[0]
+            if not re.search(r'\d+$', fileBasename):
+                fileBasename = fileBasename[:-1]
+            fileBasename += variant
+            filename = fileBasename + ".bin"
+            print(filename)
+            if os.path.isfile(filename):
+                dfuThread = FlooDfuThread([app_path, filename], update_dfu_info)
+                dfuThread.start()
 
 
 if platform.system().lower().startswith('win'):
-    dfuButton = tk.Button(aboutFrame, text=_('Device Firmware Upgrade'), relief="groove", command=button_dfu)
-    dfuButton.pack()
+    dfuButton = wx.Button(versionPanel, wx.ID_ANY, label=_('Device Firmware Upgrade'))
+    dfuButton.Bind(wx.EVT_BUTTON, button_dfu)
+    versionPanelSizer.Add(dfuButton, flag=wx.ALIGN_CENTER | wx.BOTTOM, border=4)
+
+dfuInfo = wx.StaticText(versionPanel, wx.ID_ANY, "")
+versionPanelSizer.Add(dfuInfo, flag=wx.ALIGN_CENTER)
+newFirmwareUrl = hl.HyperLinkCtrl(versionPanel, wx.ID_ANY, _("New Firmware is available"), URL="")
+versionPanelSizer.Add(newFirmwareUrl, flag=wx.ALIGN_CENTER)
+versionPanelSizer.Hide(newFirmwareUrl)
+
+# aboutFrameDesc = wx.Panel(aboutSb)
+resetExplanationLabel = wx.StaticText(aboutSb, wx.ID_ANY,
+                                      label=_("Disconnect and reconnect the dongle to activate configuration changes, " \
+                                              "after which it will function independently without the app."))
+resetExplanationLabel.Wrap(settingsMaxWidth)
+
+aboutSbSizer.Add(settingsPanel, proportion=1, flag=wx.EXPAND)
+aboutSbSizer.Add(versionPanel, proportion=3)
+aboutSbSizer.Add(resetExplanationLabel, proportion=1)
+
+appSizer.Add(audioModeSbSizer, flag=wx.EXPAND | wx.LEFT, border=4)
+appSizer.Add(windowSbSizer, flag=wx.EXPAND | wx.RIGHT, border=4)
+appSizer.Add(broadcastAndPairedDevicePanel, flag=wx.EXPAND | wx.LEFT, border=4)
+appSizer.Add(aboutSbSizer, flag=wx.EXPAND | wx.RIGHT, border=4)
+
+appSizer.AddGrowableRow(0, 0)
+appSizer.AddGrowableRow(1, 1)
+appSizer.AddGrowableCol(0, 1)
+appSizer.AddGrowableCol(1, 0)
+
+appPanel.SetSizer(appSizer)
+
+
+def update_status_bar(info: str):
+    global statusBar
+    statusBar.SetStatusText(text=info)
 
 
 def enable_settings_widgets(enable: bool):
+    if dfuUndergoing:
+        return
     if enable:
         if a2dpSink:
-            highQualityRadioButton.config(state=tk.DISABLED)
-            gamingModeRadioButton.config(state=tk.DISABLED)
-            preferLeaEnableButton.config(state=tk.DISABLED)
+            audioModeSb.Disable()
         else:
-            highQualityRadioButton.config(state=tk.NORMAL)
-            gamingModeRadioButton.config(state=tk.NORMAL)
-            preferLeaEnableButton.config(state=tk.NORMAL)
-        broadcastRadioButton.config(state=tk.NORMAL)
-        publicBroadcastEnableButton.config(state=tk.NORMAL)
-        broadcastHighQualityEnableButton.config(state=tk.NORMAL)
-        broadcastEncryptEnableButton.config(state=tk.NORMAL)
-        broadcastNameEntry.config(state=tk.NORMAL)
-        broadcastKeyEntry.config(state=tk.NORMAL)
-        ledEnableButton.config(state=tk.NORMAL)
-        aptxLosslessEnableButton.config(state=tk.NORMAL)
+            audioModeSb.Enable()
+        broadcastAndPairedDevicePanel.Enable()
+        settingsPanel.Enable()
+        thirdPartyLink.Refresh()
+        supportLink.Refresh()
         if platform.system().lower().startswith('win'):
-            dfuButton.config(state=tk.DISABLED if dfuUndergoing else tk.NORMAL)
+            dfuButton.Enable(not dfuUndergoing)
     else:
-        highQualityRadioButton.config(state=tk.DISABLED)
-        gamingModeRadioButton.config(state=tk.DISABLED)
-        broadcastRadioButton.config(state=tk.DISABLED)
-        preferLeaEnableButton.config(state=tk.DISABLED)
-        publicBroadcastEnableButton.config(state=tk.DISABLED)
-        broadcastHighQualityEnableButton.config(state=tk.DISABLED)
-        broadcastEncryptEnableButton.config(state=tk.DISABLED)
-        broadcastNameEntry.config(state=tk.DISABLED)
-        broadcastKeyEntry.config(state=tk.DISABLED)
-        ledEnableButton.config(state=tk.DISABLED)
-        aptxLosslessEnableButton.config(state=tk.DISABLED)
+        audioModeSb.Disable()
+        broadcastAndPairedDevicePanel.Disable()
+        settingsPanel.Disable()
         if platform.system().lower().startswith('win'):
-            dfuButton.config(state=tk.DISABLED)
+            dfuButton.Disable()
 
 
 enable_settings_widgets(False)
+
+appFrame.Show(True)  # Show the frame.
 
 
 # All GUI object initialized, start FlooStateMachine
@@ -635,6 +772,9 @@ class FlooSmDelegate(FlooStateMachineDelegate):
         global variant
         global a2dpSink
         global dfuInfoBind
+        global newFirmwareUrl
+        global versionPanelSizer
+        global aboutSbSizer
 
         if flag:
             update_status_bar(_("Use FlooGoo dongle on ") + " " + port)
@@ -656,43 +796,49 @@ class FlooSmDelegate(FlooStateMachineDelegate):
 
             if not dfuUndergoing:
                 if latest == "Unable":
-                    dfuInfo.config(text=(_("Current firmware: ") + firmwareVersion + _(", check the latest.")),
-                                   fg="blue", cursor="hand2")
-                    newFirmwareUrl = "https://www.flairmesh.com/Dongle/FMA120.html"
-                    dfuInfoBind = dfuInfo.bind("<Button-1>", lambda e: url_callback(newFirmwareUrl))
+                    newFirmwareUrl.SetLabelText(
+                        _("Current firmware: ") + firmwareVersion + _(", check the latest."))
+                    newFirmwareUrl.SetURL("https://www.flairmesh.com/Dongle/FMA120.html")
+
                 elif latest > firmwareVersion:
-                    dfuInfo.config(text=(_("New Firmware is available") + " " + firmwareVersion + " -> " + latest),
-                                   fg="blue", cursor="hand2")
-                    newFirmwareUrl = "https://www.flairmesh.com/support/FMA120_" + latest + ".zip"
-                    dfuInfoBind = dfuInfo.bind("<Button-1>", lambda e: url_callback(newFirmwareUrl))
+                    versionPanelSizer.Hide(dfuInfo)
+                    newFirmwareUrl.SetLabelText(
+                        _("New Firmware is available") + " " + firmwareVersion + " -> " + latest)
+                    newFirmwareUrl.SetURL("https://www.flairmesh.com/support/FMA120_" + latest + ".zip")
+                    versionPanelSizer.Show(newFirmwareUrl)
+                    versionPanelSizer.Layout()
                 else:
-                    if dfuInfoBind:
-                        dfuInfo.unbind("<Button-1>")
-                        dfuInfoBind = False
-                        dfuInfo.config(fg=dfuInfoDefaultColor, cursor='')
-                    dfuInfo.config(text=_("Firmware") + " " + firmwareVersion)
-            dfuInfo.pack()
+                    dfuInfo.SetLabelText(_("Firmware") + " " + firmwareVersion)
+                    versionPanelSizer.Show(dfuInfo)
+                    versionPanelSizer.Layout()
         else:
             update_status_bar(_("Please insert your FlooGoo dongle"))
-            enable_settings_widgets(flag)
-            enable_pairing_widgets(False)
-            pairedDeviceListbox.delete(0, tk.END)
-            dfuInfo.pack_forget()
+            pairedDeviceListbox.Clear()
+            versionPanelSizer.Hide(dfuInfo)
+        enable_settings_widgets(flag)
 
     def audioModeInd(self, mode: int):
-        audioMode.set(mode)
+        global audioMode
+        audioMode = mode
         if a2dpSink:
-            enable_pairing_widgets(True)
+            pairedDevicesSb.Enable(True)
         else:
-            enable_pairing_widgets(mode != 2)
+            if mode == 0:
+                audioModeHighQualityRadioButton.SetValue(True)
+            elif mode == 1:
+                audioModeGamingRadioButton.SetValue(True)
+            elif mode == 2:
+                audioModeBroadcastRadioButton.SetValue(True)
+            audio_mode_sel_set(mode)
+            pairedDevicesSb.Enable(mode != 2)
 
     def sourceStateInd(self, state: int):
-        dongleStateLabel.config(text=sourceStateStr[state])
-        # if state < 4:
-        #    codecInUseLabel.config(text=codecStr[0])
+        dongleStateText.SetLabelText(sourceStateStr[state])
+        audioModeSbSizer.Layout()
 
     def leAudioStateInd(self, state: int):
-        leaStateLabel.config(text=leaStateStr[state])
+        leaStateText.SetLabelText(leaStateStr[state])
+        audioModeSbSizer.Layout()
 
     def preferLeaInd(self, state: int):
         prefer_lea_enable_switch_set(state == 1)
@@ -703,25 +849,26 @@ class FlooSmDelegate(FlooStateMachineDelegate):
         broadcast_encrypt_switch_set(state & 1 == 1)
 
     def broadcastNameInd(self, name):
-        broadcastName.set(name)
-        enable_settings_widgets(True)
+        broadcastNameEntry.SetValue(name)
 
     def pairedDevicesUpdateInd(self, pairedDevices):
         global currentPairedDeviceList
         print("update paired list len %d" % len(pairedDevices))
-        pairedDeviceListbox.delete(0, tk.END)
+        pairedDeviceListbox.Clear()
         i = 0
         while i < len(pairedDevices):
-            pairedDeviceListbox.insert(tk.END, pairedDevices[i])
+            print(pairedDevices[i])
+            pairedDeviceListbox.Append(pairedDevices[i])
             i = i + 1
 
     def audioCodecInUseInd(self, codec, rssi, rate):
-        codecInUseLabel.config(text=codecStr[codec] if codec < len(codecStr) else _("Unknown"))
+        codecInUseText.SetLabelText(codecStr[codec] if codec < len(codecStr) else _("Unknown"))
         if (codec == 6 or codec == 10) and rssi != 0:
-            codecInUseLabel.config(text=codecStr[codec] + " @ " + str(rate) + "Kbps "
+            codecInUseText.SetLabelText(codecStr[codec] + " @ " + str(rate) + "Kbps "
                                         + _("RSSI") + " -" + str(0x100 - rssi) + "dBm")
         else:
-            codecInUseLabel.config(text=codecStr[codec] if codec < len(codecStr) else _("Unknown"))
+            codecInUseText.SetLabelText(codecStr[codec] if codec < len(codecStr) else _("Unknown"))
+        audioModeSbSizer.Layout()
 
     def ledEnabledInd(self, enabled):
         led_enable_switch_set(enabled)
@@ -729,11 +876,13 @@ class FlooSmDelegate(FlooStateMachineDelegate):
     def aptxLosslessEnabledInd(self, enabled):
         aptxLossless_enable_switch_set(enabled)
 
+    def gattClientEnabledInd(self, enabled):
+        gatt_client_enable_switch_set(enabled)
+
 
 flooSmDelegate = FlooSmDelegate()
 flooSm = FlooStateMachine(flooSmDelegate)
 flooSm.daemon = True
 flooSm.start()
 
-# Execute Tkinter
-root.mainloop()
+app.MainLoop()
