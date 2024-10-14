@@ -261,3 +261,26 @@ msgstr ", ελέγξτε τα πιο πρόσφατα."
 
 msgid "Current firmware: "
 msgstr "Τρέχον υλικολογισμικό:"
+
+#: Added from 1.1.0
+msgid "Must be disabled for"
+msgstr "Πρέπει να απενεργοποιηθεί για"
+
+msgid "Must be enabled for compatibility with"
+msgstr "Πρέπει να είναι ενεργοποιημένη για συμβατότητα με"
+
+msgid "Must be disabled for compatibility with"
+msgstr "Πρέπει να απενεργοποιηθεί για συμβατότητα με"
+
+msgid "Toggle switch for"
+msgstr "Εναλλαγή διακόπτη για"
+
+msgid "On"
+msgstr "Επί"
+
+msgid "Off"
+msgstr "Μακριά από"
+
+msgid "Client"
+msgstr "Πελάτης"
+

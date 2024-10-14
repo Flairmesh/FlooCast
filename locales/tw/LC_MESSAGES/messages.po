@@ -257,3 +257,26 @@ msgstr "，查看最新的。"
 
 msgid "Current firmware: "
 msgstr "目前韌體："
+
+#: Added from 1.1.0
+msgid "Must be disabled for"
+msgstr "必須禁用才能啓用"
+
+msgid "Must be enabled for compatibility with"
+msgstr "必須啟用才能相容"
+
+msgid "Must be disabled for compatibility with"
+msgstr "必須禁用才能相容必須禁用才能相容"
+
+msgid "Toggle switch for"
+msgstr "撥動開關用於"
+
+msgid "On"
+msgstr "開啓"
+
+msgid "Off"
+msgstr "關閉"
+
+msgid "Client"
+msgstr "客戶端"
+

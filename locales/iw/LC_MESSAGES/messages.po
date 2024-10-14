@@ -265,3 +265,25 @@ msgstr ", בדוק את העדכון האחרון."
 
 msgid "Current firmware: "
 msgstr "קושחה נוכחית:"
+
+#: Added from 1.1.0
+msgid "Must be disabled for"
+msgstr "חייב להיות מושבת עבור"
+
+msgid "Must be enabled for compatibility with"
+msgstr "חייב להיות מופעל עבור תאימות עם"
+
+msgid "Must be disabled for compatibility with"
+msgstr "חייב להיות מושבת עבור תאימות עם"
+
+msgid "Toggle switch for"
+msgstr "החלף מתג עבור"
+
+msgid "On"
+msgstr "עַל"
+
+msgid "Off"
+msgstr "כבוי"
+
+msgid "Client"
+msgstr "לָקוּחַ"

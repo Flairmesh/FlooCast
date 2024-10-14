@@ -257,3 +257,26 @@ msgstr ", sjekk det siste"
 
 msgid "Current firmware: "
 msgstr "Gjeldende fastvare:"
+
+#: Added from 1.1.0
+msgid "Must be disabled for"
+msgstr "Må være deaktivert for"
+
+msgid "Must be enabled for compatibility with"
+msgstr "Må være aktivert for kompatibilitet med"
+
+msgid "Must be disabled for compatibility with"
+msgstr "Må være deaktivert for kompatibilitet med"
+
+msgid "Toggle switch for"
+msgstr "Vippebryter for"
+
+msgid "On"
+msgstr "På"
+
+msgid "Off"
+msgstr "Av"
+
+msgid "Client"
+msgstr "Klient"
+

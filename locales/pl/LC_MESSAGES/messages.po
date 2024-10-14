@@ -257,3 +257,25 @@ msgstr ", sprawdź najnowsze."
 
 msgid "Current firmware: "
 msgstr "Aktualne oprogramowanie: "
+
+#: Added from 1.1.0
+msgid "Must be disabled for"
+msgstr "Musi być wyłączony dla"
+
+msgid "Must be enabled for compatibility with"
+msgstr "Musi być włączony dla zgodności z"
+
+msgid "Must be disabled for compatibility with"
+msgstr "Musi być wyłączony dla zgodności z"
+
+msgid "Toggle switch for"
+msgstr "Przełącznik dla"
+
+msgid "On"
+msgstr "Wł."
+
+msgid "Off"
+msgstr "Wył."
+
+msgid "Client"
+msgstr "Klient"

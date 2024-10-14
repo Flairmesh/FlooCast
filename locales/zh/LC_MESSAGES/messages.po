@@ -257,3 +257,26 @@ msgstr "，检查最新。"
 
 msgid "Current firmware: "
 msgstr "当前固件："
+
+#: Added from 1.1.0
+msgid "Must be disabled for"
+msgstr "需要关闭才能启用"
+
+msgid "Must be enabled for compatibility with"
+msgstr "需要启用来兼容"
+
+msgid "Must be disabled for compatibility with"
+msgstr "需要关闭来兼容"
+
+msgid "Toggle switch for"
+msgstr "拨档开关"
+
+msgid "On"
+msgstr "开启"
+
+msgid "Off"
+msgstr "关闭"
+
+msgid "Client"
+msgstr "客户端"
+

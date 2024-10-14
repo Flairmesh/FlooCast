@@ -268,3 +268,26 @@ msgstr ", vérifiez la dernière."
 
 msgid "Current firmware: "
 msgstr "Micrologiciel actuel :"
+
+#: Added from 1.1.0
+msgid "Must be disabled for"
+msgstr "Doit être désactivé pour"
+
+msgid "Must be enabled for compatibility with"
+msgstr "Doit être activé pour la compatibilité avec"
+
+msgid "Must be disabled for compatibility with"
+msgstr "Doit être désactivé pour la compatibilité avec"
+
+msgid "Toggle switch for"
+msgstr "Basculer l'interrupteur pour"
+
+msgid "On"
+msgstr "Activé"
+
+msgid "Off"
+msgstr "Désactivé"
+
+msgid "Client"
+msgstr "Client"
+

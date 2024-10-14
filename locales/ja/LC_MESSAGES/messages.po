@@ -265,3 +265,25 @@ msgstr "最新のものを確認してください。"
 
 msgid "Current firmware: "
 msgstr "現在のファームウェア:"
+
+#: Added from 1.1.0
+msgid "Must be disabled for"
+msgstr "無効にする必要があります"
+
+msgid "Must be enabled for compatibility with"
+msgstr "互換性のために有効にする必要があります"
+
+msgid "Must be disabled for compatibility with"
+msgstr "互換性のために無効にする必要があります"
+
+msgid "Toggle switch for"
+msgstr "トグル スイッチ"
+
+msgid "On"
+msgstr "オン"
+
+msgid "Off"
+msgstr "オフ"
+
+msgid "Client"
+msgstr "クライアント"

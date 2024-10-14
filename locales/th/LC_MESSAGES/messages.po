@@ -265,3 +265,26 @@ msgstr ", ตรวจสอบล่าสุด"
 
 msgid "Current firmware: "
 msgstr "เฟิร์มแวร์ปัจจุบัน: "
+
+#: Added from 1.1.0
+msgid "Must be disabled for"
+msgstr "ต้องปิดใช้งานสำหรับ"
+
+msgid "Must be enabled for compatibility with"
+msgstr "ต้องเปิดใช้งานเพื่อให้เข้ากันได้กับ"
+
+msgid "Must be disabled for compatibility with"
+msgstr "ต้องปิดใช้งานเพื่อให้เข้ากันได้กับ"
+
+msgid "Toggle switch for"
+msgstr "สวิตช์สลับสำหรับ"
+
+msgid "On"
+msgstr "เปิด"
+
+msgid "Off"
+msgstr "ปิด"
+
+msgid "Client"
+msgstr "ไคลเอนต์"
+

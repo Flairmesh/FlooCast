@@ -269,3 +269,26 @@ msgstr ", नवीनतम जाँचें."
 
 msgid "Current firmware: "
 msgstr "वर्तमान फ़र्मवेयर: "
+
+#: Added from 1.1.0
+msgid "Must be disabled for"
+msgstr "के लिए अक्षम होना चाहिए"
+
+msgid "Must be enabled for compatibility with"
+msgstr "इसके साथ संगतता के लिए सक्षम होना चाहिए"
+
+msgid "Must be disabled for compatibility with"
+msgstr "इसके साथ संगतता के लिए अक्षम होना चाहिए"
+
+msgid "Toggle switch for"
+msgstr "इसके लिए टॉगल स्विच"
+
+msgid "On"
+msgstr "चालू"
+
+msgid "Off"
+msgstr "बंद"
+
+msgid "Client"
+msgstr "क्लाइंट"
+

@@ -265,3 +265,25 @@ msgstr ", hãy kiểm tra cái mới nhất."
 
 msgid "Current firmware: "
 msgstr "Chương trình cơ sở hiện tại:"
+
+#: Added from 1.1.0
+msgid "Must be disabled for"
+msgstr "Phải tắt cho"
+
+msgid "Must be enabled for compatibility with"
+msgstr "Phải bật để tương thích với"
+
+msgid "Must be disabled for compatibility with"
+msgstr "Phải tắt để tương thích với"
+
+msgid "Toggle switch for"
+msgstr "Công tắc chuyển đổi cho"
+
+msgid "On"
+msgstr "Bật"
+
+msgid "Off"
+msgstr "Tắt"
+
+msgid "Client"
+msgstr "Máy khách"

@@ -261,3 +261,26 @@ msgstr ", tarkista viimeisimmät."
 
 msgid "Current firmware: "
 msgstr "Nykyinen laiteohjelmisto:"
+
+#: Added from 1.1.0
+msgid "Must be disabled for"
+msgstr "On poistettava käytöstä"
+
+msgid "Must be enabled for compatibility with"
+msgstr "On otettava käyttöön, jotta ne ovat yhteensopivia"
+
+msgid "Must be disabled for compatibility with"
+msgstr "Se on poistettava käytöstä yhteensopivuuden vuoksi"
+
+msgid "Toggle switch for"
+msgstr "Vaihtokytkin kohtaan"
+
+msgid "On"
+msgstr "Päällä"
+
+msgid "Off"
+msgstr "Pois"
+
+msgid "Client"
+msgstr "Asiakas"
+

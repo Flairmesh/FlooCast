@@ -257,3 +257,25 @@ msgstr ", verifique as últimas."
 
 msgid "Current firmware: "
 msgstr "Firmware atual:"
+
+#: Added from 1.1.0
+msgid "Must be disabled for"
+msgstr "Deve ser desativado para"
+
+msgid "Must be enabled for compatibility with"
+msgstr "Deve estar habilitado para compatibilidade com"
+
+msgid "Must be disabled for compatibility with"
+msgstr "Deve ser desativado para compatibilidade com"
+
+msgid "Toggle switch for"
+msgstr "Alternar interruptor para"
+
+msgid "On"
+msgstr "Em"
+
+msgid "Off"
+msgstr "Desligado"
+
+msgid "Client"
+msgstr "Cliente"

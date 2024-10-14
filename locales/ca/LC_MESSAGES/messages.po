@@ -269,3 +269,26 @@ msgstr ""
 
 msgid "Current firmware: "
 msgstr "Firmware actual:"
+
+#: Added from 1.1.0
+msgid "Must be disabled for"
+msgstr "S'ha de desactivar per"
+
+msgid "Must be enabled for compatibility with"
+msgstr "S'ha d'habilitar per a la compatibilitat amb"
+
+msgid "Must be disabled for compatibility with"
+msgstr "S'ha de desactivar per compatibilitat amb"
+
+msgid "Toggle switch for"
+msgstr "Interruptor de commutació per"
+
+msgid "On"
+msgstr "Encès"
+
+msgid "Off"
+msgstr "ApagatApagat"
+
+msgid "Client"
+msgstr "Client"
+

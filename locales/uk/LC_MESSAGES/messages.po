@@ -265,3 +265,25 @@ msgstr ", перевірити останні."
 
 msgid "Current firmware: "
 msgstr "Поточна прошивка: "
+
+#: Added from 1.1.0
+msgid "Must be disabled for"
+msgstr "Потрібно вимкнути для"
+
+msgid "Must be enabled for compatibility with"
+msgstr "Необхідно ввімкнути для сумісності з"
+
+msgid "Must be disabled for compatibility with"
+msgstr "Має бути вимкнено для сумісності з"
+
+msgid "Toggle switch for"
+msgstr "Тумблер для"
+
+msgid "On"
+msgstr "Увімкнено"
+
+msgid "Off"
+msgstr "Вимкнено"
+
+msgid "Client"
+msgstr "Вимкнено"

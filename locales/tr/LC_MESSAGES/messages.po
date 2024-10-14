@@ -257,3 +257,26 @@ msgstr ", son durumu kontrol et."
 
 msgid "Current firmware: "
 msgstr "Geçerli donanım yazılımı: "
+
+#: Added from 1.1.0
+msgid "Must be disabled for"
+msgstr "Devre dışı bırakılmalıdır"
+
+msgid "Must be enabled for compatibility with"
+msgstr "Uyumluluk için etkinleştirilmelidir"
+
+msgid "Must be disabled for compatibility with"
+msgstr "Uyumluluk için devre dışı bırakılmalıdır"
+
+msgid "Toggle switch for"
+msgstr "Anahtar geçişi"
+
+msgid "On"
+msgstr "Açık"
+
+msgid "Off"
+msgstr "Kapalı"
+
+msgid "Client"
+msgstr "İstemci"
+

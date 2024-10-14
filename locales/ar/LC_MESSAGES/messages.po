@@ -269,3 +269,26 @@ msgstr "، تحقق من الأحدث."
 
 msgid "Current firmware: "
 msgstr "البرامج الثابتة الحالية:"
+
+#: Added from 1.1.0
+msgid "Must be disabled for"
+msgstr "يجب تعطيله لـ"
+
+msgid "Must be enabled for compatibility with"
+msgstr "يجب تمكينه للتوافق مع"
+
+msgid "Must be disabled for compatibility with"
+msgstr "يجب تعطيله للتوافق مع"
+
+msgid "Toggle switch for"
+msgstr "مفتاح تبديل لـ"
+
+msgid "On"
+msgstr "تشغيل"
+
+msgid "Off"
+msgstr "إيقاف"
+
+msgid "Client"
+msgstr "العميل"
+

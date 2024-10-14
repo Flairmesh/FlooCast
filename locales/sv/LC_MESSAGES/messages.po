@@ -257,3 +257,26 @@ msgstr ", kolla det senaste."
 
 msgid "Current firmware: "
 msgstr "Aktuell firmware:"
+
+#: Added from 1.1.0
+msgid "Must be disabled for"
+msgstr "Måste vara inaktiverad för"
+
+msgid "Must be enabled for compatibility with"
+msgstr "Måste vara aktiverat för kompatibilitet med"
+
+msgid "Must be disabled for compatibility with"
+msgstr "Måste vara inaktiverat för kompatibilitet med"
+
+msgid "Toggle switch for"
+msgstr "Vippströmbrytare för"
+
+msgid "On"
+msgstr "På"
+
+msgid "Off"
+msgstr "Av"
+
+msgid "Client"
+msgstr "Klient"
+

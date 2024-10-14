@@ -257,3 +257,25 @@ msgstr ", bekijk de laatste."
 
 msgid "Current firmware: "
 msgstr "Huidige firmware:"
+
+#: Added from 1.1.0
+msgid "Must be disabled for"
+msgstr "Moet uitgeschakeld zijn voor"
+
+msgid "Must be enabled for compatibility with"
+msgstr "Moet ingeschakeld zijn voor compatibiliteit met"
+
+msgid "Must be disabled for compatibility with"
+msgstr "Moet uitgeschakeld zijn voor compatibiliteit met"
+
+msgid "Toggle switch for"
+msgstr "Toggle-schakelaar voor"
+
+msgid "On"
+msgstr "Aan"
+
+msgid "Off"
+msgstr "Uit"
+
+msgid "Client"
+msgstr "Client"

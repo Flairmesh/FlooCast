@@ -25,7 +25,7 @@ msgstr "Leerlauf"
 
 #: main.py:49
 msgid "Pairing"
-msgstr "Paarung"
+msgstr "Koppeln"
 
 #: main.py:50
 msgid "Connecting"
@@ -33,7 +33,7 @@ msgstr "Verbinden"
 
 #: main.py:51 main.py:61
 msgid "Connected"
-msgstr "In Verbindung gebracht"
+msgstr "Verbunden"
 
 #: main.py:52
 msgid "Audio starting"
@@ -77,7 +77,7 @@ msgstr "Unicast-Streaming"
 
 #: main.py:64
 msgid "Broadcast starting"
-msgstr "Die Übertragung beginnt"
+msgstr "Broadcast beginnt"
 
 #: main.py:65
 msgid "Broadcast streaming"
@@ -93,7 +93,7 @@ msgstr "Audiomodus"
 
 #: main.py:111
 msgid "LE Broadcast"
-msgstr "LE-Sendung"
+msgstr "LE-Broadcast"
 
 #: main.py:113
 msgid "Most Recently Used Devices"
@@ -105,7 +105,7 @@ msgstr "Fenster"
 
 #: main.py:119
 msgid "Help"
-msgstr "Helfen"
+msgstr "Hilfe"
 
 #: main.py:139
 msgid "High Quality (one-to-one)"
@@ -117,7 +117,7 @@ msgstr "Gaming (eins zu eins)"
 
 #: main.py:145
 msgid "Broadcast"
-msgstr "Übertragen"
+msgstr "Broadcast"
 
 #: main.py:149
 msgid "Dongle State"
@@ -129,7 +129,7 @@ msgstr "LE-Audiostatus"
 
 #: main.py:157
 msgid "Codec in Use"
-msgstr "Codec im Einsatz"
+msgstr "Genutzter Codec"
 
 #: main.py:162
 msgid "Prefer using LE audio for dual-mode devices"
@@ -137,7 +137,7 @@ msgstr "Bevorzugen Sie LE-Audio für Dual-Mode-Geräte"
 
 #: main.py:188
 msgid "Public broadcast"
-msgstr "Öffentliche Ausstrahlung"
+msgstr "Öffentlicher Broadcast"
 
 #: main.py:209
 msgid "Broadcast high-quality music, otherwise, voice"
@@ -173,15 +173,15 @@ msgstr "Löschen"
 
 #: main.py:343
 msgid "Clear All"
-msgstr "Alles lÃ¶schen"
+msgstr "Alles löschen"
 
 #: main.py:405
 msgid "Quit"
-msgstr "Aufhören"
+msgstr "Beenden"
 
 #: main.py:405
 msgid "Show Window"
-msgstr "Schaufenster"
+msgstr "Anzeigen"
 
 #: main.py:406
 msgid "FlooGoo Bluetooth Audio Source"
@@ -193,11 +193,11 @@ msgstr "In die Taskleiste minimieren"
 
 #: main.py:416
 msgid "Quit App"
-msgstr "Beenden Sie die App"
+msgstr "App schließen"
 
 #: main.py:430
 msgid "Disconnect and reconnect the dongle to activate configuration changes, after which it will function independently without the app."
-msgstr "Trennen Sie den Dongle und schließen Sie ihn erneut an, um Konfigurationsänderungen zu aktivieren. Anschließend funktioniert er unabhängig ohne die App."
+msgstr "Trennen Sie den Adapter und schließen Sie ihn erneut an, um die Konfigurationsänderungen zu aktivieren. Anschließend funktioniert er unabhängig ohne die App."
 
 #: main.py:445
 msgid "Third-Party Software Licenses"
@@ -209,7 +209,7 @@ msgstr "Support-Link"
 
 #: main.py:451
 msgid "Version"
-msgstr "Ausführung"
+msgstr "Version"
 
 #: main.py:462 main.py:536
 msgid "Firmware"
@@ -229,7 +229,7 @@ msgstr "Geräte-Firmware-Upgrade"
 
 #: main.py:524
 msgid "Use FlooGoo dongle on "
-msgstr "Verwenden Sie den FlooGoo-Adapter "
+msgstr "FlooGoo-Adapter verwendet an "
 
 #: main.py:526
 msgid "Please insert your FlooGoo dongle"
@@ -253,7 +253,30 @@ msgid "Settings"
 msgstr "Einstellungen"
 
 msgid ", check the latest."
-msgstr ", überprüfen Sie die neueste."
+msgstr ", Auf neue Version prüfen."
 
 msgid "Current firmware: "
 msgstr "Aktuelle Firmware: "
+
+#: Added from 1.1.0
+msgid "Must be disabled for"
+msgstr "Muss deaktiviert werden für"
+
+msgid "Must be enabled for compatibility with"
+msgstr "Muss aktiviert werden für Kompatibilität mit"
+
+msgid "Must be disabled for compatibility with"
+msgstr "Muss deaktiviert werden für Kompatibilität mit"
+
+msgid "Toogle switch for"
+msgstr "Schalter umlegen und"
+
+msgid "On"
+msgstr "An"
+
+msgid "Off"
+msgstr "Aus"
+
+msgid "Client"
+msgstr "Client"
+
