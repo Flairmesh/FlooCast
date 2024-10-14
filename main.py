@@ -6,16 +6,9 @@ import re
 import os
 import platform
 import sys
-from gc import enable
-
 import wx
-import webbrowser
-from ctypes.wintypes import tagMSG
-from wx.lib.sized_controls import border
 import wx.lib.agw.hyperlink as hl
 from wx.adv import TaskBarIcon as TaskBarIcon
-
-from EntryWithPlaceholder import EntryWithPlaceholder
 from FlooStateMachine import FlooStateMachine
 from FlooStateMachineDelegate import FlooStateMachineDelegate
 from FlooDfuThread import FlooDfuThread

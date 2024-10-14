@@ -24,6 +24,8 @@ from FlooMsgMd import FlooMsgMd
 from FlooMsgTc import FlooMsgTc
 from FlooMsgFd import FlooMsgFd
 from FlooMsgFt import FlooMsgFt
+import wx
+
 
 class FlooStateMachine(FlooInterfaceDelegate, Thread):
     """The state machine of the host app working with FlooGoo USB Bluetooth Dongle"""
@@ -86,51 +88,49 @@ class FlooStateMachine(FlooInterfaceDelegate, Thread):
             elif isinstance(message, FlooMsgAm):
                 if isinstance(self.lastCmd, FlooMsgAm):
                     self.audioMode = message.mode
-                    self.delegate.audioModeInd(message.mode)
+                    wx.CallAfter(self.delegate.audioModeInd, message.mode)
                     cmdGetSourceState = FlooMsgSt(True)
                     self.inf.sendMsg(cmdGetSourceState)
                     self.lastCmd = cmdGetSourceState
             elif isinstance(message, FlooMsgSt):
                 if isinstance(self.lastCmd, FlooMsgSt):
                     self.sourceState = message.state
-                    self.delegate.sourceStateInd(message.state)
+                    wx.CallAfter(self.delegate.sourceStateInd, message.state)
                     cmdGetLeaState = FlooMsgLa(True)
                     self.inf.sendMsg(cmdGetLeaState)
                     self.lastCmd = cmdGetLeaState
             elif isinstance(message, FlooMsgLa):
                 if isinstance(self.lastCmd, FlooMsgLa):
-                    self.delegate.leAudioStateInd(message.state)
+                    wx.CallAfter(self.delegate.leAudioStateInd, message.state)
                     cmdGetPreferLea = FlooMsgLf(True)
                     self.inf.sendMsg(cmdGetPreferLea)
                     self.lastCmd = cmdGetPreferLea
             elif isinstance(message, FlooMsgLf):
                 if isinstance(self.lastCmd, FlooMsgLf):
-                    self.delegate.preferLeaInd(message.mode)
+                    wx.CallAfter(self.delegate.preferLeaInd, message.mode)
                     cmdGetBroadcastMode = FlooMsgBm(True)
                     self.inf.sendMsg(cmdGetBroadcastMode)
                     self.lastCmd = cmdGetBroadcastMode
             elif isinstance(message, FlooMsgBm):
                 if isinstance(self.lastCmd, FlooMsgBm):
                     self.broadcastMode = message.mode
-                    self.delegate.broadcastModeInd(message.mode)
+                    wx.CallAfter(self.delegate.broadcastModeInd, message.mode)
                     cmdGetBroadcastName = FlooMsgBn(True)
                     self.inf.sendMsg(cmdGetBroadcastName)
                     self.lastCmd = cmdGetBroadcastName
             elif isinstance(message, FlooMsgBn):
                 if isinstance(self.lastCmd, FlooMsgBn):
                     self.broadcastName = message.name
-                    self.delegate.broadcastNameInd(message.name)
+                    wx.CallAfter(self.delegate.broadcastNameInd, message.name)
                     self.pairedDevices.clear()
                     cmdGetDeviceName = FlooMsgFn(True)
                     self.inf.sendMsg(cmdGetDeviceName)
                     self.lastCmd = cmdGetDeviceName
-                    # self.lastCmd = None
-                    # self.state = FlooStateMachine.CONNECTED
             elif isinstance(message, FlooMsgFn):
                 if isinstance(self.lastCmd, FlooMsgFn):
                     if message.btAddress is None:
                         # end of the device list
-                        self.delegate.pairedDevicesUpdateInd(self.pairedDevices)
+                        wx.CallAfter(self.delegate.pairedDevicesUpdateInd, self.pairedDevices)
                         cmdGetFeature = FlooMsgFt(True)
                         self.inf.sendMsg(cmdGetFeature)
                         self.lastCmd = cmdGetFeature
@@ -139,15 +139,15 @@ class FlooStateMachine(FlooInterfaceDelegate, Thread):
             elif isinstance(message, FlooMsgFt):
                 if isinstance(self.lastCmd, FlooMsgFt):
                     self.feature = message.feature
-                    self.delegate.ledEnabledInd(message.feature & 0x01)
-                    self.delegate.aptxLosslessEnabledInd(1 if (message.feature & 0x02) == 0x02 else 0)
-                    self.delegate.gattClientEnabledInd(1 if (self.feature & 0x04) == 0x04 else 0)
+                    wx.CallAfter(self.delegate.ledEnabledInd, message.feature & 0x01)
+                    wx.CallAfter(self.delegate.aptxLosslessEnabledInd, 1 if (message.feature & 0x02) == 0x02 else 0)
+                    wx.CallAfter(self.delegate.gattClientEnabledInd, 1 if (self.feature & 0x04) == 0x04 else 0)
                     cmdGetCodecInUse = FlooMsgAc(True)
                     self.inf.sendMsg(cmdGetCodecInUse)
                     self.lastCmd = cmdGetCodecInUse
             elif isinstance(message, FlooMsgAc) or isinstance(message, FlooMsgEr):
                 if isinstance(self.lastCmd, FlooMsgAc) and isinstance(message, FlooMsgAc):
-                    self.delegate.audioCodecInUseInd(message.codec, message.rssi, message.rate)
+                    wx.CallAfter(self.delegate.audioCodecInUseInd, message.codec, message.rssi, message.rate)
                     self.lastCmd = None
                     self.state = FlooStateMachine.CONNECTED
 
@@ -178,40 +178,40 @@ class FlooStateMachine(FlooInterfaceDelegate, Thread):
                 self.pendingCmdPara = None
             elif isinstance(message, FlooMsgEr):
                 if isinstance(self.lastCmd, FlooMsgAm):
-                    self.delegate.audioModeInd(self.audioMode)
+                    wx.CallAfter(self.delegate.audioModeInd, self.audioMode)
                 elif isinstance(self.lastCmd, FlooMsgLf):
-                    self.delegate.preferLeaInd(self.preferLea)
+                    wx.CallAfter(self.delegate.preferLeaInd, self.preferLea)
                 elif isinstance(self.lastCmd, FlooMsgBm):
-                    self.delegate.broadcastModeInd(self.broadcastMode)
+                    wx.CallAfter(self.delegate.broadcastModeInd, self.broadcastMode)
                 elif isinstance(self.lastCmd, FlooMsgBn):
-                    self.delegate.broadcastNameInd(self.broadcastName)
+                    wx.CallAfter(self.delegate.broadcastNameInd, self.broadcastName)
                 elif isinstance(self.lastCmd, FlooMsgFt):
-                    self.delegate.ledEnabledInd(self.feature & 0x01)
-                    self.delegate.aptxLosslessEnabledInd(1 if (self.feature & 0x02) == 0x02 else 0)
-                    self.delegate.gattClientEnabledInd(1 if (self.feature & 0x04) == 0x04 else 0)
+                    wx.CallAfter(self.delegate.ledEnabledInd, self.feature & 0x01)
+                    wx.CallAfter(self.delegate.aptxLosslessEnabledInd, 1 if (self.feature & 0x02) == 0x02 else 0)
+                    wx.CallAfter(self.delegate.gattClientEnabledInd, 1 if (self.feature & 0x04) == 0x04 else 0)
                 self.lastCmd = None
                 self.pendingCmdPara = None
             elif isinstance(message, FlooMsgSt):
                 self.sourceState = message.state
-                self.delegate.sourceStateInd(message.state)
+                wx.CallAfter(self.delegate.sourceStateInd, message.state)
                 if message.state == 4 or message.state == 6:
                     self.getRecentlyUsedDevices()
             elif isinstance(message, FlooMsgLa):
-                self.delegate.leAudioStateInd(message.state)
+                wx.CallAfter(self.delegate.leAudioStateInd, message.state)
             elif isinstance(message, FlooMsgFn):
                 if message.btAddress is None:
                     # end of the device list
-                    self.delegate.pairedDevicesUpdateInd(self.pairedDevices)
+                    wx.CallAfter(self.delegate.pairedDevicesUpdateInd, self.pairedDevices)
                     self.lastCmd = None
                 else:
                     self.pairedDevices.append(message.name)
             elif isinstance(message, FlooMsgAc):
-                self.delegate.audioCodecInUseInd(message.codec, message.rssi, message.rate)
+                wx.CallAfter(self.delegate.audioCodecInUseInd, message.codec, message.rssi, message.rate)
             elif isinstance(message, FlooMsgFt):
                 self.feature = message.feature
-                self.delegate.ledEnabledInd(self.feature & 0x01)
-                self.delegate.aptxLosslessEnabledInd(1 if (self.feature & 0x02) == 0x02 else 0)
-                self.delegate.gattClientEnabledInd(1 if (self.feature & 0x04) == 0x02 else 0)
+                wx.CallAfter(self.delegate.ledEnabledInd, self.feature & 0x01)
+                wx.CallAfter(self.delegate.aptxLosslessEnabledInd, 1 if (self.feature & 0x02) == 0x02 else 0)
+                wx.CallAfter(self.delegate.gattClientEnabledInd, 1 if (self.feature & 0x04) == 0x02 else 0)
 
     def setAudioMode(self, mode: int):
         if self.state == FlooStateMachine.CONNECTED:
@@ -254,14 +254,14 @@ class FlooStateMachine(FlooInterfaceDelegate, Thread):
             self.lastCmd = cmdSetBroadcastMode
             self.inf.sendMsg(cmdSetBroadcastMode)
 
-    def setBroadcastName(self, name:str):
+    def setBroadcastName(self, name: str):
         if self.state == FlooStateMachine.CONNECTED:
             cmdSetBroadcastName = FlooMsgBn(True, name)
             self.pendingCmdPara = name
             self.lastCmd = cmdSetBroadcastName
             self.inf.sendMsg(cmdSetBroadcastName)
 
-    def setBroadcastKey(self, key:str):
+    def setBroadcastKey(self, key: str):
         if self.state == FlooStateMachine.CONNECTED:
             cmdSetBroadcastKey = FlooMsgBe(True, key)
             self.pendingCmdPara = key
@@ -269,7 +269,6 @@ class FlooStateMachine(FlooInterfaceDelegate, Thread):
             self.inf.sendMsg(cmdSetBroadcastKey)
 
     def setNewPairing(self):
-        print("new pairing button clicked")
         if self.state == FlooStateMachine.CONNECTED:
             if self.a2dpSink:
                 cmdSetDiscoverable = FlooMsgMd(True, 1)
