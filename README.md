@@ -13,11 +13,15 @@ On Windows, the compiled App can be downloaded directly from Microsoft Store.
 Requires python 3.7+
 Please also install the following modules when needed.
 
-tkinter
+wxPython
 pyserial
-pystray
 serial-tool
-certifi
+certify
+PIL
+urllib
+
+For example, on a Mac, you can install the "wxPython" module with the following command:
+python3 -m pip install wxPython
  
 ## Usage
 
