@@ -1,11 +1,5 @@
-import subprocess
 import threading
-import sys, io
 import time
-from subprocess import PIPE, Popen
-from threading  import Thread
-from tkinter import messagebox
-import tkinter as tk
 
 class FlooDfuThread(threading.Thread):
     #
