@@ -132,8 +132,9 @@ def audio_mode_sel_set(mode):
         settingsPanelSizer.Hide(aptxLosslessEnableButton)
         settingsPanelSizer.Show(gattClientWithBroadcastCheckBox)
         settingsPanelSizer.Show(gattClientWithBroadcastEnableButton)
-    settingsPanelSizer.Layout()
+    aboutSbSizer.Layout()
     pairedDevicesSb.Enable(mode != 2)
+
 
 def audio_mode_sel(event):
     selectedLabel = (event.GetEventObject().GetLabel())
@@ -684,7 +685,6 @@ def button_dfu(event):
         # Proceed loading the file chosen by the user
         filename = fileDialog.GetPath()
         if filename:
-            print("app directory ", app_path)
             os.chdir(app_path)
             # os.add_dll_directory(app_path)
             fileBasename = os.path.splitext(filename)[0]
@@ -692,7 +692,6 @@ def button_dfu(event):
                 fileBasename = fileBasename[:-1]
             fileBasename += variant
             filename = fileBasename + ".bin"
-            print(filename)
             if os.path.isfile(filename):
                 dfuThread = FlooDfuThread([app_path, filename], update_dfu_info)
                 dfuThread.start()
@@ -709,15 +708,16 @@ newFirmwareUrl = hl.HyperLinkCtrl(versionPanel, wx.ID_ANY, _("New Firmware is av
 versionPanelSizer.Add(newFirmwareUrl, flag=wx.ALIGN_CENTER)
 versionPanelSizer.Hide(newFirmwareUrl)
 
-# aboutFrameDesc = wx.Panel(aboutSb)
-resetExplanationLabel = wx.StaticText(aboutSb, wx.ID_ANY,
-                                      label=_("Disconnect and reconnect the dongle to activate configuration changes, " \
-                                              "after which it will function independently without the app."))
-resetExplanationLabel.Wrap(settingsMaxWidth)
+resetExplanationLabel = wx.TextCtrl(aboutSb, wx.ID_ANY,
+                                    value=_("Disconnect and reconnect the dongle to activate configuration changes, " \
+                                            "after which it will function independently without the app."),
+                                    style=wx.TE_MULTILINE | wx.TE_READONLY | wx.TE_NO_VSCROLL | wx.BORDER_NONE | wx.TE_CENTRE)
+resetExplanationLabel.SetBackgroundColour(wx.SystemSettings.GetColour(wx.SYS_COLOUR_MENU))
 
 aboutSbSizer.Add(settingsPanel, proportion=1, flag=wx.EXPAND)
 aboutSbSizer.Add(versionPanel, proportion=3)
-aboutSbSizer.Add(resetExplanationLabel, proportion=1)
+aboutSbSizer.Add(resetExplanationLabel, proportion=1, flag=wx.EXPAND | wx.TOP | wx.BOTTOM,
+                 border=20)
 
 appSizer.Add(audioModeSbSizer, flag=wx.EXPAND | wx.LEFT, border=4)
 appSizer.Add(windowSbSizer, flag=wx.EXPAND | wx.RIGHT, border=4)
