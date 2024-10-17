@@ -268,7 +268,7 @@ msgstr "Muss aktiviert werden für Kompatibilität mit"
 msgid "Must be disabled for compatibility with"
 msgstr "Muss deaktiviert werden für Kompatibilität mit"
 
-msgid "Toogle switch for"
+msgid "Toggle switch for"
 msgstr "Schalter umlegen und"
 
 msgid "On"
