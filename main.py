@@ -126,7 +126,6 @@ def audio_mode_sel_set(mode):
         settingsPanelSizer.Show(gattClientWithBroadcastCheckBox)
         settingsPanelSizer.Show(gattClientWithBroadcastEnableButton)
     aboutSbSizer.Layout()
-    pairedDevicesSb.Enable(mode != 2)
 
 
 def audio_mode_sel(event):
@@ -139,7 +138,6 @@ def audio_mode_sel(event):
         mode = 2
     audio_mode_sel_set(mode)
     settingsPanelSizer.Layout()
-    pairedDevicesSb.Enable(mode != 2)
     flooSm.setAudioMode(mode)
 
 
@@ -189,6 +187,7 @@ def prefer_lea_enable_switch_set(enable):
             'On') if preferLeaEnable else _(
             'Off')))
     flooSm.setPreferLea(enable)
+    newPairingButton.Enable(False if preferLeaEnable and pairedDeviceListbox.GetCount() > 0 else True)
 
 
 def prefer_lea_enable_switch(event):
@@ -288,7 +287,8 @@ windowSbSizer.AddStretchSpacer()
 broadcastAndPairedDevicePanel = wx.Panel(appPanel)
 broadcastAndPairedDeviceSizer = wx.BoxSizer(wx.VERTICAL)
 
-leBroadcastSb = wx.StaticBox(broadcastAndPairedDevicePanel, wx.ID_ANY, _('LE Broadcast'))
+leBroadcastSb = wx.StaticBox(broadcastAndPairedDevicePanel, wx.ID_ANY,
+                             _('LE Broadcast') + " - " + _('Changes Take Effect After Restart'))
 leBroadcastSbSizer = wx.StaticBoxSizer(leBroadcastSb, wx.VERTICAL)
 leBroadcastSwitchPanel = wx.Panel(leBroadcastSb)
 leBroadcastSwitchPanelSizer = wx.FlexGridSizer(3, 2, (0, 0))
@@ -625,7 +625,7 @@ supportLink = hl.HyperLinkCtrl(versionPanel, wx.ID_ANY, _("Support Link"),
                                URL="https://www.flairmesh.com/Dongle/FMA120.html")
 versionPanelSizer.Add(supportLink, flag=wx.ALIGN_CENTER | wx.BOTTOM, border=4)
 versionPanel.SetSizer(versionPanelSizer)
-versionInfo = wx.StaticText(versionPanel, wx.ID_ANY, label=_("Version") + " 1.1.1")
+versionInfo = wx.StaticText(versionPanel, wx.ID_ANY, label=_("Version") + " 1.1.2")
 versionPanelSizer.Add(versionInfo, flag=wx.ALIGN_CENTER | wx.BOTTOM, border=4)
 
 dfuUndergoing = False
@@ -701,16 +701,8 @@ newFirmwareUrl = hl.HyperLinkCtrl(versionPanel, wx.ID_ANY, _("New Firmware is av
 versionPanelSizer.Add(newFirmwareUrl, flag=wx.ALIGN_CENTER)
 versionPanelSizer.Hide(newFirmwareUrl)
 
-resetExplanationLabel = wx.TextCtrl(aboutSb, wx.ID_ANY,
-                                    value=_("Disconnect and reconnect the dongle to activate configuration changes, " \
-                                            "after which it will function independently without the app."),
-                                    style=wx.TE_MULTILINE | wx.TE_READONLY | wx.TE_NO_VSCROLL | wx.BORDER_NONE | wx.TE_CENTRE)
-resetExplanationLabel.SetBackgroundColour(wx.SystemSettings.GetColour(wx.SYS_COLOUR_MENU))
-
 aboutSbSizer.Add(settingsPanel, proportion=1, flag=wx.EXPAND)
 aboutSbSizer.Add(versionPanel, proportion=3)
-aboutSbSizer.Add(resetExplanationLabel, proportion=1, flag=wx.EXPAND | wx.TOP | wx.BOTTOM,
-                 border=20)
 
 appSizer.Add(audioModeSbSizer, flag=wx.EXPAND | wx.LEFT, border=4)
 appSizer.Add(windowSbSizer, flag=wx.EXPAND | wx.RIGHT, border=4)
@@ -740,6 +732,7 @@ def enable_settings_widgets(enable: bool):
             audioModeSb.Enable()
         broadcastAndPairedDevicePanel.Enable()
         settingsPanel.Enable()
+        pairedDevicesSb.Enable()
         thirdPartyLink.Refresh()
         supportLink.Refresh()
         if platform.system().lower().startswith('win'):
@@ -760,7 +753,6 @@ appFrame.Show(True)  # Show the frame.
 # All GUI object initialized, start FlooStateMachine
 class FlooSmDelegate(FlooStateMachineDelegate):
     def deviceDetected(self, flag: bool, port: str, version: str = None):
-        global currentPairedDeviceList
         global firmwareVersion
         global variant
         global a2dpSink
@@ -823,7 +815,6 @@ class FlooSmDelegate(FlooStateMachineDelegate):
             elif mode == 2:
                 audioModeBroadcastRadioButton.SetValue(True)
             audio_mode_sel_set(mode)
-            pairedDevicesSb.Enable(mode != 2)
 
     def sourceStateInd(self, state: int):
         dongleStateText.SetLabelText(sourceStateStr[state])
@@ -845,14 +836,14 @@ class FlooSmDelegate(FlooStateMachineDelegate):
         broadcastNameEntry.SetValue(name)
 
     def pairedDevicesUpdateInd(self, pairedDevices):
-        global currentPairedDeviceList
-        print("update paired list len %d" % len(pairedDevices))
         pairedDeviceListbox.Clear()
         i = 0
         while i < len(pairedDevices):
             print(pairedDevices[i])
             pairedDeviceListbox.Append(pairedDevices[i])
             i = i + 1
+        newPairingButton.Enable(False if preferLeaEnable and i > 0 else True)
+        clearAllButton.Enable(True if i > 0 else False)
 
     def audioCodecInUseInd(self, codec, rssi, rate):
         codecInUseText.SetLabelText(codecStr[codec] if codec < len(codecStr) else _("Unknown"))
