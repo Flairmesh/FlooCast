@@ -196,7 +196,7 @@ msgid "Quit App"
 msgstr ""
 
 #: main.py:430
-msgid "Disconnect and reconnect the dongle to activate configuration changes, after which it will function independently without the app."
+msgid "Changes Take Effect After Restart"
 msgstr ""
 
 #: main.py:445

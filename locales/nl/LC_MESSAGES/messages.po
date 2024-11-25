@@ -196,8 +196,8 @@ msgid "Quit App"
 msgstr "App afsluiten"
 
 #: main.py:430
-msgid "Disconnect and reconnect the dongle to activate configuration changes, after which it will function independently without the app."
-msgstr "Koppel de dongle los en sluit deze opnieuw aan om configuratiewijzigingen te activeren, waarna deze zelfstandig zal functioneren zonder de app."
+msgid "Changes Take Effect After Restart"
+msgstr "Wijzigingen worden van kracht na herstart"
 
 #: main.py:445
 msgid "Third-Party Software Licenses"

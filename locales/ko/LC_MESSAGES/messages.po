@@ -196,8 +196,8 @@ msgid "Quit App"
 msgstr "프로그램 종료"
 
 #: main.py:430
-msgid "Disconnect and reconnect the dongle to activate configuration changes, after which it will function independently without the app."
-msgstr "변경된 설정을 적용하려면 동글을 분리했다가 다시 연결하세요. 이후 프로그램 없이도 독자적으로 사용이 가능합니다."
+msgid "Changes Take Effect After Restart"
+msgstr "변경 사항은 재시작 후 적용됩니다"
 
 #: main.py:445
 msgid "Third-Party Software Licenses"

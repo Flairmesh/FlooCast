@@ -200,8 +200,8 @@ msgid "Quit App"
 msgstr "Salir de la aplicación"
 
 #: main.py:430
-msgid "Disconnect and reconnect the dongle to activate configuration changes, after which it will function independently without the app."
-msgstr "Desconecte y vuelva a conectar el dongle para activar los cambios de configuración, después de lo cual funcionará de forma independiente sin la aplicación."
+msgid "Changes Take Effect After Restart"
+msgstr "Los cambios surten efecto después del reinicio"
 
 #: main.py:445
 msgid "Third-Party Software Licenses"

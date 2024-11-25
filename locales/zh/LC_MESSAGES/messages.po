@@ -196,8 +196,8 @@ msgid "Quit App"
 msgstr "退出应用程序"
 
 #: main.py:430
-msgid "Disconnect and reconnect the dongle to activate configuration changes, after which it will function independently without the app."
-msgstr "断开并重新连接加密狗以激活配置更改，之后它将在没有应用程序的情况下独立运行。"
+msgid "Changes Take Effect After Restart"
+msgstr "更改在重启后生效"
 
 #: main.py:445
 msgid "Third-Party Software Licenses"

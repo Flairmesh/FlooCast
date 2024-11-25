@@ -200,8 +200,8 @@ msgid "Quit App"
 msgstr "Κλείστε την εφαρμογή"
 
 #: main.py:430
-msgid "Disconnect and reconnect the dongle to activate configuration changes, after which it will function independently without the app."
-msgstr "Αποσυνδέστε και επανασυνδέστε το dongle για να ενεργοποιήσετε τις αλλαγές διαμόρφωσης, μετά τις οποίες θα λειτουργεί ανεξάρτητα χωρίς την εφαρμογή."
+msgid "Changes Take Effect After Restart"
+msgstr "Οι αλλαγές ισχύουν μετά την επανεκκίνηση"
 
 #: main.py:445
 msgid "Third-Party Software Licenses"
