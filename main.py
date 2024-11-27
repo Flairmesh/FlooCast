@@ -184,8 +184,8 @@ def prefer_lea_enable_switch_set(enable):
     preferLeButton.SetBitmap(on if preferLeaEnable else off)
     preferLeButton.SetToolTip(
         _('Toggle switch for') + ' ' + _('Prefer using LE audio for dual-mode devices') + ' ' + (_(
-            'On') if preferLeaEnable else _(
-            'Off')))
+            'Off') if preferLeaEnable else _(
+            'On')))
     flooSm.setPreferLea(enable)
     newPairingButton.Enable(False if preferLeaEnable and pairedDeviceListbox.GetCount() > 0 else True)
 
@@ -199,7 +199,7 @@ preferLeaCheckBox = wx.CheckBox(audioModeLowerPanel, wx.ID_ANY,
                                     'Must be disabled for') + ' ' + 'aptX\u2122 Lossless' + ')')
 preferLeButton = wx.Button(audioModeLowerPanel, wx.ID_ANY, style=wx.NO_BORDER | wx.MINIMIZE)
 preferLeButton.SetToolTip(
-    _('Toggle switch for') + ' ' + _('Prefer using LE audio for dual-mode devices') + ' ' + _('Off'))
+    _('Toggle switch for') + ' ' + _('Prefer using LE audio for dual-mode devices') + ' ' + _('On'))
 preferLeButton.SetBitmap(off)
 audioModeLowerPanel.Bind(wx.EVT_CHECKBOX, prefer_lea_enable_switch, preferLeaCheckBox)
 preferLeButton.Bind(wx.EVT_BUTTON, prefer_lea_enable_switch)
@@ -302,8 +302,8 @@ def public_broadcast_enable_switch_set(enable):
     publicBroadcastCheckBox.SetValue(enable)
     publicBroadcastButton.SetBitmap(on if publicBroadcastEnable else off)
     publicBroadcastButton.SetToolTip(
-        _('Toggle switch for') + ' ' + _('Public broadcast') + ' ' + (_('On') if publicBroadcastEnable else _(
-            'Off')))
+        _('Toggle switch for') + ' ' + _('Public broadcast') + ' ' + (_('Off') if publicBroadcastEnable else _(
+            'On')))
     flooSm.setPublicBroadcast(enable)
 
 
@@ -315,7 +315,7 @@ def public_broadcast_enable_switch(event):
 publicBroadcastCheckBox = wx.CheckBox(leBroadcastSwitchPanel, wx.ID_ANY, label=_('Public broadcast') + ' (' + _(
     'Must be enabled for compatibility with') + ' Auracast\u2122)')
 publicBroadcastButton = wx.Button(leBroadcastSwitchPanel, wx.ID_ANY, style=wx.NO_BORDER | wx.MINIMIZE)
-publicBroadcastButton.SetToolTip(_('Toggle switch for') + ' ' + _('Public broadcast') + ' ' + _('Off'))
+publicBroadcastButton.SetToolTip(_('Toggle switch for') + ' ' + _('Public broadcast') + ' ' + _('On'))
 publicBroadcastButton.SetBitmap(off)
 leBroadcastSwitchPanel.Bind(wx.EVT_CHECKBOX, public_broadcast_enable_switch, publicBroadcastCheckBox)
 publicBroadcastButton.Bind(wx.EVT_BUTTON, public_broadcast_enable_switch)
@@ -330,8 +330,8 @@ def broadcast_high_quality_switch_set(enable):
     broadcastHighQualityButton.SetBitmap(on if broadcastHighQualityEnable else off)
     publicBroadcastButton.SetToolTip(
         _('Toggle switch for') + ' ' + _('Broadcast high-quality music, otherwise, voice') + ' ' + (_(
-            'On') if broadcastHighQualityEnable else _(
-            'Off')))
+            'Off') if broadcastHighQualityEnable else _(
+            'On')))
     flooSm.setBroadcastHighQuality(enable)
 
 
@@ -345,7 +345,7 @@ broadcastHighQualityCheckBox = wx.CheckBox(leBroadcastSwitchPanel, wx.ID_ANY,
                                                'Must be disabled for compatibility with') + ' Auracast\u2122)')
 broadcastHighQualityButton = wx.Button(leBroadcastSwitchPanel, wx.ID_ANY, style=wx.NO_BORDER | wx.MINIMIZE)
 broadcastHighQualityButton.SetToolTip(
-    _('Toggle switch for') + ' ' + _('Broadcast high-quality music, otherwise, voice') + ' ' + _('Off'))
+    _('Toggle switch for') + ' ' + _('Broadcast high-quality music, otherwise, voice') + ' ' + _('On'))
 broadcastHighQualityButton.SetBitmap(off)
 leBroadcastSwitchPanel.Bind(wx.EVT_CHECKBOX, broadcast_high_quality_enable_switch, broadcastHighQualityCheckBox)
 broadcastHighQualityButton.Bind(wx.EVT_BUTTON, broadcast_high_quality_enable_switch)
@@ -360,7 +360,7 @@ def broadcast_encrypt_switch_set(enable):
     broadcastEncryptButton.SetBitmap(on if broadcastEncryptEnable else off)
     broadcastEncryptButton.SetToolTip(
         _('Toggle switch for') + ' ' + _('Encrypt broadcast; please set a key first') + ' ' + (_(
-            'On') if broadcastEncryptEnable else _('Off')))
+            'Off') if broadcastEncryptEnable else _('On')))
     flooSm.setBroadcastEncrypt(enable)
 
 
@@ -373,7 +373,7 @@ broadcastEncryptCheckBox = wx.CheckBox(leBroadcastSwitchPanel, wx.ID_ANY,
                                        label=_('Encrypt broadcast; please set a key first'))
 broadcastEncryptButton = wx.Button(leBroadcastSwitchPanel, wx.ID_ANY, style=wx.NO_BORDER | wx.MINIMIZE)
 broadcastEncryptButton.SetToolTip(
-    _('Toggle switch for') + ' ' + _('Encrypt broadcast; please set a key first') + ' ' + _('Off'))
+    _('Toggle switch for') + ' ' + _('Encrypt broadcast; please set a key first') + ' ' + _('On'))
 broadcastEncryptButton.SetBitmap(off)
 leBroadcastSwitchPanel.Bind(wx.EVT_CHECKBOX, broadcast_encrypt_enable_switch, broadcastEncryptCheckBox)
 broadcastEncryptButton.Bind(wx.EVT_BUTTON, broadcast_encrypt_enable_switch)
@@ -521,7 +521,7 @@ def led_enable_switch_set(enable):
     ledEnable = enable
     ledCheckBox.SetValue(enable)
     ledEnableButton.SetBitmap(on if ledEnable else off)
-    ledEnableButton.SetToolTip(_('Toggle switch for') + ' ' + _('LED') + ' ' + (_('On') if ledEnable else _('Off')))
+    ledEnableButton.SetToolTip(_('Toggle switch for') + ' ' + _('LED') + ' ' + (_('Off') if ledEnable else _('On')))
     flooSm.enableLed(enable)
 
 
@@ -532,7 +532,7 @@ def led_enable_switch(event):
 
 ledCheckBox = wx.CheckBox(settingsPanel, wx.ID_ANY, label=_('LED'))
 ledEnableButton = wx.Button(settingsPanel, wx.ID_ANY, style=wx.NO_BORDER | wx.MINIMIZE)
-ledEnableButton.SetToolTip(_('Toggle switch for') + ' ' + _('LED') + ' ' + _(' Off'))
+ledEnableButton.SetToolTip(_('Toggle switch for') + ' ' + _('LED') + ' ' + _(' On'))
 ledEnableButton.SetBitmap(off)
 settingsPanel.Bind(wx.EVT_CHECKBOX, led_enable_switch, ledCheckBox)
 ledEnableButton.Bind(wx.EVT_BUTTON, led_enable_switch)
@@ -546,7 +546,7 @@ def aptxLossless_enable_switch_set(enable):
     aptxLosslessCheckBox.SetValue(enable)
     aptxLosslessEnableButton.SetBitmap(on if aptxLosslessEnable else off)
     aptxLosslessEnableButton.SetToolTip(
-        _('Toggle switch for') + ' ' + _('aptX Lossless') + ' ' + (_('On') if aptxLosslessEnable else _('Off')))
+        _('Toggle switch for') + ' ' + _('aptX Lossless') + ' ' + (_('Off') if aptxLosslessEnable else _('On')))
     flooSm.enableAptxLossless(enable)
 
 
@@ -557,7 +557,7 @@ def aptxLossless_enable_switch(event):
 
 aptxLosslessCheckBox = wx.CheckBox(settingsPanel, wx.ID_ANY, label='aptX\u2122 Lossless')
 aptxLosslessEnableButton = wx.Button(settingsPanel, wx.ID_ANY, style=wx.NO_BORDER | wx.MINIMIZE)
-aptxLosslessEnableButton.SetToolTip(_('Toggle switch for') + ' ' + _('aptX Lossless') + ' ' + _('Off'))
+aptxLosslessEnableButton.SetToolTip(_('Toggle switch for') + ' ' + _('aptX Lossless') + ' ' + _('On'))
 aptxLosslessEnableButton.SetBitmap(off)  # , wx.RIGHT
 settingsPanel.Bind(wx.EVT_CHECKBOX, aptxLossless_enable_switch, aptxLosslessCheckBox)
 aptxLosslessEnableButton.Bind(wx.EVT_BUTTON, aptxLossless_enable_switch)
@@ -572,7 +572,7 @@ def gatt_client_enable_switch_set(enable):
     gattClientWithBroadcastEnableButton.SetBitmap(on if gattClientWithBroadcastEnable else off)
     gattClientWithBroadcastEnableButton.SetToolTip(
         _('Toggle switch for') + ' ' + 'GATT ' + _('Client') + ' ' + (
-            _('On') if gattClientWithBroadcastEnable else _('Off')))
+            _('Off') if gattClientWithBroadcastEnable else _('On')))
     flooSm.enableGattClient(enable)
 
 
@@ -583,7 +583,7 @@ def gatt_client_enable_switch(event):
 
 gattClientWithBroadcastCheckBox = wx.CheckBox(settingsPanel, wx.ID_ANY, label='GATT ' + _('Client'))
 gattClientWithBroadcastEnableButton = wx.Button(settingsPanel, wx.ID_ANY, style=wx.NO_BORDER | wx.MINIMIZE)
-gattClientWithBroadcastEnableButton.SetToolTip(_('Toggle switch for') + ' ' + ('GATT ') + _('Client') + ' ' + _('Off'))
+gattClientWithBroadcastEnableButton.SetToolTip(_('Toggle switch for') + ' ' + ('GATT ') + _('Client') + ' ' + _('On'))
 gattClientWithBroadcastEnableButton.SetBitmap(off)  # , wx.RIGHT
 settingsPanel.Bind(wx.EVT_CHECKBOX, gatt_client_enable_switch, gattClientWithBroadcastCheckBox)
 gattClientWithBroadcastEnableButton.Bind(wx.EVT_BUTTON, gatt_client_enable_switch)
