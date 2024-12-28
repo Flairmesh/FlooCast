@@ -70,7 +70,7 @@ class FlooStateMachine(FlooInterfaceDelegate, Thread):
             self.lastCmd = None
             self.pendingCmdPara = None
             self.state = FlooStateMachine.INIT
-            self.delegate.deviceDetected(False, None)
+            wx.CallAfter(self.delegate.deviceDetected, False, None)
 
     def handleMessage(self, message: FlooMessage):
         print("FlooStateMachine: handleMessage " + message.header)
@@ -81,7 +81,7 @@ class FlooStateMachine(FlooInterfaceDelegate, Thread):
                         self.a2dpSink = True
                     else:
                         self.a2dpSink = False
-                    self.delegate.deviceDetected(True, self.inf.port_name, message.verStr)
+                    wx.CallAfter(self.delegate.deviceDetected, True, self.inf.port_name, message.verStr)
                     cmdGetAudioMode = FlooMsgAm(True)
                     self.inf.sendMsg(cmdGetAudioMode)
                     self.lastCmd = cmdGetAudioMode
