@@ -125,7 +125,7 @@ def audio_mode_sel_set(mode):
         settingsPanelSizer.Hide(aptxLosslessEnableButton)
         settingsPanelSizer.Show(gattClientWithBroadcastCheckBox)
         settingsPanelSizer.Show(gattClientWithBroadcastEnableButton)
-    aboutSbSizer.Layout()
+    settingsPanelSizer.Layout()
 
 
 def audio_mode_sel(event):
@@ -177,21 +177,28 @@ audioModeLowerPanelSizer = wx.BoxSizer(wx.HORIZONTAL)
 preferLeaEnable = None
 
 
-def prefer_lea_enable_switch_set(enable):
+def prefer_lea_enable_switch_set(enable, isNotify):
     global preferLeaEnable
     preferLeaEnable = enable
-    preferLeaCheckBox.SetValue(enable)
     preferLeButton.SetBitmap(on if preferLeaEnable else off)
     preferLeButton.SetToolTip(
         _('Toggle switch for') + ' ' + _('Prefer using LE audio for dual-mode devices') + ' ' + (_(
             'On') if preferLeaEnable else _(
             'Off')))
-    flooSm.setPreferLea(enable)
+    if isNotify:
+        preferLeaCheckBox.SetValue(enable)
+    else:
+        flooSm.setPreferLea(enable)
     newPairingButton.Enable(False if preferLeaEnable and pairedDeviceListbox.GetCount() > 0 else True)
 
 
+def prefer_lea_enable_button(event):
+    preferLeaCheckBox.SetValue(not preferLeaEnable)
+    prefer_lea_enable_switch_set(not preferLeaEnable, False)
+
+
 def prefer_lea_enable_switch(event):
-    prefer_lea_enable_switch_set(not preferLeaEnable)
+    prefer_lea_enable_switch_set(not preferLeaEnable, False)
 
 
 preferLeaCheckBox = wx.CheckBox(audioModeLowerPanel, wx.ID_ANY,
@@ -202,7 +209,7 @@ preferLeButton.SetToolTip(
     _('Toggle switch for') + ' ' + _('Prefer using LE audio for dual-mode devices') + ' ' + _('Off'))
 preferLeButton.SetBitmap(off)
 audioModeLowerPanel.Bind(wx.EVT_CHECKBOX, prefer_lea_enable_switch, preferLeaCheckBox)
-preferLeButton.Bind(wx.EVT_BUTTON, prefer_lea_enable_switch)
+preferLeButton.Bind(wx.EVT_BUTTON, prefer_lea_enable_button)
 audioModeLowerPanelSizer.Add(preferLeaCheckBox, flag=wx.EXPAND, proportion=1)
 audioModeLowerPanelSizer.Add(preferLeButton, proportion=0)
 audioModeLowerPanel.SetSizer(audioModeLowerPanelSizer)
@@ -296,20 +303,27 @@ leBroadcastSwitchPanelSizer = wx.FlexGridSizer(3, 2, (0, 0))
 publicBroadcastEnable = None
 
 
-def public_broadcast_enable_switch_set(enable):
+def public_broadcast_enable_switch_set(enable, isNotify):
     global publicBroadcastEnable
     publicBroadcastEnable = enable
-    publicBroadcastCheckBox.SetValue(enable)
     publicBroadcastButton.SetBitmap(on if publicBroadcastEnable else off)
     publicBroadcastButton.SetToolTip(
         _('Toggle switch for') + ' ' + _('Public broadcast') + ' ' + (_('On') if publicBroadcastEnable else _(
             'Off')))
-    flooSm.setPublicBroadcast(enable)
+    if isNotify:
+        publicBroadcastCheckBox.SetValue(enable)
+    else:
+        flooSm.setPublicBroadcast(enable)
+
+
+def public_broadcast_enable_button(event):
+    publicBroadcastCheckBox.SetValue(not publicBroadcastEnable)
+    public_broadcast_enable_switch_set(not publicBroadcastEnable, False)
 
 
 # Broadcast enable switch function
 def public_broadcast_enable_switch(event):
-    public_broadcast_enable_switch_set(not publicBroadcastEnable)
+    public_broadcast_enable_switch_set(not publicBroadcastEnable, False)
 
 
 publicBroadcastCheckBox = wx.CheckBox(leBroadcastSwitchPanel, wx.ID_ANY, label=_('Public broadcast') + ' (' + _(
@@ -318,26 +332,33 @@ publicBroadcastButton = wx.Button(leBroadcastSwitchPanel, wx.ID_ANY, style=wx.NO
 publicBroadcastButton.SetToolTip(_('Toggle switch for') + ' ' + _('Public broadcast') + ' ' + _('Off'))
 publicBroadcastButton.SetBitmap(off)
 leBroadcastSwitchPanel.Bind(wx.EVT_CHECKBOX, public_broadcast_enable_switch, publicBroadcastCheckBox)
-publicBroadcastButton.Bind(wx.EVT_BUTTON, public_broadcast_enable_switch)
+publicBroadcastButton.Bind(wx.EVT_BUTTON, public_broadcast_enable_button)
 
 broadcastHighQualityEnable = None
 
 
-def broadcast_high_quality_switch_set(enable):
+def broadcast_high_quality_switch_set(enable, isNotify):
     global broadcastHighQualityEnable
     broadcastHighQualityEnable = enable
-    broadcastHighQualityCheckBox.SetValue(enable)
     broadcastHighQualityButton.SetBitmap(on if broadcastHighQualityEnable else off)
     publicBroadcastButton.SetToolTip(
         _('Toggle switch for') + ' ' + _('Broadcast high-quality music, otherwise, voice') + ' ' + (_(
             'On') if broadcastHighQualityEnable else _(
             'Off')))
-    flooSm.setBroadcastHighQuality(enable)
+    if isNotify:
+        broadcastHighQualityCheckBox.SetValue(enable)
+    else:
+        flooSm.setBroadcastHighQuality(enable)
+
+
+def broadcast_high_quality_enable_button(event):
+    broadcastHighQualityCheckBox.SetValue(not broadcastHighQualityEnable)
+    broadcast_high_quality_switch_set(not broadcastHighQualityEnable, False)
 
 
 # Broadcast high quality enable switch function
 def broadcast_high_quality_enable_switch(event):
-    broadcast_high_quality_switch_set(not broadcastHighQualityEnable)
+    broadcast_high_quality_switch_set(not broadcastHighQualityEnable, False)
 
 
 broadcastHighQualityCheckBox = wx.CheckBox(leBroadcastSwitchPanel, wx.ID_ANY,
@@ -348,25 +369,33 @@ broadcastHighQualityButton.SetToolTip(
     _('Toggle switch for') + ' ' + _('Broadcast high-quality music, otherwise, voice') + ' ' + _('Off'))
 broadcastHighQualityButton.SetBitmap(off)
 leBroadcastSwitchPanel.Bind(wx.EVT_CHECKBOX, broadcast_high_quality_enable_switch, broadcastHighQualityCheckBox)
-broadcastHighQualityButton.Bind(wx.EVT_BUTTON, broadcast_high_quality_enable_switch)
+broadcastHighQualityButton.Bind(wx.EVT_BUTTON, broadcast_high_quality_enable_button)
 
 broadcastEncryptEnable = None
 
 
-def broadcast_encrypt_switch_set(enable):
+def broadcast_encrypt_switch_set(enable, isNotify):
     global broadcastEncryptEnable
     broadcastEncryptEnable = enable
-    broadcastEncryptCheckBox.SetValue(enable)
     broadcastEncryptButton.SetBitmap(on if broadcastEncryptEnable else off)
     broadcastEncryptButton.SetToolTip(
         _('Toggle switch for') + ' ' + _('Encrypt broadcast; please set a key first') + ' ' + (_(
             'On') if broadcastEncryptEnable else _('Off')))
-    flooSm.setBroadcastEncrypt(enable)
+    if isNotify:
+        broadcastEncryptCheckBox.SetValue(enable)
+    else:
+        flooSm.setBroadcastEncrypt(enable)
+
+
+# Broadcast encrypt enable button function
+def broadcast_encrypt_enable_button(event):
+    broadcastEncryptCheckBox.SetValue(not broadcastEncryptEnable)
+    broadcast_encrypt_switch_set(not broadcastEncryptEnable, False)
 
 
 # Broadcast encrypt enable switch function
 def broadcast_encrypt_enable_switch(event):
-    broadcast_encrypt_switch_set(not broadcastEncryptEnable)
+    broadcast_encrypt_switch_set(not broadcastEncryptEnable, False)
 
 
 broadcastEncryptCheckBox = wx.CheckBox(leBroadcastSwitchPanel, wx.ID_ANY,
@@ -376,7 +405,7 @@ broadcastEncryptButton.SetToolTip(
     _('Toggle switch for') + ' ' + _('Encrypt broadcast; please set a key first') + ' ' + _('Off'))
 broadcastEncryptButton.SetBitmap(off)
 leBroadcastSwitchPanel.Bind(wx.EVT_CHECKBOX, broadcast_encrypt_enable_switch, broadcastEncryptCheckBox)
-broadcastEncryptButton.Bind(wx.EVT_BUTTON, broadcast_encrypt_enable_switch)
+broadcastEncryptButton.Bind(wx.EVT_BUTTON, broadcast_encrypt_enable_button)
 
 leBroadcastSwitchPanelSizer.Add(publicBroadcastCheckBox, flag=wx.ALIGN_LEFT)
 leBroadcastSwitchPanelSizer.Add(publicBroadcastButton, flag=wx.ALIGN_RIGHT)
@@ -516,18 +545,26 @@ settingsPanelSizer = wx.FlexGridSizer(3, 2, (5, 0))
 ledEnable = None
 
 
-def led_enable_switch_set(enable):
+def led_enable_switch_set(enable, isNotify):
     global ledEnable
     ledEnable = enable
-    ledCheckBox.SetValue(enable)
     ledEnableButton.SetBitmap(on if ledEnable else off)
     ledEnableButton.SetToolTip(_('Toggle switch for') + ' ' + _('LED') + ' ' + (_('On') if ledEnable else _('Off')))
-    flooSm.enableLed(enable)
+    if isNotify:
+        ledCheckBox.SetValue(enable)
+    else:
+        flooSm.enableLed(enable)
+
+
+# led enable button function
+def led_enable_button(event):
+    ledCheckBox.SetValue(not ledEnable)
+    led_enable_switch_set(not ledEnable, False)
 
 
 # led enable switch function
 def led_enable_switch(event):
-    led_enable_switch_set(not ledEnable)
+    led_enable_switch_set(not ledEnable, False)
 
 
 ledCheckBox = wx.CheckBox(settingsPanel, wx.ID_ANY, label=_('LED'))
@@ -535,24 +572,31 @@ ledEnableButton = wx.Button(settingsPanel, wx.ID_ANY, style=wx.NO_BORDER | wx.MI
 ledEnableButton.SetToolTip(_('Toggle switch for') + ' ' + _('LED') + ' ' + _(' Off'))
 ledEnableButton.SetBitmap(off)
 settingsPanel.Bind(wx.EVT_CHECKBOX, led_enable_switch, ledCheckBox)
-ledEnableButton.Bind(wx.EVT_BUTTON, led_enable_switch)
+ledEnableButton.Bind(wx.EVT_BUTTON, led_enable_button)
 
 aptxLosslessEnable = None
 
 
-def aptxLossless_enable_switch_set(enable):
+def aptxLossless_enable_switch_set(enable, isNotify):
     global aptxLosslessEnable
     aptxLosslessEnable = enable
-    aptxLosslessCheckBox.SetValue(enable)
     aptxLosslessEnableButton.SetBitmap(on if aptxLosslessEnable else off)
     aptxLosslessEnableButton.SetToolTip(
         _('Toggle switch for') + ' ' + _('aptX Lossless') + ' ' + (_('On') if aptxLosslessEnable else _('Off')))
-    flooSm.enableAptxLossless(enable)
+    if isNotify:
+        aptxLosslessCheckBox.SetValue(enable)
+    else:
+        flooSm.enableAptxLossless(enable)
+
+
+def aptxLossless_enable_button(event):
+    aptxLosslessCheckBox.SetValue(not aptxLosslessEnable)
+    aptxLossless_enable_switch_set(not aptxLosslessEnable, False)
 
 
 # aptxLossless enable switch function
 def aptxLossless_enable_switch(event):
-    aptxLossless_enable_switch_set(not aptxLosslessEnable)
+    aptxLossless_enable_switch_set(not aptxLosslessEnable, False)
 
 
 aptxLosslessCheckBox = wx.CheckBox(settingsPanel, wx.ID_ANY, label='aptX\u2122 Lossless')
@@ -560,25 +604,33 @@ aptxLosslessEnableButton = wx.Button(settingsPanel, wx.ID_ANY, style=wx.NO_BORDE
 aptxLosslessEnableButton.SetToolTip(_('Toggle switch for') + ' ' + _('aptX Lossless') + ' ' + _('Off'))
 aptxLosslessEnableButton.SetBitmap(off)  # , wx.RIGHT
 settingsPanel.Bind(wx.EVT_CHECKBOX, aptxLossless_enable_switch, aptxLosslessCheckBox)
-aptxLosslessEnableButton.Bind(wx.EVT_BUTTON, aptxLossless_enable_switch)
+aptxLosslessEnableButton.Bind(wx.EVT_BUTTON, aptxLossless_enable_button)
 
 gattClientWithBroadcastEnable = None
 
 
-def gatt_client_enable_switch_set(enable):
+def gatt_client_enable_switch_set(enable, isNotify):
     global gattClientWithBroadcastEnable
     gattClientWithBroadcastEnable = enable
-    gattClientWithBroadcastCheckBox.SetValue(enable)
     gattClientWithBroadcastEnableButton.SetBitmap(on if gattClientWithBroadcastEnable else off)
     gattClientWithBroadcastEnableButton.SetToolTip(
         _('Toggle switch for') + ' ' + 'GATT ' + _('Client') + ' ' + (
             _('On') if gattClientWithBroadcastEnable else _('Off')))
-    flooSm.enableGattClient(enable)
+    if isNotify:
+        gattClientWithBroadcastCheckBox.SetValue(enable)
+    else:
+        flooSm.enableGattClient(enable)
+
+
+# gatt client enable button function
+def gatt_client_enable_button(event):
+    gattClientWithBroadcastCheckBox.SetValue(not gattClientWithBroadcastEnable)
+    gatt_client_enable_switch_set(not gattClientWithBroadcastEnable, False)
 
 
 # gatt client enable switch function
 def gatt_client_enable_switch(event):
-    gatt_client_enable_switch_set(not gattClientWithBroadcastEnable)
+    gatt_client_enable_switch_set(not gattClientWithBroadcastEnable, False)
 
 
 gattClientWithBroadcastCheckBox = wx.CheckBox(settingsPanel, wx.ID_ANY, label='GATT ' + _('Client'))
@@ -586,7 +638,7 @@ gattClientWithBroadcastEnableButton = wx.Button(settingsPanel, wx.ID_ANY, style=
 gattClientWithBroadcastEnableButton.SetToolTip(_('Toggle switch for') + ' ' + ('GATT ') + _('Client') + ' ' + _('Off'))
 gattClientWithBroadcastEnableButton.SetBitmap(off)  # , wx.RIGHT
 settingsPanel.Bind(wx.EVT_CHECKBOX, gatt_client_enable_switch, gattClientWithBroadcastCheckBox)
-gattClientWithBroadcastEnableButton.Bind(wx.EVT_BUTTON, gatt_client_enable_switch)
+gattClientWithBroadcastEnableButton.Bind(wx.EVT_BUTTON, gatt_client_enable_button)
 
 settingsPanelSizer.Add(ledCheckBox, 1, flag=wx.ALIGN_LEFT | wx.ALIGN_CENTER_VERTICAL)
 settingsPanelSizer.Add(ledEnableButton, flag=wx.ALIGN_RIGHT)
@@ -625,7 +677,7 @@ supportLink = hl.HyperLinkCtrl(versionPanel, wx.ID_ANY, _("Support Link"),
                                URL="https://www.flairmesh.com/Dongle/FMA120.html")
 versionPanelSizer.Add(supportLink, flag=wx.ALIGN_CENTER | wx.BOTTOM, border=4)
 versionPanel.SetSizer(versionPanelSizer)
-versionInfo = wx.StaticText(versionPanel, wx.ID_ANY, label=_("Version") + " 1.1.2")
+versionInfo = wx.StaticText(versionPanel, wx.ID_ANY, label=_("Version") + " 1.1.3")
 versionPanelSizer.Add(versionInfo, flag=wx.ALIGN_CENTER | wx.BOTTOM, border=4)
 
 dfuUndergoing = False
@@ -818,19 +870,19 @@ class FlooSmDelegate(FlooStateMachineDelegate):
 
     def sourceStateInd(self, state: int):
         dongleStateText.SetLabelText(sourceStateStr[state])
-        audioModeSbSizer.Layout()
+        dongleStateSbSizer.Layout()
 
     def leAudioStateInd(self, state: int):
         leaStateText.SetLabelText(leaStateStr[state])
-        audioModeSbSizer.Layout()
+        leaStateSbSizer.Layout()
 
     def preferLeaInd(self, state: int):
-        prefer_lea_enable_switch_set(state == 1)
+        prefer_lea_enable_switch_set(state == 1, True)
 
     def broadcastModeInd(self, state: int):
-        broadcast_high_quality_switch_set(state & 4 == 4)
-        public_broadcast_enable_switch_set(state & 2 == 2)
-        broadcast_encrypt_switch_set(state & 1 == 1)
+        broadcast_high_quality_switch_set(state & 4 == 4, True)
+        public_broadcast_enable_switch_set(state & 2 == 2, True)
+        broadcast_encrypt_switch_set(state & 1 == 1, True)
 
     def broadcastNameInd(self, name):
         broadcastNameEntry.SetValue(name)
@@ -852,16 +904,16 @@ class FlooSmDelegate(FlooStateMachineDelegate):
                                         + _("RSSI") + " -" + str(0x100 - rssi) + "dBm")
         else:
             codecInUseText.SetLabelText(codecStr[codec] if codec < len(codecStr) else _("Unknown"))
-        audioModeSbSizer.Layout()
+        codecInUseSbSizer.Layout()
 
     def ledEnabledInd(self, enabled):
-        led_enable_switch_set(enabled)
+        led_enable_switch_set(enabled, True)
 
     def aptxLosslessEnabledInd(self, enabled):
-        aptxLossless_enable_switch_set(enabled)
+        aptxLossless_enable_switch_set(enabled, True)
 
     def gattClientEnabledInd(self, enabled):
-        gatt_client_enable_switch_set(enabled)
+        gatt_client_enable_switch_set(enabled, True)
 
 
 flooSmDelegate = FlooSmDelegate()
