@@ -284,3 +284,8 @@ msgstr "Μακριά από"
 msgid "Client"
 msgstr "Πελάτης"
 
+msgid "Receiver"
+msgstr "Δέκτης"
+
+msgid "Relay"
+msgstr "Αναμετάδοση"

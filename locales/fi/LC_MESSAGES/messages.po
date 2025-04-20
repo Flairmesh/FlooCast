@@ -284,3 +284,8 @@ msgstr "Pois"
 msgid "Client"
 msgstr "Asiakas"
 
+msgid "Receiver"
+msgstr "Vastaanotin"
+
+msgid "Relay"
+msgstr "Rele"

@@ -147,7 +147,8 @@ class FlooStateMachine(FlooInterfaceDelegate, Thread):
                     self.lastCmd = cmdGetCodecInUse
             elif isinstance(message, FlooMsgAc) or isinstance(message, FlooMsgEr):
                 if isinstance(self.lastCmd, FlooMsgAc) and isinstance(message, FlooMsgAc):
-                    wx.CallAfter(self.delegate.audioCodecInUseInd, message.codec, message.rssi, message.rate)
+                    wx.CallAfter(self.delegate.audioCodecInUseInd, message.codec, message.rssi, message.rate,
+                                 message.spkSampleRate, message.micSampleRate)
                     self.lastCmd = None
                     self.state = FlooStateMachine.CONNECTED
 
@@ -206,7 +207,8 @@ class FlooStateMachine(FlooInterfaceDelegate, Thread):
                 else:
                     self.pairedDevices.append(message.name)
             elif isinstance(message, FlooMsgAc):
-                wx.CallAfter(self.delegate.audioCodecInUseInd, message.codec, message.rssi, message.rate)
+                wx.CallAfter(self.delegate.audioCodecInUseInd, message.codec, message.rssi, message.rate,
+                             message.spkSampleRate, message.micSampleRate)
             elif isinstance(message, FlooMsgFt):
                 self.feature = message.feature
                 wx.CallAfter(self.delegate.ledEnabledInd, self.feature & 0x01)

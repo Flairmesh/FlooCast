@@ -279,3 +279,9 @@ msgstr "Wył."
 
 msgid "Client"
 msgstr "Klient"
+
+msgid "Receiver"
+msgstr "Odbiornik"
+
+msgid "Relay"
+msgstr "Przekaźnik"

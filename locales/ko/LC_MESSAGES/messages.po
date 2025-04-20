@@ -288,3 +288,8 @@ msgstr "꺼짐"
 msgid "Client"
 msgstr "클라이언트"
 
+msgid "Receiver"
+msgstr "수신기"
+
+msgid "Relay"
+msgstr "릴레이"

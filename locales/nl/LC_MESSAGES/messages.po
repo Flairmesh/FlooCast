@@ -279,3 +279,9 @@ msgstr "Uit"
 
 msgid "Client"
 msgstr "Client"
+
+msgid "Receiver"
+msgstr "Ontvanger"
+
+msgid "Relay"
+msgstr "Relais"

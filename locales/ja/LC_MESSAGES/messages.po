@@ -287,3 +287,9 @@ msgstr "オフ"
 
 msgid "Client"
 msgstr "クライアント"
+
+msgid "Receiver"
+msgstr "受信機"
+
+msgid "Relay"
+msgstr "リレー"

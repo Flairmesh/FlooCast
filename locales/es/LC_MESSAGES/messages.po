@@ -284,3 +284,8 @@ msgstr "Apagado"
 msgid "Client"
 msgstr "Cliente"
 
+msgid "Receiver"
+msgstr "Receptor"
+
+msgid "Relay"
+msgstr "Relé"

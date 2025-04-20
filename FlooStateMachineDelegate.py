@@ -31,7 +31,7 @@ class FlooStateMachineDelegate:
         """Called when FlooGoo device reports current paired devices list"""
         pass
 
-    def audioCodecInUseInd(self, codec, rssi, rate):
+    def audioCodecInUseInd(self, codec, rssi, rate, spkSampleRate, micSampleRate):
         """Called when FlooGoo device reports current in use audio codec"""
         pass
 

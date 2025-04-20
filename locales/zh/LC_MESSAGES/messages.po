@@ -280,3 +280,8 @@ msgstr "关闭"
 msgid "Client"
 msgstr "客户端"
 
+msgid "Receiver"
+msgstr "接收器"
+
+msgid "Relay"
+msgstr "转发器"

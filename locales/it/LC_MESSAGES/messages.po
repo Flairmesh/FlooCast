@@ -280,3 +280,8 @@ msgstr "Off"
 msgid "Client"
 msgstr "Client"
 
+msgid "Receiver"
+msgstr "Ricevitore"
+
+msgid "Relay"
+msgstr "Relè"

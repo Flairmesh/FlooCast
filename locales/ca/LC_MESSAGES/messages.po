@@ -292,3 +292,8 @@ msgstr "ApagatApagat"
 msgid "Client"
 msgstr "Client"
 
+msgid "Receiver"
+msgstr "Receptor"
+
+msgid "Relay"
+msgstr "Relleu"

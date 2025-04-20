@@ -280,3 +280,8 @@ msgstr "Kapalı"
 msgid "Client"
 msgstr "İstemci"
 
+msgid "Receiver"
+msgstr "Alıcı"
+
+msgid "Relay"
+msgstr "Röle"

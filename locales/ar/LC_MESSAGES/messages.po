@@ -292,3 +292,8 @@ msgstr "إيقاف"
 msgid "Client"
 msgstr "العميل"
 
+msgid "Receiver"
+msgstr "جهاز الاستقبال"
+
+msgid "Relay"
+msgstr "المرحّل"

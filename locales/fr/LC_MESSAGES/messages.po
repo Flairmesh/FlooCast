@@ -291,3 +291,8 @@ msgstr "Désactivé"
 msgid "Client"
 msgstr "Client"
 
+msgid "Receiver"
+msgstr "Récepteur"
+
+msgid "Relay"
+msgstr "Relais"

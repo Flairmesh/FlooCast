@@ -280,3 +280,8 @@ msgstr "Av"
 msgid "Client"
 msgstr "Klient"
 
+msgid "Receiver"
+msgstr "Mottaker"
+
+msgid "Relay"
+msgstr "Stafett"

@@ -274,7 +274,7 @@ def hide_window(event):
 
 
 windowIcon = FlooCastTaskBarIcon(appFrame)
-appFrame.Bind(wx.EVT_ICONIZE, hide_window)
+#appFrame.Bind(wx.EVT_ICONIZE, hide_window)
 appFrame.Bind(wx.EVT_CLOSE, quit_window)
 
 windowSb = wx.StaticBox(appPanel, wx.ID_ANY, _('Window'))
@@ -677,7 +677,7 @@ supportLink = hl.HyperLinkCtrl(versionPanel, wx.ID_ANY, _("Support Link"),
                                URL="https://www.flairmesh.com/Dongle/FMA120.html")
 versionPanelSizer.Add(supportLink, flag=wx.ALIGN_CENTER | wx.BOTTOM, border=4)
 versionPanel.SetSizer(versionPanelSizer)
-versionInfo = wx.StaticText(versionPanel, wx.ID_ANY, label=_("Version") + " 1.1.3")
+versionInfo = wx.StaticText(versionPanel, wx.ID_ANY, label=_("Version") + " 1.1.4")
 versionPanelSizer.Add(versionInfo, flag=wx.ALIGN_CENTER | wx.BOTTOM, border=4)
 
 dfuUndergoing = False
@@ -685,8 +685,8 @@ dfuUndergoing = False
 # dfuInfoDefaultColor = dfuInfo.cget('foreground')
 dfuInfoBind = False
 firmwareVersion = ""
-variant = ""
-a2dpSink = False
+firstBatch = ""
+firmwareVariant = 0
 
 
 def update_dfu_info(state: int):
@@ -735,7 +735,7 @@ def button_dfu(event):
             fileBasename = os.path.splitext(filename)[0]
             if not re.search(r'\d+$', fileBasename):
                 fileBasename = fileBasename[:-1]
-            fileBasename += variant
+            fileBasename += firstBatch
             filename = fileBasename + ".bin"
             if os.path.isfile(filename):
                 dfuThread = FlooDfuThread([app_path, filename], update_dfu_info)
@@ -752,6 +752,9 @@ versionPanelSizer.Add(dfuInfo, flag=wx.ALIGN_CENTER)
 newFirmwareUrl = hl.HyperLinkCtrl(versionPanel, wx.ID_ANY, _("New Firmware is available"), URL="")
 versionPanelSizer.Add(newFirmwareUrl, flag=wx.ALIGN_CENTER)
 versionPanelSizer.Hide(newFirmwareUrl)
+firmwareDesc = wx.StaticText(versionPanel, wx.ID_ANY, "")
+versionPanelSizer.Add(firmwareDesc, flag=wx.ALIGN_CENTER | wx.TOP, border=16)
+versionPanelSizer.Hide(firmwareDesc)
 
 aboutSbSizer.Add(settingsPanel, proportion=1, flag=wx.EXPAND)
 aboutSbSizer.Add(versionPanel, proportion=3)
@@ -778,7 +781,7 @@ def enable_settings_widgets(enable: bool):
     if dfuUndergoing:
         return
     if enable:
-        if a2dpSink:
+        if firmwareVariant != 0:
             audioModeSb.Disable()
         else:
             audioModeSb.Enable()
@@ -806,22 +809,27 @@ appFrame.Show(True)  # Show the frame.
 class FlooSmDelegate(FlooStateMachineDelegate):
     def deviceDetected(self, flag: bool, port: str, version: str = None):
         global firmwareVersion
-        global variant
-        global a2dpSink
+        global firstBatch
+        global firmwareVariant
         global dfuInfoBind
         global newFirmwareUrl
+        global firmwareDesc
         global versionPanelSizer
         global aboutSbSizer
 
         if flag:
             update_status_bar(_("Use FlooGoo dongle on ") + " " + port)
-            variant = "" if re.search(r'\d+$', version) else version[-1]
-            a2dpSink = True if version.startswith("AS") else False
-            firmwareVersion = version if variant == "" else version[:-1]
+            firstBatch = "" if re.search(r'\d+$', version) else version[-1]
+            firmwareVariant = 1 if version.startswith("AS1") else 0
+            firmwareVariant = 2 if version.startswith("AS2") else firmwareVariant
+            firmwareVersion = version if firstBatch == "" else version[:-1]
             # firmwareVersion = firmwareVersion[2:] if a2dpSink else firmwareVersion
             try:
-                if a2dpSink:
-                    latest = urllib.request.urlopen("https://www.flairmesh.com/Dongle/FMA120/latest_as",
+                if firmwareVariant == 1:
+                    latest = urllib.request.urlopen("https://www.flairmesh.com/Dongle/FMA120/latest_as1",
+                                                    context=ssl.create_default_context(cafile=certifi.where())).read()
+                elif firmwareVariant == 2:
+                    latest = urllib.request.urlopen("https://www.flairmesh.com/Dongle/FMA120/latest_as2",
                                                     context=ssl.create_default_context(cafile=certifi.where())).read()
                 else:
                     latest = urllib.request.urlopen("https://www.flairmesh.com/Dongle/FMA120/latest",
@@ -836,17 +844,30 @@ class FlooSmDelegate(FlooStateMachineDelegate):
                     newFirmwareUrl.SetLabelText(
                         _("Current firmware: ") + firmwareVersion + _(", check the latest."))
                     newFirmwareUrl.SetURL("https://www.flairmesh.com/Dongle/FMA120.html")
-
+                    versionPanelSizer.Show(newFirmwareUrl)
+                    versionPanelSizer.Layout()
                 elif latest > firmwareVersion:
                     versionPanelSizer.Hide(dfuInfo)
                     newFirmwareUrl.SetLabelText(
                         _("New Firmware is available") + " " + firmwareVersion + " -> " + latest)
                     newFirmwareUrl.SetURL("https://www.flairmesh.com/support/FMA120_" + latest + ".zip")
                     versionPanelSizer.Show(newFirmwareUrl)
+                    if firmwareVariant == 1:
+                        firmwareDesc.SetLabelText("Auracast\u2122 " + _("Receiver"))
+                        versionPanelSizer.Show(firmwareDesc)
+                    elif firmwareVariant == 2:
+                        firmwareDesc.SetLabelText("A2DP - Auracast\u2122 " + _("Relay"))
+                        versionPanelSizer.Show(firmwareDesc)
                     versionPanelSizer.Layout()
                 else:
                     dfuInfo.SetLabelText(_("Firmware") + " " + firmwareVersion)
                     versionPanelSizer.Show(dfuInfo)
+                    if firmwareVariant == 1:
+                        firmwareDesc.SetLabelText("Auracast\u2122 " + _("Receiver"))
+                        versionPanelSizer.Show(firmwareDesc)
+                    elif firmwareVariant == 2:
+                        firmwareDesc.SetLabelText("A2DP - Auracast\u2122 " + _("Relay"))
+                        versionPanelSizer.Show(firmwareDesc)
                     versionPanelSizer.Layout()
         else:
             update_status_bar(_("Please insert your FlooGoo dongle"))
@@ -857,7 +878,7 @@ class FlooSmDelegate(FlooStateMachineDelegate):
     def audioModeInd(self, mode: int):
         global audioMode
         audioMode = mode
-        if a2dpSink:
+        if firmwareVariant != 0:
             pairedDevicesSb.Enable(True)
         else:
             if mode == 0:
@@ -897,13 +918,27 @@ class FlooSmDelegate(FlooStateMachineDelegate):
         newPairingButton.Enable(False if preferLeaEnable and i > 0 else True)
         clearAllButton.Enable(True if i > 0 else False)
 
-    def audioCodecInUseInd(self, codec, rssi, rate):
+    def audioCodecInUseInd(self, codec, rssi, rate, spkSampleRate, micSampleRate):
         codecInUseText.SetLabelText(codecStr[codec] if codec < len(codecStr) else _("Unknown"))
         if (codec == 6 or codec == 10) and rssi != 0:
-            codecInUseText.SetLabelText(codecStr[codec] + " @ " + str(rate) + "Kbps "
-                                        + _("RSSI") + " -" + str(0x100 - rssi) + "dBm")
-        else:
-            codecInUseText.SetLabelText(codecStr[codec] if codec < len(codecStr) else _("Unknown"))
+            if spkSampleRate == 0:
+                codecInUseText.SetLabelText(codecStr[codec] + " @ " + str(rate) + "Kbps "
+                                            + _("RSSI") + " -" + str(0x100 - rssi) + "dBm")
+            else:
+                codecInUseText.SetLabelText(codecStr[codec] + " @ " + str(float(spkSampleRate / 1000)) + "kHz "
+                                            + str(rate) + "Kbps " + _("RSSI") + " -" + str(0x100 - rssi) + "dBm")
+        elif spkSampleRate != 0 and micSampleRate != 0:
+            codecInUseText.SetLabelText((codecStr[codec] + " @ " + str(float(spkSampleRate / 1000)) + "|"
+                                         + str(float(micSampleRate / 1000)) + "KHz") if codec < len(codecStr) else _(
+                "Unknown"))
+        elif spkSampleRate != 0:
+            codecInUseText.SetLabelText(
+                (codecStr[codec] + " @ " + str(float(spkSampleRate / 1000)) + "KHz") if codec < len(codecStr) else _(
+                    "Unknown"))
+        elif micSampleRate != 0:
+            codecInUseText.SetLabelText(
+                (codecStr[codec] + " @ 0| " + str(float(micSampleRate / 1000)) + "KHz") if codec < len(codecStr) else _(
+                    "Unknown"))
         codecInUseSbSizer.Layout()
 
     def ledEnabledInd(self, enabled):

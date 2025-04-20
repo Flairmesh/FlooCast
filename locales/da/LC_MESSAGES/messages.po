@@ -284,3 +284,8 @@ msgstr "Slukket"
 msgid "Client"
 msgstr "Klient"
 
+msgid "Receiver"
+msgstr "Modtager"
+
+msgid "Relay"
+msgstr "Relæ"

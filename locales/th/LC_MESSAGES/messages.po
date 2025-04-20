@@ -288,3 +288,8 @@ msgstr "ปิด"
 msgid "Client"
 msgstr "ไคลเอนต์"
 
+msgid "Receiver"
+msgstr "เครื่องรับ"
+
+msgid "Relay"
+msgstr "รีเลย์"

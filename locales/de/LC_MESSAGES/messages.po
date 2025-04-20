@@ -280,3 +280,8 @@ msgstr "Aus"
 msgid "Client"
 msgstr "Client"
 
+msgid "Receiver"
+msgstr "Empfänger"
+
+msgid "Relay"
+msgstr "Relæ"

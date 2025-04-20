@@ -292,3 +292,8 @@ msgstr "बंद"
 msgid "Client"
 msgstr "क्लाइंट"
 
+msgid "Receiver"
+msgstr "रिसीवर"
+
+msgid "Relay"
+msgstr "रिले"
