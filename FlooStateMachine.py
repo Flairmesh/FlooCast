@@ -213,7 +213,7 @@ class FlooStateMachine(FlooInterfaceDelegate, Thread):
                 self.feature = message.feature
                 wx.CallAfter(self.delegate.ledEnabledInd, self.feature & 0x01)
                 wx.CallAfter(self.delegate.aptxLosslessEnabledInd, 1 if (self.feature & 0x02) == 0x02 else 0)
-                wx.CallAfter(self.delegate.gattClientEnabledInd, 1 if (self.feature & 0x04) == 0x02 else 0)
+                wx.CallAfter(self.delegate.gattClientEnabledInd, 1 if (self.feature & 0x04) == 0x04 else 0)
 
     def setAudioMode(self, mode: int):
         if self.state == FlooStateMachine.CONNECTED:
