@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-09-14 21:16+1000\n"
+"POT-Creation-Date: 2023-09-15 00:09+1000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -13,7 +13,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: pygettext.py 1.5\n"
-
 
 #: main.py:47 main.py:89
 msgid "Initializing"
@@ -25,7 +24,7 @@ msgstr "Nhàn rỗi"
 
 #: main.py:49
 msgid "Pairing"
-msgstr "Ghép nối"
+msgstr "Đang ghép đôi"
 
 #: main.py:50
 msgid "Connecting"
@@ -41,7 +40,7 @@ msgstr "Bắt đầu âm thanh"
 
 #: main.py:53
 msgid "Audio streaming"
-msgstr "Phát thanh"
+msgstr "Đang phát âm thanh"
 
 #: main.py:54
 msgid "Audio stopping"
@@ -53,11 +52,11 @@ msgstr "Ngắt kết nối"
 
 #: main.py:56
 msgid "Voice starting"
-msgstr "Bắt đầu bằng giọng nói"
+msgstr "Bắt đầu giọng nói"
 
 #: main.py:57
 msgid "Voice streaming"
-msgstr "Truyền phát giọng nói"
+msgstr "Đang phát giọng nói"
 
 #: main.py:58
 msgid "Voice stopping"
@@ -69,11 +68,11 @@ msgstr "Đã ngắt kết nối"
 
 #: main.py:62
 msgid "Unicast starting"
-msgstr "Khởi động đơn hướng"
+msgstr "Bắt đầu truyền đơn hướng"
 
 #: main.py:63
 msgid "Unicast streaming"
-msgstr "Truyền phát đơn hướng"
+msgstr "Truyền đơn hướng"
 
 #: main.py:64
 msgid "Broadcast starting"
@@ -81,11 +80,11 @@ msgstr "Bắt đầu phát sóng"
 
 #: main.py:65
 msgid "Broadcast streaming"
-msgstr "Truyền phát trực tuyến"
+msgstr "Đang phát sóng"
 
 #: main.py:66
 msgid "Streaming stopping"
-msgstr "Đang dừng phát trực tuyến"
+msgstr "Dừng phát"
 
 #: main.py:109
 msgid "Audio Mode"
@@ -93,11 +92,11 @@ msgstr "Chế độ âm thanh"
 
 #: main.py:111
 msgid "LE Broadcast"
-msgstr "LE phát sóng"
+msgstr "Phát sóng LE"
 
 #: main.py:113
 msgid "Most Recently Used Devices"
-msgstr "Thiết bị được sử dụng gần đây nhất"
+msgstr "Thiết bị sử dụng gần đây"
 
 #: main.py:116
 msgid "Window"
@@ -105,7 +104,7 @@ msgstr "Cửa sổ"
 
 #: main.py:119
 msgid "Help"
-msgstr "Giúp đỡ"
+msgstr "Trợ giúp"
 
 #: main.py:139
 msgid "High Quality (one-to-one)"
@@ -113,15 +112,15 @@ msgstr "Chất lượng cao (một-một)"
 
 #: main.py:142
 msgid "Gaming (one-to-one)"
-msgstr "Chơi game (một đối một)"
+msgstr "Chơi game (một-một)"
 
 #: main.py:145
 msgid "Broadcast"
-msgstr "Phát tin"
+msgstr "Phát sóng"
 
 #: main.py:149
 msgid "Dongle State"
-msgstr "Trạng thái bộ điều hợp"
+msgstr "Trạng thái thiết bị"
 
 #: main.py:153
 msgid "LE Audio State"
@@ -129,23 +128,23 @@ msgstr "Trạng thái âm thanh LE"
 
 #: main.py:157
 msgid "Codec in Use"
-msgstr "Codec đang được sử dụng"
+msgstr "Bộ mã/giải mã đang sử dụng"
 
 #: main.py:162
 msgid "Prefer using LE audio for dual-mode devices"
-msgstr "Thích sử dụng âm thanh LE cho các thiết bị chế độ kép"
+msgstr "Ưu tiên sử dụng âm thanh LE cho thiết bị hai chế độ"
 
 #: main.py:188
 msgid "Public broadcast"
-msgstr "Phát sóng công cộng"
+msgstr "Phát sóng công khai"
 
 #: main.py:209
 msgid "Broadcast high-quality music, otherwise, voice"
-msgstr "Phát sóng âm nhạc chất lượng cao, nếu không thì giọng nói"
+msgstr "Phát nhạc chất lượng cao, nếu không thì giọng nói"
 
 #: main.py:231
 msgid "Encrypt broadcast; please set a key first"
-msgstr "Mã hóa phát sóng; vui lòng đặt chìa khóa trước"
+msgstr "Mã hóa phát sóng; vui lòng đặt khóa trước"
 
 #: main.py:252
 msgid "Broadcast Name, maximum 30 characters"
@@ -161,7 +160,7 @@ msgstr "Nhập tên mới không quá 30 ký tự rồi nhấn <ENTER>"
 
 #: main.py:286
 msgid "Input a new key then press <ENTER>"
-msgstr "Nhập phím mới rồi nhấn <ENTER>"
+msgstr "Nhập khóa mới rồi nhấn <ENTER>"
 
 #: main.py:308
 msgid "Add device"
@@ -169,15 +168,15 @@ msgstr "Thêm thiết bị"
 
 #: main.py:325
 msgid "Delete"
-msgstr "Xóa bỏ"
+msgstr "Xóa"
 
 #: main.py:343
 msgid "Clear All"
-msgstr "Làm sạch tất cả"
+msgstr "Xóa tất cả"
 
 #: main.py:405
 msgid "Quit"
-msgstr "Từ bỏ"
+msgstr "Thoát"
 
 #: main.py:405
 msgid "Show Window"
@@ -189,7 +188,7 @@ msgstr "Nguồn âm thanh Bluetooth FlooGoo"
 
 #: main.py:414
 msgid "Minimize to System Tray"
-msgstr "Thu nhỏ xuống khay hệ thống"
+msgstr "Thu nhỏ vào khay hệ thống"
 
 #: main.py:416
 msgid "Quit App"
@@ -201,7 +200,7 @@ msgstr "Thay đổi có hiệu lực sau khi khởi động lại"
 
 #: main.py:445
 msgid "Third-Party Software Licenses"
-msgstr "Giấy phép phần mềm của bên thứ ba"
+msgstr "Giấy phép phần mềm bên thứ ba"
 
 #: main.py:448
 msgid "Support Link"
@@ -213,7 +212,7 @@ msgstr "Phiên bản"
 
 #: main.py:462 main.py:536
 msgid "Firmware"
-msgstr "Phần sụn"
+msgstr "Phần mềm hệ thống"
 
 #: main.py:469
 msgid "Upgrade error"
@@ -221,19 +220,19 @@ msgstr "Lỗi nâng cấp"
 
 #: main.py:472
 msgid "Upgrade progress"
-msgstr "Tiến độ nâng cấp"
+msgstr "Tiến trình nâng cấp"
 
 #: main.py:486
 msgid "Device Firmware Upgrade"
-msgstr "Nâng cấp chương trình cơ sở thiết bị"
+msgstr "Nâng cấp phần mềm thiết bị"
 
 #: main.py:524
 msgid "Use FlooGoo dongle on "
-msgstr "Sử dụng bộ chuyển đổi FlooGoo trên"
+msgstr "Sử dụng thiết bị FlooGoo trên "
 
 #: main.py:526
 msgid "Please insert your FlooGoo dongle"
-msgstr "Vui lòng lắp bộ chuyển đổi FlooGoo của bạn"
+msgstr "Vui lòng cắm thiết bị FlooGoo"
 
 #: main.py:335
 msgid "Connect/Disconnect"
@@ -241,15 +240,7 @@ msgstr "Kết nối/Ngắt kết nối"
 
 #: main.py:584
 msgid "New Firmware is available"
-msgstr "Đã có phần mềm mới"
-
-#: main.py:666
-msgid "RSSI"
-msgstr "RSSI"
-
-#: main.py:442
-msgid "LED"
-msgstr "đèn LED"
+msgstr "Có phần mềm mới"
 
 msgid "Connect"
 msgstr "Kết nối"
@@ -261,14 +252,14 @@ msgid "Settings"
 msgstr "Cài đặt"
 
 msgid ", check the latest."
-msgstr ", hãy kiểm tra cái mới nhất."
+msgstr ", kiểm tra bản mới nhất."
 
 msgid "Current firmware: "
-msgstr "Chương trình cơ sở hiện tại:"
+msgstr "Phần mềm hiện tại: "
 
 #: Added from 1.1.0
 msgid "Must be disabled for"
-msgstr "Phải tắt cho"
+msgstr "Phải tắt để"
 
 msgid "Must be enabled for compatibility with"
 msgstr "Phải bật để tương thích với"
@@ -277,7 +268,7 @@ msgid "Must be disabled for compatibility with"
 msgstr "Phải tắt để tương thích với"
 
 msgid "Toggle switch for"
-msgstr "Công tắc chuyển đổi cho"
+msgstr "Công tắc bật/tắt cho"
 
 msgid "On"
 msgstr "Bật"
@@ -292,4 +283,22 @@ msgid "Receiver"
 msgstr "Bộ thu"
 
 msgid "Relay"
-msgstr "Rơ le"
+msgstr "Bộ tiếp sóng"
+
+msgid "Stop broadcasting immediately when USB audio playback ends"
+msgstr "Dừng phát sóng ngay khi phát âm thanh USB kết thúc"
+
+msgid "USB Audio Input"
+msgstr "Đầu vào âm thanh USB"
+
+msgid "Broadcast Latency"
+msgstr "Độ trễ phát sóng"
+
+msgid "Lowest"
+msgstr "Thấp nhất"
+
+msgid "Lower"
+msgstr "Thấp hơn"
+
+msgid "Default"
+msgstr "Mặc định"

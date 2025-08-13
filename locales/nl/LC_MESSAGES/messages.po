@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-09-14 21:16+1000\n"
+"POT-Creation-Date: 2023-09-15 00:09+1000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -13,7 +13,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: pygettext.py 1.5\n"
-
 
 #: main.py:47 main.py:89
 msgid "Initializing"
@@ -41,31 +40,31 @@ msgstr "Audio starten"
 
 #: main.py:53
 msgid "Audio streaming"
-msgstr "Audiostreaming"
+msgstr "Audio streamen"
 
 #: main.py:54
 msgid "Audio stopping"
-msgstr "Audio stopt"
+msgstr "Audio stoppen"
 
 #: main.py:55
 msgid "Disconnecting"
-msgstr "De verbinding verbreken"
+msgstr "Verbinding verbreken"
 
 #: main.py:56
 msgid "Voice starting"
-msgstr "Stem starten"
+msgstr "Spraak starten"
 
 #: main.py:57
 msgid "Voice streaming"
-msgstr "Spraakstreaming"
+msgstr "Spraak streamen"
 
 #: main.py:58
 msgid "Voice stopping"
-msgstr "Stem stopt"
+msgstr "Spraak stoppen"
 
 #: main.py:60 main.py:155
 msgid "Disconnected"
-msgstr "Losgekoppeld"
+msgstr "Verbinding verbroken"
 
 #: main.py:62
 msgid "Unicast starting"
@@ -73,19 +72,19 @@ msgstr "Unicast starten"
 
 #: main.py:63
 msgid "Unicast streaming"
-msgstr "Unicast-streaming"
+msgstr "Unicast streamen"
 
 #: main.py:64
 msgid "Broadcast starting"
-msgstr "Uitzending begint"
+msgstr "Uitzending starten"
 
 #: main.py:65
 msgid "Broadcast streaming"
-msgstr "Uitzendstreaming"
+msgstr "Uitzending bezig"
 
 #: main.py:66
 msgid "Streaming stopping"
-msgstr "Streaming stopt"
+msgstr "Streaming stoppen"
 
 #: main.py:109
 msgid "Audio Mode"
@@ -101,11 +100,11 @@ msgstr "Meest recent gebruikte apparaten"
 
 #: main.py:116
 msgid "Window"
-msgstr "Raam"
+msgstr "Venster"
 
 #: main.py:119
 msgid "Help"
-msgstr "Hulp"
+msgstr "Help"
 
 #: main.py:139
 msgid "High Quality (one-to-one)"
@@ -121,43 +120,43 @@ msgstr "Uitzending"
 
 #: main.py:149
 msgid "Dongle State"
-msgstr "Adapterstatus"
+msgstr "Donglestatus"
 
 #: main.py:153
 msgid "LE Audio State"
-msgstr "LE Audiostatus"
+msgstr "LE-audiostatus"
 
 #: main.py:157
 msgid "Codec in Use"
-msgstr "Codec in gebruik"
+msgstr "Gebruikte codec"
 
 #: main.py:162
 msgid "Prefer using LE audio for dual-mode devices"
-msgstr "Gebruik bij voorkeur LE-audio voor dual-mode apparaten"
+msgstr "Geef de voorkeur aan LE-audio voor dual-mode apparaten"
 
 #: main.py:188
 msgid "Public broadcast"
-msgstr "Publieke uitzending"
+msgstr "Openbare uitzending"
 
 #: main.py:209
 msgid "Broadcast high-quality music, otherwise, voice"
-msgstr "Zend muziek van hoge kwaliteit uit, anders stem"
+msgstr "Zend muziek in hoge kwaliteit uit, anders spraak"
 
 #: main.py:231
 msgid "Encrypt broadcast; please set a key first"
-msgstr "Versleutel uitzending; Stel eerst een sleutel in"
+msgstr "Versleutel uitzending; stel eerst een sleutel in"
 
 #: main.py:252
 msgid "Broadcast Name, maximum 30 characters"
-msgstr "Uitzendnaam, maximaal 30 tekens"
+msgstr "Uitzendingsnaam, maximaal 30 tekens"
 
 #: main.py:271
 msgid "Broadcast Key, maximum 16 characters"
-msgstr "Broadcast-sleutel, maximaal 16 tekens"
+msgstr "Uitzendingssleutel, maximaal 16 tekens"
 
 #: main.py:275
 msgid "Input a new name of no more than 30 characters then press <ENTER>"
-msgstr "Voer een nieuwe naam in van maximaal 30 tekens en druk vervolgens op <ENTER>"
+msgstr "Voer een nieuwe naam in van maximaal 30 tekens en druk op <ENTER>"
 
 #: main.py:286
 msgid "Input a new key then press <ENTER>"
@@ -165,7 +164,7 @@ msgstr "Voer een nieuwe sleutel in en druk op <ENTER>"
 
 #: main.py:308
 msgid "Add device"
-msgstr "Voeg toestel toe"
+msgstr "Apparaat toevoegen"
 
 #: main.py:325
 msgid "Delete"
@@ -173,23 +172,23 @@ msgstr "Verwijderen"
 
 #: main.py:343
 msgid "Clear All"
-msgstr "Wis alles"
+msgstr "Alles wissen"
 
 #: main.py:405
 msgid "Quit"
-msgstr "Ontslag nemen"
+msgstr "Afsluiten"
 
 #: main.py:405
 msgid "Show Window"
-msgstr "Toon venster"
+msgstr "Venster weergeven"
 
 #: main.py:406
 msgid "FlooGoo Bluetooth Audio Source"
-msgstr "FlooGoo Bluetooth-audiobron"
+msgstr "FlooGoo Bluetooth-audio bron"
 
 #: main.py:414
 msgid "Minimize to System Tray"
-msgstr "Minimaliseren naar het systeemvak"
+msgstr "Minimaliseren naar systeemvak"
 
 #: main.py:416
 msgid "Quit App"
@@ -197,11 +196,11 @@ msgstr "App afsluiten"
 
 #: main.py:430
 msgid "Changes Take Effect After Restart"
-msgstr "Wijzigingen worden van kracht na herstart"
+msgstr "Wijzigingen worden toegepast na herstart"
 
 #: main.py:445
 msgid "Third-Party Software Licenses"
-msgstr "Softwarelicenties van derden"
+msgstr "Licenties van derden"
 
 #: main.py:448
 msgid "Support Link"
@@ -221,55 +220,55 @@ msgstr "Upgradefout"
 
 #: main.py:472
 msgid "Upgrade progress"
-msgstr "Upgrade-voortgang"
+msgstr "Upgradevoortgang"
 
 #: main.py:486
 msgid "Device Firmware Upgrade"
-msgstr "Firmware-upgrade van apparaat"
+msgstr "Apparaatfirmware-upgrade"
 
 #: main.py:524
 msgid "Use FlooGoo dongle on "
-msgstr "Gebruik de FlooGoo-adapter aan"
+msgstr "Gebruik FlooGoo-dongle op "
 
 #: main.py:526
 msgid "Please insert your FlooGoo dongle"
-msgstr "Plaats uw FlooGoo-adapter"
+msgstr "Plaats uw FlooGoo-dongle"
 
 #: main.py:335
 msgid "Connect/Disconnect"
-msgstr "Verbinden/verbreken"
+msgstr "Verbinden/Verbreken"
 
 #: main.py:584
 msgid "New Firmware is available"
-msgstr "Er is nieuwe firmware beschikbaar"
+msgstr "Nieuwe firmware is beschikbaar"
 
 msgid "Connect"
-msgstr "Aansluiten"
+msgstr "Verbinden"
 
 msgid "Disconnect"
-msgstr "Loskoppelen"
+msgstr "Verbreken"
 
 msgid "Settings"
 msgstr "Instellingen"
 
 msgid ", check the latest."
-msgstr ", bekijk de laatste."
+msgstr ", controleer de laatste."
 
 msgid "Current firmware: "
-msgstr "Huidige firmware:"
+msgstr "Huidige firmware: "
 
 #: Added from 1.1.0
 msgid "Must be disabled for"
-msgstr "Moet uitgeschakeld zijn voor"
+msgstr "Moet worden uitgeschakeld voor"
 
 msgid "Must be enabled for compatibility with"
-msgstr "Moet ingeschakeld zijn voor compatibiliteit met"
+msgstr "Moet worden ingeschakeld voor compatibiliteit met"
 
 msgid "Must be disabled for compatibility with"
-msgstr "Moet uitgeschakeld zijn voor compatibiliteit met"
+msgstr "Moet worden uitgeschakeld voor compatibiliteit met"
 
 msgid "Toggle switch for"
-msgstr "Toggle-schakelaar voor"
+msgstr "Schakelaar voor"
 
 msgid "On"
 msgstr "Aan"
@@ -278,10 +277,28 @@ msgid "Off"
 msgstr "Uit"
 
 msgid "Client"
-msgstr "Client"
+msgstr "Cliënt"
 
 msgid "Receiver"
 msgstr "Ontvanger"
 
 msgid "Relay"
-msgstr "Relais"
+msgstr "Repeater"
+
+msgid "Stop broadcasting immediately when USB audio playback ends"
+msgstr "Stop uitzending onmiddellijk wanneer USB-audio stopt"
+
+msgid "USB Audio Input"
+msgstr "USB-audio-ingang"
+
+msgid "Broadcast Latency"
+msgstr "Uitzendvertraging"
+
+msgid "Lowest"
+msgstr "Laagst"
+
+msgid "Lower"
+msgstr "Lager"
+
+msgid "Default"
+msgstr "Standaard"

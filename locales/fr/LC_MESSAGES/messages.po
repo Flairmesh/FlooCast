@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-09-14 21:16+1000\n"
+"POT-Creation-Date: 2023-09-15 00:09+1000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -13,7 +13,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: pygettext.py 1.5\n"
-
 
 #: main.py:47 main.py:89
 msgid "Initializing"
@@ -25,11 +24,11 @@ msgstr "Inactif"
 
 #: main.py:49
 msgid "Pairing"
-msgstr "Couplage"
+msgstr "Appairage"
 
 #: main.py:50
 msgid "Connecting"
-msgstr "De liaison"
+msgstr "Connexion"
 
 #: main.py:51 main.py:61
 msgid "Connected"
@@ -45,7 +44,7 @@ msgstr "Diffusion audio"
 
 #: main.py:54
 msgid "Audio stopping"
-msgstr "Arrêt du son"
+msgstr "Arrêt audio"
 
 #: main.py:55
 msgid "Disconnecting"
@@ -53,7 +52,7 @@ msgstr "Déconnexion"
 
 #: main.py:56
 msgid "Voice starting"
-msgstr "Démarrage vocal"
+msgstr "Démarrage voix"
 
 #: main.py:57
 msgid "Voice streaming"
@@ -61,31 +60,31 @@ msgstr "Diffusion vocale"
 
 #: main.py:58
 msgid "Voice stopping"
-msgstr "La voix s'arrête"
+msgstr "Arrêt voix"
 
 #: main.py:60 main.py:155
 msgid "Disconnected"
-msgstr "Débranché"
+msgstr "Déconnecté"
 
 #: main.py:62
 msgid "Unicast starting"
-msgstr "Démarrage de la monodiffusion"
+msgstr "Démarrage unicast"
 
 #: main.py:63
 msgid "Unicast streaming"
-msgstr "Diffusion en monodiffusion"
+msgstr "Diffusion unicast"
 
 #: main.py:64
 msgid "Broadcast starting"
-msgstr "Début de la diffusion"
+msgstr "Démarrage diffusion"
 
 #: main.py:65
 msgid "Broadcast streaming"
-msgstr "Diffusion en continu"
+msgstr "Diffusion en cours"
 
 #: main.py:66
 msgid "Streaming stopping"
-msgstr "Arrêt du streaming"
+msgstr "Arrêt diffusion"
 
 #: main.py:109
 msgid "Audio Mode"
@@ -97,7 +96,7 @@ msgstr "Diffusion LE"
 
 #: main.py:113
 msgid "Most Recently Used Devices"
-msgstr "Appareils les plus récemment utilisés"
+msgstr "Périphériques récemment utilisés"
 
 #: main.py:116
 msgid "Window"
@@ -109,23 +108,19 @@ msgstr "Aide"
 
 #: main.py:139
 msgid "High Quality (one-to-one)"
-msgstr "Haute qualité (un à un)"
+msgstr "Haute qualité (un-à-un)"
 
 #: main.py:142
 msgid "Gaming (one-to-one)"
-msgstr "Jeux (en tête-à-tête)"
+msgstr "Jeu (un-à-un)"
 
 #: main.py:145
 msgid "Broadcast"
-msgstr "Diffuser"
+msgstr "Diffusion"
 
 #: main.py:149
 msgid "Dongle State"
-msgstr "État de l'adaptateur"
-
-#: main.py:151
-msgid "Initialization"
-msgstr "Initialisation"
+msgstr "État du dongle"
 
 #: main.py:153
 msgid "LE Audio State"
@@ -137,7 +132,7 @@ msgstr "Codec utilisé"
 
 #: main.py:162
 msgid "Prefer using LE audio for dual-mode devices"
-msgstr "Préférez utiliser l'audio LE pour les appareils bimodes"
+msgstr "Privilégier l’audio LE pour les appareils double mode"
 
 #: main.py:188
 msgid "Public broadcast"
@@ -145,31 +140,31 @@ msgstr "Diffusion publique"
 
 #: main.py:209
 msgid "Broadcast high-quality music, otherwise, voice"
-msgstr "Diffusez de la musique de haute qualité, sinon de la voix"
+msgstr "Diffuser de la musique haute qualité, sinon de la voix"
 
 #: main.py:231
 msgid "Encrypt broadcast; please set a key first"
-msgstr "Crypter la diffusion ; veuillez d'abord définir une clé"
+msgstr "Crypter la diffusion ; veuillez d’abord définir une clé"
 
 #: main.py:252
 msgid "Broadcast Name, maximum 30 characters"
-msgstr "Nom de la diffusion, 30 caractères maximum"
+msgstr "Nom de diffusion, 30 caractères maximum"
 
 #: main.py:271
 msgid "Broadcast Key, maximum 16 characters"
-msgstr "Clé de diffusion, maximum 16 caractères"
+msgstr "Clé de diffusion, 16 caractères maximum"
 
 #: main.py:275
 msgid "Input a new name of no more than 30 characters then press <ENTER>"
-msgstr "Saisissez un nouveau nom de 30 caractères maximum puis appuyez sur <ENTER>"
+msgstr "Saisissez un nouveau nom de 30 caractères maximum, puis appuyez sur <ENTRÉE>"
 
 #: main.py:286
 msgid "Input a new key then press <ENTER>"
-msgstr "Saisissez une nouvelle clé puis appuyez sur <ENTER>"
+msgstr "Saisissez une nouvelle clé, puis appuyez sur <ENTRÉE>"
 
 #: main.py:308
 msgid "Add device"
-msgstr "Ajouter un appareil"
+msgstr "Ajouter un périphérique"
 
 #: main.py:325
 msgid "Delete"
@@ -193,23 +188,23 @@ msgstr "Source audio Bluetooth FlooGoo"
 
 #: main.py:414
 msgid "Minimize to System Tray"
-msgstr "Réduire dans la barre d'état système"
+msgstr "Réduire dans la barre système"
 
 #: main.py:416
 msgid "Quit App"
-msgstr "Quitter l'application"
+msgstr "Quitter l’application"
 
 #: main.py:430
 msgid "Changes Take Effect After Restart"
-msgstr "Les modifications prennent effet après le redémarrage"
+msgstr "Les modifications prendront effet après redémarrage"
 
 #: main.py:445
 msgid "Third-Party Software Licenses"
-msgstr "Licences de logiciels tiers"
+msgstr "Licences logicielles tierces"
 
 #: main.py:448
 msgid "Support Link"
-msgstr "Lien d'assistance"
+msgstr "Lien de support"
 
 #: main.py:451
 msgid "Version"
@@ -221,38 +216,31 @@ msgstr "Micrologiciel"
 
 #: main.py:469
 msgid "Upgrade error"
-msgstr "Erreur de mise à niveau"
+msgstr "Erreur de mise à jour"
 
 #: main.py:472
 msgid "Upgrade progress"
-msgstr "Progression de la mise à niveau"
+msgstr "Progression de la mise à jour"
 
 #: main.py:486
 msgid "Device Firmware Upgrade"
-msgstr "Mise à niveau du micrologiciel de l'appareil"
+msgstr "Mise à jour du micrologiciel"
 
 #: main.py:524
 msgid "Use FlooGoo dongle on "
-msgstr "Utilisez l'adaptateur FlooGoo sur"
+msgstr "Utiliser le dongle FlooGoo sur "
 
 #: main.py:526
 msgid "Please insert your FlooGoo dongle"
-msgstr "Veuillez insérer votre adaptateur FlooGoo"
+msgstr "Veuillez insérer votre dongle FlooGoo"
+
 #: main.py:335
 msgid "Connect/Disconnect"
 msgstr "Connecter/Déconnecter"
 
 #: main.py:584
 msgid "New Firmware is available"
-msgstr "Un nouveau firmware est disponible"
-
-#: main.py:666
-msgid "RSSI"
-msgstr "RSSI"
-
-#: main.py:442
-msgid "LED"
-msgstr "DEL"
+msgstr "Un nouveau micrologiciel est disponible"
 
 msgid "Connect"
 msgstr "Connecter"
@@ -264,23 +252,23 @@ msgid "Settings"
 msgstr "Paramètres"
 
 msgid ", check the latest."
-msgstr ", vérifiez la dernière."
+msgstr ", vérifiez la dernière version."
 
 msgid "Current firmware: "
-msgstr "Micrologiciel actuel :"
+msgstr "Micrologiciel actuel : "
 
 #: Added from 1.1.0
 msgid "Must be disabled for"
 msgstr "Doit être désactivé pour"
 
 msgid "Must be enabled for compatibility with"
-msgstr "Doit être activé pour la compatibilité avec"
+msgstr "Doit être activé pour compatibilité avec"
 
 msgid "Must be disabled for compatibility with"
-msgstr "Doit être désactivé pour la compatibilité avec"
+msgstr "Doit être désactivé pour compatibilité avec"
 
 msgid "Toggle switch for"
-msgstr "Basculer l'interrupteur pour"
+msgstr "Bouton bascule pour"
 
 msgid "On"
 msgstr "Activé"
@@ -296,3 +284,21 @@ msgstr "Récepteur"
 
 msgid "Relay"
 msgstr "Relais"
+
+msgid "Stop broadcasting immediately when USB audio playback ends"
+msgstr "Arrêter la diffusion immédiatement lorsque la lecture audio USB se termine"
+
+msgid "USB Audio Input"
+msgstr "Entrée audio USB"
+
+msgid "Broadcast Latency"
+msgstr "Latence de diffusion"
+
+msgid "Lowest"
+msgstr "La plus basse"
+
+msgid "Lower"
+msgstr "Plus basse"
+
+msgid "Default"
+msgstr "Par défaut"

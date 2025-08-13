@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-09-14 21:16+1000\n"
+"POT-Creation-Date: 2023-09-15 00:09+1000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,18 +14,17 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: pygettext.py 1.5\n"
 
-
 #: main.py:47 main.py:89
 msgid "Initializing"
 msgstr "Initialiserer"
 
 #: main.py:48
 msgid "Idle"
-msgstr "Idle"
+msgstr "Inaktiv"
 
 #: main.py:49
 msgid "Pairing"
-msgstr "Parring"
+msgstr "Kobler sammen"
 
 #: main.py:50
 msgid "Connecting"
@@ -37,15 +36,15 @@ msgstr "Tilkoblet"
 
 #: main.py:52
 msgid "Audio starting"
-msgstr "Lyd starter"
+msgstr "Starter lyd"
 
 #: main.py:53
 msgid "Audio streaming"
-msgstr "Lydstrømming"
+msgstr "Strømmer lyd"
 
 #: main.py:54
 msgid "Audio stopping"
-msgstr "Lyd stopper"
+msgstr "Stopper lyd"
 
 #: main.py:55
 msgid "Disconnecting"
@@ -53,23 +52,23 @@ msgstr "Kobler fra"
 
 #: main.py:56
 msgid "Voice starting"
-msgstr "Stemme starter"
+msgstr "Starter tale"
 
 #: main.py:57
 msgid "Voice streaming"
-msgstr "Stemmestrømming"
+msgstr "Strømmer tale"
 
 #: main.py:58
 msgid "Voice stopping"
-msgstr "Stemme stopper"
+msgstr "Stopper tale"
 
 #: main.py:60 main.py:155
 msgid "Disconnected"
-msgstr "Koblet fra"
+msgstr "Frakoblet"
 
 #: main.py:62
 msgid "Unicast starting"
-msgstr "Unicast starter"
+msgstr "Starter unicast"
 
 #: main.py:63
 msgid "Unicast streaming"
@@ -77,15 +76,15 @@ msgstr "Unicast-strømming"
 
 #: main.py:64
 msgid "Broadcast starting"
-msgstr "Kringkastingen starter"
+msgstr "Starter kringkasting"
 
 #: main.py:65
 msgid "Broadcast streaming"
-msgstr "Kringkast strømming"
+msgstr "Kringkasting pågår"
 
 #: main.py:66
 msgid "Streaming stopping"
-msgstr "Strøming stopper"
+msgstr "Stopper strømming"
 
 #: main.py:109
 msgid "Audio Mode"
@@ -93,7 +92,7 @@ msgstr "Lydmodus"
 
 #: main.py:111
 msgid "LE Broadcast"
-msgstr "LE Broadcast"
+msgstr "LE kringkasting"
 
 #: main.py:113
 msgid "Most Recently Used Devices"
@@ -109,11 +108,11 @@ msgstr "Hjelp"
 
 #: main.py:139
 msgid "High Quality (one-to-one)"
-msgstr "Høy kvalitet (en-til-en)"
+msgstr "Høy kvalitet (én-til-én)"
 
 #: main.py:142
 msgid "Gaming (one-to-one)"
-msgstr "Gaming (en-til-en)"
+msgstr "Gaming (én-til-én)"
 
 #: main.py:145
 msgid "Broadcast"
@@ -121,19 +120,19 @@ msgstr "Kringkasting"
 
 #: main.py:149
 msgid "Dongle State"
-msgstr "Dongle State"
+msgstr "Dongle-status"
 
 #: main.py:153
 msgid "LE Audio State"
-msgstr "LE Audio State"
+msgstr "LE-lydstatus"
 
 #: main.py:157
 msgid "Codec in Use"
-msgstr "Kodek i bruk"
+msgstr "Brukt codec"
 
 #: main.py:162
 msgid "Prefer using LE audio for dual-mode devices"
-msgstr "Foretrekker å bruke LE-lyd for enheter med to moduser"
+msgstr "Foretrekk LE-lyd for to-modus-enheter"
 
 #: main.py:188
 msgid "Public broadcast"
@@ -141,27 +140,27 @@ msgstr "Offentlig kringkasting"
 
 #: main.py:209
 msgid "Broadcast high-quality music, otherwise, voice"
-msgstr "Kringkast musikk av høy kvalitet, ellers stemme"
+msgstr "Kringkast musikk i høy kvalitet, ellers tale"
 
 #: main.py:231
 msgid "Encrypt broadcast; please set a key first"
-msgstr "Krypter kringkasting; sett inn en nøkkel først"
+msgstr "Krypter kringkasting; sett en nøkkel først"
 
 #: main.py:252
 msgid "Broadcast Name, maximum 30 characters"
-msgstr "Kringkastingsnavn, maksimalt 30 tegn"
+msgstr "Kringkastingsnavn, maks 30 tegn"
 
 #: main.py:271
 msgid "Broadcast Key, maximum 16 characters"
-msgstr "Kringkastingsnøkkel, maksimalt 16 tegn"
+msgstr "Kringkastingsnøkkel, maks 16 tegn"
 
 #: main.py:275
 msgid "Input a new name of no more than 30 characters then press <ENTER>"
-msgstr "Skriv inn et nytt navn på ikke mer enn 30 tegn og trykk deretter <ENTER>"
+msgstr "Skriv inn et nytt navn på maks 30 tegn og trykk <ENTER>"
 
 #: main.py:286
 msgid "Input a new key then press <ENTER>"
-msgstr "Skriv inn en ny nøkkel og trykk deretter <ENTER>"
+msgstr "Skriv inn en ny nøkkel og trykk <ENTER>"
 
 #: main.py:308
 msgid "Add device"
@@ -173,7 +172,7 @@ msgstr "Slett"
 
 #: main.py:343
 msgid "Clear All"
-msgstr "Slett alt"
+msgstr "Tøm alt"
 
 #: main.py:405
 msgid "Quit"
@@ -189,15 +188,15 @@ msgstr "FlooGoo Bluetooth-lydkilde"
 
 #: main.py:414
 msgid "Minimize to System Tray"
-msgstr "Minimer til systemstatusfeltet"
+msgstr "Minimer til systemstatusfelt"
 
 #: main.py:416
 msgid "Quit App"
-msgstr "Avslutt appen"
+msgstr "Avslutt app"
 
 #: main.py:430
 msgid "Changes Take Effect After Restart"
-msgstr "Endringer gjelder etter omstart."
+msgstr "Endringer trer i kraft etter omstart"
 
 #: main.py:445
 msgid "Third-Party Software Licenses"
@@ -205,7 +204,7 @@ msgstr "Tredjeparts programvarelisenser"
 
 #: main.py:448
 msgid "Support Link"
-msgstr "Support Link"
+msgstr "Støttelenke"
 
 #: main.py:451
 msgid "Version"
@@ -225,26 +224,26 @@ msgstr "Oppgraderingsfremdrift"
 
 #: main.py:486
 msgid "Device Firmware Upgrade"
-msgstr "Enhetsfastvareoppgradering"
+msgstr "Oppgradering av enhetens fastvare"
 
 #: main.py:524
 msgid "Use FlooGoo dongle on "
-msgstr "Bruk FlooGoo dongle på"
+msgstr "Bruk FlooGoo-dongle på "
 
 #: main.py:526
 msgid "Please insert your FlooGoo dongle"
-msgstr "Vennligst sett inn FlooGoo-dongelen"
+msgstr "Sett inn FlooGoo-donglen din"
 
 #: main.py:335
 msgid "Connect/Disconnect"
-msgstr "Koble til/Koble fra"
+msgstr "Koble til/fra"
 
 #: main.py:584
 msgid "New Firmware is available"
 msgstr "Ny fastvare er tilgjengelig"
 
 msgid "Connect"
-msgstr "Koble"
+msgstr "Koble til"
 
 msgid "Disconnect"
 msgstr "Koble fra"
@@ -253,23 +252,23 @@ msgid "Settings"
 msgstr "Innstillinger"
 
 msgid ", check the latest."
-msgstr ", sjekk det siste"
+msgstr ", sjekk den nyeste."
 
 msgid "Current firmware: "
-msgstr "Gjeldende fastvare:"
+msgstr "Nåværende fastvare: "
 
 #: Added from 1.1.0
 msgid "Must be disabled for"
-msgstr "Må være deaktivert for"
+msgstr "Må deaktiveres for"
 
 msgid "Must be enabled for compatibility with"
-msgstr "Må være aktivert for kompatibilitet med"
+msgstr "Må aktiveres for kompatibilitet med"
 
 msgid "Must be disabled for compatibility with"
-msgstr "Må være deaktivert for kompatibilitet med"
+msgstr "Må deaktiveres for kompatibilitet med"
 
 msgid "Toggle switch for"
-msgstr "Vippebryter for"
+msgstr "Veksle bryter for"
 
 msgid "On"
 msgstr "På"
@@ -284,4 +283,22 @@ msgid "Receiver"
 msgstr "Mottaker"
 
 msgid "Relay"
-msgstr "Stafett"
+msgstr "Repeater"
+
+msgid "Stop broadcasting immediately when USB audio playback ends"
+msgstr "Stopp kringkasting umiddelbart når USB-lydavspilling slutter"
+
+msgid "USB Audio Input"
+msgstr "USB-lydinngang"
+
+msgid "Broadcast Latency"
+msgstr "Kringkastingsforsinkelse"
+
+msgid "Lowest"
+msgstr "Lavest"
+
+msgid "Lower"
+msgstr "Lavere"
+
+msgid "Default"
+msgstr "Standard"

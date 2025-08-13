@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-09-14 21:16+1000\n"
+"POT-Creation-Date: 2023-09-15 00:09+1000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,18 +14,17 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: pygettext.py 1.5\n"
 
-
 #: main.py:47 main.py:89
 msgid "Initializing"
 msgstr "Initierar"
 
 #: main.py:48
 msgid "Idle"
-msgstr "På tomgång"
+msgstr "Inaktiv"
 
 #: main.py:49
 msgid "Pairing"
-msgstr "Parning"
+msgstr "Parar"
 
 #: main.py:50
 msgid "Connecting"
@@ -37,7 +36,7 @@ msgstr "Ansluten"
 
 #: main.py:52
 msgid "Audio starting"
-msgstr "Ljudet startar"
+msgstr "Ljud startar"
 
 #: main.py:53
 msgid "Audio streaming"
@@ -45,15 +44,15 @@ msgstr "Ljudströmning"
 
 #: main.py:54
 msgid "Audio stopping"
-msgstr "Ljudet stoppar"
+msgstr "Ljud stoppas"
 
 #: main.py:55
 msgid "Disconnecting"
-msgstr "Kopplar bort"
+msgstr "Kopplar från"
 
 #: main.py:56
 msgid "Voice starting"
-msgstr "Rösten börjar"
+msgstr "Röst startar"
 
 #: main.py:57
 msgid "Voice streaming"
@@ -61,11 +60,11 @@ msgstr "Röstströmning"
 
 #: main.py:58
 msgid "Voice stopping"
-msgstr "Rösten stannar"
+msgstr "Röst stoppas"
 
 #: main.py:60 main.py:155
 msgid "Disconnected"
-msgstr "Osammanhängande"
+msgstr "Frånkopplad"
 
 #: main.py:62
 msgid "Unicast starting"
@@ -77,15 +76,15 @@ msgstr "Unicast-strömning"
 
 #: main.py:64
 msgid "Broadcast starting"
-msgstr "Sändningen startar"
+msgstr "Sändning startar"
 
 #: main.py:65
 msgid "Broadcast streaming"
-msgstr "Sänd streaming"
+msgstr "Sändning pågår"
 
 #: main.py:66
 msgid "Streaming stopping"
-msgstr "Streaming stoppar"
+msgstr "Sändning stoppas"
 
 #: main.py:109
 msgid "Audio Mode"
@@ -93,7 +92,7 @@ msgstr "Ljudläge"
 
 #: main.py:111
 msgid "LE Broadcast"
-msgstr "LE Broadcast"
+msgstr "LE-sändning"
 
 #: main.py:113
 msgid "Most Recently Used Devices"
@@ -117,23 +116,23 @@ msgstr "Spel (en-till-en)"
 
 #: main.py:145
 msgid "Broadcast"
-msgstr "Utsända"
+msgstr "Sändning"
 
 #: main.py:149
 msgid "Dongle State"
-msgstr "Adapterstatus"
+msgstr "Dongelstatus"
 
 #: main.py:153
 msgid "LE Audio State"
-msgstr "LE Audio State"
+msgstr "LE-ljudstatus"
 
 #: main.py:157
 msgid "Codec in Use"
-msgstr "Codec i bruk"
+msgstr "Använd codec"
 
 #: main.py:162
 msgid "Prefer using LE audio for dual-mode devices"
-msgstr "Använd helst LE-ljud för enheter med dubbla lägen"
+msgstr "Föredra LE-ljud för dubbelmodsenheter"
 
 #: main.py:188
 msgid "Public broadcast"
@@ -141,27 +140,27 @@ msgstr "Offentlig sändning"
 
 #: main.py:209
 msgid "Broadcast high-quality music, otherwise, voice"
-msgstr "Sänd högkvalitativ musik, annars röst"
+msgstr "Sänd musik i hög kvalitet, annars röst"
 
 #: main.py:231
 msgid "Encrypt broadcast; please set a key first"
-msgstr "Kryptera sändning; vänligen ställ in en nyckel först"
+msgstr "Kryptera sändning; ange en nyckel först"
 
 #: main.py:252
 msgid "Broadcast Name, maximum 30 characters"
-msgstr "Sändningsnamn, max 30 tecken"
+msgstr "Sändningsnamn, högst 30 tecken"
 
 #: main.py:271
 msgid "Broadcast Key, maximum 16 characters"
-msgstr "Broadcast Key, max 16 tecken"
+msgstr "Sändningsnyckel, högst 16 tecken"
 
 #: main.py:275
 msgid "Input a new name of no more than 30 characters then press <ENTER>"
-msgstr "Ange ett nytt namn på högst 30 tecken och tryck sedan på <ENTER>"
+msgstr "Ange ett nytt namn med högst 30 tecken och tryck på <ENTER>"
 
 #: main.py:286
 msgid "Input a new key then press <ENTER>"
-msgstr "Mata in en ny nyckel och tryck sedan på <ENTER>"
+msgstr "Ange en ny nyckel och tryck på <ENTER>"
 
 #: main.py:308
 msgid "Add device"
@@ -169,7 +168,7 @@ msgstr "Lägg till enhet"
 
 #: main.py:325
 msgid "Delete"
-msgstr "Radera"
+msgstr "Ta bort"
 
 #: main.py:343
 msgid "Clear All"
@@ -177,7 +176,7 @@ msgstr "Rensa alla"
 
 #: main.py:405
 msgid "Quit"
-msgstr "Sluta"
+msgstr "Avsluta"
 
 #: main.py:405
 msgid "Show Window"
@@ -193,15 +192,15 @@ msgstr "Minimera till systemfältet"
 
 #: main.py:416
 msgid "Quit App"
-msgstr "Avsluta appen"
+msgstr "Avsluta app"
 
 #: main.py:430
 msgid "Changes Take Effect After Restart"
-msgstr "Ändringar träder i kraft efter omstart"
+msgstr "Ändringar gäller efter omstart"
 
 #: main.py:445
 msgid "Third-Party Software Licenses"
-msgstr "Programvarulicenser från tredje part"
+msgstr "Licenser för tredjepartsprogramvara"
 
 #: main.py:448
 msgid "Support Link"
@@ -217,11 +216,11 @@ msgstr "Firmware"
 
 #: main.py:469
 msgid "Upgrade error"
-msgstr "Uppgraderingsfel"
+msgstr "Uppdateringsfel"
 
 #: main.py:472
 msgid "Upgrade progress"
-msgstr "Uppgraderingsförlopp"
+msgstr "Uppdateringsförlopp"
 
 #: main.py:486
 msgid "Device Firmware Upgrade"
@@ -229,47 +228,47 @@ msgstr "Uppgradering av enhetens firmware"
 
 #: main.py:524
 msgid "Use FlooGoo dongle on "
-msgstr "Använd FlooGoo-adaptern på"
+msgstr "Använd FlooGoo-dongel på "
 
 #: main.py:526
 msgid "Please insert your FlooGoo dongle"
-msgstr "Sätt i din FlooGoo-adapter"
+msgstr "Sätt in din FlooGoo-dongel"
 
 #: main.py:335
 msgid "Connect/Disconnect"
-msgstr "Anslut/koppla från"
+msgstr "Anslut/Koppla från"
 
 #: main.py:584
 msgid "New Firmware is available"
-msgstr "Ny firmware är tillgänglig"
+msgstr "Ny firmware tillgänglig"
 
 msgid "Connect"
-msgstr "Ansluta"
+msgstr "Anslut"
 
 msgid "Disconnect"
-msgstr "Koppla ifrån"
+msgstr "Koppla från"
 
 msgid "Settings"
-msgstr "inställningar"
+msgstr "Inställningar"
 
 msgid ", check the latest."
-msgstr ", kolla det senaste."
+msgstr ", kontrollera den senaste."
 
 msgid "Current firmware: "
-msgstr "Aktuell firmware:"
+msgstr "Aktuell firmware: "
 
 #: Added from 1.1.0
 msgid "Must be disabled for"
-msgstr "Måste vara inaktiverad för"
+msgstr "Måste vara avstängd för"
 
 msgid "Must be enabled for compatibility with"
-msgstr "Måste vara aktiverat för kompatibilitet med"
+msgstr "Måste vara påslagen för kompatibilitet med"
 
 msgid "Must be disabled for compatibility with"
-msgstr "Måste vara inaktiverat för kompatibilitet med"
+msgstr "Måste vara avstängd för kompatibilitet med"
 
 msgid "Toggle switch for"
-msgstr "Vippströmbrytare för"
+msgstr "Växla för"
 
 msgid "On"
 msgstr "På"
@@ -285,3 +284,21 @@ msgstr "Mottagare"
 
 msgid "Relay"
 msgstr "Relä"
+
+msgid "Stop broadcasting immediately when USB audio playback ends"
+msgstr "Stoppa sändningen omedelbart när USB-ljuduppspelningen avslutas"
+
+msgid "USB Audio Input"
+msgstr "USB-ljudingång"
+
+msgid "Broadcast Latency"
+msgstr "Sändningslatens"
+
+msgid "Lowest"
+msgstr "Lägst"
+
+msgid "Lower"
+msgstr "Lägre"
+
+msgid "Default"
+msgstr "Standard"

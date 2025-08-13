@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-09-14 21:16+1000\n"
+"POT-Creation-Date: 2023-09-15 00:09+1000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,18 +14,17 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: pygettext.py 1.5\n"
 
-
 #: main.py:47 main.py:89
 msgid "Initializing"
-msgstr "Alustus"
+msgstr "Alustetaan"
 
 #: main.py:48
 msgid "Idle"
-msgstr "Tyhjäkäynti"
+msgstr "Valmiustila"
 
 #: main.py:49
 msgid "Pairing"
-msgstr "Pariliitos"
+msgstr "Paritetaan"
 
 #: main.py:50
 msgid "Connecting"
@@ -41,27 +40,27 @@ msgstr "Ääni käynnistyy"
 
 #: main.py:53
 msgid "Audio streaming"
-msgstr "Äänen suoratoisto"
+msgstr "Ääntä suoratoistetaan"
 
 #: main.py:54
 msgid "Audio stopping"
-msgstr "Äänen pysähtyminen"
+msgstr "Ääni pysähtyy"
 
 #: main.py:55
 msgid "Disconnecting"
-msgstr "Irrotetaan"
+msgstr "Katkaistaan yhteys"
 
 #: main.py:56
 msgid "Voice starting"
-msgstr "Ääni alkaa"
+msgstr "Puhe käynnistyy"
 
 #: main.py:57
 msgid "Voice streaming"
-msgstr "Äänen suoratoisto"
+msgstr "Puhetta suoratoistetaan"
 
 #: main.py:58
 msgid "Voice stopping"
-msgstr "Ääni pysähtyy"
+msgstr "Puhe pysähtyy"
 
 #: main.py:60 main.py:155
 msgid "Disconnected"
@@ -77,11 +76,11 @@ msgstr "Unicast-suoratoisto"
 
 #: main.py:64
 msgid "Broadcast starting"
-msgstr "Unicast alkaa"
+msgstr "Lähetys alkaa"
 
 #: main.py:65
 msgid "Broadcast streaming"
-msgstr "Unicast-suoratoisto"
+msgstr "Lähetys käynnissä"
 
 #: main.py:66
 msgid "Streaming stopping"
@@ -105,39 +104,35 @@ msgstr "Ikkuna"
 
 #: main.py:119
 msgid "Help"
-msgstr "auta"
+msgstr "Ohje"
 
 #: main.py:139
 msgid "High Quality (one-to-one)"
-msgstr "Korkea laatu (yksi yhteen)"
+msgstr "Korkea laatu (yksi-yhteen)"
 
 #: main.py:142
 msgid "Gaming (one-to-one)"
-msgstr "Pelaaminen (yksi-yhteen)"
+msgstr "Pelitila (yksi-yhteen)"
 
 #: main.py:145
 msgid "Broadcast"
-msgstr "Lähettää"
+msgstr "Lähetys"
 
 #: main.py:149
 msgid "Dongle State"
 msgstr "Sovittimen tila"
 
-#: main.py:151
-msgid "Initialization"
-msgstr "Alustus"
-
 #: main.py:153
 msgid "LE Audio State"
-msgstr "LE Äänen tila"
+msgstr "LE-äänitila"
 
 #: main.py:157
 msgid "Codec in Use"
-msgstr "Codec käytössä"
+msgstr "Käytössä oleva koodekki"
 
 #: main.py:162
 msgid "Prefer using LE audio for dual-mode devices"
-msgstr "Käytä mieluummin LE-ääntä kaksitilalaitteissa"
+msgstr "Suosi LE-ääntä kaksitilaisissa laitteissa"
 
 #: main.py:188
 msgid "Public broadcast"
@@ -145,7 +140,7 @@ msgstr "Julkinen lähetys"
 
 #: main.py:209
 msgid "Broadcast high-quality music, otherwise, voice"
-msgstr "Lähetä korkealaatuista musiikkia, muuten ääntä"
+msgstr "Lähetä korkealaatuista musiikkia, muuten puhetta"
 
 #: main.py:231
 msgid "Encrypt broadcast; please set a key first"
@@ -161,11 +156,11 @@ msgstr "Lähetysavain, enintään 16 merkkiä"
 
 #: main.py:275
 msgid "Input a new name of no more than 30 characters then press <ENTER>"
-msgstr "Syötä uusi nimi, jossa on enintään 30 merkkiä ja paina sitten <ENTER>"
+msgstr "Anna uusi nimi (enintään 30 merkkiä) ja paina <ENTER>"
 
 #: main.py:286
 msgid "Input a new key then press <ENTER>"
-msgstr "Syötä uusi avain ja paina sitten <ENTER>"
+msgstr "Anna uusi avain ja paina <ENTER>"
 
 #: main.py:308
 msgid "Add device"
@@ -173,15 +168,15 @@ msgstr "Lisää laite"
 
 #: main.py:325
 msgid "Delete"
-msgstr "Poistaa"
+msgstr "Poista"
 
 #: main.py:343
 msgid "Clear All"
-msgstr "Tyhjennä"
+msgstr "Tyhjennä kaikki"
 
 #: main.py:405
 msgid "Quit"
-msgstr "Lopettaa"
+msgstr "Lopeta"
 
 #: main.py:405
 msgid "Show Window"
@@ -189,19 +184,19 @@ msgstr "Näytä ikkuna"
 
 #: main.py:406
 msgid "FlooGoo Bluetooth Audio Source"
-msgstr "FlooGoo Bluetooth-äänilähde"
+msgstr "FlooGoo Bluetooth -äänilähde"
 
 #: main.py:414
 msgid "Minimize to System Tray"
-msgstr "Pienennä ilmaisinalueelle"
+msgstr "Pienennä ilmoitusalueelle"
 
 #: main.py:416
 msgid "Quit App"
-msgstr "Lopeta sovellus"
+msgstr "Sulje sovellus"
 
 #: main.py:430
 msgid "Changes Take Effect After Restart"
-msgstr "Muutokset astuvat voimaan uudelleenkäynnistyksen jälkeen"
+msgstr "Muutokset tulevat voimaan uudelleenkäynnistyksen jälkeen"
 
 #: main.py:445
 msgid "Third-Party Software Licenses"
@@ -225,7 +220,7 @@ msgstr "Päivitysvirhe"
 
 #: main.py:472
 msgid "Upgrade progress"
-msgstr "Päivityksen edistyminen"
+msgstr "Päivityksen eteneminen"
 
 #: main.py:486
 msgid "Device Firmware Upgrade"
@@ -233,53 +228,53 @@ msgstr "Laitteen laiteohjelmiston päivitys"
 
 #: main.py:524
 msgid "Use FlooGoo dongle on "
-msgstr "Käytä FlooGoo-sovitinta"
+msgstr "Käytä FlooGoo-sovitinta "
 
 #: main.py:526
 msgid "Please insert your FlooGoo dongle"
-msgstr "Aseta FlooGoo-sovitin"
+msgstr "Liitä FlooGoo-sovitin"
 
 #: main.py:335
 msgid "Connect/Disconnect"
-msgstr "Yhdistä/katkaise yhteys"
+msgstr "Yhdistä/Katkaise"
 
 #: main.py:584
 msgid "New Firmware is available"
 msgstr "Uusi laiteohjelmisto on saatavilla"
 
 msgid "Connect"
-msgstr "Kytkeä"
+msgstr "Yhdistä"
 
 msgid "Disconnect"
-msgstr "Katkaista"
+msgstr "Katkaise"
 
 msgid "Settings"
-msgstr "asetukset"
+msgstr "Asetukset"
 
 msgid ", check the latest."
-msgstr ", tarkista viimeisimmät."
+msgstr ", tarkista uusin."
 
 msgid "Current firmware: "
-msgstr "Nykyinen laiteohjelmisto:"
+msgstr "Nykyinen laiteohjelmisto: "
 
 #: Added from 1.1.0
 msgid "Must be disabled for"
 msgstr "On poistettava käytöstä"
 
 msgid "Must be enabled for compatibility with"
-msgstr "On otettava käyttöön, jotta ne ovat yhteensopivia"
+msgstr "On otettava käyttöön yhteensopivuuden vuoksi"
 
 msgid "Must be disabled for compatibility with"
-msgstr "Se on poistettava käytöstä yhteensopivuuden vuoksi"
+msgstr "On poistettava käytöstä yhteensopivuuden vuoksi"
 
 msgid "Toggle switch for"
-msgstr "Vaihtokytkin kohtaan"
+msgstr "Vaihda kytkin"
 
 msgid "On"
 msgstr "Päällä"
 
 msgid "Off"
-msgstr "Pois"
+msgstr "Pois päältä"
 
 msgid "Client"
 msgstr "Asiakas"
@@ -288,4 +283,22 @@ msgid "Receiver"
 msgstr "Vastaanotin"
 
 msgid "Relay"
-msgstr "Rele"
+msgstr "Välitin"
+
+msgid "Stop broadcasting immediately when USB audio playback ends"
+msgstr "Lopeta lähetys heti, kun USB-äänentoisto päättyy"
+
+msgid "USB Audio Input"
+msgstr "USB-äänitulo"
+
+msgid "Broadcast Latency"
+msgstr "Lähetyksen viive"
+
+msgid "Lowest"
+msgstr "Alin"
+
+msgid "Lower"
+msgstr "Alempi"
+
+msgid "Default"
+msgstr "Oletus"

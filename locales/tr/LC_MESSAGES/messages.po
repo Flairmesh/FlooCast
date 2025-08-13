@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-09-14 21:16+1000\n"
+"POT-Creation-Date: 2023-09-15 00:09+1000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -13,7 +13,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: pygettext.py 1.5\n"
-
 
 #: main.py:47 main.py:89
 msgid "Initializing"
@@ -25,7 +24,7 @@ msgstr "Boşta"
 
 #: main.py:49
 msgid "Pairing"
-msgstr "Eşleştirme"
+msgstr "Eşleştiriliyor"
 
 #: main.py:50
 msgid "Connecting"
@@ -33,7 +32,7 @@ msgstr "Bağlanıyor"
 
 #: main.py:51 main.py:61
 msgid "Connected"
-msgstr "Bağlı"
+msgstr "Bağlandı"
 
 #: main.py:52
 msgid "Audio starting"
@@ -45,7 +44,7 @@ msgstr "Ses akışı"
 
 #: main.py:54
 msgid "Audio stopping"
-msgstr "Ses durdurma"
+msgstr "Ses durduruluyor"
 
 #: main.py:55
 msgid "Disconnecting"
@@ -53,15 +52,15 @@ msgstr "Bağlantı kesiliyor"
 
 #: main.py:56
 msgid "Voice starting"
-msgstr "Sesli başlatma"
+msgstr "Sesli arama başlatılıyor"
 
 #: main.py:57
 msgid "Voice streaming"
-msgstr "Ses akışı"
+msgstr "Sesli arama akışı"
 
 #: main.py:58
 msgid "Voice stopping"
-msgstr "Ses durdurma"
+msgstr "Sesli arama durduruluyor"
 
 #: main.py:60 main.py:155
 msgid "Disconnected"
@@ -69,15 +68,15 @@ msgstr "Bağlantı kesildi"
 
 #: main.py:62
 msgid "Unicast starting"
-msgstr "Tek noktaya yayın başlangıcı"
+msgstr "Tekli yayın başlatılıyor"
 
 #: main.py:63
 msgid "Unicast streaming"
-msgstr "Tek noktaya yayın akışı"
+msgstr "Tekli yayın akışı"
 
 #: main.py:64
 msgid "Broadcast starting"
-msgstr "Yayın başlıyor"
+msgstr "Yayın başlatılıyor"
 
 #: main.py:65
 msgid "Broadcast streaming"
@@ -85,7 +84,7 @@ msgstr "Yayın akışı"
 
 #: main.py:66
 msgid "Streaming stopping"
-msgstr "Akış durduruluyor"
+msgstr "Yayın durduruluyor"
 
 #: main.py:109
 msgid "Audio Mode"
@@ -93,7 +92,7 @@ msgstr "Ses Modu"
 
 #: main.py:111
 msgid "LE Broadcast"
-msgstr "LE Yayını"
+msgstr "LE Yayın"
 
 #: main.py:113
 msgid "Most Recently Used Devices"
@@ -121,7 +120,7 @@ msgstr "Yayın"
 
 #: main.py:149
 msgid "Dongle State"
-msgstr "Adaptör Durumu"
+msgstr "Dongle Durumu"
 
 #: main.py:153
 msgid "LE Audio State"
@@ -129,35 +128,35 @@ msgstr "LE Ses Durumu"
 
 #: main.py:157
 msgid "Codec in Use"
-msgstr "Kullanımdaki Codec"
+msgstr "Kullanılan Codec"
 
 #: main.py:162
 msgid "Prefer using LE audio for dual-mode devices"
-msgstr "Çift modlu cihazlar için LE sesini kullanmayı tercih edin"
+msgstr "Çift modlu cihazlar için LE ses tercih edin"
 
 #: main.py:188
 msgid "Public broadcast"
-msgstr "Kamu yayını"
+msgstr "Herkese açık yayın"
 
 #: main.py:209
 msgid "Broadcast high-quality music, otherwise, voice"
-msgstr "Yüksek kaliteli müzik yayınlayın, aksi takdirde ses yayınlayın"
+msgstr "Yüksek kaliteli müzik yayınla, aksi halde ses"
 
 #: main.py:231
 msgid "Encrypt broadcast; please set a key first"
-msgstr "Yayını şifreleyin; lütfen önce bir anahtar ayarlayın"
+msgstr "Yayını şifrele; lütfen önce bir anahtar belirleyin"
 
 #: main.py:252
 msgid "Broadcast Name, maximum 30 characters"
-msgstr "Yayın Adı, maksimum 30 karakter"
+msgstr "Yayın Adı, en fazla 30 karakter"
 
 #: main.py:271
 msgid "Broadcast Key, maximum 16 characters"
-msgstr "Yayın Anahtarı, maksimum 16 karakter"
+msgstr "Yayın Anahtarı, en fazla 16 karakter"
 
 #: main.py:275
 msgid "Input a new name of no more than 30 characters then press <ENTER>"
-msgstr "En fazla 30 karakterden oluşan yeni bir ad girin ve ardından <ENTER> tuşuna basın"
+msgstr "En fazla 30 karakterden oluşan yeni bir ad girin ve <ENTER> tuşuna basın"
 
 #: main.py:286
 msgid "Input a new key then press <ENTER>"
@@ -169,19 +168,19 @@ msgstr "Cihaz ekle"
 
 #: main.py:325
 msgid "Delete"
-msgstr "Silmek"
+msgstr "Sil"
 
 #: main.py:343
 msgid "Clear All"
-msgstr "Hepsini temizle"
+msgstr "Tümünü temizle"
 
 #: main.py:405
 msgid "Quit"
-msgstr "Çıkış yapmak"
+msgstr "Çıkış"
 
 #: main.py:405
 msgid "Show Window"
-msgstr "Pencere göster"
+msgstr "Pencereyi Göster"
 
 #: main.py:406
 msgid "FlooGoo Bluetooth Audio Source"
@@ -197,7 +196,7 @@ msgstr "Uygulamadan Çık"
 
 #: main.py:430
 msgid "Changes Take Effect After Restart"
-msgstr "Değişiklikler Yeniden Başlatıldıktan Sonra Etkili Olur"
+msgstr "Değişiklikler yeniden başlatıldıktan sonra geçerli olur"
 
 #: main.py:445
 msgid "Third-Party Software Licenses"
@@ -213,27 +212,27 @@ msgstr "Sürüm"
 
 #: main.py:462 main.py:536
 msgid "Firmware"
-msgstr "Firmware"
+msgstr "Yazılım"
 
 #: main.py:469
 msgid "Upgrade error"
-msgstr "Yükseltme hatası"
+msgstr "Güncelleme hatası"
 
 #: main.py:472
 msgid "Upgrade progress"
-msgstr "Yükseltme ilerlemesi"
+msgstr "Güncelleme ilerlemesi"
 
 #: main.py:486
 msgid "Device Firmware Upgrade"
-msgstr "Cihaz Firmware Güncellemesi"
+msgstr "Cihaz Yazılım Güncellemesi"
 
 #: main.py:524
 msgid "Use FlooGoo dongle on "
-msgstr "FlooGoo adaptörünü kullanın"
+msgstr "FlooGoo dongle'ı şurada kullan "
 
 #: main.py:526
 msgid "Please insert your FlooGoo dongle"
-msgstr "Lütfen FlooGoo adaptörünüzü takın"
+msgstr "Lütfen FlooGoo dongle'ınızı takın"
 
 #: main.py:335
 msgid "Connect/Disconnect"
@@ -241,35 +240,35 @@ msgstr "Bağlan/Bağlantıyı Kes"
 
 #: main.py:584
 msgid "New Firmware is available"
-msgstr "Yeni ürün yazılımı mevcut"
+msgstr "Yeni yazılım mevcut"
 
 msgid "Connect"
-msgstr "Bağlamak"
+msgstr "Bağlan"
 
 msgid "Disconnect"
-msgstr "Bağlantıyı kes"
+msgstr "Bağlantıyı Kes"
 
 msgid "Settings"
 msgstr "Ayarlar"
 
 msgid ", check the latest."
-msgstr ", son durumu kontrol et."
+msgstr ", en sonuncuyu kontrol edin."
 
 msgid "Current firmware: "
-msgstr "Geçerli donanım yazılımı: "
+msgstr "Mevcut yazılım: "
 
 #: Added from 1.1.0
 msgid "Must be disabled for"
-msgstr "Devre dışı bırakılmalıdır"
+msgstr "Şunun için devre dışı bırakılmalı"
 
 msgid "Must be enabled for compatibility with"
-msgstr "Uyumluluk için etkinleştirilmelidir"
+msgstr "Şununla uyum için etkinleştirilmeli"
 
 msgid "Must be disabled for compatibility with"
-msgstr "Uyumluluk için devre dışı bırakılmalıdır"
+msgstr "Şununla uyum için devre dışı bırakılmalı"
 
 msgid "Toggle switch for"
-msgstr "Anahtar geçişi"
+msgstr "Şunun için anahtarı değiştir"
 
 msgid "On"
 msgstr "Açık"
@@ -284,4 +283,22 @@ msgid "Receiver"
 msgstr "Alıcı"
 
 msgid "Relay"
-msgstr "Röle"
+msgstr "Aktarıcı"
+
+msgid "Stop broadcasting immediately when USB audio playback ends"
+msgstr "USB ses oynatma bittiğinde yayını hemen durdur"
+
+msgid "USB Audio Input"
+msgstr "USB Ses Girişi"
+
+msgid "Broadcast Latency"
+msgstr "Yayın Gecikmesi"
+
+msgid "Lowest"
+msgstr "En Düşük"
+
+msgid "Lower"
+msgstr "Daha Düşük"
+
+msgid "Default"
+msgstr "Varsayılan"

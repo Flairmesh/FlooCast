@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-09-14 21:16+1000\n"
+"POT-Creation-Date: 2023-09-15 00:09+1000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,18 +14,17 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: pygettext.py 1.5\n"
 
-
 #: main.py:47 main.py:89
 msgid "Initializing"
 msgstr "初期化中"
 
 #: main.py:48
 msgid "Idle"
-msgstr "アイドル状態"
+msgstr "アイドル"
 
 #: main.py:49
 msgid "Pairing"
-msgstr "ペアリング"
+msgstr "ペアリング中"
 
 #: main.py:50
 msgid "Connecting"
@@ -37,15 +36,15 @@ msgstr "接続済み"
 
 #: main.py:52
 msgid "Audio starting"
-msgstr "オーディオの開始"
+msgstr "オーディオ開始中"
 
 #: main.py:53
 msgid "Audio streaming"
-msgstr "オーディオストリーミング"
+msgstr "オーディオ再生中"
 
 #: main.py:54
 msgid "Audio stopping"
-msgstr "音声停止"
+msgstr "オーディオ停止中"
 
 #: main.py:55
 msgid "Disconnecting"
@@ -53,35 +52,35 @@ msgstr "切断中"
 
 #: main.py:56
 msgid "Voice starting"
-msgstr "音声起動"
+msgstr "音声開始中"
 
 #: main.py:57
 msgid "Voice streaming"
-msgstr "音声ストリーミング"
+msgstr "音声再生中"
 
 #: main.py:58
 msgid "Voice stopping"
-msgstr "声が止まる"
+msgstr "音声停止中"
 
 #: main.py:60 main.py:155
 msgid "Disconnected"
-msgstr "切断されました"
+msgstr "切断済み"
 
 #: main.py:62
 msgid "Unicast starting"
-msgstr "ユニキャスト開始"
+msgstr "ユニキャスト開始中"
 
 #: main.py:63
 msgid "Unicast streaming"
-msgstr "ユニキャストストリーミング"
+msgstr "ユニキャスト再生中"
 
 #: main.py:64
 msgid "Broadcast starting"
-msgstr "放送開始"
+msgstr "ブロードキャスト開始中"
 
 #: main.py:65
 msgid "Broadcast streaming"
-msgstr "ブロードキャストストリーミング"
+msgstr "ブロードキャスト中"
 
 #: main.py:66
 msgid "Streaming stopping"
@@ -101,7 +100,7 @@ msgstr "最近使用したデバイス"
 
 #: main.py:116
 msgid "Window"
-msgstr "窓"
+msgstr "ウィンドウ"
 
 #: main.py:119
 msgid "Help"
@@ -109,23 +108,23 @@ msgstr "ヘルプ"
 
 #: main.py:139
 msgid "High Quality (one-to-one)"
-msgstr "高品質（1対1）"
+msgstr "高音質（1対1）"
 
 #: main.py:142
 msgid "Gaming (one-to-one)"
-msgstr "ゲーム（1対1）"
+msgstr "ゲームモード（1対1）"
 
 #: main.py:145
 msgid "Broadcast"
-msgstr "放送"
+msgstr "ブロードキャスト"
 
 #: main.py:149
 msgid "Dongle State"
-msgstr "アダプターの状態"
+msgstr "ドングル状態"
 
 #: main.py:153
 msgid "LE Audio State"
-msgstr "LE オーディオ状態"
+msgstr "LEオーディオ状態"
 
 #: main.py:157
 msgid "Codec in Use"
@@ -133,35 +132,35 @@ msgstr "使用中のコーデック"
 
 #: main.py:162
 msgid "Prefer using LE audio for dual-mode devices"
-msgstr "デュアルモードデバイスには LE オーディオの使用を優先する"
+msgstr "デュアルモードデバイスにはLEオーディオを優先使用"
 
 #: main.py:188
 msgid "Public broadcast"
-msgstr "公共放送"
+msgstr "パブリックブロードキャスト"
 
 #: main.py:209
 msgid "Broadcast high-quality music, otherwise, voice"
-msgstr "高品質の音楽をブロードキャストするか、それ以外の場合は音声をブロードキャストする"
+msgstr "高音質音楽をブロードキャスト、それ以外は音声"
 
 #: main.py:231
 msgid "Encrypt broadcast; please set a key first"
-msgstr "ブロードキャストを暗号化します。 最初にキーを設定してください"
+msgstr "ブロードキャストを暗号化; まずキーを設定してください"
 
 #: main.py:252
 msgid "Broadcast Name, maximum 30 characters"
-msgstr "ブロードキャスト名、最大 30 文字"
+msgstr "ブロードキャスト名（最大30文字）"
 
 #: main.py:271
 msgid "Broadcast Key, maximum 16 characters"
-msgstr "ブロードキャスト キー、最大 16 文字"
+msgstr "ブロードキャストキー（最大16文字）"
 
 #: main.py:275
 msgid "Input a new name of no more than 30 characters then press <ENTER>"
-msgstr "30 文字以内の新しい名前を入力して、<ENTER> を押してください。"
+msgstr "30文字以内の新しい名前を入力し、<ENTER>を押してください"
 
 #: main.py:286
 msgid "Input a new key then press <ENTER>"
-msgstr "新しいキーを入力し、<ENTER> を押します。"
+msgstr "新しいキーを入力して<ENTER>を押してください"
 
 #: main.py:308
 msgid "Add device"
@@ -169,7 +168,7 @@ msgstr "デバイスを追加"
 
 #: main.py:325
 msgid "Delete"
-msgstr "消去"
+msgstr "削除"
 
 #: main.py:343
 msgid "Clear All"
@@ -177,15 +176,15 @@ msgstr "すべてクリア"
 
 #: main.py:405
 msgid "Quit"
-msgstr "やめる"
+msgstr "終了"
 
 #: main.py:405
 msgid "Show Window"
-msgstr "ショーウィンドウ"
+msgstr "ウィンドウを表示"
 
 #: main.py:406
 msgid "FlooGoo Bluetooth Audio Source"
-msgstr "FlooGoo Bluetooth オーディオ ソース"
+msgstr "FlooGoo Bluetoothオーディオソース"
 
 #: main.py:414
 msgid "Minimize to System Tray"
@@ -193,15 +192,15 @@ msgstr "システムトレイに最小化"
 
 #: main.py:416
 msgid "Quit App"
-msgstr "アプリを終了する"
+msgstr "アプリを終了"
 
 #: main.py:430
 msgid "Changes Take Effect After Restart"
-msgstr "変更は再起動後に適用されます"
+msgstr "変更は再起動後に有効"
 
 #: main.py:445
 msgid "Third-Party Software Licenses"
-msgstr "サードパーティ ソフトウェア ライセンス"
+msgstr "サードパーティソフトウェアライセンス"
 
 #: main.py:448
 msgid "Support Link"
@@ -221,19 +220,19 @@ msgstr "アップグレードエラー"
 
 #: main.py:472
 msgid "Upgrade progress"
-msgstr "アップグレードの進行状況"
+msgstr "アップグレード進行中"
 
 #: main.py:486
 msgid "Device Firmware Upgrade"
-msgstr "デバイスのファームウェアのアップグレード"
+msgstr "デバイスファームウェアアップグレード"
 
 #: main.py:524
 msgid "Use FlooGoo dongle on "
-msgstr "FlooGooアダプターを使用してください"
+msgstr "FlooGooドングルを使用中: "
 
 #: main.py:526
 msgid "Please insert your FlooGoo dongle"
-msgstr "FlooGoo アダプターを挿入してください"
+msgstr "FlooGooドングルを挿入してください"
 
 #: main.py:335
 msgid "Connect/Disconnect"
@@ -241,15 +240,7 @@ msgstr "接続/切断"
 
 #: main.py:584
 msgid "New Firmware is available"
-msgstr "新しいファームウェアが利用可能になりました"
-
-#: main.py:666
-msgid "RSSI"
-msgstr "電波強度指示"
-
-#: main.py:442
-msgid "LED"
-msgstr "LED"
+msgstr "新しいファームウェアが利用可能です"
 
 msgid "Connect"
 msgstr "接続"
@@ -261,23 +252,23 @@ msgid "Settings"
 msgstr "設定"
 
 msgid ", check the latest."
-msgstr "最新のものを確認してください。"
+msgstr "、最新を確認してください。"
 
 msgid "Current firmware: "
-msgstr "現在のファームウェア:"
+msgstr "現在のファームウェア: "
 
 #: Added from 1.1.0
 msgid "Must be disabled for"
-msgstr "無効にする必要があります"
+msgstr "無効にする必要があります: "
 
 msgid "Must be enabled for compatibility with"
-msgstr "互換性のために有効にする必要があります"
+msgstr "互換性のため有効にする必要があります: "
 
 msgid "Must be disabled for compatibility with"
-msgstr "互換性のために無効にする必要があります"
+msgstr "互換性のため無効にする必要があります: "
 
 msgid "Toggle switch for"
-msgstr "トグル スイッチ"
+msgstr "トグルスイッチ: "
 
 msgid "On"
 msgstr "オン"
@@ -289,7 +280,25 @@ msgid "Client"
 msgstr "クライアント"
 
 msgid "Receiver"
-msgstr "受信機"
+msgstr "レシーバー"
 
 msgid "Relay"
 msgstr "リレー"
+
+msgid "Stop broadcasting immediately when USB audio playback ends"
+msgstr "USBオーディオ再生終了時に即座にブロードキャストを停止"
+
+msgid "USB Audio Input"
+msgstr "USBオーディオ入力"
+
+msgid "Broadcast Latency"
+msgstr "ブロードキャスト遅延"
+
+msgid "Lowest"
+msgstr "最小"
+
+msgid "Lower"
+msgstr "低"
+
+msgid "Default"
+msgstr "デフォルト"

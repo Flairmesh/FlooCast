@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-09-14 21:16+1000\n"
+"POT-Creation-Date: 2023-09-15 00:09+1000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,30 +14,29 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: pygettext.py 1.5\n"
 
-
 #: main.py:47 main.py:89
 msgid "Initializing"
-msgstr "אתחול"
+msgstr "מאתחל"
 
 #: main.py:48
 msgid "Idle"
-msgstr "לְהִתְבַּטֵל"
+msgstr "בהמתנה"
 
 #: main.py:49
 msgid "Pairing"
-msgstr "צִמוּד"
+msgstr "מתבצע שידוך"
 
 #: main.py:50
 msgid "Connecting"
-msgstr "מְקַשֵׁר"
+msgstr "מתחבר"
 
 #: main.py:51 main.py:61
 msgid "Connected"
-msgstr "מְחוּבָּר"
+msgstr "מחובר"
 
 #: main.py:52
 msgid "Audio starting"
-msgstr "אודיו מתחיל"
+msgstr "הפעלת אודיו"
 
 #: main.py:53
 msgid "Audio streaming"
@@ -45,7 +44,7 @@ msgstr "הזרמת אודיו"
 
 #: main.py:54
 msgid "Audio stopping"
-msgstr "השמע מפסיק"
+msgstr "עצירת אודיו"
 
 #: main.py:55
 msgid "Disconnecting"
@@ -53,7 +52,7 @@ msgstr "מתנתק"
 
 #: main.py:56
 msgid "Voice starting"
-msgstr "קול מתחיל"
+msgstr "הפעלת קול"
 
 #: main.py:57
 msgid "Voice streaming"
@@ -61,35 +60,35 @@ msgstr "הזרמת קול"
 
 #: main.py:58
 msgid "Voice stopping"
-msgstr "קול עוצר"
+msgstr "עצירת קול"
 
 #: main.py:60 main.py:155
 msgid "Disconnected"
-msgstr "מְנוּתָק"
+msgstr "מנותק"
 
 #: main.py:62
 msgid "Unicast starting"
-msgstr "Unicast מתחיל"
+msgstr "התחלת יוניקאסט"
 
 #: main.py:63
 msgid "Unicast streaming"
-msgstr "סטרימינג של Unicast"
+msgstr "הזרמת יוניקאסט"
 
 #: main.py:64
 msgid "Broadcast starting"
-msgstr "שידור מתחיל"
+msgstr "התחלת שידור"
 
 #: main.py:65
 msgid "Broadcast streaming"
-msgstr "שידור סטרימינג"
+msgstr "שידור מתבצע"
 
 #: main.py:66
 msgid "Streaming stopping"
-msgstr "הסטרימינג מפסיק"
+msgstr "עצירת שידור"
 
 #: main.py:109
 msgid "Audio Mode"
-msgstr "מצב שמע"
+msgstr "מצב אודיו"
 
 #: main.py:111
 msgid "LE Broadcast"
@@ -97,43 +96,43 @@ msgstr "שידור LE"
 
 #: main.py:113
 msgid "Most Recently Used Devices"
-msgstr "התקנים שנעשה בהם שימוש לאחרונה"
+msgstr "מכשירים בשימוש לאחרונה"
 
 #: main.py:116
 msgid "Window"
-msgstr "חַלוֹן"
+msgstr "חלון"
 
 #: main.py:119
 msgid "Help"
-msgstr "עֶזרָה"
+msgstr "עזרה"
 
 #: main.py:139
 msgid "High Quality (one-to-one)"
-msgstr "איכות גבוהה (אחד על אחד)"
+msgstr "איכות גבוהה (אחד-לאחד)"
 
 #: main.py:142
 msgid "Gaming (one-to-one)"
-msgstr "משחקים (אחד על אחד)"
+msgstr "גיימינג (אחד-לאחד)"
 
 #: main.py:145
 msgid "Broadcast"
-msgstr "מִשׁדָר"
+msgstr "שידור"
 
 #: main.py:149
 msgid "Dongle State"
-msgstr "מצב מתאם"
+msgstr "מצב דונגל"
 
 #: main.py:153
 msgid "LE Audio State"
-msgstr "מצב אודיו של LE"
+msgstr "מצב אודיו LE"
 
 #: main.py:157
 msgid "Codec in Use"
-msgstr "Codec בשימוש"
+msgstr "קודק בשימוש"
 
 #: main.py:162
 msgid "Prefer using LE audio for dual-mode devices"
-msgstr "העדיפו להשתמש באודיו LE עבור התקני מצב כפול"
+msgstr "העדף שימוש באודיו LE למכשירים כפולי מצב"
 
 #: main.py:188
 msgid "Public broadcast"
@@ -141,27 +140,27 @@ msgstr "שידור ציבורי"
 
 #: main.py:209
 msgid "Broadcast high-quality music, otherwise, voice"
-msgstr "שדר מוזיקה באיכות גבוהה, אחרת, קול"
+msgstr "שדר מוזיקה באיכות גבוהה, אחרת קול"
 
 #: main.py:231
 msgid "Encrypt broadcast; please set a key first"
-msgstr "הצפין שידור; נא להגדיר מפתח קודם"
+msgstr "הצפן שידור; אנא הגדר מפתח קודם"
 
 #: main.py:252
 msgid "Broadcast Name, maximum 30 characters"
-msgstr "שם השידור, מקסימום 30 תווים"
+msgstr "שם השידור, עד 30 תווים"
 
 #: main.py:271
 msgid "Broadcast Key, maximum 16 characters"
-msgstr "מפתח שידור, מקסימום 16 תווים"
+msgstr "מפתח השידור, עד 16 תווים"
 
 #: main.py:275
 msgid "Input a new name of no more than 30 characters then press <ENTER>"
-msgstr "הזן שם חדש של לא יותר מ-30 תווים ולאחר מכן הקש <ENTER>"
+msgstr "הזן שם חדש עד 30 תווים ולחץ <ENTER>"
 
 #: main.py:286
 msgid "Input a new key then press <ENTER>"
-msgstr "הזן מפתח חדש ולאחר מכן הקש <ENTER>"
+msgstr "הזן מפתח חדש ולחץ <ENTER>"
 
 #: main.py:308
 msgid "Add device"
@@ -169,7 +168,7 @@ msgstr "הוסף מכשיר"
 
 #: main.py:325
 msgid "Delete"
-msgstr "לִמְחוֹק"
+msgstr "מחק"
 
 #: main.py:343
 msgid "Clear All"
@@ -177,7 +176,7 @@ msgstr "נקה הכל"
 
 #: main.py:405
 msgid "Quit"
-msgstr "לְהַפְסִיק"
+msgstr "יציאה"
 
 #: main.py:405
 msgid "Show Window"
@@ -185,23 +184,23 @@ msgstr "הצג חלון"
 
 #: main.py:406
 msgid "FlooGoo Bluetooth Audio Source"
-msgstr "מקור שמע FlooGoo Bluetooth"
+msgstr "מקור אודיו בלוטות' FlooGoo"
 
 #: main.py:414
 msgid "Minimize to System Tray"
-msgstr "למזער למגש המערכת"
+msgstr "מזער למגש המערכת"
 
 #: main.py:416
 msgid "Quit App"
-msgstr "צא מהאפליקציה"
+msgstr "סגור אפליקציה"
 
 #: main.py:430
 msgid "Changes Take Effect After Restart"
-msgstr "השינויים נכנסים לתוקף לאחר הפעלה מחדש"
+msgstr "השינויים ייכנסו לתוקף לאחר הפעלה מחדש"
 
 #: main.py:445
 msgid "Third-Party Software Licenses"
-msgstr "רישיונות תוכנה של צד שלישי"
+msgstr "רישיונות תוכנה מצד שלישי"
 
 #: main.py:448
 msgid "Support Link"
@@ -209,7 +208,7 @@ msgstr "קישור תמיכה"
 
 #: main.py:451
 msgid "Version"
-msgstr "גִרְסָה"
+msgstr "גרסה"
 
 #: main.py:462 main.py:536
 msgid "Firmware"
@@ -225,71 +224,81 @@ msgstr "התקדמות השדרוג"
 
 #: main.py:486
 msgid "Device Firmware Upgrade"
-msgstr "שדרוג קושחה של מכשיר"
+msgstr "שדרוג קושחת המכשיר"
 
 #: main.py:524
 msgid "Use FlooGoo dongle on "
-msgstr "השתמש במתאם FlooGoo"
+msgstr "השתמש בדונגל FlooGoo ב-"
 
 #: main.py:526
 msgid "Please insert your FlooGoo dongle"
-msgstr "אנא הכנס את מתאם FlooGoo שלך"
+msgstr "אנא הכנס את דונגל FlooGoo"
 
 #: main.py:335
 msgid "Connect/Disconnect"
-msgstr "התחבר/נתק"
+msgstr "התחבר/התנתק"
 
 #: main.py:584
 msgid "New Firmware is available"
-msgstr "קושחה חדשה זמינה"
-
-#: main.py:666
-msgid "RSSI"
-msgstr "RSSI"
-
-#: main.py:442
-msgid "LED"
-msgstr "אור נתפס חשמלית"
+msgstr "קיימת קושחה חדשה"
 
 msgid "Connect"
-msgstr "לְחַבֵּר"
+msgstr "התחבר"
 
 msgid "Disconnect"
-msgstr "לְנַתֵק"
+msgstr "התנתק"
 
 msgid "Settings"
 msgstr "הגדרות"
 
 msgid ", check the latest."
-msgstr ", בדוק את העדכון האחרון."
+msgstr ", בדוק את העדכני ביותר."
 
 msgid "Current firmware: "
-msgstr "קושחה נוכחית:"
+msgstr "קושחה נוכחית: "
 
 #: Added from 1.1.0
 msgid "Must be disabled for"
-msgstr "חייב להיות מושבת עבור"
+msgstr "חייב להיות כבוי עבור"
 
 msgid "Must be enabled for compatibility with"
 msgstr "חייב להיות מופעל עבור תאימות עם"
 
 msgid "Must be disabled for compatibility with"
-msgstr "חייב להיות מושבת עבור תאימות עם"
+msgstr "חייב להיות כבוי עבור תאימות עם"
 
 msgid "Toggle switch for"
-msgstr "החלף מתג עבור"
+msgstr "מתג עבור"
 
 msgid "On"
-msgstr "עַל"
+msgstr "פועל"
 
 msgid "Off"
 msgstr "כבוי"
 
 msgid "Client"
-msgstr "לָקוּחַ"
+msgstr "לקוח"
 
 msgid "Receiver"
-msgstr "מַקְלֵט"
+msgstr "מקלט"
 
 msgid "Relay"
-msgstr "מִמסָר"
+msgstr "משדר ביניים"
+
+msgid "Stop broadcasting immediately when USB audio playback ends"
+msgstr "הפסק שידור מיד כאשר נגינת אודיו USB מסתיימת"
+
+msgid "USB Audio Input"
+msgstr "כניסת אודיו USB"
+
+msgid "Broadcast Latency"
+msgstr "השהיית שידור"
+
+msgid "Lowest"
+msgstr "הנמוכה ביותר"
+
+msgid "Lower"
+msgstr "נמוכה"
+
+msgid "Default"
+msgstr "ברירת מחדל"

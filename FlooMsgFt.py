@@ -22,4 +22,4 @@ class FlooMsgFt(FlooMessage):
         msgLen = len(payload)
         if msgLen < 5:
             return None
-        return cls(False, int(payload[3:5].decode('utf-8')))
+        return cls(False, int(payload[3:5].decode('ascii'), 16))

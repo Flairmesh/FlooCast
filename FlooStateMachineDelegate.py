@@ -47,4 +47,7 @@ class FlooStateMachineDelegate:
         """Called when FlooGoo device reports current setting of Gatt Client Function"""
         pass
 
+    def audioSourceInd(self, enabled):
+        """Called when FlooGoo device reports current setting of audio source"""
+        pass
 

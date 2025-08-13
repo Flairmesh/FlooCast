@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-09-14 21:16+1000\n"
+"POT-Creation-Date: 2023-09-15 00:09+1000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,98 +14,97 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: pygettext.py 1.5\n"
 
-
 #: main.py:47 main.py:89
 msgid "Initializing"
-msgstr "正在初始化"
+msgstr "初始化中"
 
 #: main.py:48
 msgid "Idle"
-msgstr "閒置的"
+msgstr "閒置"
 
 #: main.py:49
 msgid "Pairing"
-msgstr "配對"
+msgstr "配對中"
 
 #: main.py:50
 msgid "Connecting"
-msgstr "正在連接"
+msgstr "連線中"
 
 #: main.py:51 main.py:61
 msgid "Connected"
-msgstr "連接的"
+msgstr "已連線"
 
 #: main.py:52
 msgid "Audio starting"
-msgstr "音頻啟動"
+msgstr "音訊啟動中"
 
 #: main.py:53
 msgid "Audio streaming"
-msgstr "音頻流"
+msgstr "音訊串流中"
 
 #: main.py:54
 msgid "Audio stopping"
-msgstr "音頻停止"
+msgstr "音訊停止中"
 
 #: main.py:55
 msgid "Disconnecting"
-msgstr "斷開連接"
+msgstr "斷線中"
 
 #: main.py:56
 msgid "Voice starting"
-msgstr "語音啟動"
+msgstr "語音啟動中"
 
 #: main.py:57
 msgid "Voice streaming"
-msgstr "語音串流"
+msgstr "語音串流中"
 
 #: main.py:58
 msgid "Voice stopping"
-msgstr "聲音停止"
+msgstr "語音停止中"
 
 #: main.py:60 main.py:155
 msgid "Disconnected"
-msgstr "已斷開連接"
+msgstr "已斷線"
 
 #: main.py:62
 msgid "Unicast starting"
-msgstr "單播啟動"
+msgstr "單播啟動中"
 
 #: main.py:63
 msgid "Unicast streaming"
-msgstr "單播流媒體"
+msgstr "單播中"
 
 #: main.py:64
 msgid "Broadcast starting"
-msgstr "廣播開始"
+msgstr "廣播啟動中"
 
 #: main.py:65
 msgid "Broadcast streaming"
-msgstr "廣播流媒體"
+msgstr "廣播中"
 
 #: main.py:66
 msgid "Streaming stopping"
-msgstr "流媒體停止"
+msgstr "串流停止中"
 
 #: main.py:109
 msgid "Audio Mode"
-msgstr "音頻模式"
+msgstr "音訊模式"
 
 #: main.py:111
 msgid "LE Broadcast"
-msgstr "LE廣播"
+msgstr "低功耗藍牙廣播"
 
 #: main.py:113
 msgid "Most Recently Used Devices"
-msgstr "最近使用的設備"
+msgstr "最近使用的裝置"
 
 #: main.py:116
 msgid "Window"
-msgstr "窗戶"
+msgstr "視窗"
 
 #: main.py:119
 msgid "Help"
-msgstr "幫助"
+msgstr "說明"
 
 #: main.py:139
 msgid "High Quality (one-to-one)"
@@ -113,19 +112,19 @@ msgstr "高品質（一對一）"
 
 #: main.py:142
 msgid "Gaming (one-to-one)"
-msgstr "遊戲（一對一）"
+msgstr "遊戲模式（一對一）"
 
 #: main.py:145
 msgid "Broadcast"
-msgstr "播送"
+msgstr "廣播"
 
 #: main.py:149
 msgid "Dongle State"
-msgstr "適配器狀態"
+msgstr "轉接器狀態"
 
 #: main.py:153
 msgid "LE Audio State"
-msgstr "LE 音頻狀態"
+msgstr "低功耗藍牙音訊狀態"
 
 #: main.py:157
 msgid "Codec in Use"
@@ -133,7 +132,7 @@ msgstr "使用中的編解碼器"
 
 #: main.py:162
 msgid "Prefer using LE audio for dual-mode devices"
-msgstr "更喜歡在雙模設備上使用 LE 音頻"
+msgstr "雙模式裝置優先使用低功耗藍牙音訊"
 
 #: main.py:188
 msgid "Public broadcast"
@@ -141,31 +140,31 @@ msgstr "公共廣播"
 
 #: main.py:209
 msgid "Broadcast high-quality music, otherwise, voice"
-msgstr "播放高品質音樂，否則播放語音"
+msgstr "廣播高品質音樂，否則為語音"
 
 #: main.py:231
 msgid "Encrypt broadcast; please set a key first"
-msgstr "加密廣播； 請先設置一個密鑰"
+msgstr "加密廣播；請先設定金鑰"
 
 #: main.py:252
 msgid "Broadcast Name, maximum 30 characters"
-msgstr "廣播名稱，最多 30 個字符"
+msgstr "廣播名稱，最多 30 個字元"
 
 #: main.py:271
 msgid "Broadcast Key, maximum 16 characters"
-msgstr "廣播密鑰，最多 16 個字符"
+msgstr "廣播金鑰，最多 16 個字元"
 
 #: main.py:275
 msgid "Input a new name of no more than 30 characters then press <ENTER>"
-msgstr "輸入不超過 30 個字元的新名稱，然後按 <ENTER>"
+msgstr "輸入不超過 30 個字元的新名稱後按 <ENTER>"
 
 #: main.py:286
 msgid "Input a new key then press <ENTER>"
-msgstr "輸入新密鑰然後按<ENTER>"
+msgstr "輸入新金鑰後按 <ENTER>"
 
 #: main.py:308
 msgid "Add device"
-msgstr "添加設備"
+msgstr "新增裝置"
 
 #: main.py:325
 msgid "Delete"
@@ -181,31 +180,31 @@ msgstr "退出"
 
 #: main.py:405
 msgid "Show Window"
-msgstr "櫥窗"
+msgstr "顯示視窗"
 
 #: main.py:406
 msgid "FlooGoo Bluetooth Audio Source"
-msgstr "FlooGoo藍牙音源"
+msgstr "FlooGoo 藍牙音訊來源"
 
 #: main.py:414
 msgid "Minimize to System Tray"
-msgstr "最小化到系統托盤"
+msgstr "最小化到系統匣"
 
 #: main.py:416
 msgid "Quit App"
-msgstr "退出應用程序"
+msgstr "退出應用程式"
 
 #: main.py:430
 msgid "Changes Take Effect After Restart"
-msgstr "變更在重新啟動後生效"
+msgstr "變更將於重新啟動後生效"
 
 #: main.py:445
 msgid "Third-Party Software Licenses"
-msgstr "第三方軟件許可證"
+msgstr "第三方軟體授權"
 
 #: main.py:448
 msgid "Support Link"
-msgstr "支持鏈接"
+msgstr "支援連結"
 
 #: main.py:451
 msgid "Version"
@@ -225,63 +224,81 @@ msgstr "升級進度"
 
 #: main.py:486
 msgid "Device Firmware Upgrade"
-msgstr "設備固件升級"
+msgstr "裝置韌體升級"
 
 #: main.py:524
 msgid "Use FlooGoo dongle on "
-msgstr "使用 FlooGoo 適配器"
+msgstr "FlooGoo 轉接器使用於 "
 
 #: main.py:526
 msgid "Please insert your FlooGoo dongle"
-msgstr "請插入您的 FloGoo 適配器"
+msgstr "請插入您的 FlooGoo 轉接器"
 
 #: main.py:335
 msgid "Connect/Disconnect"
-msgstr "連接/斷開"
+msgstr "連線/斷線"
 
 #: main.py:584
 msgid "New Firmware is available"
-msgstr "新韌體可用"
+msgstr "有新的韌體可用"
 
 msgid "Connect"
-msgstr "連接"
+msgstr "連線"
 
 msgid "Disconnect"
-msgstr "斷開"
+msgstr "斷線"
 
 msgid "Settings"
 msgstr "設定"
 
 msgid ", check the latest."
-msgstr "，查看最新的。"
+msgstr "，檢查最新版本。"
 
 msgid "Current firmware: "
 msgstr "目前韌體："
 
 #: Added from 1.1.0
 msgid "Must be disabled for"
-msgstr "必須禁用才能啓用"
+msgstr "必須停用以用於"
 
 msgid "Must be enabled for compatibility with"
-msgstr "必須啟用才能相容"
+msgstr "必須啟用以相容於"
 
 msgid "Must be disabled for compatibility with"
-msgstr "必須禁用才能相容必須禁用才能相容"
+msgstr "必須停用以相容於"
 
 msgid "Toggle switch for"
-msgstr "撥動開關用於"
+msgstr "切換開關"
 
 msgid "On"
-msgstr "開啓"
+msgstr "開"
 
 msgid "Off"
-msgstr "關閉"
+msgstr "關"
 
 msgid "Client"
 msgstr "客戶端"
 
 msgid "Receiver"
-msgstr "接收器"
+msgstr "接收端"
 
 msgid "Relay"
 msgstr "中繼器"
+
+msgid "Stop broadcasting immediately when USB audio playback ends"
+msgstr "USB 音訊播放結束後立即停止廣播"
+
+msgid "USB Audio Input"
+msgstr "USB 音訊輸入"
+
+msgid "Broadcast Latency"
+msgstr "廣播延遲"
+
+msgid "Lowest"
+msgstr "最低"
+
+msgid "Lower"
+msgstr "較低"
+
+msgid "Default"
+msgstr "預設"

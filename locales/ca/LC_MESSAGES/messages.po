@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-09-14 21:16+1000\n"
+"POT-Creation-Date: 2023-09-15 00:09+1000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,18 +14,17 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: pygettext.py 1.5\n"
 
-
 #: main.py:47 main.py:89
 msgid "Initializing"
-msgstr "Inicialització"
+msgstr "Inicialitzant"
 
 #: main.py:48
 msgid "Idle"
-msgstr "Ociós"
+msgstr "Inactiu"
 
 #: main.py:49
 msgid "Pairing"
-msgstr "Maridatge"
+msgstr "Emparellant"
 
 #: main.py:50
 msgid "Connecting"
@@ -37,7 +36,7 @@ msgstr "Connectat"
 
 #: main.py:52
 msgid "Audio starting"
-msgstr "Inici de l'àudio"
+msgstr "Iniciant àudio"
 
 #: main.py:53
 msgid "Audio streaming"
@@ -45,7 +44,7 @@ msgstr "Transmissió d'àudio"
 
 #: main.py:54
 msgid "Audio stopping"
-msgstr "S'atura l'àudio"
+msgstr "Aturant àudio"
 
 #: main.py:55
 msgid "Disconnecting"
@@ -53,7 +52,7 @@ msgstr "Desconnectant"
 
 #: main.py:56
 msgid "Voice starting"
-msgstr "La veu comença"
+msgstr "Iniciant veu"
 
 #: main.py:57
 msgid "Voice streaming"
@@ -61,7 +60,7 @@ msgstr "Transmissió de veu"
 
 #: main.py:58
 msgid "Voice stopping"
-msgstr "La veu s'atura"
+msgstr "Aturant veu"
 
 #: main.py:60 main.py:155
 msgid "Disconnected"
@@ -69,7 +68,7 @@ msgstr "Desconnectat"
 
 #: main.py:62
 msgid "Unicast starting"
-msgstr "Començament unicast"
+msgstr "Iniciant unicast"
 
 #: main.py:63
 msgid "Unicast streaming"
@@ -77,15 +76,15 @@ msgstr "Transmissió unicast"
 
 #: main.py:64
 msgid "Broadcast starting"
-msgstr "Comença l'emissió"
+msgstr "Iniciant emissió"
 
 #: main.py:65
 msgid "Broadcast streaming"
-msgstr "Transmissió en streaming"
+msgstr "Emissió en curs"
 
 #: main.py:66
 msgid "Streaming stopping"
-msgstr "S'atura el streaming"
+msgstr "Aturant transmissió"
 
 #: main.py:109
 msgid "Audio Mode"
@@ -93,11 +92,11 @@ msgstr "Mode d'àudio"
 
 #: main.py:111
 msgid "LE Broadcast"
-msgstr "LE Broadcast"
+msgstr "Emissió LE"
 
 #: main.py:113
 msgid "Most Recently Used Devices"
-msgstr "Dispositius utilitzats més recentment"
+msgstr "Dispositius utilitzats recentment"
 
 #: main.py:116
 msgid "Window"
@@ -117,15 +116,11 @@ msgstr "Jocs (un a un)"
 
 #: main.py:145
 msgid "Broadcast"
-msgstr "Transmissió"
+msgstr "Emissió"
 
 #: main.py:149
 msgid "Dongle State"
-msgstr "Estat de l'adaptador"
-
-#: main.py:151
-msgid "Initialization"
-msgstr "Inicialització"
+msgstr "Estat del dongle"
 
 #: main.py:153
 msgid "LE Audio State"
@@ -137,7 +132,7 @@ msgstr "Còdec en ús"
 
 #: main.py:162
 msgid "Prefer using LE audio for dual-mode devices"
-msgstr "Preferiu utilitzar l'àudio LE per a dispositius de mode dual"
+msgstr "Preferir àudio LE per a dispositius de doble mode"
 
 #: main.py:188
 msgid "Public broadcast"
@@ -145,47 +140,47 @@ msgstr "Emissió pública"
 
 #: main.py:209
 msgid "Broadcast high-quality music, otherwise, voice"
-msgstr "Transmet música d'alta qualitat, en cas contrari, veu"
+msgstr "Emetre música d'alta qualitat, en cas contrari, veu"
 
 #: main.py:231
 msgid "Encrypt broadcast; please set a key first"
-msgstr "Transmissió xifrada; primer, posa una clau"
+msgstr "Xifrar emissió; establiu primer una clau"
 
 #: main.py:252
 msgid "Broadcast Name, maximum 30 characters"
-msgstr "Nom de l'emissió, màxim 30 caràcters"
+msgstr "Nom d'emissió, màxim 30 caràcters"
 
 #: main.py:271
 msgid "Broadcast Key, maximum 16 characters"
-msgstr "Clau de difusió, màxim 16 caràcters"
+msgstr "Clau d'emissió, màxim 16 caràcters"
 
 #: main.py:275
 msgid "Input a new name of no more than 30 characters then press <ENTER>"
-msgstr "Introduïu un nom nou de no més de 30 caràcters i premeu <ENTER>"
+msgstr "Introduïu un nom nou de com a màxim 30 caràcters i premeu <ENTER>"
 
 #: main.py:286
 msgid "Input a new key then press <ENTER>"
-msgstr "Introduïu una tecla nova i premeu <ENTER>"
+msgstr "Introduïu una clau nova i premeu <ENTER>"
 
 #: main.py:308
 msgid "Add device"
-msgstr "Afegeix un dispositiu"
+msgstr "Afegir dispositiu"
 
 #: main.py:325
 msgid "Delete"
-msgstr "Suprimeix"
+msgstr "Eliminar"
 
 #: main.py:343
 msgid "Clear All"
-msgstr "Esborra-ho tot"
+msgstr "Esborrar tot"
 
 #: main.py:405
 msgid "Quit"
-msgstr "Surt"
+msgstr "Sortir"
 
 #: main.py:405
 msgid "Show Window"
-msgstr "Mostra la finestra"
+msgstr "Mostrar finestra"
 
 #: main.py:406
 msgid "FlooGoo Bluetooth Audio Source"
@@ -197,11 +192,11 @@ msgstr "Minimitzar a la safata del sistema"
 
 #: main.py:416
 msgid "Quit App"
-msgstr "Surt de l'aplicació"
+msgstr "Tancar aplicació"
 
 #: main.py:430
 msgid "Changes Take Effect After Restart"
-msgstr "Els canvis tenen efecte després del reinici"
+msgstr "Els canvis tindran efecte després de reiniciar"
 
 #: main.py:445
 msgid "Third-Party Software Licenses"
@@ -229,15 +224,15 @@ msgstr "Progrés de l'actualització"
 
 #: main.py:486
 msgid "Device Firmware Upgrade"
-msgstr "Actualització del firmware del dispositiu"
+msgstr "Actualització de firmware del dispositiu"
 
 #: main.py:524
 msgid "Use FlooGoo dongle on "
-msgstr "Utilitzeu l'adaptador FlooGoo activat"
+msgstr "Utilitzar dongle FlooGoo a "
 
 #: main.py:526
 msgid "Please insert your FlooGoo dongle"
-msgstr "Si us plau, inseriu el vostre adaptador FlooGoo"
+msgstr "Si us plau, inseriu el vostre dongle FlooGoo"
 
 #: main.py:335
 msgid "Connect/Disconnect"
@@ -245,49 +240,41 @@ msgstr "Connectar/Desconnectar"
 
 #: main.py:584
 msgid "New Firmware is available"
-msgstr "El nou firmware està disponible"
-
-#: main.py:666
-msgid "RSSI"
-msgstr "RSSI"
-
-#: main.py:442
-msgid "LED"
-msgstr "LED"
+msgstr "Nou firmware disponible"
 
 msgid "Connect"
-msgstr "Connecta't"
+msgstr "Connectar"
 
 msgid "Disconnect"
-msgstr "Desconnecta"
+msgstr "Desconnectar"
 
 msgid "Settings"
 msgstr "Configuració"
 
-msgid ", comproveu l'últim"
-msgstr ""
+msgid ", check the latest."
+msgstr ", comproveu el més recent."
 
 msgid "Current firmware: "
-msgstr "Firmware actual:"
+msgstr "Firmware actual: "
 
 #: Added from 1.1.0
 msgid "Must be disabled for"
-msgstr "S'ha de desactivar per"
+msgstr "S'ha de desactivar per a"
 
 msgid "Must be enabled for compatibility with"
-msgstr "S'ha d'habilitar per a la compatibilitat amb"
+msgstr "S'ha d'activar per compatibilitat amb"
 
 msgid "Must be disabled for compatibility with"
 msgstr "S'ha de desactivar per compatibilitat amb"
 
 msgid "Toggle switch for"
-msgstr "Interruptor de commutació per"
+msgstr "Canviar commutador per"
 
 msgid "On"
-msgstr "Encès"
+msgstr "Activat"
 
 msgid "Off"
-msgstr "ApagatApagat"
+msgstr "Desactivat"
 
 msgid "Client"
 msgstr "Client"
@@ -296,4 +283,22 @@ msgid "Receiver"
 msgstr "Receptor"
 
 msgid "Relay"
-msgstr "Relleu"
+msgstr "Repetidor"
+
+msgid "Stop broadcasting immediately when USB audio playback ends"
+msgstr "Aturar emissió immediatament quan finalitzi la reproducció d'àudio USB"
+
+msgid "USB Audio Input"
+msgstr "Entrada d'àudio USB"
+
+msgid "Broadcast Latency"
+msgstr "Latència d'emissió"
+
+msgid "Lowest"
+msgstr "Mínim"
+
+msgid "Lower"
+msgstr "Baix"
+
+msgid "Default"
+msgstr "Per defecte"

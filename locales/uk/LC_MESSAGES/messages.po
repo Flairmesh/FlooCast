@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-09-14 21:16+1000\n"
+"POT-Creation-Date: 2023-09-15 00:09+1000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,18 +14,17 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: pygettext.py 1.5\n"
 
-
 #: main.py:47 main.py:89
 msgid "Initializing"
 msgstr "Ініціалізація"
 
 #: main.py:48
 msgid "Idle"
-msgstr "Бездіяльність"
+msgstr "Очікування"
 
 #: main.py:49
 msgid "Pairing"
-msgstr "Створення пари"
+msgstr "Спряження"
 
 #: main.py:50
 msgid "Connecting"
@@ -41,11 +40,11 @@ msgstr "Запуск аудіо"
 
 #: main.py:53
 msgid "Audio streaming"
-msgstr "Потокове аудіо"
+msgstr "Аудіотрансляція"
 
 #: main.py:54
 msgid "Audio stopping"
-msgstr "Припинення звуку"
+msgstr "Зупинка аудіо"
 
 #: main.py:55
 msgid "Disconnecting"
@@ -53,11 +52,11 @@ msgstr "Відключення"
 
 #: main.py:56
 msgid "Voice starting"
-msgstr "Початок голосу"
+msgstr "Запуск голосу"
 
 #: main.py:57
 msgid "Voice streaming"
-msgstr "Потік голосу"
+msgstr "Голосова трансляція"
 
 #: main.py:58
 msgid "Voice stopping"
@@ -69,35 +68,35 @@ msgstr "Відключено"
 
 #: main.py:62
 msgid "Unicast starting"
-msgstr "Початок одноадресної передачі"
+msgstr "Запуск одноадресної передачі"
 
 #: main.py:63
 msgid "Unicast streaming"
-msgstr "Одноадресна потокова передача"
+msgstr "Одноадресна передача"
 
 #: main.py:64
 msgid "Broadcast starting"
-msgstr "Початок трансляції"
+msgstr "Запуск мовлення"
 
 #: main.py:65
 msgid "Broadcast streaming"
-msgstr "Потокове мовлення"
+msgstr "Мовлення"
 
 #: main.py:66
 msgid "Streaming stopping"
-msgstr "Припинення трансляції"
+msgstr "Зупинка трансляції"
 
 #: main.py:109
 msgid "Audio Mode"
-msgstr "Режим звуку"
+msgstr "Аудіорежим"
 
 #: main.py:111
 msgid "LE Broadcast"
-msgstr "Трансляція LE"
+msgstr "LE Мовлення"
 
 #: main.py:113
 msgid "Most Recently Used Devices"
-msgstr "Останні використовувані пристрої"
+msgstr "Нещодавно використані пристрої"
 
 #: main.py:116
 msgid "Window"
@@ -109,15 +108,15 @@ msgstr "Довідка"
 
 #: main.py:139
 msgid "High Quality (one-to-one)"
-msgstr "Висока якість (один до одного)"
+msgstr "Висока якість (один-на-один)"
 
 #: main.py:142
 msgid "Gaming (one-to-one)"
-msgstr "Ігри (один на один)"
+msgstr "Ігровий режим (один-на-один)"
 
 #: main.py:145
 msgid "Broadcast"
-msgstr "Трансляція"
+msgstr "Мовлення"
 
 #: main.py:149
 msgid "Dongle State"
@@ -125,47 +124,47 @@ msgstr "Стан адаптера"
 
 #: main.py:153
 msgid "LE Audio State"
-msgstr "LE Audio State"
+msgstr "Стан LE аудіо"
 
 #: main.py:157
 msgid "Codec in Use"
-msgstr "Кодек у використанні"
+msgstr "Використовуваний кодек"
 
 #: main.py:162
 msgid "Prefer using LE audio for dual-mode devices"
-msgstr "Надавайте перевагу використанню аудіо LE для дворежимних пристроїв"
+msgstr "Надавати перевагу LE аудіо для пристроїв з подвійним режимом"
 
 #: main.py:188
 msgid "Public broadcast"
-msgstr "Публічний ефір"
+msgstr "Публічне мовлення"
 
 #: main.py:209
 msgid "Broadcast high-quality music, otherwise, voice"
-msgstr "Транслюйте якісну музику, інакше голос"
+msgstr "Мовлення музики високої якості, інакше — голосу"
 
 #: main.py:231
 msgid "Encrypt broadcast; please set a key first"
-msgstr "Шифрувати трансляцію; спочатку встановіть ключ"
+msgstr "Зашифрувати мовлення; спершу задайте ключ"
 
 #: main.py:252
 msgid "Broadcast Name, maximum 30 characters"
-msgstr "Широкомовна назва, максимум 30 символів"
+msgstr "Назва мовлення, максимум 30 символів"
 
 #: main.py:271
 msgid "Broadcast Key, maximum 16 characters"
-msgstr "Широкомовний ключ, максимум 16 символів"
+msgstr "Ключ мовлення, максимум 16 символів"
 
 #: main.py:275
 msgid "Input a new name of no more than 30 characters then press <ENTER>"
-msgstr "Введіть нове ім'я довжиною не більше 30 символів і натисніть <ENTER>"
+msgstr "Введіть нову назву до 30 символів та натисніть <ENTER>"
 
 #: main.py:286
 msgid "Input a new key then press <ENTER>"
-msgstr "Введіть новий ключ і натисніть <ENTER>"
+msgstr "Введіть новий ключ та натисніть <ENTER>"
 
 #: main.py:308
 msgid "Add device"
-msgstr "Додайте пристрій"
+msgstr "Додати пристрій"
 
 #: main.py:325
 msgid "Delete"
@@ -185,7 +184,7 @@ msgstr "Показати вікно"
 
 #: main.py:406
 msgid "FlooGoo Bluetooth Audio Source"
-msgstr "Джерело звуку FlooGoo Bluetooth"
+msgstr "FlooGoo Джерело Bluetooth аудіо"
 
 #: main.py:414
 msgid "Minimize to System Tray"
@@ -197,15 +196,15 @@ msgstr "Вийти з програми"
 
 #: main.py:430
 msgid "Changes Take Effect After Restart"
-msgstr "Зміни набирають чинності після перезавантаження"
+msgstr "Зміни набудуть чинності після перезапуску"
 
 #: main.py:445
 msgid "Third-Party Software Licenses"
-msgstr "Ліцензії програмного забезпечення третіх осіб"
+msgstr "Ліцензії стороннього ПЗ"
 
 #: main.py:448
 msgid "Support Link"
-msgstr "Посилання на підтримку"
+msgstr "Посилання підтримки"
 
 #: main.py:451
 msgid "Version"
@@ -225,34 +224,26 @@ msgstr "Прогрес оновлення"
 
 #: main.py:486
 msgid "Device Firmware Upgrade"
-msgstr "Оновлення мікропрограми пристрою"
+msgstr "Оновлення прошивки пристрою"
 
 #: main.py:524
 msgid "Use FlooGoo dongle on "
-msgstr "Використовуйте адаптер FlooGoo"
+msgstr "Використовуйте адаптер FlooGoo на "
 
 #: main.py:526
 msgid "Please insert your FlooGoo dongle"
-msgstr "Вставте адаптер FlooGoo"
+msgstr "Будь ласка, вставте адаптер FlooGoo"
 
 #: main.py:335
 msgid "Connect/Disconnect"
-msgstr "Підключення/Відключення"
+msgstr "Підключити/Відключити"
 
 #: main.py:584
 msgid "New Firmware is available"
-msgstr "Доступна нова мікропрограма"
-
-#: main.py:666
-msgid "RSSI"
-msgstr "RSSI"
-
-#: main.py:442
-msgid "LED"
-msgstr "світлодіод"
+msgstr "Доступна нова прошивка"
 
 msgid "Connect"
-msgstr "Підключитися"
+msgstr "Підключити"
 
 msgid "Disconnect"
 msgstr "Відключити"
@@ -261,7 +252,7 @@ msgid "Settings"
 msgstr "Налаштування"
 
 msgid ", check the latest."
-msgstr ", перевірити останні."
+msgstr ", перевірте оновлення."
 
 msgid "Current firmware: "
 msgstr "Поточна прошивка: "
@@ -271,13 +262,13 @@ msgid "Must be disabled for"
 msgstr "Потрібно вимкнути для"
 
 msgid "Must be enabled for compatibility with"
-msgstr "Необхідно ввімкнути для сумісності з"
+msgstr "Потрібно увімкнути для сумісності з"
 
 msgid "Must be disabled for compatibility with"
-msgstr "Має бути вимкнено для сумісності з"
+msgstr "Потрібно вимкнути для сумісності з"
 
 msgid "Toggle switch for"
-msgstr "Тумблер для"
+msgstr "Перемикач для"
 
 msgid "On"
 msgstr "Увімкнено"
@@ -286,10 +277,28 @@ msgid "Off"
 msgstr "Вимкнено"
 
 msgid "Client"
-msgstr "Вимкнено"
+msgstr "Клієнт"
 
 msgid "Receiver"
 msgstr "Приймач"
 
 msgid "Relay"
-msgstr "естафета"
+msgstr "Ретранслятор"
+
+msgid "Stop broadcasting immediately when USB audio playback ends"
+msgstr "Негайно припиняти мовлення після завершення відтворення USB аудіо"
+
+msgid "USB Audio Input"
+msgstr "Вхід USB аудіо"
+
+msgid "Broadcast Latency"
+msgstr "Затримка мовлення"
+
+msgid "Lowest"
+msgstr "Найнижча"
+
+msgid "Lower"
+msgstr "Нижча"
+
+msgid "Default"
+msgstr "За замовчуванням"

@@ -76,7 +76,7 @@ leaStateStr = [_("Disconnected"),
 # create root window
 app = wx.App(False)
 
-appFrame = wx.Frame(None, wx.ID_ANY, "FlooCast", size=wx.Size(930, 560))
+appFrame = wx.Frame(None, wx.ID_ANY, "FlooCast", size=wx.Size(950, 560))
 appFrame.SetIcon(wx.Icon(app_path + os.sep + appIcon))
 
 statusBar = appFrame.CreateStatusBar(name=_("Status Bar"))
@@ -96,6 +96,9 @@ off = wx.Bitmap(app_path + os.sep + 'offS.png')
 appPanel = wx.Panel(appFrame)
 appSizer = wx.FlexGridSizer(2, 2, vgap=2, hgap=4)
 
+# Hardware variant FMA120 (USB only) or FMA120 (with 3.5mm analog input)
+hwWithAnalogInput = 0
+
 # Audio mode panel
 audioMode = None
 audioModeSb = wx.StaticBox(appPanel, wx.ID_ANY, _('Audio Mode'))
@@ -110,35 +113,45 @@ audioModeBroadcastRadioButton = wx.RadioButton(audioModeUpperPanel, label=_('Bro
 
 
 def audio_mode_sel_set(mode):
-    if mode == 0:
+    if hwWithAnalogInput:
+        settingsPanelSizer.Show(usbInputCheckBox)
+        settingsPanelSizer.Show(usbInputEnableButton)
+    else:
+        settingsPanelSizer.Hide(usbInputCheckBox)
+        settingsPanelSizer.Hide(usbInputEnableButton)
+    if audioMode == 0:
         settingsPanelSizer.Show(aptxLosslessCheckBox)
         settingsPanelSizer.Show(aptxLosslessEnableButton)
         settingsPanelSizer.Hide(gattClientWithBroadcastCheckBox)
         settingsPanelSizer.Hide(gattClientWithBroadcastEnableButton)
-    elif mode == 1:
+        leBroadcastSb.Disable()
+    elif audioMode == 1:
         settingsPanelSizer.Hide(aptxLosslessCheckBox)
         settingsPanelSizer.Hide(aptxLosslessEnableButton)
         settingsPanelSizer.Hide(gattClientWithBroadcastCheckBox)
         settingsPanelSizer.Hide(gattClientWithBroadcastEnableButton)
-    elif mode == 2:
+        leBroadcastSb.Disable()
+    elif audioMode == 2:
         settingsPanelSizer.Hide(aptxLosslessCheckBox)
         settingsPanelSizer.Hide(aptxLosslessEnableButton)
         settingsPanelSizer.Show(gattClientWithBroadcastCheckBox)
         settingsPanelSizer.Show(gattClientWithBroadcastEnableButton)
+        leBroadcastSb.Enable()
     settingsPanelSizer.Layout()
 
 
 def audio_mode_sel(event):
+    global  audioMode
     selectedLabel = (event.GetEventObject().GetLabel())
     if selectedLabel == audioModeHighQualityRadioButton.GetLabel():
-        mode = 0
+        audioMode = 0
     elif selectedLabel == audioModeGamingRadioButton.GetLabel():
-        mode = 1
+        audioMode = 1
     else:
-        mode = 2
-    audio_mode_sel_set(mode)
+        audioMode = 2
+    audio_mode_sel_set(audioMode + (0x80 if hwWithAnalogInput else 0x00))
     settingsPanelSizer.Layout()
-    flooSm.setAudioMode(mode)
+    flooSm.setAudioMode(audioMode)
 
 
 audioModeUpperPanel.Bind(wx.EVT_RADIOBUTTON, audio_mode_sel)
@@ -294,11 +307,10 @@ windowSbSizer.AddStretchSpacer()
 broadcastAndPairedDevicePanel = wx.Panel(appPanel)
 broadcastAndPairedDeviceSizer = wx.BoxSizer(wx.VERTICAL)
 
-leBroadcastSb = wx.StaticBox(broadcastAndPairedDevicePanel, wx.ID_ANY,
-                             _('LE Broadcast') + " - " + _('Changes Take Effect After Restart'))
+leBroadcastSb = wx.StaticBox(broadcastAndPairedDevicePanel, wx.ID_ANY, _('LE Broadcast'))
 leBroadcastSbSizer = wx.StaticBoxSizer(leBroadcastSb, wx.VERTICAL)
 leBroadcastSwitchPanel = wx.Panel(leBroadcastSb)
-leBroadcastSwitchPanelSizer = wx.FlexGridSizer(3, 2, (0, 0))
+leBroadcastSwitchPanelSizer = wx.FlexGridSizer(4, 2, (0, 0))
 
 publicBroadcastEnable = None
 
@@ -407,12 +419,50 @@ broadcastEncryptButton.SetBitmap(off)
 leBroadcastSwitchPanel.Bind(wx.EVT_CHECKBOX, broadcast_encrypt_enable_switch, broadcastEncryptCheckBox)
 broadcastEncryptButton.Bind(wx.EVT_BUTTON, broadcast_encrypt_enable_button)
 
+broadcastStopOnIdleEnable = None
+
+
+def broadcast_stop_on_idle_switch_set(enable, isNotify):
+    global broadcastStopOnIdleEnable
+    broadcastStopOnIdleEnable = enable
+    broadcastStopOnIdleButton.SetBitmap(on if broadcastStopOnIdleEnable else off)
+    broadcastStopOnIdleButton.SetToolTip(
+        _('Toggle switch for') + ' ' + _('Stop broadcasting immediately when USB audio playback ends') + ' ' + (_(
+            'On') if broadcastStopOnIdleEnable else _('Off')))
+    if isNotify:
+        broadcastStopOnIdleCheckBox.SetValue(enable)
+    else:
+        flooSm.setBroadcastStopOnIdle(enable)
+
+
+# Broadcast stops when USB idle enable button function
+def broadcast_stop_on_idle_enable_button(event):
+    broadcastStopOnIdleCheckBox.SetValue(not broadcastStopOnIdleEnable)
+    broadcast_stop_on_idle_switch_set(not broadcastStopOnIdleEnable, False)
+
+
+# BBroadcast stops when USB idle enable switch function
+def broadcast_stop_on_idle_enable_switch(event):
+    broadcast_stop_on_idle_switch_set(not broadcastStopOnIdleEnable, False)
+
+
+broadcastStopOnIdleCheckBox = wx.CheckBox(leBroadcastSwitchPanel, wx.ID_ANY,
+                                       label=_('Stop broadcasting immediately when USB audio playback ends'))
+broadcastStopOnIdleButton = wx.Button(leBroadcastSwitchPanel, wx.ID_ANY, style=wx.NO_BORDER | wx.MINIMIZE)
+broadcastStopOnIdleButton.SetToolTip(
+    _('Toggle switch for') + ' ' + _('Stop broadcasting immediately when USB audio playback ends') + ' ' + _('Off'))
+broadcastStopOnIdleButton.SetBitmap(off)
+leBroadcastSwitchPanel.Bind(wx.EVT_CHECKBOX, broadcast_stop_on_idle_enable_switch, broadcastStopOnIdleCheckBox)
+broadcastStopOnIdleButton.Bind(wx.EVT_BUTTON, broadcast_stop_on_idle_enable_button)
+
 leBroadcastSwitchPanelSizer.Add(publicBroadcastCheckBox, flag=wx.ALIGN_LEFT)
 leBroadcastSwitchPanelSizer.Add(publicBroadcastButton, flag=wx.ALIGN_RIGHT)
 leBroadcastSwitchPanelSizer.Add(broadcastHighQualityCheckBox, flag=wx.ALIGN_LEFT)
 leBroadcastSwitchPanelSizer.Add(broadcastHighQualityButton, flag=wx.ALIGN_RIGHT)
 leBroadcastSwitchPanelSizer.Add(broadcastEncryptCheckBox, flag=wx.ALIGN_LEFT)
 leBroadcastSwitchPanelSizer.Add(broadcastEncryptButton, flag=wx.ALIGN_RIGHT)
+leBroadcastSwitchPanelSizer.Add(broadcastStopOnIdleCheckBox, flag=wx.ALIGN_LEFT)
+leBroadcastSwitchPanelSizer.Add(broadcastStopOnIdleButton, flag=wx.ALIGN_RIGHT)
 
 leBroadcastSwitchPanelSizer.AddGrowableCol(0, 0)
 leBroadcastSwitchPanelSizer.AddGrowableCol(1, 1)
@@ -424,7 +474,7 @@ leBroadcastEntryPanelSizer = wx.FlexGridSizer(2, 2, (0, 0))
 # Broadcast name entry function
 def broadcast_name_entry(event):
     name = broadcastNameEntry.GetValue()
-    print("new broadcast name", name)
+    # print("new broadcast name", name)
     nameBytes = name.encode('utf-8')
     if 0 < len(nameBytes) < 31:
         flooSm.setBroadcastName(name)
@@ -466,8 +516,46 @@ leBroadcastEntryPanelSizer.AddGrowableCol(0, 1)
 leBroadcastEntryPanelSizer.AddGrowableCol(1, 1)
 leBroadcastEntryPanel.SetSizer(leBroadcastEntryPanelSizer)
 
+leBroadcastLatencyPanel = wx.Panel(leBroadcastSb)
+leBroadcastLatencyPanelSizer = wx.FlexGridSizer(1, 2, (0, 0))
+broadcastLatencyLabel = wx.StaticText(leBroadcastLatencyPanel, wx.ID_ANY, label=_('Broadcast Latency'))
+leBroadcastLatencyPanelSizer.Add(broadcastLatencyLabel, flag=wx.ALIGN_LEFT | wx.ALIGN_CENTER_VERTICAL)
+leBroadcastLatencyRadioPanel =  wx.Panel(leBroadcastLatencyPanel)
+leBroadcastLatencyRadioPanelSizer = wx.BoxSizer(wx.HORIZONTAL)
+latencyLowestRadioButton = wx.RadioButton(leBroadcastLatencyRadioPanel, label=_('Lowest'),
+                                                 style=wx.RB_GROUP)
+latencyLowerRadioButton = wx.RadioButton(leBroadcastLatencyRadioPanel, label=_('Lower'))
+latencyDefaultRadioButton = wx.RadioButton(leBroadcastLatencyRadioPanel, label=_('Default'))
+leBroadcastLatencyRadioPanelSizer.Add(latencyLowestRadioButton, 0, wx.EXPAND | wx.LEFT, 10)
+leBroadcastLatencyRadioPanelSizer.Add(latencyLowerRadioButton, 0, wx.EXPAND | wx.LEFT, 10)
+leBroadcastLatencyRadioPanelSizer.Add(latencyDefaultRadioButton, 0, wx.EXPAND | wx.LEFT, 10)
+#leBroadcastLatencyRadioPanelSizer.AddGrowableCol(0, 1)
+#leBroadcastLatencyRadioPanelSizer.AddGrowableCol(1, 1)
+#leBroadcastLatencyRadioPanelSizer.AddGrowableCol(2, 1)
+leBroadcastLatencyRadioPanel.SetSizer(leBroadcastLatencyRadioPanelSizer)
+
+leBroadcastLatencyPanelSizer.Add(leBroadcastLatencyRadioPanel, flag=wx.ALIGN_RIGHT | wx.ALIGN_CENTER_VERTICAL, border=8)
+#leBroadcastLatencyPanelSizer.AddGrowableCol(0, 1)
+leBroadcastLatencyPanelSizer.AddGrowableCol(1, 1)
+leBroadcastLatencyPanel.SetSizer(leBroadcastLatencyPanelSizer)
+
+
+def broadcast_latency_sel(event):
+    selectedLabel = (event.GetEventObject().GetLabel())
+    if selectedLabel == latencyLowestRadioButton.GetLabel():
+        mode = 1
+    elif selectedLabel == latencyLowerRadioButton.GetLabel():
+        mode = 2
+    else:
+        mode = 3
+    flooSm.setBroadcastLatency(mode)
+
+
+leBroadcastLatencyRadioPanel.Bind(wx.EVT_RADIOBUTTON, broadcast_latency_sel)
+
 leBroadcastSbSizer.Add(leBroadcastSwitchPanel, flag=wx.EXPAND | wx.TOP, border=4)
-leBroadcastSbSizer.Add(leBroadcastEntryPanel, flag=wx.EXPAND, border=4)
+leBroadcastSbSizer.Add(leBroadcastEntryPanel, flag=wx.EXPAND | wx.TOP, border=4)
+leBroadcastSbSizer.Add(leBroadcastLatencyPanel, flag=wx.EXPAND | wx.TOP, border=4)
 leBroadcastSwitchPanel.SetSizer(leBroadcastSwitchPanelSizer)
 
 pairedDevicesSb = wx.StaticBox(broadcastAndPairedDevicePanel, wx.ID_ANY, _('Most Recently Used Devices'))
@@ -540,7 +628,40 @@ broadcastAndPairedDevicePanel.SetSizer(broadcastAndPairedDeviceSizer)
 aboutSb = wx.StaticBox(appPanel, wx.ID_ANY, _('Settings'))
 aboutSbSizer = wx.StaticBoxSizer(aboutSb, wx.VERTICAL)
 settingsPanel = wx.Panel(aboutSb)
-settingsPanelSizer = wx.FlexGridSizer(3, 2, (5, 0))
+settingsPanelSizer = wx.FlexGridSizer(4, 2, (5, 0))
+
+usbInputEnable = None
+
+
+def usb_input_enable_switch_set(enable, isNotify):
+    global usbInputEnable
+    usbInputEnable = enable
+    usbInputEnableButton.SetBitmap(on if usbInputEnable else off)
+    usbInputEnableButton.SetToolTip(_('Toggle switch for') + ' ' + _('USB Audio Input') + ' '
+                                    + (_('On') if usbInputEnable else _('Off')))
+    if isNotify:
+        usbInputCheckBox.SetValue(enable)
+    else:
+        flooSm.enableUsbInput(enable)
+
+
+# usb input enable button function
+def usb_input_enable_button(event):
+    usbInputCheckBox.SetValue(not usbInputEnable)
+    usb_input_enable_switch_set(not usbInputEnable, False)
+
+
+# usb input enable switch function
+def usb_input_enable_switch(event):
+    usb_input_enable_switch_set(not usbInputEnable, False)
+
+
+usbInputCheckBox = wx.CheckBox(settingsPanel, wx.ID_ANY, label=_('USB Audio Input'))
+usbInputEnableButton = wx.Button(settingsPanel, wx.ID_ANY, style=wx.NO_BORDER | wx.MINIMIZE)
+usbInputEnableButton.SetToolTip(_('Toggle switch for') + ' ' + _('USB Audio Input') + ' ' + _(' Off'))
+usbInputEnableButton.SetBitmap(off)
+settingsPanel.Bind(wx.EVT_CHECKBOX, usb_input_enable_switch, usbInputCheckBox)
+usbInputEnableButton.Bind(wx.EVT_BUTTON, usb_input_enable_button)
 
 ledEnable = None
 
@@ -640,12 +761,16 @@ gattClientWithBroadcastEnableButton.SetBitmap(off)  # , wx.RIGHT
 settingsPanel.Bind(wx.EVT_CHECKBOX, gatt_client_enable_switch, gattClientWithBroadcastCheckBox)
 gattClientWithBroadcastEnableButton.Bind(wx.EVT_BUTTON, gatt_client_enable_button)
 
+settingsPanelSizer.Add(usbInputCheckBox, 1, flag=wx.ALIGN_LEFT | wx.ALIGN_CENTER_VERTICAL)
+settingsPanelSizer.Add(usbInputEnableButton, flag=wx.ALIGN_RIGHT)
 settingsPanelSizer.Add(ledCheckBox, 1, flag=wx.ALIGN_LEFT | wx.ALIGN_CENTER_VERTICAL)
 settingsPanelSizer.Add(ledEnableButton, flag=wx.ALIGN_RIGHT)
 settingsPanelSizer.Add(aptxLosslessCheckBox, 1, flag=wx.ALIGN_LEFT | wx.ALIGN_CENTER_VERTICAL)
 settingsPanelSizer.Add(aptxLosslessEnableButton, flag=wx.ALIGN_RIGHT)
 settingsPanelSizer.Add(gattClientWithBroadcastCheckBox, 1, flag=wx.ALIGN_LEFT | wx.ALIGN_CENTER_VERTICAL)
 settingsPanelSizer.Add(gattClientWithBroadcastEnableButton, flag=wx.ALIGN_RIGHT)
+settingsPanelSizer.Hide(usbInputCheckBox)
+settingsPanelSizer.Hide(usbInputEnableButton)
 settingsPanelSizer.Hide(aptxLosslessCheckBox)
 settingsPanelSizer.Hide(aptxLosslessEnableButton)
 settingsPanelSizer.Hide(gattClientWithBroadcastCheckBox)
@@ -661,7 +786,7 @@ logoImg = wx.Image(app_path + os.sep + appLogoPng, wx.BITMAP_TYPE_PNG).ConvertTo
 logoStaticBmp = wx.StaticBitmap(versionPanel, wx.ID_ANY, logoImg)
 logoStaticBmp.SetToolTip(_('FlooGoo'))
 versionPanelSizer.Add(logoStaticBmp, flag=wx.ALIGN_CENTER)
-copyRightText = "Copyright© 2023~2024 Flairmesh Technologies."
+copyRightText = "Copyright© 2023~2025 Flairmesh Technologies."
 copyRightInfo = wx.StaticText(versionPanel, wx.ID_ANY, label=copyRightText)
 versionPanelSizer.Add(copyRightInfo, flag=wx.ALIGN_CENTER | wx.BOTTOM, border=4)
 font = wx.Font(pointSize=10, family=wx.DEFAULT,
@@ -677,7 +802,7 @@ supportLink = hl.HyperLinkCtrl(versionPanel, wx.ID_ANY, _("Support Link"),
                                URL="https://www.flairmesh.com/Dongle/FMA120.html")
 versionPanelSizer.Add(supportLink, flag=wx.ALIGN_CENTER | wx.BOTTOM, border=4)
 versionPanel.SetSizer(versionPanelSizer)
-versionInfo = wx.StaticText(versionPanel, wx.ID_ANY, label=_("Version") + " 1.1.4")
+versionInfo = wx.StaticText(versionPanel, wx.ID_ANY, label=_("Version") + " 1.1.5")
 versionPanelSizer.Add(versionInfo, flag=wx.ALIGN_CENTER | wx.BOTTOM, border=4)
 
 dfuUndergoing = False
@@ -836,7 +961,7 @@ class FlooSmDelegate(FlooStateMachineDelegate):
                                                     context=ssl.create_default_context(cafile=certifi.where())).read()
                 latest = latest.decode("utf-8").rstrip()
             except Exception as exec0:
-                print("Cann't get the latest version")
+                # print("Cann't get the latest version")
                 latest = "Unable"
 
             if not dfuUndergoing:
@@ -877,16 +1002,21 @@ class FlooSmDelegate(FlooStateMachineDelegate):
 
     def audioModeInd(self, mode: int):
         global audioMode
-        audioMode = mode
+        global hwWithAnalogInput
+        hwWithAnalogInput = 1 if (mode & 0x80) == 0x80 else 0
+        audioMode = mode & 0x03
         if firmwareVariant != 0:
             pairedDevicesSb.Enable(True)
         else:
-            if mode == 0:
+            if audioMode == 0:
                 audioModeHighQualityRadioButton.SetValue(True)
-            elif mode == 1:
+                leBroadcastSb.Disable()
+            elif audioMode == 1:
                 audioModeGamingRadioButton.SetValue(True)
-            elif mode == 2:
+                leBroadcastSb.Disable()
+            elif audioMode == 2:
                 audioModeBroadcastRadioButton.SetValue(True)
+                leBroadcastSb.Enable()
             audio_mode_sel_set(mode)
 
     def sourceStateInd(self, state: int):
@@ -904,6 +1034,22 @@ class FlooSmDelegate(FlooStateMachineDelegate):
         broadcast_high_quality_switch_set(state & 4 == 4, True)
         public_broadcast_enable_switch_set(state & 2 == 2, True)
         broadcast_encrypt_switch_set(state & 1 == 1, True)
+        broadcast_stop_on_idle_switch_set(state & 8 == 8, True)
+        broadcastLatency = (state & 0x30) >> 4
+        if broadcastLatency == 1:
+            latencyLowestRadioButton.SetValue(True)
+        elif broadcastLatency == 2:
+            latencyLowerRadioButton.SetValue(True)
+        elif broadcastLatency == 3:
+            latencyDefaultRadioButton.SetValue(True)
+        if broadcastLatency == 0:
+            leBroadcastLatencyPanel.Disable()
+            broadcastStopOnIdleCheckBox.Disable()
+            broadcastStopOnIdleButton.Disable()
+        else:
+            leBroadcastLatencyPanel.Enable()
+            broadcastStopOnIdleCheckBox.Enable()
+            broadcastStopOnIdleButton.Enable()
 
     def broadcastNameInd(self, name):
         broadcastNameEntry.SetValue(name)
@@ -912,15 +1058,41 @@ class FlooSmDelegate(FlooStateMachineDelegate):
         pairedDeviceListbox.Clear()
         i = 0
         while i < len(pairedDevices):
-            print(pairedDevices[i])
+            # print(pairedDevices[i])
             pairedDeviceListbox.Append(pairedDevices[i])
             i = i + 1
         newPairingButton.Enable(False if preferLeaEnable and i > 0 else True)
-        clearAllButton.Enable(True if i > 0 else False)
+        # clearAllButton.Enable(True if i > 0 else False)
 
-    def audioCodecInUseInd(self, codec, rssi, rate, spkSampleRate, micSampleRate):
+    def audioCodecInUseInd(self, codec, rssi, rate, spkSampleRate, micSampleRate,
+                           sduInt, transportDelay, presentDelay):
         codecInUseText.SetLabelText(codecStr[codec] if codec < len(codecStr) else _("Unknown"))
-        if (codec == 6 or codec == 10) and rssi != 0:
+        if transportDelay != 0:
+            if (codec == 6 or codec == 10) and rssi != 0:
+                if spkSampleRate == 0:
+                    codecInUseText.SetLabelText(codecStr[codec] + " @ " + str(rate) + "Kbps "
+                                                + str(float(transportDelay) / 100) + "ms, "
+                                                + _("RSSI") + " -" + str(0x100 - rssi) + "dBm")
+                else:
+                    codecInUseText.SetLabelText(codecStr[codec] + " @ " + str(float(spkSampleRate / 1000)) + "kHz "
+                                                + str(rate) + "Kbps " + str(float(transportDelay) / 100) + "ms, "
+                                                + _("RSSI") + " -" + str(0x100 - rssi) + "dBm")
+            elif presentDelay != 0:
+                if micSampleRate != 0:
+                    codecInUseText.SetLabelText(codecStr[codec] + " @ " + str(float(spkSampleRate / 1000))
+                                                 + "|" + str(float(micSampleRate / 1000)) + "kHz "
+                                                + str(float(sduInt) / 100) + "+" + str(float(transportDelay) / 100)
+                                                + "+" + str(float(presentDelay) / 100) + "ms"
+                                                if codec < len(codecStr) else _("Unknown"))
+                else:
+                    codecInUseText.SetLabelText(codecStr[codec] + " @ " + str(float(spkSampleRate / 1000)) + "kHz "
+                                                + str(float(sduInt) / 100) + "+" + str(float(transportDelay) / 100)
+                                                + "+" + str(float(presentDelay) / 100)  + "ms"
+                                                if codec < len(codecStr) else _("Unknown"))
+            else:
+                codecInUseText.SetLabelText((codecStr[codec] + " @ " + str(float(spkSampleRate / 1000))
+                                             + "kHz ") + str(float(transportDelay) / 100) + "ms")
+        elif (codec == 6 or codec == 10) and rssi != 0:
             if spkSampleRate == 0:
                 codecInUseText.SetLabelText(codecStr[codec] + " @ " + str(rate) + "Kbps "
                                             + _("RSSI") + " -" + str(0x100 - rssi) + "dBm")
@@ -949,6 +1121,9 @@ class FlooSmDelegate(FlooStateMachineDelegate):
 
     def gattClientEnabledInd(self, enabled):
         gatt_client_enable_switch_set(enabled, True)
+
+    def audioSourceInd(self, enabled):
+        usb_input_enable_switch_set(enabled, True)
 
 
 flooSmDelegate = FlooSmDelegate()

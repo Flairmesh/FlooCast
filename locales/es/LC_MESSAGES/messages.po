@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-09-14 21:16+1000\n"
+"POT-Creation-Date: 2023-09-15 00:09+1000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,10 +14,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: pygettext.py 1.5\n"
 
-
 #: main.py:47 main.py:89
 msgid "Initializing"
-msgstr "Inicializando"
+msgstr "Iniciando"
 
 #: main.py:48
 msgid "Idle"
@@ -25,7 +24,7 @@ msgstr "Inactivo"
 
 #: main.py:49
 msgid "Pairing"
-msgstr "Emparejamiento"
+msgstr "Emparejando"
 
 #: main.py:50
 msgid "Connecting"
@@ -37,15 +36,15 @@ msgstr "Conectado"
 
 #: main.py:52
 msgid "Audio starting"
-msgstr "Inicio de audio"
+msgstr "Iniciando audio"
 
 #: main.py:53
 msgid "Audio streaming"
-msgstr "Transmisión auditiva"
+msgstr "Transmitiendo audio"
 
 #: main.py:54
 msgid "Audio stopping"
-msgstr "Detención de audio"
+msgstr "Deteniendo audio"
 
 #: main.py:55
 msgid "Disconnecting"
@@ -53,15 +52,15 @@ msgstr "Desconectando"
 
 #: main.py:56
 msgid "Voice starting"
-msgstr "inicio de voz"
+msgstr "Iniciando voz"
 
 #: main.py:57
 msgid "Voice streaming"
-msgstr "Transmisión de voz"
+msgstr "Transmitiendo voz"
 
 #: main.py:58
 msgid "Voice stopping"
-msgstr "parada de voz"
+msgstr "Deteniendo voz"
 
 #: main.py:60 main.py:155
 msgid "Disconnected"
@@ -69,23 +68,23 @@ msgstr "Desconectado"
 
 #: main.py:62
 msgid "Unicast starting"
-msgstr "inicio de unidifusión"
+msgstr "Iniciando unicast"
 
 #: main.py:63
 msgid "Unicast streaming"
-msgstr "Transmisión de unidifusión"
+msgstr "Transmitiendo unicast"
 
 #: main.py:64
 msgid "Broadcast starting"
-msgstr "Inicio de transmisión"
+msgstr "Iniciando transmisión"
 
 #: main.py:65
 msgid "Broadcast streaming"
-msgstr "Transmisión de transmisión"
+msgstr "Transmitiendo"
 
 #: main.py:66
 msgid "Streaming stopping"
-msgstr "Detención de la transmisión"
+msgstr "Deteniendo transmisión"
 
 #: main.py:109
 msgid "Audio Mode"
@@ -97,7 +96,7 @@ msgstr "Transmisión LE"
 
 #: main.py:113
 msgid "Most Recently Used Devices"
-msgstr "Dispositivos usados más recientemente"
+msgstr "Dispositivos usados recientemente"
 
 #: main.py:116
 msgid "Window"
@@ -121,11 +120,7 @@ msgstr "Transmisión"
 
 #: main.py:149
 msgid "Dongle State"
-msgstr "Estado del adaptador"
-
-#: main.py:151
-msgid "Initialization"
-msgstr "Inicialización"
+msgstr "Estado del dongle"
 
 #: main.py:153
 msgid "LE Audio State"
@@ -137,7 +132,7 @@ msgstr "Códec en uso"
 
 #: main.py:162
 msgid "Prefer using LE audio for dual-mode devices"
-msgstr "Prefiere usar audio LE para dispositivos de modo dual"
+msgstr "Preferir audio LE para dispositivos de doble modo"
 
 #: main.py:188
 msgid "Public broadcast"
@@ -145,7 +140,7 @@ msgstr "Transmisión pública"
 
 #: main.py:209
 msgid "Broadcast high-quality music, otherwise, voice"
-msgstr "Transmita música de alta calidad; de lo contrario, voz"
+msgstr "Transmitir música de alta calidad; de lo contrario, voz"
 
 #: main.py:231
 msgid "Encrypt broadcast; please set a key first"
@@ -161,27 +156,27 @@ msgstr "Clave de transmisión, máximo 16 caracteres"
 
 #: main.py:275
 msgid "Input a new name of no more than 30 characters then press <ENTER>"
-msgstr "Ingrese un nuevo nombre de no más de 30 caracteres y luego presione <ENTER>"
+msgstr "Ingrese un nuevo nombre de hasta 30 caracteres y presione <ENTER>"
 
 #: main.py:286
 msgid "Input a new key then press <ENTER>"
-msgstr "Ingrese una nueva clave y luego presione <ENTER>"
+msgstr "Ingrese una nueva clave y presione <ENTER>"
 
 #: main.py:308
 msgid "Add device"
-msgstr "Añadir dispositivo"
+msgstr "Agregar dispositivo"
 
 #: main.py:325
 msgid "Delete"
-msgstr "Borrar"
+msgstr "Eliminar"
 
 #: main.py:343
 msgid "Clear All"
-msgstr "Limpiar todo"
+msgstr "Borrar todo"
 
 #: main.py:405
-msgid "QAbandonaruit"
-msgstr ""
+msgid "Quit"
+msgstr "Salir"
 
 #: main.py:405
 msgid "Show Window"
@@ -201,7 +196,7 @@ msgstr "Salir de la aplicación"
 
 #: main.py:430
 msgid "Changes Take Effect After Restart"
-msgstr "Los cambios surten efecto después del reinicio"
+msgstr "Los cambios tendrán efecto después de reiniciar"
 
 #: main.py:445
 msgid "Third-Party Software Licenses"
@@ -217,7 +212,7 @@ msgstr "Versión"
 
 #: main.py:462 main.py:536
 msgid "Firmware"
-msgstr "firmware"
+msgstr "Firmware"
 
 #: main.py:469
 msgid "Upgrade error"
@@ -229,15 +224,15 @@ msgstr "Progreso de actualización"
 
 #: main.py:486
 msgid "Device Firmware Upgrade"
-msgstr "Actualización del firmware del dispositivo"
+msgstr "Actualización de firmware del dispositivo"
 
 #: main.py:524
 msgid "Use FlooGoo dongle on "
-msgstr "Utilice el adaptador FlooGoo en"
+msgstr "Usar dongle FlooGoo en "
 
 #: main.py:526
 msgid "Please insert your FlooGoo dongle"
-msgstr "Por favor inserte su adaptador FlooGoo"
+msgstr "Por favor, inserte su dongle FlooGoo"
 
 #: main.py:335
 msgid "Connect/Disconnect"
@@ -254,26 +249,26 @@ msgid "Disconnect"
 msgstr "Desconectar"
 
 msgid "Settings"
-msgstr "Ajustes"
+msgstr "Configuración"
 
 msgid ", check the latest."
-msgstr ", consulte la última versión"
+msgstr ", verifique el más reciente."
 
 msgid "Current firmware: "
 msgstr "Firmware actual: "
 
 #: Added from 1.1.0
 msgid "Must be disabled for"
-msgstr "Debe estar deshabilitado para"
+msgstr "Debe desactivarse para"
 
 msgid "Must be enabled for compatibility with"
-msgstr "Debe estar habilitado para compatibilidad con"
+msgstr "Debe activarse para compatibilidad con"
 
 msgid "Must be disabled for compatibility with"
-msgstr "Debe estar deshabilitado para compatibilidad con"
+msgstr "Debe desactivarse para compatibilidad con"
 
 msgid "Toggle switch for"
-msgstr "Interruptor de palanca para"
+msgstr "Interruptor para"
 
 msgid "On"
 msgstr "Encendido"
@@ -288,4 +283,22 @@ msgid "Receiver"
 msgstr "Receptor"
 
 msgid "Relay"
-msgstr "Relé"
+msgstr "Repetidor"
+
+msgid "Stop broadcasting immediately when USB audio playback ends"
+msgstr "Detener transmisión inmediatamente al finalizar la reproducción de audio USB"
+
+msgid "USB Audio Input"
+msgstr "Entrada de audio USB"
+
+msgid "Broadcast Latency"
+msgstr "Latencia de transmisión"
+
+msgid "Lowest"
+msgstr "Mínima"
+
+msgid "Lower"
+msgstr "Baja"
+
+msgid "Default"
+msgstr "Predeterminado"

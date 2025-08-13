@@ -142,13 +142,15 @@ class FlooStateMachine(FlooInterfaceDelegate, Thread):
                     wx.CallAfter(self.delegate.ledEnabledInd, message.feature & 0x01)
                     wx.CallAfter(self.delegate.aptxLosslessEnabledInd, 1 if (message.feature & 0x02) == 0x02 else 0)
                     wx.CallAfter(self.delegate.gattClientEnabledInd, 1 if (self.feature & 0x04) == 0x04 else 0)
+                    wx.CallAfter(self.delegate.audioSourceInd, 1 if (self.feature & 0x08) == 0x08 else 0)
                     cmdGetCodecInUse = FlooMsgAc(True)
                     self.inf.sendMsg(cmdGetCodecInUse)
                     self.lastCmd = cmdGetCodecInUse
             elif isinstance(message, FlooMsgAc) or isinstance(message, FlooMsgEr):
                 if isinstance(self.lastCmd, FlooMsgAc) and isinstance(message, FlooMsgAc):
                     wx.CallAfter(self.delegate.audioCodecInUseInd, message.codec, message.rssi, message.rate,
-                                 message.spkSampleRate, message.micSampleRate)
+                                 message.spkSampleRate, message.micSampleRate, message.sduInterval, message.transportDelay,
+                                 message.presentDelay)
                     self.lastCmd = None
                     self.state = FlooStateMachine.CONNECTED
 
@@ -208,7 +210,8 @@ class FlooStateMachine(FlooInterfaceDelegate, Thread):
                     self.pairedDevices.append(message.name)
             elif isinstance(message, FlooMsgAc):
                 wx.CallAfter(self.delegate.audioCodecInUseInd, message.codec, message.rssi, message.rate,
-                             message.spkSampleRate, message.micSampleRate)
+                             message.spkSampleRate, message.micSampleRate, message.sduInterval, message.transportDelay,
+                             message.presentDelay)
             elif isinstance(message, FlooMsgFt):
                 self.feature = message.feature
                 wx.CallAfter(self.delegate.ledEnabledInd, self.feature & 0x01)
@@ -233,7 +236,7 @@ class FlooStateMachine(FlooInterfaceDelegate, Thread):
         oldValue = self.broadcastMode & 2 == 2
         if oldValue != enable:
             print("setPublicBroadcast")
-            self.pendingCmdPara = (self.broadcastMode & 5) + (2 if enable else 0)
+            self.pendingCmdPara = (self.broadcastMode & 0x3D) + (2 if enable else 0)
             cmdSetBroadcastMode = FlooMsgBm(True, self.pendingCmdPara)
             self.lastCmd = cmdSetBroadcastMode
             self.inf.sendMsg(cmdSetBroadcastMode)
@@ -242,7 +245,7 @@ class FlooStateMachine(FlooInterfaceDelegate, Thread):
         oldValue = self.broadcastMode & 4 == 4
         if oldValue != enable:
             print("setBroadcastHighQuality")
-            self.pendingCmdPara = (self.broadcastMode & 3) + (4 if enable else 0)
+            self.pendingCmdPara = (self.broadcastMode & 0x3B) + (4 if enable else 0)
             cmdSetBroadcastMode = FlooMsgBm(True, self.pendingCmdPara)
             self.lastCmd = cmdSetBroadcastMode
             self.inf.sendMsg(cmdSetBroadcastMode)
@@ -251,7 +254,25 @@ class FlooStateMachine(FlooInterfaceDelegate, Thread):
         oldValue = self.broadcastMode & 1 == 1
         if oldValue != enable:
             print("setBroadcastEncrypt old: %d, new %d" % (oldValue, enable))
-            self.pendingCmdPara = (self.broadcastMode & 6) + (1 if enable else 0)
+            self.pendingCmdPara = (self.broadcastMode & 0x3E) + (1 if enable else 0)
+            cmdSetBroadcastMode = FlooMsgBm(True, self.pendingCmdPara)
+            self.lastCmd = cmdSetBroadcastMode
+            self.inf.sendMsg(cmdSetBroadcastMode)
+
+    def setBroadcastStopOnIdle(self, enable: bool):
+        oldValue = self.broadcastMode & 8 == 8
+        if oldValue != enable:
+            print("setBroadcastStopOnIdle old: %d, new %d" % (oldValue, enable))
+            self.pendingCmdPara = (self.broadcastMode & 0x37) + (8 if enable else 0)
+            cmdSetBroadcastMode = FlooMsgBm(True, self.pendingCmdPara)
+            self.lastCmd = cmdSetBroadcastMode
+            self.inf.sendMsg(cmdSetBroadcastMode)
+
+    def setBroadcastLatency(self, mode: int):
+        oldValue = (self.broadcastMode & 0x30) >> 4
+        if oldValue != mode:
+            print("setBroadcastLatency old: %d, new %d" % (oldValue, mode))
+            self.pendingCmdPara = (self.broadcastMode & 0xF) + (mode << 4)
             cmdSetBroadcastMode = FlooMsgBm(True, self.pendingCmdPara)
             self.lastCmd = cmdSetBroadcastMode
             self.inf.sendMsg(cmdSetBroadcastMode)
@@ -309,7 +330,7 @@ class FlooStateMachine(FlooInterfaceDelegate, Thread):
 
     def enableLed(self, onOff: int):
         if self.state == FlooStateMachine.CONNECTED:
-            feature = (self.feature & 0x06) + onOff
+            feature = (self.feature & 0x0E) + onOff
             cmdLedOnOff = FlooMsgFt(True, feature)
             self.pendingCmdPara = feature
             self.lastCmd = cmdLedOnOff
@@ -317,14 +338,22 @@ class FlooStateMachine(FlooInterfaceDelegate, Thread):
 
     def enableAptxLossless(self, onOff: int):
         if self.state == FlooStateMachine.CONNECTED:
-            feature = (self.feature & 0x05) + (0x02 if onOff else 0x00)
+            feature = (self.feature & 0x0D) + (0x02 if onOff else 0x00)
             cmdLosslessOnOff = FlooMsgFt(True, feature)
             self.lastCmd = cmdLosslessOnOff
             self.inf.sendMsg(cmdLosslessOnOff)
 
     def enableGattClient(self, onOff: int):
         if self.state == FlooStateMachine.CONNECTED:
-            feature = (self.feature & 0x03) + (0x04 if onOff else 0x00)
+            feature = (self.feature & 0x0B) + (0x04 if onOff else 0x00)
             cmdGattClientOnOff = FlooMsgFt(True, feature)
             self.lastCmd = cmdGattClientOnOff
             self.inf.sendMsg(cmdGattClientOnOff)
+
+    def enableUsbInput(self, onOff: int):
+        if self.state == FlooStateMachine.CONNECTED:
+            feature = (self.feature & 0x07) + (0x08 if onOff else 0x00)
+            cmdLedOnOff = FlooMsgFt(True, feature)
+            self.pendingCmdPara = feature
+            self.lastCmd = cmdLedOnOff
+            self.inf.sendMsg(cmdLedOnOff)

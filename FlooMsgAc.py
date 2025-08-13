@@ -17,18 +17,21 @@ class FlooMsgAc(FlooMessage):
 
     HEADER = "AC"
 
-    def __init__(self, isSend, codec = None, rssi = 0, rate = 0, spkSampleRate = 0, micSampleRate = 0):
+    def __init__(self, isSend, codec = None, rssi = 0, rate = 0, spkSampleRate = 0, micSampleRate = 0,
+                 sduInterval = 0, transportDelay = 0, presentDelay = 0):
         self.codec = codec
         self.rssi = rssi
         self.rate = rate
         self.spkSampleRate = spkSampleRate * 10
         self.micSampleRate = micSampleRate * 10
-        if codec == 0x0A or codec == 0x06:
-            adaptiveStr = "%02X" % codec + "," + "%02X" % rssi + "," + "%04X" % rate + "," + "%04X" % self.spkSampleRate
+        self.sduInterval = sduInterval
+        self.transportDelay = transportDelay
+        self.presentDelay = presentDelay
+        if codec != None:
+            adaptiveStr = "%02X" % codec + "," + "%02X" % rssi + "," + "%04X" % rate + "," + \
+                          "%04X" % spkSampleRate + "," + "%04X" % micSampleRate + "," + \
+                          "%04X" % sduInterval + "," + "%04X" % transportDelay + "," + "%04X" % self.presentDelay
             super().__init__(isSend, FlooMsgAc.HEADER, bytes(adaptiveStr, 'ascii'))
-        elif codec != None:
-            codecStr = "%02X" % codec + "," + "%04X" % self.spkSampleRate + "," + "%04X" % self.micSampleRate
-            super().__init__(isSend, FlooMsgAc.HEADER, bytes(codecStr, 'ascii'))
         else:
             super().__init__(isSend, FlooMsgAc.HEADER)
 
@@ -52,5 +55,15 @@ class FlooMsgAc(FlooMessage):
                        int(payload[9:13].decode('ascii'), 16),
                        int(payload[14:18].decode('ascii'), 16),
                        int(payload[19:23].decode('ascii'), 16))
+        elif msgLen == 38:
+            return cls(False, int(payload[3:5].decode('ascii'), 16),
+                       int(payload[6:8].decode('ascii'), 16),
+                       int(payload[9:13].decode('ascii'), 16),
+                       int(payload[14:18].decode('ascii'), 16),
+                       int(payload[19:23].decode('ascii'), 16),
+                       int(payload[24:28].decode('ascii'), 16),
+                       int(payload[29:33].decode('ascii'), 16),
+                       int(payload[34:38].decode('ascii'), 16))
+
         else:
             return cls(False, int(payload[3:5].decode('ascii'), 16))

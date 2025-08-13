@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-09-14 21:16+1000\n"
+"POT-Creation-Date: 2023-09-15 00:09+1000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,22 +14,21 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: pygettext.py 1.5\n"
 
-
 #: main.py:47 main.py:89
 msgid "Initializing"
-msgstr "جار تهيئة"
+msgstr "جارٍ التهيئة"
 
 #: main.py:48
 msgid "Idle"
-msgstr "عاطل"
+msgstr "خامل"
 
 #: main.py:49
 msgid "Pairing"
-msgstr "الاقتران"
+msgstr "جارٍ الاقتران"
 
 #: main.py:50
 msgid "Connecting"
-msgstr "توصيل"
+msgstr "جارٍ الاتصال"
 
 #: main.py:51 main.py:61
 msgid "Connected"
@@ -37,35 +36,35 @@ msgstr "متصل"
 
 #: main.py:52
 msgid "Audio starting"
-msgstr "بدء الصوت"
+msgstr "بدء تشغيل الصوت"
 
 #: main.py:53
 msgid "Audio streaming"
-msgstr "تدفق الصوت"
+msgstr "بث الصوت"
 
 #: main.py:54
 msgid "Audio stopping"
-msgstr "توقف الصوت"
+msgstr "إيقاف الصوت"
 
 #: main.py:55
 msgid "Disconnecting"
-msgstr "قطع الاتصال"
+msgstr "جارٍ قطع الاتصال"
 
 #: main.py:56
 msgid "Voice starting"
-msgstr "بدء الصوت"
+msgstr "بدء تشغيل الصوتيات"
 
 #: main.py:57
 msgid "Voice streaming"
-msgstr "البث الصوتي"
+msgstr "بث الصوتيات"
 
 #: main.py:58
 msgid "Voice stopping"
-msgstr "توقف الصوت"
+msgstr "إيقاف الصوتيات"
 
 #: main.py:60 main.py:155
 msgid "Disconnected"
-msgstr "انقطع الاتصال"
+msgstr "غير متصل"
 
 #: main.py:62
 msgid "Unicast starting"
@@ -73,7 +72,7 @@ msgstr "بدء البث الأحادي"
 
 #: main.py:63
 msgid "Unicast streaming"
-msgstr "البث الأحادي"
+msgstr "بث أحادي"
 
 #: main.py:64
 msgid "Broadcast starting"
@@ -85,7 +84,7 @@ msgstr "بث مباشر"
 
 #: main.py:66
 msgid "Streaming stopping"
-msgstr "توقف البث"
+msgstr "إيقاف البث"
 
 #: main.py:109
 msgid "Audio Mode"
@@ -93,19 +92,19 @@ msgstr "وضع الصوت"
 
 #: main.py:111
 msgid "LE Broadcast"
-msgstr "بث جنيه"
+msgstr "بث الصوت منخفض الطاقة"
 
 #: main.py:113
 msgid "Most Recently Used Devices"
-msgstr "أحدث الأجهزة المستخدمة"
+msgstr "الأجهزة المستخدمة مؤخرًا"
 
 #: main.py:116
 msgid "Window"
-msgstr "نافذة او شباك"
+msgstr "نافذة"
 
 #: main.py:119
 msgid "Help"
-msgstr "يساعد"
+msgstr "مساعدة"
 
 #: main.py:139
 msgid "High Quality (one-to-one)"
@@ -113,79 +112,75 @@ msgstr "جودة عالية (واحد لواحد)"
 
 #: main.py:142
 msgid "Gaming (one-to-one)"
-msgstr "الألعاب (واحد لواحد)"
+msgstr "ألعاب (واحد لواحد)"
 
 #: main.py:145
 msgid "Broadcast"
-msgstr "إذاعة"
+msgstr "بث"
 
 #: main.py:149
 msgid "Dongle State"
 msgstr "حالة المحول"
 
-#: main.py:151
-msgid "Initialization"
-msgstr "التهيئة"
-
 #: main.py:153
 msgid "LE Audio State"
-msgstr "حالة الصوت LE"
+msgstr "حالة الصوت منخفض الطاقة"
 
 #: main.py:157
 msgid "Codec in Use"
-msgstr "برنامج الترميز قيد الاستخدام"
+msgstr "الترميز المستخدم"
 
 #: main.py:162
 msgid "Prefer using LE audio for dual-mode devices"
-msgstr "تفضل استخدام صوت LE للأجهزة ذات الوضع المزدوج"
+msgstr "يفضل استخدام الصوت منخفض الطاقة للأجهزة ثنائية النمط"
 
 #: main.py:188
 msgid "Public broadcast"
-msgstr "البث العام"
+msgstr "بث عام"
 
 #: main.py:209
 msgid "Broadcast high-quality music, otherwise, voice"
-msgstr "بث موسيقى عالية الجودة، وإلا صوت"
+msgstr "بث موسيقى عالية الجودة، وإلا فسيكون صوت"
 
 #: main.py:231
 msgid "Encrypt broadcast; please set a key first"
-msgstr "تشفير البث؛ يرجى تعيين المفتاح أولا"
+msgstr "تشفير البث؛ يرجى تعيين مفتاح أولاً"
 
 #: main.py:252
 msgid "Broadcast Name, maximum 30 characters"
-msgstr "اسم البث، الحد الأقصى 30 حرفًا"
+msgstr "اسم البث، بحد أقصى 30 حرفًا"
 
 #: main.py:271
 msgid "Broadcast Key, maximum 16 characters"
-msgstr "مفتاح البث، الحد الأقصى 16 حرفًا"
+msgstr "مفتاح البث، بحد أقصى 16 حرفًا"
 
 #: main.py:275
 msgid "Input a new name of no more than 30 characters then press <ENTER>"
-msgstr "أدخل اسمًا جديدًا لا يزيد عن 30 حرفًا ثم اضغط على <ENTER>"
+msgstr "أدخل اسمًا جديدًا لا يزيد عن 30 حرفًا ثم اضغط <ENTER>"
 
 #: main.py:286
 msgid "Input a new key then press <ENTER>"
-msgstr "أدخل مفتاحًا جديدًا ثم اضغط على <ENTER>"
+msgstr "أدخل مفتاحًا جديدًا ثم اضغط <ENTER>"
 
 #: main.py:308
 msgid "Add device"
-msgstr "اضف جهاز"
+msgstr "إضافة جهاز"
 
 #: main.py:325
 msgid "Delete"
-msgstr "يمسح"
+msgstr "حذف"
 
 #: main.py:343
 msgid "Clear All"
-msgstr "امسح الكل"
+msgstr "مسح الكل"
 
 #: main.py:405
 msgid "Quit"
-msgstr "يترك"
+msgstr "خروج"
 
 #: main.py:405
 msgid "Show Window"
-msgstr "فرجي شباك"
+msgstr "إظهار النافذة"
 
 #: main.py:406
 msgid "FlooGoo Bluetooth Audio Source"
@@ -193,15 +188,15 @@ msgstr "مصدر صوت بلوتوث FlooGoo"
 
 #: main.py:414
 msgid "Minimize to System Tray"
-msgstr "يخفض الى قاع النظام"
+msgstr "تصغير إلى شريط النظام"
 
 #: main.py:416
 msgid "Quit App"
-msgstr "قم بإنهاء التطبيق"
+msgstr "إغلاق التطبيق"
 
 #: main.py:430
 msgid "Changes Take Effect After Restart"
-msgstr "التغييرات تدخل حيز التنفيذ بعد إعادة التشغيل"
+msgstr "ستسري التغييرات بعد إعادة التشغيل"
 
 #: main.py:445
 msgid "Third-Party Software Licenses"
@@ -213,7 +208,7 @@ msgstr "رابط الدعم"
 
 #: main.py:451
 msgid "Version"
-msgstr "إصدار"
+msgstr "الإصدار"
 
 #: main.py:462 main.py:536
 msgid "Firmware"
@@ -233,55 +228,47 @@ msgstr "ترقية البرامج الثابتة للجهاز"
 
 #: main.py:524
 msgid "Use FlooGoo dongle on "
-msgstr "استخدم محول FlooGoo قيد التشغيل"
+msgstr "استخدم محول FlooGoo على"
 
 #: main.py:526
 msgid "Please insert your FlooGoo dongle"
-msgstr "الرجاء إدخال محول FlooGoo الخاص بك"
+msgstr "يرجى إدخال محول FlooGoo الخاص بك"
 
 #: main.py:335
 msgid "Connect/Disconnect"
-msgstr "الاتصال/قطع الاتصال"
+msgstr "اتصال/قطع الاتصال"
 
 #: main.py:584
 msgid "New Firmware is available"
-msgstr "البرامج الثابتة الجديدة متاحة"
-
-#: main.py:666
-msgid "RSSI"
-msgstr "RSSI"
-
-#: main.py:442
-msgid "LED"
-msgstr "ليد"
+msgstr "برنامج ثابت جديد متاح"
 
 msgid "Connect"
-msgstr "يتصل"
+msgstr "اتصال"
 
 msgid "Disconnect"
 msgstr "قطع الاتصال"
 
 msgid "Settings"
-msgstr "إعدادات"
+msgstr "الإعدادات"
 
 msgid ", check the latest."
 msgstr "، تحقق من الأحدث."
 
 msgid "Current firmware: "
-msgstr "البرامج الثابتة الحالية:"
+msgstr "البرنامج الثابت الحالي: "
 
 #: Added from 1.1.0
 msgid "Must be disabled for"
 msgstr "يجب تعطيله لـ"
 
 msgid "Must be enabled for compatibility with"
-msgstr "يجب تمكينه للتوافق مع"
+msgstr "يجب تفعيله للتوافق مع"
 
 msgid "Must be disabled for compatibility with"
 msgstr "يجب تعطيله للتوافق مع"
 
 msgid "Toggle switch for"
-msgstr "مفتاح تبديل لـ"
+msgstr "تبديل المفتاح لـ"
 
 msgid "On"
 msgstr "تشغيل"
@@ -290,10 +277,28 @@ msgid "Off"
 msgstr "إيقاف"
 
 msgid "Client"
-msgstr "العميل"
+msgstr "عميل"
 
 msgid "Receiver"
-msgstr "جهاز الاستقبال"
+msgstr "جهاز استقبال"
 
 msgid "Relay"
-msgstr "المرحّل"
+msgstr "مكرر"
+
+msgid "Stop broadcasting immediately when USB audio playback ends"
+msgstr "إيقاف البث فورًا عند انتهاء تشغيل الصوت عبر USB"
+
+msgid "USB Audio Input"
+msgstr "إدخال صوت USB"
+
+msgid "Broadcast Latency"
+msgstr "زمن انتقال البث"
+
+msgid "Lowest"
+msgstr "الأدنى"
+
+msgid "Lower"
+msgstr "أقل"
+
+msgid "Default"
+msgstr "افتراضي"
