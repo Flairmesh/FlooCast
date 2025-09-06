@@ -37,7 +37,11 @@ codecStr = ['None',
             'aptX\u2122 Lossless',
             'aptX\u2122 Voice']
 
+mainWindowWidth = 950
+mainWindowHeight = 560
 if platform.system().lower().startswith('darwin'):
+    mainWindowWidth = 1200
+    mainWindowHeight = 640
     preferLanguages = subprocess.run(['defaults', 'read', '-g', 'AppleLanguages'], stdout=subprocess.PIPE)
     preferLanguage = preferLanguages.stdout.decode('utf-8').split('\n')[1]
     lanSearch = re.search(r'(?<=\")\w+', preferLanguage.lstrip())
@@ -80,7 +84,7 @@ app = wx.App(False)
 settings = FlooSettings()
 startMinimized = bool(settings.get_item("start_minimized") or False)
 
-appFrame = wx.Frame(None, wx.ID_ANY, "FlooCast", size=wx.Size(950, 560))
+appFrame = wx.Frame(None, wx.ID_ANY, "FlooCast", size=wx.Size(mainWindowWidth, 560))
 appFrame.SetIcon(wx.Icon(app_path + os.sep + appIcon))
 
 statusBar = appFrame.CreateStatusBar(name=_("Status Bar"))
@@ -288,7 +292,7 @@ class FlooCastTaskBarIcon(wx.adv.TaskBarIcon):
 
             # 3) bring to front
             try:
-                self.frame.Restore()   # if maximized/minimized state needs clearing
+                self.frame.Restore()   # clear maximized/minimized state if needed
             except Exception:
                 pass
             self.frame.Raise()
@@ -297,11 +301,19 @@ class FlooCastTaskBarIcon(wx.adv.TaskBarIcon):
             child = self.frame.FindFocus() or self.frame.FindWindowById(wx.ID_ANY)
             (child or self.frame).SetFocus()
 
-            # optional: flash taskbar if not focused
+            # optional: flash/bounce if not focused (safe across wx versions)
             if not self.frame.IsActive():
-                self.frame.RequestUserAttention(wx.NOTIFY)
+                try:
+                    flag = getattr(wx, "USER_ATTENTION_INFO", 0)  # gentle notify
+                    self.frame.RequestUserAttention(flag)
+                except Exception:
+                    try:
+                        self.frame.RequestUserAttention()  # some builds accept no arg
+                    except Exception:
+                        pass
 
-        wx.CallAfter(_restore)
+        # run immediately (keep your original structure)
+        _restore()
 
     # ---- event handlers ----
     def on_show(self, event):
@@ -647,6 +659,11 @@ leBroadcastAuxInputPanelSizer = wx.FlexGridSizer(1, 2, (0, 0))
 
 saved_bs = settings.get_item("aux_blocksize")  # e.g., 128 or None
 looper = FlooAuxInput(blocksize=saved_bs)
+# --- macOS specific latency profile ---
+if sys.platform == "darwin":
+    # choose one: "safe" 400ms | "low" 120ms | "ultra" 60ms | "jack" 250ms
+    profile = settings.get_item("aux_latency_profile", "ultra")
+    looper.set_latency_profile_mac(profile)
 auxInput = None
 inputDevices = looper.list_additional_inputs()
 nameInputDevices = {d["name"]: d for d in inputDevices}
