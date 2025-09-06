@@ -259,22 +259,22 @@ msgstr "현재 펌웨어: "
 
 #: Added from 1.1.0
 msgid "Must be disabled for"
-msgstr "~를 위해 비활성화해야 함"
+msgstr "비활성화 필요:"
 
 msgid "Must be enabled for compatibility with"
-msgstr "~와의 호환성을 위해 활성화해야 함"
+msgstr "활성화 필요:"
 
 msgid "Must be disabled for compatibility with"
-msgstr "~와의 호환성을 위해 비활성화해야 함"
+msgstr "비활성화 필요:"
 
 msgid "Toggle switch for"
-msgstr "~를 위한 토글 스위치"
+msgstr "스위치 전환 시"
 
 msgid "On"
-msgstr "켜기"
+msgstr "켜짐"
 
 msgid "Off"
-msgstr "끄기"
+msgstr "꺼짐"
 
 msgid "Client"
 msgstr "클라이언트"
@@ -302,3 +302,9 @@ msgstr "낮음"
 
 msgid "Default"
 msgstr "기본값"
+
+msgid "Broadcast Additional Audio Input"
+msgstr "추가 오디오 입력 방송"
+
+msgid "Start Minimized"
+msgstr "최소화하여 시작"

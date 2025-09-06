@@ -302,3 +302,9 @@ msgstr "Baix"
 
 msgid "Default"
 msgstr "Per defecte"
+
+msgid "Broadcast Additional Audio Input"
+msgstr "Transmetre entrada d'àudio addicional"
+
+msgid "Start Minimized"
+msgstr "Inicia en mode minimitzat"

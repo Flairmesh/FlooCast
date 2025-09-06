@@ -302,3 +302,9 @@ msgstr "أقل"
 
 msgid "Default"
 msgstr "افتراضي"
+
+msgid "Broadcast Additional Audio Input"
+msgstr "بث إدخال صوتي إضافي"
+
+msgid "Start Minimized"
+msgstr "بدء مصغرًا"

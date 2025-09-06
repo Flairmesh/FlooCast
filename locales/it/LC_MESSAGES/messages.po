@@ -302,3 +302,9 @@ msgstr "Bassa"
 
 msgid "Default"
 msgstr "Predefinita"
+
+msgid "Broadcast Additional Audio Input"
+msgstr "Trasmetti ingresso audio aggiuntivo"
+
+msgid "Start Minimized"
+msgstr "Avvia ridotto a icona"

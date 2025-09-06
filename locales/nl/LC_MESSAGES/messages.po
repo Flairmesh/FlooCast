@@ -302,3 +302,9 @@ msgstr "Lager"
 
 msgid "Default"
 msgstr "Standaard"
+
+msgid "Broadcast Additional Audio Input"
+msgstr "Extra audio-invoer uitzenden"
+
+msgid "Start Minimized"
+msgstr "Geminiaturiseerd starten"

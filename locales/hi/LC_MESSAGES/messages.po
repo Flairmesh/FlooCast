@@ -302,3 +302,9 @@ msgstr "कम"
 
 msgid "Default"
 msgstr "डिफ़ॉल्ट"
+
+msgid "Broadcast Additional Audio Input"
+msgstr "प्रसारण के लिए अतिरिक्त ऑडियो इनपुट"
+
+msgid "Start Minimized"
+msgstr "मिनिमाइज़ मोड में प्रारंभ करें"

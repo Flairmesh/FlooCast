@@ -302,3 +302,9 @@ msgstr "נמוכה"
 
 msgid "Default"
 msgstr "ברירת מחדל"
+
+msgid "Broadcast Additional Audio Input"
+msgstr "שדר קלט שמע נוסף"
+
+msgid "Start Minimized"
+msgstr "התחל במצב ממוזער"

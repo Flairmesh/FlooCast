@@ -302,3 +302,9 @@ msgstr "Нижча"
 
 msgid "Default"
 msgstr "За замовчуванням"
+
+msgid "Broadcast Additional Audio Input"
+msgstr "Транслювати додатковий аудіовхід"
+
+msgid "Start Minimized"
+msgstr "Запускати згорнутим"

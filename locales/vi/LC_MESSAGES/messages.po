@@ -302,3 +302,10 @@ msgstr "Thấp hơn"
 
 msgid "Default"
 msgstr "Mặc định"
+
+msgid "Broadcast Additional Audio Input"
+msgstr "Phát đầu vào âm thanh bổ sung"
+
+msgid "Start Minimized"
+msgstr "Khởi động thu nhỏ"
+

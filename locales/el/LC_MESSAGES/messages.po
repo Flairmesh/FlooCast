@@ -302,3 +302,9 @@ msgstr "Χαμηλή"
 
 msgid "Default"
 msgstr "Προεπιλογή"
+
+msgid "Broadcast Additional Audio Input"
+msgstr "Μετάδοση πρόσθετης εισόδου ήχου"
+
+msgid "Start Minimized"
+msgstr "Εκκίνηση σε ελαχιστοποίηση"

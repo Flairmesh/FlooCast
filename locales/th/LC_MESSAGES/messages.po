@@ -302,3 +302,10 @@ msgstr "ต่ำกว่า"
 
 msgid "Default"
 msgstr "ค่าเริ่มต้น"
+
+msgid "Broadcast Additional Audio Input"
+msgstr "ถ่ายทอดอินพุตเสียงเพิ่มเติม"
+
+msgid "Start Minimized"
+msgstr "เริ่มต้นแบบย่อ"
+

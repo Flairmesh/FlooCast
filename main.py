@@ -7,11 +7,13 @@ import os
 import platform
 import sys
 import wx
+import wx.adv
 import wx.lib.agw.hyperlink as hl
-from wx.adv import TaskBarIcon as TaskBarIcon
 from FlooStateMachine import FlooStateMachine
 from FlooStateMachineDelegate import FlooStateMachineDelegate
 from FlooDfuThread import FlooDfuThread
+from FlooSettings import FlooSettings
+from FlooAuxInput import FlooAuxInput
 from PIL import Image
 import urllib.request
 import certifi
@@ -41,8 +43,8 @@ if platform.system().lower().startswith('darwin'):
     lanSearch = re.search(r'(?<=\")\w+', preferLanguage.lstrip())
     lan = lanSearch.group(0)
 else:
-    userLocale = locale.getdefaultlocale()
-    lan = userLocale[0].split('_')[0]
+    userLocale = wx.Locale.GetSystemLanguage()
+    lan = wx.Locale.GetLanguageInfo(userLocale).CanonicalName
 
 # Set the local directory
 app_path = os.path.abspath(os.path.dirname(sys.argv[0]))
@@ -75,6 +77,8 @@ leaStateStr = [_("Disconnected"),
 
 # create root window
 app = wx.App(False)
+settings = FlooSettings()
+startMinimized = bool(settings.get_item("start_minimized") or False)
 
 appFrame = wx.Frame(None, wx.ID_ANY, "FlooCast", size=wx.Size(950, 560))
 appFrame.SetIcon(wx.Icon(app_path + os.sep + appIcon))
@@ -112,6 +116,15 @@ audioModeGamingRadioButton = wx.RadioButton(audioModeUpperPanel, label=_('Gaming
 audioModeBroadcastRadioButton = wx.RadioButton(audioModeUpperPanel, label=_('Broadcast'))
 
 
+def aux_input_broadcast_enable(enable):
+    if enable and saved_name in nameInputDevices:
+        auxInputComboBox.SetValue(saved_name)
+        looper.set_input(saved_device)
+    else:
+        # auxInputComboBox.SetValue("None")
+        looper.set_input(None)
+
+
 def audio_mode_sel_set(mode):
     if hwWithAnalogInput:
         settingsPanelSizer.Show(usbInputCheckBox)
@@ -137,6 +150,7 @@ def audio_mode_sel_set(mode):
         settingsPanelSizer.Show(gattClientWithBroadcastCheckBox)
         settingsPanelSizer.Show(gattClientWithBroadcastEnableButton)
         leBroadcastSb.Enable()
+    aux_input_broadcast_enable(audioMode == 2)
     settingsPanelSizer.Layout()
 
 
@@ -232,42 +246,76 @@ audioModeSbSizer.Add(audioModeLowerPanel, flag=wx.EXPAND)  # , proportion=1
 
 
 # Window panel
-class FlooCastTaskBarIcon(TaskBarIcon):
+
+
+
+ID_SHOW = wx.NewIdRef()
+ID_MINIMIZE = wx.NewIdRef()
+ID_QUIT = wx.NewIdRef()
+
+class FlooCastTaskBarIcon(wx.adv.TaskBarIcon):
     def __init__(self, frame):
-        TaskBarIcon.__init__(self)
-
+        super().__init__()
         self.frame = frame
-        # file_path = os.path.abspath(os.path.dirname(sys.argv[0]))
-        image = Image.open(app_path + os.sep + appIcon)
 
-        self.SetIcon(wx.Icon(app_path + os.sep + appIcon, wx.BITMAP_TYPE_ICO), 'FlooCast')
+        icon = wx.Icon(app_path + os.sep + appIcon, wx.BITMAP_TYPE_ICO)
+        self.SetIcon(icon, "FlooCast")
 
-        # ------------
-
-        self.Bind(wx.EVT_MENU, self.OnTaskBarActivate, id=1)
-        self.Bind(wx.EVT_MENU, self.OnTaskBarDeactivate, id=2)
-        self.Bind(wx.EVT_MENU, self.OnTaskBarClose, id=3)
-
-    # -----------------------------------------------------------------------
+        # Bind tray events
+        self.Bind(wx.EVT_MENU, self.on_show,    id=ID_SHOW)
+        self.Bind(wx.EVT_MENU, self.on_minimize, id=ID_MINIMIZE)
+        self.Bind(wx.EVT_MENU, self.on_quit,     id=ID_QUIT)
+        self.Bind(wx.adv.EVT_TASKBAR_LEFT_DCLICK, self.on_show)
 
     def CreatePopupMenu(self):
         menu = wx.Menu()
-        menu.Append(1, _('Show Window'))
-        menu.Append(2, _('Minimize to System Tray'))
-        menu.Append(3, _('Quit'))
-
+        menu.Append(ID_SHOW, _("Show Window"))
+        menu.Append(ID_MINIMIZE, _("Minimize to System Tray"))
+        menu.AppendSeparator()
+        menu.Append(ID_QUIT, _("Quit"))
         return menu
 
-    def OnTaskBarClose(self, event):
-        self.frame.Close()
+    # ---- helpers ----
+    def restore_window(self):
+        def _restore():
+            # 1) show if hidden
+            if not self.frame.IsShown():
+                self.frame.Show(True)
 
-    def OnTaskBarActivate(self, event):
-        if not self.frame.IsShown():
-            self.frame.Show()
+            # 2) un-minimize if iconized
+            if self.frame.IsIconized():
+                self.frame.Iconize(False)
 
-    def OnTaskBarDeactivate(self, event):
+            # 3) bring to front
+            try:
+                self.frame.Restore()   # if maximized/minimized state needs clearing
+            except Exception:
+                pass
+            self.frame.Raise()
+
+            # 4) ensure focus lands somewhere sensible
+            child = self.frame.FindFocus() or self.frame.FindWindowById(wx.ID_ANY)
+            (child or self.frame).SetFocus()
+
+            # optional: flash taskbar if not focused
+            if not self.frame.IsActive():
+                self.frame.RequestUserAttention(wx.NOTIFY)
+
+        wx.CallAfter(_restore)
+
+    # ---- event handlers ----
+    def on_show(self, event):
+        self.restore_window()
+
+    def on_minimize(self, event):
+        # minimize to tray: mark minimized, then hide
+        if not self.frame.IsIconized():
+            self.frame.Iconize(True)
         if self.frame.IsShown():
             self.frame.Hide()
+
+    def on_quit(self, event):
+        self.frame.Close()
 
 
 def quit_all():
@@ -297,11 +345,52 @@ minimizeButton.Bind(wx.EVT_BUTTON, hide_window)
 quitButton = wx.Button(windowSb, label=_('Quit App'))
 quitButton.Bind(wx.EVT_BUTTON, quit_window)
 
+
+def start_minimized_enable_switch_set(enable):
+    global startMinimized
+    startMinimized = enable
+    settings.set_item("start_minimized", enable)  # or False
+    settings.save()
+    startMinimizedButton.SetBitmap(on if startMinimized else off)
+    startMinimizedButton.SetToolTip(
+        _('Toggle switch for') + ' ' + _('Start Minimized') + ' ' + (_('On') if startMinimized else _(
+            'Off')))
+
+
+def start_minimized_enable_button(event):
+    startMinimizedCheckBox.SetValue(not startMinimized)
+    start_minimized_enable_switch_set(not startMinimized)
+
+
+def start_minimized_enable_switch(event):
+    start_minimized_enable_switch_set(not startMinimized)
+
+
+startMinimizedPanel = wx.Panel(windowSb)
+startMinimizedPanelSizer = wx.BoxSizer(wx.HORIZONTAL)
+startMinimizedCheckBox = wx.CheckBox(startMinimizedPanel, wx.ID_ANY, label=_('Start Minimized'))
+startMinimizedCheckBox.SetValue(startMinimized)
+startMinimizedButton = wx.Button(startMinimizedPanel, wx.ID_ANY, style=wx.NO_BORDER | wx.MINIMIZE)
+if startMinimized:
+    startMinimizedButton.SetToolTip(_('Toggle switch for') + ' ' + _('Start Minimized') + ' ' + _('On'))
+    startMinimizedButton.SetBitmap(on)
+else:
+    startMinimizedButton.SetToolTip(_('Toggle switch for') + ' ' + _('Start Minimized') + ' ' + _('Off'))
+    startMinimizedButton.SetBitmap(off)
+windowSb.Bind(wx.EVT_CHECKBOX, start_minimized_enable_switch, startMinimizedCheckBox)
+startMinimizedButton.Bind(wx.EVT_BUTTON, start_minimized_enable_button)
+startMinimizedPanelSizer.Add(startMinimizedCheckBox, 0, wx.ALIGN_CENTER_VERTICAL | wx.RIGHT, 0)
+startMinimizedPanelSizer.AddStretchSpacer(1)
+startMinimizedPanelSizer.Add(startMinimizedButton, 0, wx.ALIGN_CENTER_VERTICAL)
+startMinimizedPanel.SetSizer(startMinimizedPanelSizer)
+
 windowSbSizer.AddStretchSpacer()
 windowSbSizer.Add(minimizeButton, proportion=2, flag=wx.EXPAND | wx.LEFT | wx.RIGHT, border=10)
 windowSbSizer.AddStretchSpacer()
 windowSbSizer.Add(quitButton, proportion=2, flag=wx.EXPAND | wx.LEFT | wx.RIGHT, border=10)
 windowSbSizer.AddStretchSpacer()
+windowSbSizer.Add(startMinimizedPanel, proportion=2, flag=wx.EXPAND | wx.LEFT | wx.RIGHT, border=0)
+#windowSbSizer.AddStretchSpacer()
 
 # A combined panel for broadcast settings and paired devices
 broadcastAndPairedDevicePanel = wx.Panel(appPanel)
@@ -310,7 +399,7 @@ broadcastAndPairedDeviceSizer = wx.BoxSizer(wx.VERTICAL)
 leBroadcastSb = wx.StaticBox(broadcastAndPairedDevicePanel, wx.ID_ANY, _('LE Broadcast'))
 leBroadcastSbSizer = wx.StaticBoxSizer(leBroadcastSb, wx.VERTICAL)
 leBroadcastSwitchPanel = wx.Panel(leBroadcastSb)
-leBroadcastSwitchPanelSizer = wx.FlexGridSizer(4, 2, (0, 0))
+leBroadcastSwitchPanelSizer = wx.FlexGridSizer(5, 2, (0, 0))
 
 publicBroadcastEnable = None
 
@@ -553,9 +642,49 @@ def broadcast_latency_sel(event):
 
 leBroadcastLatencyRadioPanel.Bind(wx.EVT_RADIOBUTTON, broadcast_latency_sel)
 
+leBroadcastAuxInputPanel = wx.Panel(leBroadcastSb)
+leBroadcastAuxInputPanelSizer = wx.FlexGridSizer(1, 2, (0, 0))
+
+saved_bs = settings.get_item("aux_blocksize")  # e.g., 128 or None
+looper = FlooAuxInput(blocksize=saved_bs)
+auxInput = None
+inputDevices = looper.list_additional_inputs()
+nameInputDevices = {d["name"]: d for d in inputDevices}
+saved_device = settings.get_item("aux_input")  # may be None
+saved_name = (saved_device or {}).get("name", "None")
+
+
+# AUX Input device select function
+def input_device_on_select(event):
+    global saved_device
+    global saved_name
+    saved_name = auxInputComboBox.GetValue()
+    dev = nameInputDevices.get(saved_name)
+
+    # Save new selection
+    saved_device = looper.serialize_input_device(dev)
+    settings.set_item("aux_input", saved_device)
+    settings.save()
+
+    # Apply runtime
+    looper.set_input(saved_device)
+
+    print(f"User chose: {saved_name} -> applied and saved")
+
+
+auxInputLabel = wx.StaticText(leBroadcastAuxInputPanel, wx.ID_ANY, label=_('Broadcast Additional Audio Input'))
+auxInputComboBox = wx.ComboBox(leBroadcastAuxInputPanel, style=wx.CB_READONLY, choices=[d["name"] for d in inputDevices])
+auxInputComboBox.Bind(wx.EVT_COMBOBOX, input_device_on_select)
+leBroadcastAuxInputPanelSizer.Add(auxInputLabel, flag=wx.ALIGN_LEFT | wx.ALIGN_CENTER_VERTICAL)
+leBroadcastAuxInputPanelSizer.Add(auxInputComboBox, flag=wx.ALIGN_RIGHT | wx.ALIGN_CENTER_VERTICAL, border=8)
+#leBroadcastLatencyPanelSizer.AddGrowableCol(0, 1)
+leBroadcastAuxInputPanelSizer.AddGrowableCol(1, 1)
+leBroadcastAuxInputPanel.SetSizer(leBroadcastAuxInputPanelSizer)
+
 leBroadcastSbSizer.Add(leBroadcastSwitchPanel, flag=wx.EXPAND | wx.TOP, border=4)
 leBroadcastSbSizer.Add(leBroadcastEntryPanel, flag=wx.EXPAND | wx.TOP, border=4)
 leBroadcastSbSizer.Add(leBroadcastLatencyPanel, flag=wx.EXPAND | wx.TOP, border=4)
+leBroadcastSbSizer.Add(leBroadcastAuxInputPanel, flag=wx.EXPAND | wx.TOP, border=4)
 leBroadcastSwitchPanel.SetSizer(leBroadcastSwitchPanelSizer)
 
 pairedDevicesSb = wx.StaticBox(broadcastAndPairedDevicePanel, wx.ID_ANY, _('Most Recently Used Devices'))
@@ -802,7 +931,7 @@ supportLink = hl.HyperLinkCtrl(versionPanel, wx.ID_ANY, _("Support Link"),
                                URL="https://www.flairmesh.com/Dongle/FMA120.html")
 versionPanelSizer.Add(supportLink, flag=wx.ALIGN_CENTER | wx.BOTTOM, border=4)
 versionPanel.SetSizer(versionPanelSizer)
-versionInfo = wx.StaticText(versionPanel, wx.ID_ANY, label=_("Version") + " 1.1.5")
+versionInfo = wx.StaticText(versionPanel, wx.ID_ANY, label=_("Version") + " 1.1.6")
 versionPanelSizer.Add(versionInfo, flag=wx.ALIGN_CENTER | wx.BOTTOM, border=4)
 
 dfuUndergoing = False
@@ -882,7 +1011,7 @@ versionPanelSizer.Add(firmwareDesc, flag=wx.ALIGN_CENTER | wx.TOP, border=16)
 versionPanelSizer.Hide(firmwareDesc)
 
 aboutSbSizer.Add(settingsPanel, proportion=1, flag=wx.EXPAND)
-aboutSbSizer.Add(versionPanel, proportion=3)
+aboutSbSizer.Add(versionPanel, proportion=3, flag=wx.TOP, border=4)
 
 appSizer.Add(audioModeSbSizer, flag=wx.EXPAND | wx.LEFT, border=4)
 appSizer.Add(windowSbSizer, flag=wx.EXPAND | wx.RIGHT, border=4)
@@ -927,7 +1056,11 @@ def enable_settings_widgets(enable: bool):
 
 enable_settings_widgets(False)
 
-appFrame.Show(True)  # Show the frame.
+if startMinimized:
+    appFrame.Iconize(True)
+    appFrame.Hide()
+else:
+    appFrame.Show(True)
 
 
 # All GUI object initialized, start FlooStateMachine

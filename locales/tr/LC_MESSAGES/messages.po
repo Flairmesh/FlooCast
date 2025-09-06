@@ -302,3 +302,9 @@ msgstr "Daha Düşük"
 
 msgid "Default"
 msgstr "Varsayılan"
+
+msgid "Broadcast Additional Audio Input"
+msgstr "Ek ses girişini yayınla"
+
+msgid "Start Minimized"
+msgstr "Küçültülmüş başlat"

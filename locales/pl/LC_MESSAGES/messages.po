@@ -16,7 +16,7 @@ msgstr ""
 
 #: main.py:47 main.py:89
 msgid "Initializing"
-msgstr "Inicjalizacja"
+msgstr "Inicjalizowanie"
 
 #: main.py:48
 msgid "Idle"
@@ -56,7 +56,7 @@ msgstr "Uruchamianie głosu"
 
 #: main.py:57
 msgid "Voice streaming"
-msgstr "Przesyłanie głosu"
+msgstr "Strumieniowanie głosu"
 
 #: main.py:58
 msgid "Voice stopping"
@@ -64,11 +64,11 @@ msgstr "Zatrzymywanie głosu"
 
 #: main.py:60 main.py:155
 msgid "Disconnected"
-msgstr "Rozłączono"
+msgstr "Rozłączony"
 
 #: main.py:62
 msgid "Unicast starting"
-msgstr "Rozpoczynanie unicastu"
+msgstr "Uruchamianie transmisji Unicast"
 
 #: main.py:63
 msgid "Unicast streaming"
@@ -76,7 +76,7 @@ msgstr "Przesyłanie unicast"
 
 #: main.py:64
 msgid "Broadcast starting"
-msgstr "Rozpoczynanie transmisji"
+msgstr "Uruchamianie transmisji Broadcast"
 
 #: main.py:65
 msgid "Broadcast streaming"
@@ -92,7 +92,7 @@ msgstr "Tryb audio"
 
 #: main.py:111
 msgid "LE Broadcast"
-msgstr "Transmisja LE"
+msgstr "Transmisja LE Audio"
 
 #: main.py:113
 msgid "Most Recently Used Devices"
@@ -116,7 +116,7 @@ msgstr "Gry (jeden do jednego)"
 
 #: main.py:145
 msgid "Broadcast"
-msgstr "Transmisja"
+msgstr "Transmisja Broadcast"
 
 #: main.py:149
 msgid "Dongle State"
@@ -124,15 +124,15 @@ msgstr "Stan adaptera"
 
 #: main.py:153
 msgid "LE Audio State"
-msgstr "Stan audio LE"
+msgstr "Stan LE Audio"
 
 #: main.py:157
 msgid "Codec in Use"
-msgstr "Używany kodek"
+msgstr "Używany kode"
 
 #: main.py:162
 msgid "Prefer using LE audio for dual-mode devices"
-msgstr "Preferuj audio LE dla urządzeń z trybem podwójnym"
+msgstr "Preferuj korzystanie z LE Audio w przypadku urządzeń pracujących w dwóch trybach (dual-mode)"
 
 #: main.py:188
 msgid "Public broadcast"
@@ -156,11 +156,11 @@ msgstr "Klucz transmisji, maksymalnie 16 znaków"
 
 #: main.py:275
 msgid "Input a new name of no more than 30 characters then press <ENTER>"
-msgstr "Wprowadź nową nazwę (maksymalnie 30 znaków), a następnie naciśnij <ENTER>"
+msgstr "Wprowadź nazwę transmisji i naciśnij <ENTER>"
 
 #: main.py:286
 msgid "Input a new key then press <ENTER>"
-msgstr "Wprowadź nowy klucz i naciśnij <ENTER>"
+msgstr "Wprowadź klucz transmisji i naciśnij <ENTER>"
 
 #: main.py:308
 msgid "Add device"
@@ -176,7 +176,7 @@ msgstr "Wyczyść wszystko"
 
 #: main.py:405
 msgid "Quit"
-msgstr "Zakończ"
+msgstr "Zamknij"
 
 #: main.py:405
 msgid "Show Window"
@@ -184,7 +184,7 @@ msgstr "Pokaż okno"
 
 #: main.py:406
 msgid "FlooGoo Bluetooth Audio Source"
-msgstr "Źródło audio Bluetooth FlooGoo"
+msgstr "FlooGoo Bluetooth Adapter"
 
 #: main.py:414
 msgid "Minimize to System Tray"
@@ -224,11 +224,11 @@ msgstr "Postęp aktualizacji"
 
 #: main.py:486
 msgid "Device Firmware Upgrade"
-msgstr "Aktualizacja oprogramowania urządzenia"
+msgstr "Aktualizacja oprogramowania sprzętowego"
 
 #: main.py:524
 msgid "Use FlooGoo dongle on "
-msgstr "Użyj adaptera FlooGoo na "
+msgstr "Użyj adaptera FlooGoo na porcie "
 
 #: main.py:526
 msgid "Please insert your FlooGoo dongle"
@@ -252,10 +252,10 @@ msgid "Settings"
 msgstr "Ustawienia"
 
 msgid ", check the latest."
-msgstr ", sprawdź najnowszą."
+msgstr ", sprawdź najnowsze."
 
 msgid "Current firmware: "
-msgstr "Bieżące oprogramowanie sprzętowe: "
+msgstr "Aktualne oprogramowanie: "
 
 #: Added from 1.1.0
 msgid "Must be disabled for"

@@ -302,3 +302,9 @@ msgstr "Plus basse"
 
 msgid "Default"
 msgstr "Par défaut"
+
+msgid "Broadcast Additional Audio Input"
+msgstr "Diffuser une entrée audio supplémentaire"
+
+msgid "Start Minimized"
+msgstr "Démarrer réduit"

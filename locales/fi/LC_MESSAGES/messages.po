@@ -302,3 +302,9 @@ msgstr "Alempi"
 
 msgid "Default"
 msgstr "Oletus"
+
+msgid "Broadcast Additional Audio Input"
+msgstr "Lähetä lisä-äänitulo"
+
+msgid "Start Minimized"
+msgstr "Käynnistä pienennettynä"

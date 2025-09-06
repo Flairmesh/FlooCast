@@ -302,3 +302,10 @@ msgstr "Lavere"
 
 msgid "Default"
 msgstr "Standard"
+
+msgid "Broadcast Additional Audio Input"
+msgstr "Send ekstra lydinngang"
+
+msgid "Start Minimized"
+msgstr "Start minimert"
+

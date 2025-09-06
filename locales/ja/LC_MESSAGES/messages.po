@@ -302,3 +302,9 @@ msgstr "低"
 
 msgid "Default"
 msgstr "デフォルト"
+
+msgid "Broadcast Additional Audio Input"
+msgstr "追加オーディオ入力をブロードキャスト"
+
+msgid "Start Minimized"
+msgstr "最小化して開始"
