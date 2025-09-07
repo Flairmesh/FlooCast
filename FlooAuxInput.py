@@ -22,7 +22,7 @@ class FlooAuxInput:
     # ---------- Defaults ----------
     TARGET_RATE = 48000
     FALLBACK_RATE = 44100
-    DTYPE = "int16"                 # Windows/Linux default; macOS switched below
+    DTYPE = "float32"               # Windows/Linux default; macOS switched below
     LATENCY = None                  # overridden on macOS
 
     # Backend preference order
@@ -39,7 +39,7 @@ class FlooAuxInput:
         PREFERRED_OUTPUT_BACKENDS = ["ALSA", "JACK", "PulseAudio"]
 
     # Windows: WASAPI shared by default
-    PREFER_EXCLUSIVE_IN = False
+    PREFER_EXCLUSIVE_IN = True
     PREFER_EXCLUSIVE_OUT = False
 
     # Output auto-pick (name hints)
