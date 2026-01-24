@@ -309,3 +309,8 @@ msgstr "Phát đầu vào âm thanh bổ sung"
 msgid "Start Minimized"
 msgstr "Khởi động thu nhỏ"
 
+msgid "Follow USB volume for broadcast level"
+msgstr "Mức phát sóng theo âm lượng USB"
+
+msgid "Simultaneous standard and high-quality broadcast"
+msgstr "Phát sóng đồng thời tiêu chuẩn và chất lượng cao"

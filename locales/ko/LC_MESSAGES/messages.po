@@ -308,3 +308,9 @@ msgstr "추가 오디오 입력 방송"
 
 msgid "Start Minimized"
 msgstr "최소화하여 시작"
+
+msgid "Follow USB volume for broadcast level"
+msgstr "방송 음량은 USB 음량을 따릅니다"
+
+msgid "Simultaneous standard and high-quality broadcast"
+msgstr "표준 및 고음질 동시 방송"

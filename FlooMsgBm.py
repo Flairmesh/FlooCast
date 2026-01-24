@@ -19,6 +19,12 @@ class FlooMsgBm(FlooMessage):
                 1 lowest latency
                 2 lower latency
                 3 default
+                Bit 6:
+                0 Broadcast 1 quality
+                1 Broadcast both standard and high-quality
+                Bit 7:
+                0 Keep 0 dB gain for USB audio input during broadcast
+                1 Adjust broadcast volume when USB volume changes
     BM=xx
     """
 

@@ -308,3 +308,9 @@ msgstr "Trasmetti ingresso audio aggiuntivo"
 
 msgid "Start Minimized"
 msgstr "Avvia ridotto a icona"
+
+msgid "Follow USB volume for broadcast level"
+msgstr "Il livello di trasmissione segue il volume USB"
+
+msgid "Simultaneous standard and high-quality broadcast"
+msgstr "Trasmissione simultanea standard e di alta qualità"

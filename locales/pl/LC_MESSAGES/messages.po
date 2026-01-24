@@ -302,3 +302,15 @@ msgstr "Niższe"
 
 msgid "Default"
 msgstr "Domyślne"
+
+msgid "Broadcast Additional Audio Input"
+msgstr "Nadawanie dodatkowego wejścia audio"
+
+msgid "Start Minimized"
+msgstr "Uruchamiaj zminimalizowany"
+
+msgid "Follow USB volume for broadcast level"
+msgstr "Poziom nadawania podąża za głośnością USB"
+
+msgid "Simultaneous standard and high-quality broadcast"
+msgstr "Jednoczesne nadawanie standardowe i wysokiej jakości"

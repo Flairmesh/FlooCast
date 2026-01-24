@@ -308,3 +308,9 @@ msgstr "שדר קלט שמע נוסף"
 
 msgid "Start Minimized"
 msgstr "התחל במצב ממוזער"
+
+msgid "Follow USB volume for broadcast level"
+msgstr "רמת השידור עוקבת אחר עוצמת השמע של USB"
+
+msgid "Simultaneous standard and high-quality broadcast"
+msgstr "שידור סימולטני באיכות רגילה וגבוהה"

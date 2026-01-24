@@ -308,3 +308,9 @@ msgstr "Транслювати додатковий аудіовхід"
 
 msgid "Start Minimized"
 msgstr "Запускати згорнутим"
+
+msgid "Follow USB volume for broadcast level"
+msgstr "Рівень трансляції слідує за гучністю USB"
+
+msgid "Simultaneous standard and high-quality broadcast"
+msgstr "Одночасна стандартна та високоякісна трансляція"

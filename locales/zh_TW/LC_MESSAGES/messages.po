@@ -308,3 +308,9 @@ msgstr "廣播額外的音訊輸入"
 
 msgid "Start Minimized"
 msgstr "啟動時最小化"
+
+msgid "Follow USB volume for broadcast level"
+msgstr "廣播音量跟隨 USB 音量"
+
+msgid "Simultaneous standard and high-quality broadcast"
+msgstr "同時廣播標準與高音質"

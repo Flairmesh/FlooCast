@@ -308,3 +308,9 @@ msgstr "Μετάδοση πρόσθετης εισόδου ήχου"
 
 msgid "Start Minimized"
 msgstr "Εκκίνηση σε ελαχιστοποίηση"
+
+msgid "Follow USB volume for broadcast level"
+msgstr "Το επίπεδο εκπομπής ακολουθεί την ένταση USB"
+
+msgid "Simultaneous standard and high-quality broadcast"
+msgstr "Ταυτόχρονη εκπομπή κανονικής και υψηλής ποιότητας"

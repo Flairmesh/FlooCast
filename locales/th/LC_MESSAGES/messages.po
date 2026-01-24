@@ -309,3 +309,8 @@ msgstr "ถ่ายทอดอินพุตเสียงเพิ่มเ
 msgid "Start Minimized"
 msgstr "เริ่มต้นแบบย่อ"
 
+msgid "Follow USB volume for broadcast level"
+msgstr "ระดับการออกอากาศจะตามระดับเสียง USB"
+
+msgid "Simultaneous standard and high-quality broadcast"
+msgstr "ออกอากาศพร้อมกันทั้งแบบมาตรฐานและคุณภาพสูง"

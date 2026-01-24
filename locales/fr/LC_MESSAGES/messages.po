@@ -308,3 +308,9 @@ msgstr "Diffuser une entrée audio supplémentaire"
 
 msgid "Start Minimized"
 msgstr "Démarrer réduit"
+
+msgid "Follow USB volume for broadcast level"
+msgstr "Le niveau de diffusion suit le volume USB"
+
+msgid "Simultaneous standard and high-quality broadcast"
+msgstr "Diffusion simultanée standard et haute qualité"

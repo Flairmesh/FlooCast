@@ -308,3 +308,9 @@ msgstr "Transmetre entrada d'àudio addicional"
 
 msgid "Start Minimized"
 msgstr "Inicia en mode minimitzat"
+
+msgid "Follow USB volume for broadcast level"
+msgstr "El nivell de difusió segueix el volum USB"
+
+msgid "Simultaneous standard and high-quality broadcast"
+msgstr "Difusió simultània estàndard i d’alta qualitat"

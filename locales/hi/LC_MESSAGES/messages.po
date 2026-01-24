@@ -308,3 +308,9 @@ msgstr "प्रसारण के लिए अतिरिक्त ऑड�
 
 msgid "Start Minimized"
 msgstr "मिनिमाइज़ मोड में प्रारंभ करें"
+
+msgid "Follow USB volume for broadcast level"
+msgstr "प्रसारण स्तर USB वॉल्यूम का अनुसरण करता है"
+
+msgid "Simultaneous standard and high-quality broadcast"
+msgstr "मानक और उच्च-गुणवत्ता का एक साथ प्रसारण"

@@ -308,3 +308,9 @@ msgstr "追加オーディオ入力をブロードキャスト"
 
 msgid "Start Minimized"
 msgstr "最小化して開始"
+
+msgid "Follow USB volume for broadcast level"
+msgstr "ブロードキャスト音量は USB 音量に従います"
+
+msgid "Simultaneous standard and high-quality broadcast"
+msgstr "標準音質と高音質の同時ブロードキャスト"

@@ -154,6 +154,10 @@ def audio_mode_sel_set(mode):
         settingsPanelSizer.Show(gattClientWithBroadcastCheckBox)
         settingsPanelSizer.Show(gattClientWithBroadcastEnableButton)
         leBroadcastSb.Enable()
+        broadcastUsbVolCtrCheckBox.Enable(broadcastUsbVolCtrSupported)
+        broadcastUsbVolCtrButton.Enable(broadcastUsbVolCtrSupported)
+        broadcast2QualityCheckBox.Enable(broadcast2QualitySupported)
+        broadcast2QualityButton.Enable(broadcast2QualitySupported)
     aux_input_broadcast_enable(audioMode == 2)
     settingsPanelSizer.Layout()
 
@@ -411,7 +415,7 @@ broadcastAndPairedDeviceSizer = wx.BoxSizer(wx.VERTICAL)
 leBroadcastSb = wx.StaticBox(broadcastAndPairedDevicePanel, wx.ID_ANY, _('LE Broadcast'))
 leBroadcastSbSizer = wx.StaticBoxSizer(leBroadcastSb, wx.VERTICAL)
 leBroadcastSwitchPanel = wx.Panel(leBroadcastSb)
-leBroadcastSwitchPanelSizer = wx.FlexGridSizer(5, 2, (0, 0))
+leBroadcastSwitchPanelSizer = wx.FlexGridSizer(6, 2, (0, 0))
 
 publicBroadcastEnable = None
 
@@ -447,6 +451,86 @@ publicBroadcastButton.SetBitmap(off)
 leBroadcastSwitchPanel.Bind(wx.EVT_CHECKBOX, public_broadcast_enable_switch, publicBroadcastCheckBox)
 publicBroadcastButton.Bind(wx.EVT_BUTTON, public_broadcast_enable_button)
 
+broadcastUsbVolCtrEnable = None
+broadcastUsbVolCtrSupported = False
+
+
+def broadcast_usb_vol_ctr_switch_set(enable, isNotify):
+    global broadcastUsbVolCtrEnable
+    broadcastUsbVolCtrEnable = enable
+    broadcastUsbVolCtrButton.SetBitmap(on if broadcastUsbVolCtrEnable else off)
+    broadcastUsbVolCtrButton.SetToolTip(
+        _('Toggle switch for') + ' ' + _('Follow USB volume for broadcast level') + ' ' + (_(
+            'On') if broadcastUsbVolCtrEnable else _(
+            'Off')))
+    if isNotify:
+        broadcastUsbVolCtrCheckBox.SetValue(enable)
+    else:
+        flooSm.setBroadcastUsbVolCtr(enable)
+
+
+def broadcast_usb_vol_ctr_enable_button(event):
+    broadcastUsbVolCtrCheckBox.SetValue(not broadcastUsbVolCtrEnable)
+    broadcast_usb_vol_ctr_switch_set(not broadcastUsbVolCtrEnable, False)
+
+
+# Broadcast high quality enable switch function
+def broadcast_usb_vol_ctr_enable_switch(event):
+    broadcast_usb_vol_ctr_switch_set(not broadcastUsbVolCtrEnable, False)
+
+
+broadcastUsbVolCtrCheckBox = wx.CheckBox(leBroadcastSwitchPanel, wx.ID_ANY,
+                                           label=_('Follow USB volume for broadcast level'))
+broadcastUsbVolCtrCheckBox.Enable(False)
+broadcastUsbVolCtrButton = wx.Button(leBroadcastSwitchPanel, wx.ID_ANY, style=wx.NO_BORDER | wx.MINIMIZE)
+broadcastUsbVolCtrButton.SetToolTip(
+    _('Toggle switch for') + ' ' + _('Follow USB volume for broadcast level') + ' ' + _('Off'))
+broadcastUsbVolCtrButton.SetBitmap(off)
+broadcastUsbVolCtrButton.Enable(False)
+leBroadcastSwitchPanel.Bind(wx.EVT_CHECKBOX, broadcast_usb_vol_ctr_enable_switch, broadcastUsbVolCtrCheckBox)
+broadcastUsbVolCtrButton.Bind(wx.EVT_BUTTON, broadcast_usb_vol_ctr_enable_button)
+
+
+broadcast2QualityEnable = None
+broadcast2QualitySupported = False
+
+
+def broadcast_2_quality_switch_set(enable, isNotify):
+    global broadcast2QualityEnable
+    broadcast2QualityEnable = enable
+    broadcast2QualityButton.SetBitmap(on if broadcast2QualityEnable else off)
+    broadcast2QualityButton.SetToolTip(
+        _('Toggle switch for') + ' ' + _('Simultaneous standard and high-quality broadcast') + ' ' + (_(
+            'On') if broadcast2QualityEnable else _(
+            'Off')))
+    if isNotify:
+        broadcast2QualityCheckBox.SetValue(enable)
+    else:
+        flooSm.setBroadcast2Quality(enable)
+
+
+def broadcast_2_quality_enable_button(event):
+    broadcast2QualityCheckBox.SetValue(not broadcast2QualityEnable)
+    broadcast_2_quality_switch_set(not broadcast2QualityEnable, False)
+
+
+# Broadcast high quality enable switch function
+def broadcast_2_quality_enable_switch(event):
+    broadcast_2_quality_switch_set(not broadcast2QualityEnable, False)
+
+
+broadcast2QualityCheckBox = wx.CheckBox(leBroadcastSwitchPanel, wx.ID_ANY,
+                                           label=_('Simultaneous standard and high-quality broadcast'))
+broadcast2QualityCheckBox.Enable(False)
+broadcast2QualityButton = wx.Button(leBroadcastSwitchPanel, wx.ID_ANY, style=wx.NO_BORDER | wx.MINIMIZE)
+broadcast2QualityButton.SetToolTip(
+    _('Toggle switch for') + ' ' + _('Simultaneous standard and high-quality broadcast') + ' ' + _('Off'))
+broadcast2QualityButton.SetBitmap(off)
+broadcast2QualityButton.Enable(False)
+leBroadcastSwitchPanel.Bind(wx.EVT_CHECKBOX, broadcast_2_quality_enable_switch, broadcast2QualityCheckBox)
+broadcast2QualityButton.Bind(wx.EVT_BUTTON, broadcast_2_quality_enable_button)
+
+
 broadcastHighQualityEnable = None
 
 
@@ -454,7 +538,7 @@ def broadcast_high_quality_switch_set(enable, isNotify):
     global broadcastHighQualityEnable
     broadcastHighQualityEnable = enable
     broadcastHighQualityButton.SetBitmap(on if broadcastHighQualityEnable else off)
-    publicBroadcastButton.SetToolTip(
+    broadcastHighQualityButton.SetToolTip(
         _('Toggle switch for') + ' ' + _('Broadcast high-quality music, otherwise, voice') + ' ' + (_(
             'On') if broadcastHighQualityEnable else _(
             'Off')))
@@ -558,6 +642,10 @@ broadcastStopOnIdleButton.Bind(wx.EVT_BUTTON, broadcast_stop_on_idle_enable_butt
 
 leBroadcastSwitchPanelSizer.Add(publicBroadcastCheckBox, flag=wx.ALIGN_LEFT)
 leBroadcastSwitchPanelSizer.Add(publicBroadcastButton, flag=wx.ALIGN_RIGHT)
+leBroadcastSwitchPanelSizer.Add(broadcastUsbVolCtrCheckBox, flag=wx.ALIGN_LEFT)
+leBroadcastSwitchPanelSizer.Add(broadcastUsbVolCtrButton, flag=wx.ALIGN_RIGHT)
+leBroadcastSwitchPanelSizer.Add(broadcast2QualityCheckBox, flag=wx.ALIGN_LEFT)
+leBroadcastSwitchPanelSizer.Add(broadcast2QualityButton, flag=wx.ALIGN_RIGHT)
 leBroadcastSwitchPanelSizer.Add(broadcastHighQualityCheckBox, flag=wx.ALIGN_LEFT)
 leBroadcastSwitchPanelSizer.Add(broadcastHighQualityButton, flag=wx.ALIGN_RIGHT)
 leBroadcastSwitchPanelSizer.Add(broadcastEncryptCheckBox, flag=wx.ALIGN_LEFT)
@@ -948,7 +1036,7 @@ supportLink = hl.HyperLinkCtrl(versionPanel, wx.ID_ANY, _("Support Link"),
                                URL="https://www.flairmesh.com/Dongle/FMA120.html")
 versionPanelSizer.Add(supportLink, flag=wx.ALIGN_CENTER | wx.BOTTOM, border=4)
 versionPanel.SetSizer(versionPanelSizer)
-versionInfo = wx.StaticText(versionPanel, wx.ID_ANY, label=_("Version") + " 1.1.6")
+versionInfo = wx.StaticText(versionPanel, wx.ID_ANY, label=_("Version") + " 1.1.7")
 versionPanelSizer.Add(versionInfo, flag=wx.ALIGN_CENTER | wx.BOTTOM, border=4)
 
 dfuUndergoing = False
@@ -1091,6 +1179,8 @@ class FlooSmDelegate(FlooStateMachineDelegate):
         global firmwareDesc
         global versionPanelSizer
         global aboutSbSizer
+        global broadcastUsbVolCtrSupported
+        global broadcast2QualitySupported
 
         if flag:
             update_status_bar(_("Use FlooGoo dongle on ") + " " + port)
@@ -1113,6 +1203,15 @@ class FlooSmDelegate(FlooStateMachineDelegate):
             except Exception as exec0:
                 # print("Cann't get the latest version")
                 latest = "Unable"
+
+            # Simultaneous standard and high-quality broadcast added in v1.1.5.8
+            print("Firmware Ver: ")
+            print(firmwareVersion)
+            if firmwareVersion > "1.1.5.8" and firmwareVariant == 0:
+                broadcastUsbVolCtrSupported = True
+                broadcast2QualitySupported = True
+                broadcast2QualityButton.Enable(True)
+                broadcast2QualityCheckBox.Enable(True)
 
             if not dfuUndergoing:
                 if latest == "Unable":
@@ -1148,6 +1247,8 @@ class FlooSmDelegate(FlooStateMachineDelegate):
             update_status_bar(_("Please insert your FlooGoo dongle"))
             pairedDeviceListbox.Clear()
             versionPanelSizer.Hide(dfuInfo)
+            broadcastUsbVolCtrSupported = False
+            broadcast2QualitySupported = False
         enable_settings_widgets(flag)
 
     def audioModeInd(self, mode: int):
@@ -1167,6 +1268,10 @@ class FlooSmDelegate(FlooStateMachineDelegate):
             elif audioMode == 2:
                 audioModeBroadcastRadioButton.SetValue(True)
                 leBroadcastSb.Enable()
+                broadcastUsbVolCtrCheckBox.Enable(broadcastUsbVolCtrSupported)
+                broadcastUsbVolCtrButton.Enable(broadcastUsbVolCtrSupported)
+                broadcast2QualityCheckBox.Enable(broadcast2QualitySupported)
+                broadcast2QualityButton.Enable(broadcast2QualitySupported)
             audio_mode_sel_set(mode)
 
     def sourceStateInd(self, state: int):
@@ -1182,6 +1287,8 @@ class FlooSmDelegate(FlooStateMachineDelegate):
 
     def broadcastModeInd(self, state: int):
         broadcast_high_quality_switch_set(state & 4 == 4, True)
+        broadcast_usb_vol_ctr_switch_set(state & 0x80 == 0x80, True)
+        broadcast_2_quality_switch_set(state & 0x40 == 0x40, True)
         public_broadcast_enable_switch_set(state & 2 == 2, True)
         broadcast_encrypt_switch_set(state & 1 == 1, True)
         broadcast_stop_on_idle_switch_set(state & 8 == 8, True)

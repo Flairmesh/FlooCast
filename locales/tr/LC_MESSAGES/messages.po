@@ -308,3 +308,9 @@ msgstr "Ek ses girişini yayınla"
 
 msgid "Start Minimized"
 msgstr "Küçültülmüş başlat"
+
+msgid "Follow USB volume for broadcast level"
+msgstr "Yayın seviyesi USB ses düzeyini takip eder"
+
+msgid "Simultaneous standard and high-quality broadcast"
+msgstr "Standart ve yüksek kaliteli eşzamanlı yayın"

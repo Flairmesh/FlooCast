@@ -308,3 +308,9 @@ msgstr "بث إدخال صوتي إضافي"
 
 msgid "Start Minimized"
 msgstr "بدء مصغرًا"
+
+msgid "Follow USB volume for broadcast level"
+msgstr "مستوى البث يتبع مستوى صوت USB"
+
+msgid "Simultaneous standard and high-quality broadcast"
+msgstr "بث متزامن بالجودة القياسية والعالية"

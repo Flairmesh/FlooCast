@@ -236,7 +236,7 @@ class FlooStateMachine(FlooInterfaceDelegate, Thread):
         oldValue = self.broadcastMode & 2 == 2
         if oldValue != enable:
             print("setPublicBroadcast")
-            self.pendingCmdPara = (self.broadcastMode & 0x3D) + (2 if enable else 0)
+            self.pendingCmdPara = (self.broadcastMode & 0xFD) + (2 if enable else 0)
             cmdSetBroadcastMode = FlooMsgBm(True, self.pendingCmdPara)
             self.lastCmd = cmdSetBroadcastMode
             self.inf.sendMsg(cmdSetBroadcastMode)
@@ -245,7 +245,25 @@ class FlooStateMachine(FlooInterfaceDelegate, Thread):
         oldValue = self.broadcastMode & 4 == 4
         if oldValue != enable:
             print("setBroadcastHighQuality")
-            self.pendingCmdPara = (self.broadcastMode & 0x3B) + (4 if enable else 0)
+            self.pendingCmdPara = (self.broadcastMode & 0xFB) + (4 if enable else 0)
+            cmdSetBroadcastMode = FlooMsgBm(True, self.pendingCmdPara)
+            self.lastCmd = cmdSetBroadcastMode
+            self.inf.sendMsg(cmdSetBroadcastMode)
+
+    def setBroadcastUsbVolCtr(self, enable: bool):
+        oldValue = (self.broadcastMode & 0x80) >> 7
+        if oldValue != enable:
+            print("setBroadcastUsbVolCtr")
+            self.pendingCmdPara = (self.broadcastMode & 0x7F) + (0x80 if enable else 0)
+            cmdSetBroadcastMode = FlooMsgBm(True, self.pendingCmdPara)
+            self.lastCmd = cmdSetBroadcastMode
+            self.inf.sendMsg(cmdSetBroadcastMode)
+
+    def setBroadcast2Quality(self, enable: bool):
+        oldValue = (self.broadcastMode & 0x40) >> 6
+        if oldValue != enable:
+            print("setBroadcast2Quality")
+            self.pendingCmdPara = (self.broadcastMode & 0xBF) + (0x40 if enable else 0)
             cmdSetBroadcastMode = FlooMsgBm(True, self.pendingCmdPara)
             self.lastCmd = cmdSetBroadcastMode
             self.inf.sendMsg(cmdSetBroadcastMode)
@@ -254,7 +272,7 @@ class FlooStateMachine(FlooInterfaceDelegate, Thread):
         oldValue = self.broadcastMode & 1 == 1
         if oldValue != enable:
             print("setBroadcastEncrypt old: %d, new %d" % (oldValue, enable))
-            self.pendingCmdPara = (self.broadcastMode & 0x3E) + (1 if enable else 0)
+            self.pendingCmdPara = (self.broadcastMode & 0xFE) + (1 if enable else 0)
             cmdSetBroadcastMode = FlooMsgBm(True, self.pendingCmdPara)
             self.lastCmd = cmdSetBroadcastMode
             self.inf.sendMsg(cmdSetBroadcastMode)
@@ -263,7 +281,7 @@ class FlooStateMachine(FlooInterfaceDelegate, Thread):
         oldValue = self.broadcastMode & 8 == 8
         if oldValue != enable:
             print("setBroadcastStopOnIdle old: %d, new %d" % (oldValue, enable))
-            self.pendingCmdPara = (self.broadcastMode & 0x37) + (8 if enable else 0)
+            self.pendingCmdPara = (self.broadcastMode & 0xF7) + (8 if enable else 0)
             cmdSetBroadcastMode = FlooMsgBm(True, self.pendingCmdPara)
             self.lastCmd = cmdSetBroadcastMode
             self.inf.sendMsg(cmdSetBroadcastMode)
@@ -272,7 +290,7 @@ class FlooStateMachine(FlooInterfaceDelegate, Thread):
         oldValue = (self.broadcastMode & 0x30) >> 4
         if oldValue != mode:
             print("setBroadcastLatency old: %d, new %d" % (oldValue, mode))
-            self.pendingCmdPara = (self.broadcastMode & 0xF) + (mode << 4)
+            self.pendingCmdPara = (self.broadcastMode & 0xCF) + (mode << 4)
             cmdSetBroadcastMode = FlooMsgBm(True, self.pendingCmdPara)
             self.lastCmd = cmdSetBroadcastMode
             self.inf.sendMsg(cmdSetBroadcastMode)

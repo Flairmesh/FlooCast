@@ -308,3 +308,9 @@ msgstr "Sänd ytterligare ljudingång"
 
 msgid "Start Minimized"
 msgstr "Starta minimerad"
+
+msgid "Follow USB volume for broadcast level"
+msgstr "Sändningsnivån följer USB-volymen"
+
+msgid "Simultaneous standard and high-quality broadcast"
+msgstr "Samtidig standard- och högkvalitativ sändning"
