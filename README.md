@@ -8,21 +8,33 @@ The dongle functions as a standard USB audio speaker and microphone, requiring n
 
 ## Installation
 
+### Windows
 On Windows, the compiled App can be downloaded directly from Microsoft Store.
 
+### Linux/Mac
+
 Requires python 3.7+
-Please also install the following modules when needed.
 
-wxPython
-pyserial
-serial-tool
-certify
-PIL
-urllib
+#### Configure Python Environment
+Create a virtual environment and install the required packages.
+```bash
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
 
-For example, on a Mac, you can install the "wxPython" module with the following command:
-python3 -m pip install wxPython
- 
+#### Running
+After configuring the environment, run `main.py` within it.
+```bash
+venv/bin/python main.py
+```
+
+If your dongle is not found, or if you see a permission denied error, check the [Platform specific notes/issues](#Platform-specific-notes/issues) section.
+You may also choose to run the command as root to ensure it has access to the serial device.
+```bash
+sudo venv/bin/python main.py
+```
+
 ## Usage
 
 Once configured, the dongle can automatically reconnect to the most recently used device. Please check the support link for more advanced uses. 
