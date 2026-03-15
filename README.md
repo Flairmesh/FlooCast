@@ -6,6 +6,14 @@ It configures a FlooGoo FMA120 Bluetooth dongle to pair and connect with a Bluet
 
 The dongle functions as a standard USB audio speaker and microphone, requiring no drivers on Windows, macOS, or Linux.
 
+DFU Function Notice
+
+The open-source code in this repository does not include the DFU (Device Firmware Update) functionality.
+
+The DFU implementation provided by the chip vendor is distributed under a different license, which does not allow redistribution as part of this open-source project. For this reason, the DFU-related source code has been excluded from this repository.
+
+If you require DFU support, please download the binary releases provided with this project, which include the DFU functionality.
+
 ## Installation
 
 ### Windows
