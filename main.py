@@ -143,8 +143,8 @@ def audio_mode_sel_set(mode):
         settingsPanelSizer.Hide(gattClientWithBroadcastEnableButton)
         leBroadcastSb.Disable()
     elif audioMode == 1:
-        settingsPanelSizer.Hide(aptxLosslessCheckBox)
-        settingsPanelSizer.Hide(aptxLosslessEnableButton)
+        settingsPanelSizer.Show(aptxLosslessCheckBox)
+        settingsPanelSizer.Show(aptxLosslessEnableButton)
         settingsPanelSizer.Hide(gattClientWithBroadcastCheckBox)
         settingsPanelSizer.Hide(gattClientWithBroadcastEnableButton)
         leBroadcastSb.Disable()
@@ -212,6 +212,18 @@ audioModeLowerPanelSizer = wx.BoxSizer(wx.HORIZONTAL)
 preferLeaEnable = None
 
 
+def set_aptx_settings_text(leaMode):
+    if leaMode:
+        aptxLosslessCheckBox.SetLabelText('aptX\u2122')
+        aptxLosslessEnableButton.SetToolTip(_('Toggle switch for') + ' ' + _('aptX') + ' ' +
+                                            _('Off') if aptxLosslessEnable else _('On'))
+    else:
+        aptxLosslessCheckBox.SetLabelText('aptX\u2122 Lossless')
+        aptxLosslessEnableButton.SetToolTip(_('Toggle switch for') + ' ' + _('aptX Lossless') + ' ' +
+                                            _('Off') if aptxLosslessEnable else _('On'))
+    aptxLosslessCheckBox.GetParent().Layout()
+
+
 def prefer_lea_enable_switch_set(enable, isNotify):
     global preferLeaEnable
     preferLeaEnable = enable
@@ -220,6 +232,7 @@ def prefer_lea_enable_switch_set(enable, isNotify):
         _('Toggle switch for') + ' ' + _('Prefer using LE audio for dual-mode devices') + ' ' + (_(
             'On') if preferLeaEnable else _(
             'Off')))
+    set_aptx_settings_text(enable)
     if isNotify:
         preferLeaCheckBox.SetValue(enable)
     else:
@@ -1020,7 +1033,7 @@ logoImg = wx.Image(app_path + os.sep + appLogoPng, wx.BITMAP_TYPE_PNG).ConvertTo
 logoStaticBmp = wx.StaticBitmap(versionPanel, wx.ID_ANY, logoImg)
 logoStaticBmp.SetToolTip(_('FlooGoo'))
 versionPanelSizer.Add(logoStaticBmp, flag=wx.ALIGN_CENTER)
-copyRightText = "Copyright© 2023~2025 Flairmesh Technologies."
+copyRightText = "Copyright© 2023~2026 Flairmesh Technologies."
 copyRightInfo = wx.StaticText(versionPanel, wx.ID_ANY, label=copyRightText)
 versionPanelSizer.Add(copyRightInfo, flag=wx.ALIGN_CENTER | wx.BOTTOM, border=4)
 font = wx.Font(pointSize=10, family=wx.DEFAULT,
@@ -1036,7 +1049,7 @@ supportLink = hl.HyperLinkCtrl(versionPanel, wx.ID_ANY, _("Support Link"),
                                URL="https://www.flairmesh.com/Dongle/FMA120.html")
 versionPanelSizer.Add(supportLink, flag=wx.ALIGN_CENTER | wx.BOTTOM, border=4)
 versionPanel.SetSizer(versionPanelSizer)
-versionInfo = wx.StaticText(versionPanel, wx.ID_ANY, label=_("Version") + " 1.1.7")
+versionInfo = wx.StaticText(versionPanel, wx.ID_ANY, label=_("Version") + " 1.1.8")
 versionPanelSizer.Add(versionInfo, flag=wx.ALIGN_CENTER | wx.BOTTOM, border=4)
 
 dfuUndergoing = False
@@ -1188,6 +1201,8 @@ class FlooSmDelegate(FlooStateMachineDelegate):
             firmwareVariant = 1 if version.startswith("AS1") else 0
             firmwareVariant = 2 if version.startswith("AS2") else firmwareVariant
             firmwareVersion = version if firstBatch == "" else version[:-1]
+            # Reset variant-specific description whenever a new device is detected.
+            versionPanelSizer.Hide(firmwareDesc)
             # firmwareVersion = firmwareVersion[2:] if a2dpSink else firmwareVersion
             try:
                 if firmwareVariant == 1:
@@ -1247,6 +1262,8 @@ class FlooSmDelegate(FlooStateMachineDelegate):
             update_status_bar(_("Please insert your FlooGoo dongle"))
             pairedDeviceListbox.Clear()
             versionPanelSizer.Hide(dfuInfo)
+            versionPanelSizer.Hide(newFirmwareUrl)
+            versionPanelSizer.Hide(firmwareDesc)
             broadcastUsbVolCtrSupported = False
             broadcast2QualitySupported = False
         enable_settings_widgets(flag)
