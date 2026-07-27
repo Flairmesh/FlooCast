@@ -334,6 +334,91 @@ class FlooCastTaskBarIcon(wx.adv.TaskBarIcon):
         self.frame.Close()
 
 
+class FlooCastTrayIcon:
+    """StatusNotifierItem tray for Linux, backed by pystray's AppIndicator.
+
+    wx.adv.TaskBarIcon uses GtkStatusIcon (the X11 _NET_SYSTEM_TRAY protocol),
+    which is invisible on Wayland desktops such as GNOME and KDE. pystray's
+    appindicator backend speaks the StatusNotifierItem D-Bus protocol that
+    modern shells render instead. Icon.run_detached() reuses the GLib main
+    context wx.App already drives, so there is no second event loop; menu
+    callbacks fire on pystray's thread and hop back via wx.CallAfter.
+
+    Presents the same restore_window()/Destroy() surface as
+    FlooCastTaskBarIcon so it is a drop-in replacement (see make_tray_icon).
+    """
+
+    def __init__(self, frame):
+        self.frame = frame
+        os.environ.setdefault("PYSTRAY_BACKEND", "appindicator")
+        import pystray
+        image = Image.open(app_path + os.sep + appIcon)
+        menu = pystray.Menu(
+            pystray.MenuItem(
+                _("Show Window"),
+                lambda icon, item: wx.CallAfter(self.restore_window),
+                default=True),
+            pystray.MenuItem(
+                _("Minimize to System Tray"),
+                lambda icon, item: wx.CallAfter(self._minimize)),
+            pystray.Menu.SEPARATOR,
+            pystray.MenuItem(
+                _("Quit"),
+                lambda icon, item: wx.CallAfter(self.frame.Close)),
+        )
+        self._icon = pystray.Icon(
+            "floocast", icon=image, title=appTitle, menu=menu)
+        self._icon.run_detached()
+
+    def _minimize(self):
+        if not self.frame.IsIconized():
+            self.frame.Iconize(True)
+        if self.frame.IsShown():
+            self.frame.Hide()
+
+    def restore_window(self):
+        if not self.frame.IsShown():
+            self.frame.Show(True)
+        if self.frame.IsIconized():
+            self.frame.Iconize(False)
+        try:
+            self.frame.Restore()
+        except Exception:
+            pass
+        self.frame.Raise()
+        if not self.frame.IsActive():
+            try:
+                self.frame.RequestUserAttention()
+            except Exception:
+                pass
+
+    def Destroy(self):
+        try:
+            self._icon.visible = False
+        except Exception:
+            pass
+        try:
+            self._icon.stop()
+        except Exception:
+            pass
+
+
+def make_tray_icon(frame):
+    """Pick a tray implementation suited to the running platform.
+
+    Linux gets the pystray/AppIndicator (StatusNotifierItem) tray so the icon
+    is visible under Wayland; Windows and macOS keep the native wx tray. If
+    pystray or the AppIndicator GI typelib is unavailable, fall back to the wx
+    tray so the app still starts.
+    """
+    if platform.system().lower().startswith("linux"):
+        try:
+            return FlooCastTrayIcon(frame)
+        except Exception as exc:
+            print("Falling back to wx tray icon:", exc)
+    return FlooCastTaskBarIcon(frame)
+
+
 def quit_all():
     appFrame.Close()
 
@@ -350,7 +435,7 @@ def hide_window(event):
         appFrame.Hide()
 
 
-windowIcon = FlooCastTaskBarIcon(appFrame)
+windowIcon = make_tray_icon(appFrame)
 #appFrame.Bind(wx.EVT_ICONIZE, hide_window)
 appFrame.Bind(wx.EVT_CLOSE, quit_window)
 
