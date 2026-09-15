@@ -11,6 +11,12 @@ The dongle functions as a standard USB audio speaker and microphone, requiring n
 ### Windows
 On Windows, the compiled App can be downloaded directly from Microsoft Store.
 
+FlooCast can optionally make the FMA120 the default Windows audio output when a
+paired headset connects, then restore the previous output when it disconnects.
+Enable **Auto-switch audio output** in Settings. This option is off by default
+and does not change the communications audio device. FlooCast leaves the current
+output unchanged when it closes and retains any pending restore for its next run.
+
 ### Linux/Mac
 
 Requires python 3.7+
@@ -47,4 +53,3 @@ You may take the following link as a reference,
 https://askubuntu.com/questions/133235/how-do-i-allow-non-root-access-to-ttyusb0
 
 ## Acknowledgements
-
