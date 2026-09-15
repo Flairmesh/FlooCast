@@ -1,10 +1,9 @@
 # Default ignored files
 /.idea
-/__pycache__
+__pycache__/
 /dist
 /build
 *.exe
 *.dll
 *.msix
 *.spec
-

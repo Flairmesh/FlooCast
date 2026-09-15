@@ -14,6 +14,7 @@ from FlooStateMachineDelegate import FlooStateMachineDelegate
 from FlooDfuThread import FlooDfuThread
 from FlooSettings import FlooSettings
 from FlooAuxInput import FlooAuxInput
+from FlooAudioOutputSwitcher import FlooAudioOutputSwitcher
 from PIL import Image
 import urllib.request
 import certifi
@@ -95,6 +96,28 @@ statusBar.SetStatusText(_("Initializing"))
 def update_status_bar(info: str):
     global statusBar
     statusBar.SetStatusText(info)
+
+
+autoSwitchAudio = bool(settings.get_item("auto_switch_audio", False))
+autoSwitchAudioRestoreKey = "auto_switch_audio_restore"
+
+
+def save_audio_output_restore_state(restore_state):
+    if restore_state is None:
+        settings.remove(autoSwitchAudioRestoreKey)
+    else:
+        settings.set_item(autoSwitchAudioRestoreKey, restore_state)
+    settings.save()
+
+
+audioOutputSwitcher = FlooAudioOutputSwitcher(
+    enabled=autoSwitchAudio,
+    error_callback=lambda message: update_status_bar(
+        _("Audio output switching failed") + ": " + message
+    ),
+    restore_state=settings.get_item(autoSwitchAudioRestoreKey),
+    restore_state_callback=save_audio_output_restore_state,
+)
 
 
 # Define On/Off Images
@@ -862,7 +885,50 @@ broadcastAndPairedDevicePanel.SetSizer(broadcastAndPairedDeviceSizer)
 aboutSb = wx.StaticBox(appPanel, wx.ID_ANY, _('Settings'))
 aboutSbSizer = wx.StaticBoxSizer(aboutSb, wx.VERTICAL)
 settingsPanel = wx.Panel(aboutSb)
-settingsPanelSizer = wx.FlexGridSizer(4, 2, (5, 0))
+settingsPanelSizer = wx.FlexGridSizer(5, 2, (5, 0))
+
+
+def auto_switch_audio_enable_set(enable):
+    global autoSwitchAudio
+    autoSwitchAudio = enable
+    settings.set_item("auto_switch_audio", enable)
+    settings.save()
+    audioOutputSwitcher.set_enabled(enable)
+    autoSwitchAudioButton.SetBitmap(on if autoSwitchAudio else off)
+    autoSwitchAudioButton.SetToolTip(
+        _('Toggle switch for') + ' ' + _('Auto-switch audio output') + ' ' +
+        (_('On') if autoSwitchAudio else _('Off'))
+    )
+    if enable:
+        audioOutputSwitcher.handle_source_state(flooSm.sourceState)
+
+
+def auto_switch_audio_enable_button(event):
+    autoSwitchAudioCheckBox.SetValue(not autoSwitchAudio)
+    auto_switch_audio_enable_set(not autoSwitchAudio)
+
+
+def auto_switch_audio_enable_switch(event):
+    auto_switch_audio_enable_set(event.IsChecked())
+
+
+autoSwitchAudioCheckBox = wx.CheckBox(
+    settingsPanel,
+    wx.ID_ANY,
+    label=_('Auto-switch audio output'),
+)
+autoSwitchAudioCheckBox.SetValue(autoSwitchAudio)
+autoSwitchAudioButton = wx.Button(settingsPanel, wx.ID_ANY, style=wx.NO_BORDER | wx.MINIMIZE)
+autoSwitchAudioButton.SetBitmap(on if autoSwitchAudio else off)
+autoSwitchAudioButton.SetToolTip(
+    _('Toggle switch for') + ' ' + _('Auto-switch audio output') + ' ' +
+    (_('On') if autoSwitchAudio else _('Off'))
+)
+settingsPanel.Bind(wx.EVT_CHECKBOX, auto_switch_audio_enable_switch, autoSwitchAudioCheckBox)
+autoSwitchAudioButton.Bind(wx.EVT_BUTTON, auto_switch_audio_enable_button)
+if not audioOutputSwitcher.supported:
+    autoSwitchAudioCheckBox.Hide()
+    autoSwitchAudioButton.Hide()
 
 usbInputEnable = None
 
@@ -1003,6 +1069,8 @@ settingsPanelSizer.Add(aptxLosslessCheckBox, 1, flag=wx.ALIGN_LEFT | wx.ALIGN_CE
 settingsPanelSizer.Add(aptxLosslessEnableButton, flag=wx.ALIGN_RIGHT)
 settingsPanelSizer.Add(gattClientWithBroadcastCheckBox, 1, flag=wx.ALIGN_LEFT | wx.ALIGN_CENTER_VERTICAL)
 settingsPanelSizer.Add(gattClientWithBroadcastEnableButton, flag=wx.ALIGN_RIGHT)
+settingsPanelSizer.Add(autoSwitchAudioCheckBox, 1, flag=wx.ALIGN_LEFT | wx.ALIGN_CENTER_VERTICAL)
+settingsPanelSizer.Add(autoSwitchAudioButton, flag=wx.ALIGN_RIGHT)
 settingsPanelSizer.Hide(usbInputCheckBox)
 settingsPanelSizer.Hide(usbInputEnableButton)
 settingsPanelSizer.Hide(aptxLosslessCheckBox)
@@ -1277,6 +1345,7 @@ class FlooSmDelegate(FlooStateMachineDelegate):
     def sourceStateInd(self, state: int):
         dongleStateText.SetLabelText(sourceStateStr[state])
         dongleStateSbSizer.Layout()
+        audioOutputSwitcher.handle_source_state(state)
 
     def leAudioStateInd(self, state: int):
         leaStateText.SetLabelText(leaStateStr[state])

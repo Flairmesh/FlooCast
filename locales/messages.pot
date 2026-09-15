@@ -84,6 +84,12 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
+msgid "Auto-switch audio output"
+msgstr ""
+
+msgid "Audio output switching failed"
+msgstr ""
+
 msgid "High Quality (one-to-one)"
 msgstr ""
 
@@ -203,4 +209,3 @@ msgstr ""
 
 msgid "RSSI"
 msgstr ""
-
