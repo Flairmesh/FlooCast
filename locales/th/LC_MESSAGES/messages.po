@@ -314,3 +314,6 @@ msgstr "ระดับการออกอากาศจะตามระด
 
 msgid "Simultaneous standard and high-quality broadcast"
 msgstr "ออกอากาศพร้อมกันทั้งแบบมาตรฐานและคุณภาพสูง"
+
+msgid "Extended Delay"
+msgstr "การหน่วงเวลาแบบขยาย"

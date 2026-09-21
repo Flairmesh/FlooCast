@@ -314,3 +314,6 @@ msgstr "مستوى البث يتبع مستوى صوت USB"
 
 msgid "Simultaneous standard and high-quality broadcast"
 msgstr "بث متزامن بالجودة القياسية والعالية"
+
+msgid "Extended Delay"
+msgstr "تأخير ممتد"

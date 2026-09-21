@@ -314,3 +314,6 @@ msgstr "El nivell de difusió segueix el volum USB"
 
 msgid "Simultaneous standard and high-quality broadcast"
 msgstr "Difusió simultània estàndard i d’alta qualitat"
+
+msgid "Extended Delay"
+msgstr "Retard ampliat"

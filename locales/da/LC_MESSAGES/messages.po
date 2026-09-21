@@ -314,3 +314,6 @@ msgstr "Udsendelsesniveau følger USB-lydstyrken"
 
 msgid "Simultaneous standard and high-quality broadcast"
 msgstr "Samtidig standard- og højkvalitetsudsendelse"
+
+msgid "Extended Delay"
+msgstr "Udvidet forsinkelse"

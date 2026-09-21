@@ -314,3 +314,6 @@ msgstr "Sändningsnivån följer USB-volymen"
 
 msgid "Simultaneous standard and high-quality broadcast"
 msgstr "Samtidig standard- och högkvalitativ sändning"
+
+msgid "Extended Delay"
+msgstr "Utökad fördröjning"

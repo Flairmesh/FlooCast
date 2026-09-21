@@ -314,3 +314,6 @@ msgstr "प्रसारण स्तर USB वॉल्यूम का अ�
 
 msgid "Simultaneous standard and high-quality broadcast"
 msgstr "मानक और उच्च-गुणवत्ता का एक साथ प्रसारण"
+
+msgid "Extended Delay"
+msgstr "विस्तारित विलंब"

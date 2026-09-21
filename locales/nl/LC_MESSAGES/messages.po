@@ -314,3 +314,6 @@ msgstr "Uitzendniveau volgt het USB-volume"
 
 msgid "Simultaneous standard and high-quality broadcast"
 msgstr "Gelijktijdige standaard- en hoogwaardige uitzending"
+
+msgid "Extended Delay"
+msgstr "Verlengde vertraging"

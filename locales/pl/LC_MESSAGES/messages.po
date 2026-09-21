@@ -314,3 +314,6 @@ msgstr "Poziom nadawania podąża za głośnością USB"
 
 msgid "Simultaneous standard and high-quality broadcast"
 msgstr "Jednoczesne nadawanie standardowe i wysokiej jakości"
+
+msgid "Extended Delay"
+msgstr "Wydłużone opóźnienie"

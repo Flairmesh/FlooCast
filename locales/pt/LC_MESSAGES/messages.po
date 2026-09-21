@@ -314,3 +314,6 @@ msgstr "O nível de transmissão segue o volume USB"
 
 msgid "Simultaneous standard and high-quality broadcast"
 msgstr "Transmissão simultânea padrão e de alta qualidade"
+
+msgid "Extended Delay"
+msgstr "Atraso prolongado"

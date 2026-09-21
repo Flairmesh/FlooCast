@@ -257,3 +257,6 @@ msgstr ""
 
 msgid "Current firmware: "
 msgstr ""
+
+msgid "Extended Delay"
+msgstr "Extended Delay"

@@ -204,3 +204,6 @@ msgstr ""
 msgid "RSSI"
 msgstr ""
 
+#: main.py
+msgid "Extended Delay"
+msgstr ""

@@ -314,3 +314,6 @@ msgstr "Mức phát sóng theo âm lượng USB"
 
 msgid "Simultaneous standard and high-quality broadcast"
 msgstr "Phát sóng đồng thời tiêu chuẩn và chất lượng cao"
+
+msgid "Extended Delay"
+msgstr "Độ trễ mở rộng"

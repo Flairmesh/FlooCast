@@ -43,6 +43,10 @@ class FlooStateMachineDelegate:
         """Called when FlooGoo device reports current setting of aptx lossless"""
         pass
 
+    def aptxLiteExtendedDelayEnabledInd(self, enabled):
+        """Called when FlooGoo device reports current setting of aptx Lite Extended Delay"""
+        pass
+
     def gattClientEnabledInd(self, enabled):
         """Called when FlooGoo device reports current setting of Gatt Client Function"""
         pass

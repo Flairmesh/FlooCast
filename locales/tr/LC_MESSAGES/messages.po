@@ -314,3 +314,6 @@ msgstr "Yayın seviyesi USB ses düzeyini takip eder"
 
 msgid "Simultaneous standard and high-quality broadcast"
 msgstr "Standart ve yüksek kaliteli eşzamanlı yayın"
+
+msgid "Extended Delay"
+msgstr "Uzatılmış Gecikme"

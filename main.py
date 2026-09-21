@@ -145,6 +145,10 @@ def audio_mode_sel_set(mode):
     elif audioMode == 1:
         settingsPanelSizer.Show(aptxLosslessCheckBox)
         settingsPanelSizer.Show(aptxLosslessEnableButton)
+        settingsPanelSizer.Show(aptxLiteExtendedDelayCheckBox,
+                                firmware_version_at_least("1.1.7.4", 0))
+        settingsPanelSizer.Show(aptxLiteExtendedDelayEnableButton,
+                                firmware_version_at_least("1.1.7.4", 0))
         settingsPanelSizer.Hide(gattClientWithBroadcastCheckBox)
         settingsPanelSizer.Hide(gattClientWithBroadcastEnableButton)
         leBroadcastSb.Disable()
@@ -158,6 +162,9 @@ def audio_mode_sel_set(mode):
         broadcastUsbVolCtrButton.Enable(broadcastUsbVolCtrSupported)
         broadcast2QualityCheckBox.Enable(broadcast2QualitySupported)
         broadcast2QualityButton.Enable(broadcast2QualitySupported)
+    if audioMode != 1:
+        settingsPanelSizer.Hide(aptxLiteExtendedDelayCheckBox)
+        settingsPanelSizer.Hide(aptxLiteExtendedDelayEnableButton)
     aux_input_broadcast_enable(audioMode == 2)
     settingsPanelSizer.Layout()
 
@@ -875,7 +882,7 @@ broadcastAndPairedDevicePanel.SetSizer(broadcastAndPairedDeviceSizer)
 aboutSb = wx.StaticBox(appPanel, wx.ID_ANY, _('Settings'))
 aboutSbSizer = wx.StaticBoxSizer(aboutSb, wx.VERTICAL)
 settingsPanel = wx.Panel(aboutSb)
-settingsPanelSizer = wx.FlexGridSizer(4, 2, (5, 0))
+settingsPanelSizer = wx.FlexGridSizer(5, 2, (5, 0))
 
 usbInputEnable = None
 
@@ -974,6 +981,43 @@ aptxLosslessEnableButton.SetBitmap(off)  # , wx.RIGHT
 settingsPanel.Bind(wx.EVT_CHECKBOX, aptxLossless_enable_switch, aptxLosslessCheckBox)
 aptxLosslessEnableButton.Bind(wx.EVT_BUTTON, aptxLossless_enable_button)
 
+aptxLiteExtendedDelayEnable = None
+
+
+def aptxLiteExtendedDelay_enable_switch_set(enable, isNotify):
+    global aptxLiteExtendedDelayEnable
+    aptxLiteExtendedDelayEnable = enable
+    aptxLiteExtendedDelayEnableButton.SetBitmap(on if aptxLiteExtendedDelayEnable else off)
+    aptxLiteExtendedDelayEnableButton.SetToolTip(
+        _('Toggle switch for') + ' ' + 'aptX\u2122 Lite ' + _('Extended Delay') + ' ' +
+        (_('On') if aptxLiteExtendedDelayEnable else _('Off')))
+    if isNotify:
+        aptxLiteExtendedDelayCheckBox.SetValue(enable)
+    else:
+        flooSm.enableAptxLiteExtendedDelay(enable)
+
+
+def aptxLiteExtendedDelay_enable_button(event):
+    aptxLiteExtendedDelayCheckBox.SetValue(not aptxLiteExtendedDelayEnable)
+    aptxLiteExtendedDelay_enable_switch_set(not aptxLiteExtendedDelayEnable, False)
+
+
+# aptxLiteExtendedDelay enable switch function
+def aptxLiteExtendedDelay_enable_switch(event):
+    aptxLiteExtendedDelay_enable_switch_set(not aptxLiteExtendedDelayEnable, False)
+
+
+aptxLiteExtendedDelayCheckBox = wx.CheckBox(settingsPanel, wx.ID_ANY,
+                                             label='aptX\u2122 Lite ' + _('Extended Delay'))
+aptxLiteExtendedDelayEnableButton = wx.Button(settingsPanel, wx.ID_ANY,
+                                               style=wx.NO_BORDER | wx.MINIMIZE)
+aptxLiteExtendedDelayEnableButton.SetToolTip(
+    _('Toggle switch for') + ' ' + 'aptX\u2122 Lite ' + _('Extended Delay') + ' ' + _('Off'))
+aptxLiteExtendedDelayEnableButton.SetBitmap(off)
+settingsPanel.Bind(wx.EVT_CHECKBOX, aptxLiteExtendedDelay_enable_switch,
+                   aptxLiteExtendedDelayCheckBox)
+aptxLiteExtendedDelayEnableButton.Bind(wx.EVT_BUTTON, aptxLiteExtendedDelay_enable_button)
+
 gattClientWithBroadcastEnable = None
 
 
@@ -1014,12 +1058,17 @@ settingsPanelSizer.Add(ledCheckBox, 1, flag=wx.ALIGN_LEFT | wx.ALIGN_CENTER_VERT
 settingsPanelSizer.Add(ledEnableButton, flag=wx.ALIGN_RIGHT)
 settingsPanelSizer.Add(aptxLosslessCheckBox, 1, flag=wx.ALIGN_LEFT | wx.ALIGN_CENTER_VERTICAL)
 settingsPanelSizer.Add(aptxLosslessEnableButton, flag=wx.ALIGN_RIGHT)
+settingsPanelSizer.Add(aptxLiteExtendedDelayCheckBox, 1,
+                       flag=wx.ALIGN_LEFT | wx.ALIGN_CENTER_VERTICAL)
+settingsPanelSizer.Add(aptxLiteExtendedDelayEnableButton, flag=wx.ALIGN_RIGHT)
 settingsPanelSizer.Add(gattClientWithBroadcastCheckBox, 1, flag=wx.ALIGN_LEFT | wx.ALIGN_CENTER_VERTICAL)
 settingsPanelSizer.Add(gattClientWithBroadcastEnableButton, flag=wx.ALIGN_RIGHT)
 settingsPanelSizer.Hide(usbInputCheckBox)
 settingsPanelSizer.Hide(usbInputEnableButton)
 settingsPanelSizer.Hide(aptxLosslessCheckBox)
 settingsPanelSizer.Hide(aptxLosslessEnableButton)
+settingsPanelSizer.Hide(aptxLiteExtendedDelayCheckBox)
+settingsPanelSizer.Hide(aptxLiteExtendedDelayEnableButton)
 settingsPanelSizer.Hide(gattClientWithBroadcastCheckBox)
 settingsPanelSizer.Hide(gattClientWithBroadcastEnableButton)
 
@@ -1049,7 +1098,7 @@ supportLink = hl.HyperLinkCtrl(versionPanel, wx.ID_ANY, _("Support Link"),
                                URL="https://www.flairmesh.com/Dongle/FMA120.html")
 versionPanelSizer.Add(supportLink, flag=wx.ALIGN_CENTER | wx.BOTTOM, border=4)
 versionPanel.SetSizer(versionPanelSizer)
-versionInfo = wx.StaticText(versionPanel, wx.ID_ANY, label=_("Version") + " 1.1.8")
+versionInfo = wx.StaticText(versionPanel, wx.ID_ANY, label=_("Version") + " 1.1.9")
 versionPanelSizer.Add(versionInfo, flag=wx.ALIGN_CENTER | wx.BOTTOM, border=4)
 
 dfuUndergoing = False
@@ -1059,6 +1108,17 @@ dfuInfoBind = False
 firmwareVersion = ""
 firstBatch = ""
 firmwareVariant = 0
+
+
+def firmware_version_at_least(minimum, firmwareType):
+    if firmwareVariant != firmwareType:
+        return False
+    versionMatch = re.search(r'\d+(?:\.\d+){3}', firmwareVersion)
+    if versionMatch is None:
+        return False
+    currentParts = tuple(int(part) for part in versionMatch.group(0).split('.'))
+    minimumParts = tuple(int(part) for part in minimum.split('.'))
+    return currentParts >= minimumParts
 
 
 def update_dfu_info(state: int):
@@ -1222,7 +1282,7 @@ class FlooSmDelegate(FlooStateMachineDelegate):
             # Simultaneous standard and high-quality broadcast added in v1.1.5.8
             print("Firmware Ver: ")
             print(firmwareVersion)
-            if firmwareVersion > "1.1.5.8" and firmwareVariant == 0:
+            if firmware_version_at_least("1.1.5.8", 0):
                 broadcastUsbVolCtrSupported = True
                 broadcast2QualitySupported = True
                 broadcast2QualityButton.Enable(True)
@@ -1392,6 +1452,9 @@ class FlooSmDelegate(FlooStateMachineDelegate):
 
     def aptxLosslessEnabledInd(self, enabled):
         aptxLossless_enable_switch_set(enabled, True)
+
+    def aptxLiteExtendedDelayEnabledInd(self, enabled):
+        aptxLiteExtendedDelay_enable_switch_set(enabled, True)
 
     def gattClientEnabledInd(self, enabled):
         gatt_client_enable_switch_set(enabled, True)

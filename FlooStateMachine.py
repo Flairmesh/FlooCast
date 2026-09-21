@@ -143,6 +143,8 @@ class FlooStateMachine(FlooInterfaceDelegate, Thread):
                     wx.CallAfter(self.delegate.aptxLosslessEnabledInd, 1 if (message.feature & 0x02) == 0x02 else 0)
                     wx.CallAfter(self.delegate.gattClientEnabledInd, 1 if (self.feature & 0x04) == 0x04 else 0)
                     wx.CallAfter(self.delegate.audioSourceInd, 1 if (self.feature & 0x08) == 0x08 else 0)
+                    wx.CallAfter(self.delegate.aptxLiteExtendedDelayEnabledInd,
+                                 1 if (self.feature & 0x10) == 0x10 else 0)
                     cmdGetCodecInUse = FlooMsgAc(True)
                     self.inf.sendMsg(cmdGetCodecInUse)
                     self.lastCmd = cmdGetCodecInUse
@@ -192,6 +194,8 @@ class FlooStateMachine(FlooInterfaceDelegate, Thread):
                     wx.CallAfter(self.delegate.ledEnabledInd, self.feature & 0x01)
                     wx.CallAfter(self.delegate.aptxLosslessEnabledInd, 1 if (self.feature & 0x02) == 0x02 else 0)
                     wx.CallAfter(self.delegate.gattClientEnabledInd, 1 if (self.feature & 0x04) == 0x04 else 0)
+                    wx.CallAfter(self.delegate.aptxLiteExtendedDelayEnabledInd,
+                                 1 if (self.feature & 0x10) == 0x10 else 0)
                 self.lastCmd = None
                 self.pendingCmdPara = None
             elif isinstance(message, FlooMsgSt):
@@ -217,6 +221,8 @@ class FlooStateMachine(FlooInterfaceDelegate, Thread):
                 wx.CallAfter(self.delegate.ledEnabledInd, self.feature & 0x01)
                 wx.CallAfter(self.delegate.aptxLosslessEnabledInd, 1 if (self.feature & 0x02) == 0x02 else 0)
                 wx.CallAfter(self.delegate.gattClientEnabledInd, 1 if (self.feature & 0x04) == 0x04 else 0)
+                wx.CallAfter(self.delegate.aptxLiteExtendedDelayEnabledInd,
+                             1 if (self.feature & 0x10) == 0x10 else 0)
 
     def setAudioMode(self, mode: int):
         if self.state == FlooStateMachine.CONNECTED:
@@ -348,7 +354,7 @@ class FlooStateMachine(FlooInterfaceDelegate, Thread):
 
     def enableLed(self, onOff: int):
         if self.state == FlooStateMachine.CONNECTED:
-            feature = (self.feature & 0x0E) + onOff
+            feature = (self.feature & ~0x01) | (0x01 if onOff else 0x00)
             cmdLedOnOff = FlooMsgFt(True, feature)
             self.pendingCmdPara = feature
             self.lastCmd = cmdLedOnOff
@@ -356,21 +362,28 @@ class FlooStateMachine(FlooInterfaceDelegate, Thread):
 
     def enableAptxLossless(self, onOff: int):
         if self.state == FlooStateMachine.CONNECTED:
-            feature = (self.feature & 0x0D) + (0x02 if onOff else 0x00)
+            feature = (self.feature & ~0x02) | (0x02 if onOff else 0x00)
             cmdLosslessOnOff = FlooMsgFt(True, feature)
             self.lastCmd = cmdLosslessOnOff
             self.inf.sendMsg(cmdLosslessOnOff)
 
+    def enableAptxLiteExtendedDelay(self, onOff: int):
+        if self.state == FlooStateMachine.CONNECTED:
+            feature = (self.feature & ~0x10) | (0x10 if onOff else 0x00)
+            cmdExtendedDelayOnOff = FlooMsgFt(True, feature)
+            self.lastCmd = cmdExtendedDelayOnOff
+            self.inf.sendMsg(cmdExtendedDelayOnOff)
+
     def enableGattClient(self, onOff: int):
         if self.state == FlooStateMachine.CONNECTED:
-            feature = (self.feature & 0x0B) + (0x04 if onOff else 0x00)
+            feature = (self.feature & ~0x04) | (0x04 if onOff else 0x00)
             cmdGattClientOnOff = FlooMsgFt(True, feature)
             self.lastCmd = cmdGattClientOnOff
             self.inf.sendMsg(cmdGattClientOnOff)
 
     def enableUsbInput(self, onOff: int):
         if self.state == FlooStateMachine.CONNECTED:
-            feature = (self.feature & 0x07) + (0x08 if onOff else 0x00)
+            feature = (self.feature & ~0x08) | (0x08 if onOff else 0x00)
             cmdLedOnOff = FlooMsgFt(True, feature)
             self.pendingCmdPara = feature
             self.lastCmd = cmdLedOnOff

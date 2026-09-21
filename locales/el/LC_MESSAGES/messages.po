@@ -314,3 +314,6 @@ msgstr "Το επίπεδο εκπομπής ακολουθεί την έντα�
 
 msgid "Simultaneous standard and high-quality broadcast"
 msgstr "Ταυτόχρονη εκπομπή κανονικής και υψηλής ποιότητας"
+
+msgid "Extended Delay"
+msgstr "Εκτεταμένη καθυστέρηση"

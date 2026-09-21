@@ -314,3 +314,6 @@ msgstr "Lähetystaso seuraa USB-äänenvoimakkuutta"
 
 msgid "Simultaneous standard and high-quality broadcast"
 msgstr "Samanaikainen vakio- ja korkealaatuinen lähetys"
+
+msgid "Extended Delay"
+msgstr "Pidennetty viive"

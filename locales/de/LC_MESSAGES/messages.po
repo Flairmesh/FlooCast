@@ -314,3 +314,6 @@ msgstr "Sendelautstärke folgt der USB-Lautstärke"
 
 msgid "Simultaneous standard and high-quality broadcast"
 msgstr "Gleichzeitige Standard- und Hochqualitätsübertragung"
+
+msgid "Extended Delay"
+msgstr "Erweiterte Verzögerung"

@@ -314,3 +314,6 @@ msgstr "Рівень трансляції слідує за гучністю USB
 
 msgid "Simultaneous standard and high-quality broadcast"
 msgstr "Одночасна стандартна та високоякісна трансляція"
+
+msgid "Extended Delay"
+msgstr "Розширена затримка"

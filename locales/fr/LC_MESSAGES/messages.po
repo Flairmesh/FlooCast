@@ -314,3 +314,6 @@ msgstr "Le niveau de diffusion suit le volume USB"
 
 msgid "Simultaneous standard and high-quality broadcast"
 msgstr "Diffusion simultanée standard et haute qualité"
+
+msgid "Extended Delay"
+msgstr "Délai prolongé"

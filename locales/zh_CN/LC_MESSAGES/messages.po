@@ -10,307 +10,310 @@ msgstr ""
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=cp936\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: main.py:47 main.py:89
 msgid "Initializing"
-msgstr "³õÊ¼»¯ÖĞ"
+msgstr "åˆå§‹åŒ–ä¸­"
 
 #: main.py:48
 msgid "Idle"
-msgstr "¿ÕÏĞ"
+msgstr "ç©ºé—²"
 
 #: main.py:49
 msgid "Pairing"
-msgstr "Åä¶ÔÖĞ"
+msgstr "é…å¯¹ä¸­"
 
 #: main.py:50
 msgid "Connecting"
-msgstr "Á¬½ÓÖĞ"
+msgstr "è¿æ¥ä¸­"
 
 #: main.py:51 main.py:61
 msgid "Connected"
-msgstr "ÒÑÁ¬½Ó"
+msgstr "å·²è¿æ¥"
 
 #: main.py:52
 msgid "Audio starting"
-msgstr "ÒôÆµ¿ªÊ¼ÖĞ"
+msgstr "éŸ³é¢‘å¼€å§‹ä¸­"
 
 #: main.py:53
 msgid "Audio streaming"
-msgstr "ÒôÆµ²¥·ÅÖĞ"
+msgstr "éŸ³é¢‘æ’­æ”¾ä¸­"
 
 #: main.py:54
 msgid "Audio stopping"
-msgstr "ÒôÆµÕıÔÚÍ£Ö¹"
+msgstr "éŸ³é¢‘æ­£åœ¨åœæ­¢"
 
 #: main.py:55
 msgid "Disconnecting"
-msgstr "¶Ï¿ªÁ¬½ÓÖĞ"
+msgstr "æ–­å¼€è¿æ¥ä¸­"
 
 #: main.py:56
 msgid "Voice starting"
-msgstr "ÓïÒô¿ªÊ¼ÖĞ"
+msgstr "è¯­éŸ³å¼€å§‹ä¸­"
 
 #: main.py:57
 msgid "Voice streaming"
-msgstr "ÓïÒô²¥·ÅÖĞ"
+msgstr "è¯­éŸ³æ’­æ”¾ä¸­"
 
 #: main.py:58
 msgid "Voice stopping"
-msgstr "ÓïÒôÍ£Ö¹ÖĞ"
+msgstr "è¯­éŸ³åœæ­¢ä¸­"
 
 #: main.py:60 main.py:155
 msgid "Disconnected"
-msgstr "ÒÑ¶Ï¿ª"
+msgstr "å·²æ–­å¼€"
 
 #: main.py:62
 msgid "Unicast starting"
-msgstr "µ¥²¥¿ªÊ¼ÖĞ"
+msgstr "å•æ’­å¼€å§‹ä¸­"
 
 #: main.py:63
 msgid "Unicast streaming"
-msgstr "µ¥²¥ÖĞ"
+msgstr "å•æ’­ä¸­"
 
 #: main.py:64
 msgid "Broadcast starting"
-msgstr "¹ã²¥¿ªÊ¼ÖĞ"
+msgstr "å¹¿æ’­å¼€å§‹ä¸­"
 
 #: main.py:65
 msgid "Broadcast streaming"
-msgstr "¹ã²¥½øĞĞÖĞ"
+msgstr "å¹¿æ’­è¿›è¡Œä¸­"
 
 #: main.py:66
 msgid "Streaming stopping"
-msgstr "²¥·ÅÍ£Ö¹ÖĞ"
+msgstr "æ’­æ”¾åœæ­¢ä¸­"
 
 #: main.py:109
 msgid "Audio Mode"
-msgstr "ÒôÆµÄ£Ê½"
+msgstr "éŸ³é¢‘æ¨¡å¼"
 
 #: main.py:111
 msgid "LE Broadcast"
-msgstr "µÍ¹¦ºÄÒôÆµ¹ã²¥"
+msgstr "ä½åŠŸè€—éŸ³é¢‘å¹¿æ’­"
 
 #: main.py:113
 msgid "Most Recently Used Devices"
-msgstr "×î½üÊ¹ÓÃµÄÉè±¸"
+msgstr "æœ€è¿‘ä½¿ç”¨çš„è®¾å¤‡"
 
 #: main.py:116
 msgid "Window"
-msgstr "´°¿Ú"
+msgstr "çª—å£"
 
 #: main.py:119
 msgid "Help"
-msgstr "°ïÖú"
+msgstr "å¸®åŠ©"
 
 #: main.py:139
 msgid "High Quality (one-to-one)"
-msgstr "¸ßÆ·ÖÊ£¨Ò»¶ÔÒ»£©"
+msgstr "é«˜å“è´¨ï¼ˆä¸€å¯¹ä¸€ï¼‰"
 
 #: main.py:142
 msgid "Gaming (one-to-one)"
-msgstr "ÓÎÏ·£¨Ò»¶ÔÒ»£©"
+msgstr "æ¸¸æˆï¼ˆä¸€å¯¹ä¸€ï¼‰"
 
 #: main.py:145
 msgid "Broadcast"
-msgstr "¹ã²¥"
+msgstr "å¹¿æ’­"
 
 #: main.py:149
 msgid "Dongle State"
-msgstr "ÊÊÅäÆ÷×´Ì¬"
+msgstr "é€‚é…å™¨çŠ¶æ€"
 
 #: main.py:153
 msgid "LE Audio State"
-msgstr "µÍ¹¦ºÄÒôÆµ×´Ì¬"
+msgstr "ä½åŠŸè€—éŸ³é¢‘çŠ¶æ€"
 
 #: main.py:157
 msgid "Codec in Use"
-msgstr "Ê¹ÓÃÖĞµÄ±àÂëÆ÷"
+msgstr "ä½¿ç”¨ä¸­çš„ç¼–ç å™¨"
 
 #: main.py:162
 msgid "Prefer using LE audio for dual-mode devices"
-msgstr "ÎªË«Ä£Ê½Éè±¸ÓÅÏÈÊ¹ÓÃµÍ¹¦ºÄÒôÆµ"
+msgstr "ä¸ºåŒæ¨¡å¼è®¾å¤‡ä¼˜å…ˆä½¿ç”¨ä½åŠŸè€—éŸ³é¢‘"
 
 #: main.py:188
 msgid "Public broadcast"
-msgstr "¹«¹²¹ã²¥"
+msgstr "å…¬å…±å¹¿æ’­"
 
 #: main.py:209
 msgid "Broadcast high-quality music, otherwise, voice"
-msgstr "¹ã²¥¸ßÖÊÁ¿ÒôÀÖ£¬¹Ø±ÕÔòÎªÓïÒô"
+msgstr "å¹¿æ’­é«˜è´¨é‡éŸ³ä¹ï¼Œå…³é—­åˆ™ä¸ºè¯­éŸ³"
 
 #: main.py:231
 msgid "Encrypt broadcast; please set a key first"
-msgstr "¼ÓÃÜ¹ã²¥£»ÇëÏÈÉèÖÃÒ»¸öÃÜÂë"
+msgstr "åŠ å¯†å¹¿æ’­ï¼›è¯·å…ˆè®¾ç½®ä¸€ä¸ªå¯†ç "
 
 #: main.py:252
 msgid "Broadcast Name, maximum 30 characters"
-msgstr "¹ã²¥Ãû³Æ£¬×î´ó30Ó¢ÎÄ×Ö·û"
+msgstr "å¹¿æ’­åç§°ï¼Œæœ€å¤§30è‹±æ–‡å­—ç¬¦"
 
 #: main.py:271
 msgid "Broadcast Key, maximum 16 characters"
-msgstr "¹ã²¥ÃÜÂë£¬×î´ó16¸öÓ¢ÎÄ×Ö·û"
+msgstr "å¹¿æ’­å¯†ç ï¼Œæœ€å¤§16ä¸ªè‹±æ–‡å­—ç¬¦"
 
 #: main.py:275
 msgid "Input a new name of no more than 30 characters then press <ENTER>"
-msgstr "ÊäÈë²»³¬¹ı 30 ¸ö×Ö·ûµÄĞÂÃû³Æ£¬È»ºó°´ <ENTER>"
+msgstr "è¾“å…¥ä¸è¶…è¿‡ 30 ä¸ªå­—ç¬¦çš„æ–°åç§°ï¼Œç„¶åæŒ‰ <ENTER>"
 
 #: main.py:286
 msgid "Input a new key then press <ENTER>"
-msgstr "ÊäÈëÒ»¸öĞÂÃÜÂëºó°´»Ø³µ"
+msgstr "è¾“å…¥ä¸€ä¸ªæ–°å¯†ç åæŒ‰å›è½¦"
 
 #: main.py:308
 msgid "Add device"
-msgstr "Åä¶ÔĞÂÉè±¸"
+msgstr "é…å¯¹æ–°è®¾å¤‡"
 
 #: main.py:325
 msgid "Delete"
-msgstr "É¾³ı"
+msgstr "åˆ é™¤"
 
 #: main.py:343
 msgid "Clear All"
-msgstr "È«²¿Çå³ı"
+msgstr "å…¨éƒ¨æ¸…é™¤"
 
 #: main.py:405
 msgid "Quit"
-msgstr "ÍË³ö"
+msgstr "é€€å‡º"
 
 #: main.py:405
 msgid "Show Window"
-msgstr "ÏÔÊ¾´°¿Ú"
+msgstr "æ˜¾ç¤ºçª—å£"
 
 #: main.py:406
 msgid "FlooGoo Bluetooth Audio Source"
-msgstr "FlooGooÀ¶ÑÀÒôÆµÔ´"
+msgstr "FlooGooè“ç‰™éŸ³é¢‘æº"
 
 #: main.py:414
 msgid "Minimize to System Tray"
-msgstr "×îĞ¡»¯µ½ÏµÍ³ÍĞÅÌ"
+msgstr "æœ€å°åŒ–åˆ°ç³»ç»Ÿæ‰˜ç›˜"
 
 #: main.py:416
 msgid "Quit App"
-msgstr "ÍË³öÓ¦ÓÃ³ÌĞò"
+msgstr "é€€å‡ºåº”ç”¨ç¨‹åº"
 
 #: main.py:430
 msgid "Changes Take Effect After Restart"
-msgstr "¸ü¸ÄÔÚÖØÆôºóÉúĞ§"
+msgstr "æ›´æ”¹åœ¨é‡å¯åç”Ÿæ•ˆ"
 
 #: main.py:445
 msgid "Third-Party Software Licenses"
-msgstr "µÚÈı·½Èí¼şĞí¿ÉÖ¤"
+msgstr "ç¬¬ä¸‰æ–¹è½¯ä»¶è®¸å¯è¯"
 
 #: main.py:448
 msgid "Support Link"
-msgstr "Ö§³ÖÍøÕ¾Á´½Ó"
+msgstr "æ”¯æŒç½‘ç«™é“¾æ¥"
 
 #: main.py:451
 msgid "Version"
-msgstr "°æ±¾"
+msgstr "ç‰ˆæœ¬"
 
 #: main.py:462 main.py:536
 msgid "Firmware"
-msgstr "¹Ì¼ş"
+msgstr "å›ºä»¶"
 
 #: main.py:469
 msgid "Upgrade error"
-msgstr "¸üĞÂ´íÎó"
+msgstr "æ›´æ–°é”™è¯¯"
 
 #: main.py:472
 msgid "Upgrade progress"
-msgstr "¸üĞÂ½ø¶È"
+msgstr "æ›´æ–°è¿›åº¦"
 
 #: main.py:486
 msgid "Device Firmware Upgrade"
-msgstr "Éè±¸¹Ì¼şÉı¼¶"
+msgstr "è®¾å¤‡å›ºä»¶å‡çº§"
 
 #: main.py:524
 msgid "Use FlooGoo dongle on "
-msgstr "ÕıÊ¹ÓÃµÄFlooGooÉè±¸ÔÚ¶Ë¿Ú"
+msgstr "æ­£ä½¿ç”¨çš„FlooGooè®¾å¤‡åœ¨ç«¯å£"
 
 #: main.py:526
 msgid "Please insert your FlooGoo dongle"
-msgstr "Çë²åÈëÄúµÄFlooGooÊÊÅäÆ÷"
+msgstr "è¯·æ’å…¥æ‚¨çš„FlooGooé€‚é…å™¨"
 
 #: main.py:335
 msgid "Connect/Disconnect"
-msgstr "Á¬½Ó/¶Ï¿ª"
+msgstr "è¿æ¥/æ–­å¼€"
 
 #: main.py:584
 msgid "New Firmware is available"
-msgstr "ĞÂ¹Ì¼ş¿ÉÓÃ"
+msgstr "æ–°å›ºä»¶å¯ç”¨"
 
 msgid "Connect"
-msgstr "Á¬½Ó"
+msgstr "è¿æ¥"
 
 msgid "Disconnect"
-msgstr "¶Ï¿ªÁ¬½Ó"
+msgstr "æ–­å¼€è¿æ¥"
 
 msgid "Settings"
-msgstr "ÉèÖÃ"
+msgstr "è®¾ç½®"
 
 msgid ", check the latest."
-msgstr "£¬Çë¼ì²é×îĞÂ°æ±¾¡£"
+msgstr "ï¼Œè¯·æ£€æŸ¥æœ€æ–°ç‰ˆæœ¬ã€‚"
 
 msgid "Current firmware: "
-msgstr "µ±Ç°¹Ì¼ş£º"
+msgstr "å½“å‰å›ºä»¶ï¼š"
 
 #: Added from 1.1.0
 msgid "Must be disabled for"
-msgstr "±ØĞë¹Ø±ÕÒÔÓÃÓÚ"
+msgstr "å¿…é¡»å…³é—­ä»¥ç”¨äº"
 
 msgid "Must be enabled for compatibility with"
-msgstr "±ØĞë¿ªÆôÒÔ¼æÈİ"
+msgstr "å¿…é¡»å¼€å¯ä»¥å…¼å®¹"
 
 msgid "Must be disabled for compatibility with"
-msgstr "±ØĞë¹Ø±ÕÒÔ¼æÈİ"
+msgstr "å¿…é¡»å…³é—­ä»¥å…¼å®¹"
 
 msgid "Toggle switch for"
-msgstr "ÇĞ»»¿ª¹Ø£º"
+msgstr "åˆ‡æ¢å¼€å…³ï¼š"
 
 msgid "On"
-msgstr "¿ªÆô"
+msgstr "å¼€å¯"
 
 msgid "Off"
-msgstr "¹Ø±Õ"
+msgstr "å…³é—­"
 
 msgid "Client"
-msgstr "¿Í»§¶Ë"
+msgstr "å®¢æˆ·ç«¯"
 
 msgid "Receiver"
-msgstr "½ÓÊÕÆ÷"
+msgstr "æ¥æ”¶å™¨"
 
 msgid "Relay"
-msgstr "×ª·¢Æ÷"
+msgstr "è½¬å‘å™¨"
 
 msgid "Stop broadcasting immediately when USB audio playback ends"
-msgstr "µ±USBÒôÆµ²¥·Å½áÊøÊ±Á¢¼´Í£Ö¹¹ã²¥"
+msgstr "å½“USBéŸ³é¢‘æ’­æ”¾ç»“æŸæ—¶ç«‹å³åœæ­¢å¹¿æ’­"
 
 msgid "USB Audio Input"
-msgstr "USBÒôÆµÊäÈë"
+msgstr "USBéŸ³é¢‘è¾“å…¥"
 
 msgid "Broadcast Latency"
-msgstr "¹ã²¥ÑÓ³Ù"
+msgstr "å¹¿æ’­å»¶è¿Ÿ"
 
 msgid "Lowest"
-msgstr "×îµÍ"
+msgstr "æœ€ä½"
 
 msgid "Lower"
-msgstr "½ÏµÍ"
+msgstr "è¾ƒä½"
 
 msgid "Default"
-msgstr "Ä¬ÈÏ"
+msgstr "é»˜è®¤"
 
 msgid "Broadcast Additional Audio Input"
-msgstr "¹ã²¥¶îÍâµÄÒôÆµÊäÈë"
+msgstr "å¹¿æ’­é¢å¤–çš„éŸ³é¢‘è¾“å…¥"
 
 msgid "Start Minimized"
-msgstr "Æô¶¯Ê±×îĞ¡»¯"
+msgstr "å¯åŠ¨æ—¶æœ€å°åŒ–"
 
 msgid "Follow USB volume for broadcast level"
-msgstr "¹ã²¥ÒôÁ¿¸úËæ USB ÒôÁ¿"
+msgstr "å¹¿æ’­éŸ³é‡è·Ÿéš USB éŸ³é‡"
 
 msgid "Simultaneous standard and high-quality broadcast"
-msgstr "Í¬Ê±½øĞĞ±ê×¼Óë¸ßÖÊÁ¿¹ã²¥"
+msgstr "åŒæ—¶è¿›è¡Œæ ‡å‡†ä¸é«˜è´¨é‡å¹¿æ’­"
+
+msgid "Extended Delay"
+msgstr "æ‰©å±•å»¶è¿Ÿ"

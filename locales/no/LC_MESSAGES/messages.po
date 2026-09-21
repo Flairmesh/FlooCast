@@ -314,3 +314,6 @@ msgstr "Kringkastingsnivået følger USB-volumet"
 
 msgid "Simultaneous standard and high-quality broadcast"
 msgstr "Samtidig standard- og høykvalitetskringkasting"
+
+msgid "Extended Delay"
+msgstr "Utvidet forsinkelse"
